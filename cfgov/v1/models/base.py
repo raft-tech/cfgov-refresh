@@ -171,6 +171,7 @@ class CFGOVPage(Page):
 
     def get_breadcrumbs(self, request):
         ancestors = self.get_ancestors()
+        print ancestors
         home_page_children = request.site.root_page.get_children()
         for i, ancestor in enumerate(ancestors):
             if ancestor in home_page_children:

@@ -887,11 +887,9 @@ class ArticlePage(CFGOVPage):
     )
     sections = StreamField([
         ('section', blocks.StructBlock([
-            ('anchor', blocks.CharBlock(max_length=255)),
-            ('heading', blocks.CharBlock(max_length=255)),
-            ('summary', blocks.TextBlock(required=False, blank=True)),
-            ('link', atoms.Hyperlink(required=False)),
-            ('subsection', blocks.ListBlock(
+            ('section_heading', blocks.CharBlock(max_length=255)),
+            ('section_anchor', blocks.CharBlock(max_length=255)),
+            ('section_links', blocks.ListBlock(
                 blocks.StructBlock([
                     ('heading', blocks.CharBlock(
                         max_length=255,

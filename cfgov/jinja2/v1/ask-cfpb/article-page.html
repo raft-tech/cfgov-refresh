@@ -10,7 +10,7 @@
     <div class="eyebrow">{{ page.get_article_type_display() }}</div>
     <h1>{{ page.heading }}</h1>
     <div class="lead-paragraph">{{ page.intro }}</div>
-    {% if page.article_links %}
+    {% if page.article_links.length %}
         {% set value = {
             'heading': page.inset_heading,
             'links': page.article_links.all()
@@ -23,27 +23,25 @@
         <ul>
         {% for block in page.sections %}
             <li>
-                <a href="#{{ block.value.anchor }}">{{ block.value.heading }}</a>
+                <a href="#{{ block.value.section_anchor }}">{{ block.value.section_heading }}</a>
             </li>
         {% endfor %}
         </ul>
     <div class="block">
         {% for block in page.sections %}
             <div class="block block_sub" id="{{ block.anchor }}">
-                <h2>{{ block.value.heading }}</h2>
-                {% if block.value.summary %}
-                    <p>{{block.value.summary}}</p>
-                {% endif %}
-                {% if block.value.link %}
-                    <p><a href="{{ block.value.link.url }}">{{ block.value.link.text }}</a></p>
-                {% endif %}
-                {% for item in block.value.subsection %}
-                    <div class="block block__sub">
-                    {% if item.heading %}
-                    <h3>{{ item.heading }}</h3>
-                    {% endif %}
-                    <p>{{ item.summary }}</p>
-                    <p><a href="{{ item.link.url }}">{{ item.link.text }}</a></p>
+                <h2 id="{{block.value.section_anchor}}">{{ block.value.section_heading }}</h2>
+                {% for item in block.value.section_links %}
+                    <div class="subsection">
+                        {% if item.heading %}
+                        <h3 class="u-mt30">{{ item.heading }}</h3>
+                        {% endif %}
+                        {% if item.summary %}
+                        <p>{{ item.summary }}</p>
+                        {% endif %}
+                        {% if item.link %}
+                        <p><a href="{{ item.link.url }}">{{ item.link.text }}</a></p>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
