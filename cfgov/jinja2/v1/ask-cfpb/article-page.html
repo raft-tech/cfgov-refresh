@@ -19,30 +19,28 @@
         {% include 'molecules/related-content.html' with context %}
         </div>
     {% endif %}
-        <p>In this article:</p>
-        <ul>
-        {% for block in page.sections %}
-            <li>
-                <a href="#{{ block.value.section_anchor }}">{{ block.value.section_heading }}</a>
-            </li>
-        {% endfor %}
-        </ul>
+    <p>In this article:</p>
+    <ul>
+    {% for block in page.sections %}
+        <li>
+            <a href="#{{ block.value.section_anchor }}">{{ block.value.section_heading }}</a>
+        </li>
+    {% endfor %}
+    </ul>
     <div class="block">
         {% for block in page.sections %}
             <div class="block block_sub" id="{{ block.anchor }}">
                 <h2 id="{{block.value.section_anchor}}">{{ block.value.section_heading }}</h2>
                 {% for item in block.value.section_links %}
-                    <div class="subsection">
-                        {% if item.heading %}
+                    {% if item.heading %}
                         <h3 class="u-mt30">{{ item.heading }}</h3>
-                        {% endif %}
-                        {% if item.summary %}
+                    {% endif %}
+                    {% if item.summary %}
                         <p>{{ item.summary }}</p>
-                        {% endif %}
-                        {% if item.link %}
+                    {% endif %}
+                    {% if item.link %}
                         <p><a href="{{ item.link.url }}">{{ item.link.text }}</a></p>
-                        {% endif %}
-                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         {% endfor %}
