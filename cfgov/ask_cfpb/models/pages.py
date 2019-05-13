@@ -899,10 +899,8 @@ class ArticlePage(CFGOVPage):
                     ('summary', blocks.TextBlock(
                         required=False,
                         blank=True)),
-                    ('link', blocks.StructBlock([
-                        ('text', blocks.CharBlock(required=True)),
-                        ('url', blocks.CharBlock(required=True))
-                    ]))
+                    ('link_text', blocks.CharBlock(required=True)),
+                    ('url', blocks.CharBlock(required=True, verbose_name='URL'))
                 ])
             ))
         ]))

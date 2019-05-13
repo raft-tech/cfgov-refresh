@@ -39,8 +39,8 @@
                     {% if item.summary %}
                         <p>{{ item.summary }}</p>
                     {% endif %}
-                    {% if item.link %}
-                        <p><a href="{{ item.link.url }}">{{ item.link.text }}</a></p>
+                    {% if item.link_text and item.url %}
+                        <p><a href="{{ item.url }}">{{ item.link_text }}</a></p>
                     {% endif %}
                 {% endfor %}
             </div>
