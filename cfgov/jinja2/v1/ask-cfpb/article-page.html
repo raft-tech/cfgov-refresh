@@ -10,10 +10,11 @@
     <div class="eyebrow">{{ page.get_article_type_display() }}</div>
     <h1>{{ page.heading }}</h1>
     <div class="lead-paragraph">{{ page.intro }}</div>
-    {% if page.article_links.length %}
+    {% set inset_links = page.article_links.all() %}
+    {% if inset_links %}
         {% set value = {
             'heading': page.inset_heading,
-            'links': page.article_links.all()
+            'links': inset_links
         }%}
         <div class="m-inset">
         {% include 'molecules/related-content.html' with context %}
