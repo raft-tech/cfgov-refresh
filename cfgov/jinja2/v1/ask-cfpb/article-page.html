@@ -22,41 +22,48 @@
         {% include 'molecules/related-content.html' with context %}
         </div>
     {% endif %}
+    </div>
+    <div>
     <p>In this article:</p>
-        <ul>
+        <ul class="m-list m-list__links">
         {% for block in page.sections %}
-            <li>
-                <a href="#{{'section-'~loop.index}}">{{ block.value.heading }}</a>
+            <li class="m-list_item">
+                <a href="#{{'section-'~loop.index}}"
+                   class="m-list_link">
+                    {{ block.value.heading }}
+                </a>
             </li>
         {% endfor %}
         </ul>
     </div>
 
-    <div class="block">
-        {% for block in page.sections %}
-            <div class="block block__sub article-section" id="{{'section-'~loop.index}}">
+    {% for block in page.sections %}
+        <div class="article-section u-mt45" id="{{'section-'~loop.index}}">
 
-                <h2>{{ block.value.heading }}</h2>
-                {% if block.value.summary %}
-                    <p>{{ block.value.summary }}</p>
+            <h2>{{ block.value.heading }}</h2>
+            {% if block.value.summary %}
+                <p>{{ block.value.summary }}</p>
+            {% endif %}
+            {% if block.value.link_text and block.value.url %}
+                <p>
+                    <a href="{{ block.value.url }}">
+                        {{ block.value.link_text }}
+                    </a>
+                </p>
+            {% endif %}
+
+            {% for item in block.value.subsections %}
+                <h3 class="u-mt30">{{ item.heading }}</h3>
+                {% if item.summary %}
+                    <p>{{ item.summary }}</p>
                 {% endif %}
-                {% if block.value.link_text and block.value.url %}
-                    <p><a href="{{ block.value.url }}">{{ block.value.link_text }}</a></p>
+                {% if item.link_text and item.url %}
+                    <p><a href="{{ item.url }}">{{ item.link_text }}</a></p>
                 {% endif %}
+            {% endfor %}
 
-                {% for item in block.value.subsections %}
-                    <h3 class="u-mt30">{{ item.heading }}</h3>
-                    {% if item.summary %}
-                        <p>{{ item.summary }}</p>
-                    {% endif %}
-                    {% if item.link_text and item.url %}
-                        <p><a href="{{ item.url }}">{{ item.link_text }}</a></p>
-                    {% endif %}
-                {% endfor %}
-
-            </div>
-        {% endfor %}
-    </div>
+        </div>
+    {% endfor %}
 {% endblock %}
 
 {% block content_sidebar_modifiers -%}
