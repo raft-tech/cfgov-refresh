@@ -10,6 +10,8 @@
     <div class="eyebrow">{{ page.get_article_type_display() }}</div>
     <h1>{{ page.heading }}</h1>
     <div class="lead-paragraph">{{ page.intro }}</div>
+
+    <div class="block block__sub">
     {% set inset_links = page.article_links.all() %}
     {% if inset_links %}
         {% set value = {
@@ -21,16 +23,18 @@
         </div>
     {% endif %}
     <p>In this article:</p>
-    <ul>
-    {% for block in page.sections %}
-        <li>
-            <a href="#{{'section-'~loop.index}}">{{ block.value.heading }}</a>
-        </li>
-    {% endfor %}
-    </ul>
+        <ul>
+        {% for block in page.sections %}
+            <li>
+                <a href="#{{'section-'~loop.index}}">{{ block.value.heading }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
     <div class="block">
         {% for block in page.sections %}
-            <div class="block block_sub" id="{{'section-'~loop.index}}">
+            <div class="block block__sub article-section" id="{{'section-'~loop.index}}">
 
                 <h2>{{ block.value.heading }}</h2>
                 {% if block.value.summary %}
