@@ -1,0 +1,71 @@
+{% extends 'layout-2-1-bleedbar.html' %}
+{% import 'templates/render_block.html' as render_block with context %}
+{% import 'templates/streamfield-sidefoot.html' as streamfield_sidefoot with context %}
+
+{% block content_modifiers -%}
+    {{ super() }} ask-cfpb-page ask-cfpb-page__article
+{%- endblock %}
+
+{% block content_main %}
+    <div class="eyebrow">{{ page.get_article_type_display() }}</div>
+    <h1>{{ page.heading }}</h1>
+    <div class="lead-paragraph">{{ page.intro }}</div>
+    {% set inset_links = page.article_links.all() %}
+    {% if inset_links %}
+        {% set value = {
+            'heading': page.inset_heading,
+            'links': inset_links
+        }%}
+        <div class="m-inset">
+        {% include 'molecules/related-content.html' with context %}
+        </div>
+    {% endif %}
+    <p>In this article:</p>
+    <ul>
+    {% for block in page.sections %}
+        <li>
+            <a href="#{{'section-'~loop.index}}">{{ block.value.heading }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+    <div class="block">
+        {% for block in page.sections %}
+            <div class="block block_sub" id="{{'section-'~loop.index}}">
+
+                <h2>{{ block.value.heading }}</h2>
+                {% if block.value.summary %}
+                    <p>{{ block.value.summary }}</p>
+                {% endif %}
+                {% if block.value.link_text and block.value.url %}
+                    <p><a href="{{ block.value.url }}">{{ block.value.link_text }}</a></p>
+                {% endif %}
+
+                {% for item in block.value.subsections %}
+                    <h3 class="u-mt30">{{ item.heading }}</h3>
+                    {% if item.summary %}
+                        <p>{{ item.summary }}</p>
+                    {% endif %}
+                    {% if item.link_text and item.url %}
+                        <p><a href="{{ item.url }}">{{ item.link_text }}</a></p>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block content_sidebar_modifiers -%}
+    o-sidebar-content
+{%- endblock %}
+    
+{% block content_sidebar scoped -%}
+<div class="block block__flush-top u-mb45 about-us-text">
+    {% if about_us %}
+        {{ about_us.text | richtext }}
+    {% endif %}
+</div>
+{% if page.sidebar_panels %}
+    {{ streamfield_sidefoot.render(page.sidebar) }}
+{% endif %}
+{%- endblock %}
