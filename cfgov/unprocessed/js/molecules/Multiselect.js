@@ -20,9 +20,11 @@ const BASE_CLASS = 'o-multiselect';
  *
  * @param {HTMLNode} element
  *   The DOM element within which to search for the molecule.
+ * @param {number} maxSelections
+ *   The maximum number of selections allowed.
  * @returns {Multiselect} An instance.
  */
-function Multiselect( element ) { // eslint-disable-line max-statements
+function Multiselect( element, maxSelections ) { // eslint-disable-line max-statements
 
   const LIST_CLASS = 'm-list';
   const CHECKBOX_INPUT_CLASS = 'a-checkbox';
@@ -79,7 +81,7 @@ function Multiselect( element ) { // eslint-disable-line max-statements
     _options = _dom.options || [];
 
     if ( _options.length > 0 ) {
-      _model = new MultiselectModel( _options ).init();
+      _model = new MultiselectModel( _options, maxSelections ).init();
       _optionsData = _model.getOptions();
       const newDom = _populateMarkup();
 
@@ -98,6 +100,12 @@ function Multiselect( element ) { // eslint-disable-line max-statements
     return this;
   }
 
+  function documentEventHandler( event ) {
+    if ( !_containerDom.contains( event.target ) ) {
+        collapse();
+    }
+  }
+
   /**
    * Expand the multiselect drop down.
    * @returns {Multiselect} An instance.
@@ -107,6 +115,8 @@ function Multiselect( element ) { // eslint-disable-line max-statements
     _fieldsetDom.classList.remove( 'u-invisible' );
     _fieldsetDom.setAttribute( 'aria-hidden', false );
     _instance.dispatchEvent( 'expandBegin', { target: _instance } );
+    document.addEventListener( 'click', documentEventHandler );
+    document.addEventListener( 'keyup', documentEventHandler );
 
     return _instance;
   }
@@ -121,6 +131,8 @@ function Multiselect( element ) { // eslint-disable-line max-statements
     _fieldsetDom.setAttribute( 'aria-hidden', true );
     _model.resetIndex();
     _instance.dispatchEvent( 'expandEnd', { target: _instance } );
+    document.removeEventListener( 'click', documentEventHandler );
+    document.removeEventListener( 'keyup', documentEventHandler );
 
     return _instance;
   }

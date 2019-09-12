@@ -3,17 +3,20 @@ import { stringMatch } from '../modules/util/strings';
 // Undefined return value for void methods.
 let UNDEFINED;
 
-// How many options may be checked.
-const MAX_SELECTIONS = 5;
-
 /**
  * @class
  * MultiselectModel
  * @param {HTMLOptionsCollection} options -
  *   Set of options from a <select> element.
+ * @param {number} maxSelections
+ *   The maximum number of selections allowed.
  */
-function MultiselectModel( options ) {
+function MultiselectModel( options, maxSelections ) {
   const _options = options;
+
+  // How many options may be checked.
+  const MAX_SELECTIONS = maxSelections || 5;
+
   let _optionsData = [];
 
   let _selectedIndices = [];
