@@ -17,13 +17,13 @@
         {% endif %}
 
         <div class="m-form-field u-mb15">
-            {% set selections = filters['issuer_name'] %}
+            {% set selections = applied_filters['issuer_name'] %}
             <label class="a-label a-label__heading"
                    for="card_type">
                 Issuer name
             </label>
             <select name="issuer_name" multiple="multiple" data-placeholder="Enter prepaid account issuer name" placeholder="Enter card issuer name" id="issuer_name" class="o-multiselect">
-                {% for issuer in active_filters['issuer_name'] %}
+                {% for issuer in available_filter_options['issuer_name'] %}
                     <option 
                         value="{{ issuer }}"
                         {{ ' selected' if issuer in selections else '' }}>
@@ -33,68 +33,64 @@
             </select>
         </div>
                 
-        <div class="filter-section">
-            {% set selections = filters['prepaid_type'] %}
-            {% set expandable_settings = {
-                'label': 'Prepaid product type',
-                'is_expanded': selections | length > 0,
-                'is_midtone': true,
-                'hide_cue_label': true
-            } %}
-            {% call() expandable(expandable_settings) %}
-             <div class="o-form_group">
-                <fieldset class="o-form_fieldset">
-                    <ul class="m-list m-list__unstyled">
-                        {% for type in active_filters['prepaid_type'] %}
-                            {% if type != None %}
-                                <li>
-                                    {{ checkbox.render({
-                                        'label': type,
-                                        'value': type,
-                                        'id': 'type_' ~ loop.index,
-                                        'name': 'prepaid_type',
-                                        'class': 'test',
-                                        'selected': type in selections
-                                    }) }}
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </fieldset>
-            </div>
-            {% endcall %}
+        {% set selections = applied_filters['prepaid_type'] %}
+        {% set expandable_settings = {
+            'label': 'Prepaid product type',
+            'is_expanded': selections | length > 0,
+            'is_midtone': true,
+            'hide_cue_label': true
+        } %}
+        {% call() expandable(expandable_settings) %}
+         <div class="o-form_group">
+            <fieldset class="o-form_fieldset">
+                <ul class="m-list m-list__unstyled">
+                    {% for type in available_filter_options['prepaid_type'] %}
+                        {% if type != None %}
+                            <li>
+                                {{ checkbox.render({
+                                    'label': type,
+                                    'value': type,
+                                    'id': 'type_' ~ loop.index,
+                                    'name': 'prepaid_type',
+                                    'class': 'test',
+                                    'selected': type in selections
+                                }) }}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </fieldset>
         </div>
+        {% endcall %}
 
-        <div class="filter-section">
-            {% set selections = filters['status'] %}
-            {% set expandable_settings = {
-                'label': 'Current status',
-                'is_expanded': selections | length > 0,
-                'is_midtone': true,
-                'hide_cue_label': true,
-                'paragraph': 'This will be either active or withdrawn.'
-            } %}
-            {% call() expandable(expandable_settings) %}
-            
-             <div class="o-form_group">
-                <fieldset class="o-form_fieldset">
-                    <ul class="m-list m-list__unstyled">
-                        {% for option in active_filters['status'] %}
-                        <li>
-                            {{ checkbox.render({
-                                'label': option,
-                                'value': option,
-                                'id': 'status_' ~ loop.index,
-                                'name': 'status',
-                                'selected': option in selections
-                            }) }}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </fieldset>
-            </div>
-            {% endcall %}
+        {% set selections = applied_filters['status'] %}
+        {% set expandable_settings = {
+            'label': 'Current status',
+            'is_expanded': selections | length > 0,
+            'is_midtone': true,
+            'hide_cue_label': true,
+            'paragraph': 'This will be either active or withdrawn.'
+        } %}
+        {% call() expandable(expandable_settings) %}
+        
+         <div class="o-form_group">
+            <fieldset class="o-form_fieldset">
+                <ul class="m-list m-list__unstyled">
+                    {% for option in available_filter_options['status'] %}
+                    <li>
+                        {{ checkbox.render({
+                            'label': option,
+                            'value': option,
+                            'id': 'status_' ~ loop.index,
+                            'name': 'status',
+                            'selected': option in selections
+                        }) }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </fieldset>
         </div>
+        {% endcall %}
             
         <button class="a-btn u-mb15 u-hide-on-js">Apply filters</button>
     </form>
@@ -121,7 +117,7 @@
         {% endif %}
     </div>
     
-    {% if filters | length %}
+    {% if applied_filters | length %}
     
         <div class="filters_applied">
             <div class="filters_tags">
@@ -129,21 +125,19 @@
                 Filters applied:
             </span>
                 {% set filters_to_remove = [] %}
-                {% for filter in filters %}
-                    {% if filter in valid_filters %}
-                        {% for val in filters[filter] %}
-                            {% set href = remove_url_parameter(request, {filter: [val]}) %}
-                            {{ tag.render({
-                                'label': val,
-                                'value': val,
-                                'behavior': 'clear-filter',
-                                'href': href if href else '.'
-                            }) }}
-                        {% endfor %}
-                    {% endif %}
+                {% for filter in applied_filters %}
+                    {% for val in applied_filters[filter] %}
+                        {% set href = remove_url_parameter(request, {filter: [val]}) %}
+                        {{ tag.render({
+                            'label': val,
+                            'value': val,
+                            'behavior': 'clear-filter',
+                            'href': href if href else '.'
+                        }) }}
+                    {% endfor %}
                 {% endfor %}
 
-                {% set clear_url = remove_url_parameter(request, filters) %}
+                {% set clear_url = remove_url_parameter(request, applied_filters) %}
                 <a class="a-btn a-btn__link a-btn__warning a-micro-copy results_filters-clear u-mb10"
                         data-js-hook="behavior_clear-all" href="{{ clear_url if clear_url else '.' }}">
                     Clear all filters
