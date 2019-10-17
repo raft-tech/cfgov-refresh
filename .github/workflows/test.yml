@@ -1,0 +1,92 @@
+
+name: test
+
+on: pull_request
+
+jobs:
+
+  frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+            node-version: '10.x'
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.6
+
+      - name: Install dependencies
+        run: |
+          ./frontend.sh development
+          python -m pip install --upgrade pip
+          pip install -r requirements/ci.txt
+
+      - name: Run tests
+        run: yarn run gulp test --ci --headless
+
+      - name: Submit test coverage
+        run: bash <(curl -s https://codecov.io/bash) -F frontend -X coveragepy
+
+  backend:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        toxenv:
+            - lint-py27
+            - lint-py36
+            - unittest-py27-dj111-wag113-slow
+            - unittest-py36-dj111-wag113-slow
+        include:
+          - toxenv: lint-py27
+            python-version: 2.7
+          - toxenv: lint-py36
+            python-version: 3.6
+          - toxenv: unittest-py27-dj111-wag113-slow
+            python-version: 2.7
+          - toxenv: unittest-py36-dj111-wag113-slow
+            python-version: 3.6
+
+    services:
+      postgres:
+        # https://github.com/actions/example-services/blob/master/.github/workflows/postgres-service.yml
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+        - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements/ci.txt
+
+      - name: Run tox -e ${{ matrix.toxenv }}
+        run: |
+          tox -e ${{ matrix.toxenv }}
+        env: 
+          TEST_RUNNER: cfgov.test.StdoutCapturingTestRunner 
+          TEST_DATABASE_URL: postgres://postgres:postgres@localhost/postgres
+          CI_CHECK_MIGRATIONS: "./manage.py makemigrations --dry-run --check"
+
+      - name: Submit test coverage
+        if: matrix.toxenv == 'unittest-py36-dj111-wag113-slow'
+        run: bash <(curl -s https://codecov.io/bash) -F backend
