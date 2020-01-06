@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/
 """
 
 import os
+from wsgi_basic_auth import BasicAuth
 
 
 def initialize_new_relic():
@@ -32,3 +33,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cfgov.settings.local')
 # We don't want to import this module until after initializing New Relic.
 from django.core.wsgi import get_wsgi_application  # noqa: E402, isort:skip
 application = get_wsgi_application()
+
+if os.getenv('WSGI_AUTH_CREDENTIALS'):
+    application = BasicAuth(application)

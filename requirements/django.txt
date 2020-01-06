@@ -1,3 +1,4 @@
 gunicorn
 whitenoise==3.3.1
+wsgi-basic-auth==1.1.0
 django==1.11.27
