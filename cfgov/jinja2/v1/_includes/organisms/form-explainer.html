@@ -1,0 +1,213 @@
+
+{# ==========================================================================
+
+   render_map_points( terms, page_num )
+
+   ==========================================================================
+
+   Description:
+
+   Render a list of o-expandable terms with definitions.
+
+   terms:    An array of term objects.
+
+   page_num: The page that these map points belong to.
+
+   ========================================================================== #}
+
+{% macro render_map_points( categories, page_num, image_height, image_width ) %}
+{% for category in categories %}
+{% set ext = loop.index %}
+{% for item in category.notes %}
+  {% set id = 'page-' + page_num | string + '-category-' + ext | string + '-note-'  + loop.index | string %}
+  {% set top = ( item.coordinates.top | float / image_height ) * 100 %}
+  {% set left = ( item.coordinates.left | float / image_width ) * 100 %}
+  {% set width = ( item.coordinates.width | float / image_width ) * 100 %}
+  {% set height = ( item.coordinates.height | float / image_height ) * 100 %}
+
+  <a class="image-map_overlay image-map_overlay__{{ ext }}"
+     style="{{ 'top:' + top | string + '%;' 'left:' + left | string + '%;' }}
+            {{ 'width:' + width | string + '%;' 'height:' + height | string + '%;'
+            if item.coordinates.width and item.coordinates.height }}"
+     href="{{ '#' + id }}"
+     id="{{ 'image-map_overlay__' + id }}"
+     tabindex="-1">
+      <span class="u-visually-hidden">{{ item.heading }}</span>
+   </a>
+{% endfor %}
+{% endfor %}
+{% endmacro %}
+
+
+{# ==========================================================================
+
+   render_terms( terms, page_num, category )
+
+   ==========================================================================
+
+   Description:
+
+   Render a list of o-expandable terms with definitions.
+
+   terms:    An array of term objects.
+
+   page_num: The page that these terms belong to.
+
+   ========================================================================== #}
+
+{% macro render_terms( terms, page_num, category ) %}
+{% for item in terms %}
+    {{ render_term( item, loop.index, page_num, category ) }}
+{% endfor %}
+{% endmacro %}
+
+
+{# ==========================================================================
+
+   render_term( term, index, page_num )
+
+   ==========================================================================
+
+   Description:
+
+   Render an o-expandable term with a definition.
+
+   item:      A term object. Term objects have the following structure:
+              {
+                'category':   'String containing the name of the category.'
+                'definition': 'This definition can contain HTML.',
+                'highlight':  'String containing a url to an image.',
+                'id':         'a-unique-html-id.',
+                'term':       'Term name.'
+              }
+
+   index:    The term's position within the array.
+
+   page_num: The page that this term belongs to.
+
+   ========================================================================== #}
+
+{% macro render_term( item, index, page_num, category ) %}
+<div class="o-expandable
+            o-expandable__padded
+            o-expandable__form-explainer
+            o-expandable__form-explainer-{{ category }}"
+     id="{{ 'page-' + page_num | string + '-category-' + category | string + '-note-' + index | string }}">
+    <button class="o-expandable_header o-expandable_target"
+            tabindex="0">
+        <span class="h4 o-expandable_header-left o-expandable_label">
+            {{ item.heading }}
+        </span>
+        <span class="o-expandable_header-right o-expandable_link">
+            <span class="o-expandable_cue-open">
+                <span class="u-visually-hidden">Show</span>
+                {{ svg_icon('plus-round') }}
+            </span>
+            <span class="o-expandable_cue-close">
+                <span class="u-visually-hidden">Hide</span>
+                {{ svg_icon('minus-round') }}
+            </span>
+        </span>
+    </button>
+    <div class="o-expandable_content" tabindex="0">
+        {{ item.body | safe }}
+        {% if item.highlight -%}
+            <img src="{{ item.highlight }}" alt="">
+        {%- endif %}
+    </div>
+</div>
+{% endmacro %}
+
+
+{# ==========================================================================
+
+   render_pagination( pages )
+
+   ==========================================================================
+
+   Description:
+
+   Render pagination.
+
+   pages: Pages in form. The data structure is as follows:
+          [
+            { 'img':   'url-to-form-img',
+              'terms': [ ... ]
+            }
+          ]
+
+   ========================================================================== #}
+
+{% macro render_pagination( pages ) %}
+<nav class="pagination explain_pagination">
+    <span class="form-explainer_nav-label">Viewing page:</span>
+    <ul class="form-explainer_page-links">
+        {% for page in pages %}
+        <li>
+            <a class="form-explainer_page-link {{ 'current-page' if loop.index == 1 else '' }}"
+               data-page="{{ loop.index }}">
+               {{ loop.index }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+{% endmacro %}
+<div class="form-explainer">
+
+<div class="explain" aria-controls="form-explainer">
+
+    {% set page_count = value.pages | length %}
+    {% if page_count > 1 %}
+      {{ render_pagination( value.pages ) }}
+    {% endif %}
+
+    {% for page in value.pages %}
+    {% set page_num = loop.index %}
+    <figure class="explain_page"
+            id="explain_page-{{ loop.index }}"
+            role="tablist"
+            aria-multiselectable="true">
+        <div class="explain_container">
+          <div class="image-map explain_image-map">
+              <div class="image-map_wrapper">
+                  {% if page_count > 1 %}
+                  <div class="form-explainer_page-buttons">
+                      <button class="prev a-btn a-btn__disabled">
+                          <span class="u-visually-hidden">Previous page</span>
+                          {{ svg_icon('left') }}
+                      </button>
+                      <button class="a-btn next">
+                          <span class="u-visually-hidden">Next page</span>
+                          {{ svg_icon('right') }}
+                      </button>
+                  </div>
+                  {% endif %}
+                    {% set media = image(page.image, 'original') %}
+                    {% set image_height = media.height | float %}
+                    {% set image_width = media.width | float %}
+                  <img class="image-map_image"
+                       src="{{ media.url }}"
+                       alt="">
+                  {{ render_map_points( page.categories, page_num, image_height, image_width ) }}
+              </div>
+          </div>
+          <figcaption class="terms explain_terms">
+              <div class="o-expandable-group
+                          o-expandable-group__form-explainer
+                          o-expandable-group__accordion">
+                  {% for category in page.categories %}
+                    {% if category.title %}
+                       <h3>{{ category.title }}</h3>
+                    {% endif %}
+                    {{ render_terms( category.notes, page_num, loop.index ) }}
+                  {% endfor %}
+              </div>
+          </figcaption>
+        </div>
+
+    </figure>
+    {% endfor %}
+</div>
+
+</div>

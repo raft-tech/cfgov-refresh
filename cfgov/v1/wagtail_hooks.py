@@ -95,6 +95,7 @@ def editor_js():
 def editor_css():
     css_files = [
         'css/bureau-structure.css',
+        'css/coordinates.css',
         'css/deprecated-blocks.css',
         'css/general-enhancements.css',
         'css/heading-block.css',
