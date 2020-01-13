@@ -1,22 +1,22 @@
-const { LAST_2_IE_11_UP } = require('../../../../config/browser-list-config');
-const webpack = require('webpack');
-const TerserPlugin = require('terser-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { LAST_2_IE_11_UP } = require("../../../../config/browser-list-config");
+const webpack = require("webpack");
+const TerserPlugin = require("terser-webpack-plugin");
+// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
-const reactPreset = require('@babel/preset-react');
-const classPropertiesPlugin = require('@babel/plugin-proposal-class-properties');
+const reactPreset = require("@babel/preset-react");
+const classPropertiesPlugin = require("@babel/plugin-proposal-class-properties");
 
 // Used for toggling debug output. Inherit Django debug value to cut down on redundant environment variables:
 const {
   DJANGO_DEBUG: DEBUG = false,
-  NODE_ENV = 'development',
-  ANALYZE = false,
+  NODE_ENV = "development",
+  ANALYZE = false
 } = process.env;
 
-const COMMON_BUNDLE_NAME = 'common.js';
+const COMMON_BUNDLE_NAME = "common.js";
 
 const AUTOLOAD_REACT = new webpack.ProvidePlugin({
-  React: 'react',
+  React: "react"
 });
 
 const COMMON_MINIFICATION_CONFIG = new TerserPlugin({
@@ -30,9 +30,9 @@ const COMMON_MINIFICATION_CONFIG = new TerserPlugin({
     mangle: true,
     output: {
       comments: false,
-      beautify: false,
-    },
-  },
+      beautify: false
+    }
+  }
 });
 
 const COMMON_MODULE_CONFIG = {
@@ -41,70 +41,75 @@ const COMMON_MODULE_CONFIG = {
       test: /\.js$/,
       exclude: {
         test: /node_modules/,
-        exclude: /node_modules\/(?:cf-.+|cfpb-.+)/,
+        exclude: /node_modules\/(?:cf-.+|cfpb-.+)/
       },
       use: {
-        loader: 'babel-loader?cacheDirectory=true',
+        loader: "babel-loader?cacheDirectory=true",
         options: {
           presets: [
-            ['@babel/preset-env', {
-              configPath: __dirname,
-              useBuiltIns: DEBUG ? 'usage' : false,
-              debug: DEBUG,
-              targets: LAST_2_IE_11_UP,
-            }],
-            [reactPreset, {
-              development: NODE_ENV === 'development',
-            }],
+            [
+              "@babel/preset-env",
+              {
+                configPath: __dirname,
+                useBuiltIns: DEBUG ? "usage" : false,
+                debug: DEBUG,
+                targets: LAST_2_IE_11_UP
+              }
+            ],
+            [
+              reactPreset,
+              {
+                development: NODE_ENV === "development"
+              }
+            ]
           ],
           plugins: [
-            [classPropertiesPlugin, {
-              loose: true,
-            }],
-          ],
-        },
-      },
-    },
-  ],
+            [
+              classPropertiesPlugin,
+              {
+                loose: true
+              }
+            ]
+          ]
+        }
+      }
+    }
+  ]
 };
 
 const STATS_CONFIG = {
   stats: {
-    entrypoints: false,
-  },
+    entrypoints: false
+  }
 };
 
 /**
  * TODO: Set up service worker config using workbox for offline capability
  */
 
-const plugins = [
-  AUTOLOAD_REACT,
-];
+const plugins = [AUTOLOAD_REACT];
 
-if (NODE_ENV === 'development' && ANALYZE) {
-  plugins.push(new BundleAnalyzerPlugin({
-    analyzerMode: 'server',
-  }));
-}
+// if (NODE_ENV === 'development' && ANALYZE) {
+//   plugins.push(new BundleAnalyzerPlugin({
+//     analyzerMode: 'server',
+//   }));
+//  }
 
 const conf = {
   cache: false,
   mode: NODE_ENV,
   module: COMMON_MODULE_CONFIG,
   output: {
-    filename: '[name]',
-    jsonpFunction: 'apps',
+    filename: "[name]",
+    jsonpFunction: "apps"
   },
   optimization: {
     minimize: true,
-    minimizer: [
-      COMMON_MINIFICATION_CONFIG,
-    ],
+    minimizer: [COMMON_MINIFICATION_CONFIG]
   },
   stats: STATS_CONFIG.stats,
-  devtool: NODE_ENV === 'production' ? false : 'inline-source-map',
-  plugins,
+  devtool: NODE_ENV === "production" ? false : "inline-source-map",
+  plugins
 };
 
 module.exports = { conf };
