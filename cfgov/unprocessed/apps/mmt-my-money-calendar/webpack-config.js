@@ -44,24 +44,33 @@ const COMMON_MODULE_CONFIG = {
         loader: "babel-loader?cacheDirectory=true",
         options: {
           presets: [
-            ['@babel/preset-env', {
-              configPath: __dirname,
-              useBuiltIns: DEBUG ? 'usage' : false,
-              debug: DEBUG,
-              targets: LAST_2_IE_11_UP,
-            }],
-            [require('@babel/preset-react'), {
-              development: NODE_ENV === 'development',
-            }],
+            [
+              "@babel/preset-env",
+              {
+                configPath: __dirname,
+                useBuiltIns: DEBUG ? "usage" : false,
+                debug: DEBUG,
+                targets: LAST_2_IE_11_UP
+              }
+            ],
+            [
+              require("@babel/preset-react"),
+              {
+                development: NODE_ENV === "development"
+              }
+            ]
           ],
           plugins: [
-            [require('@babel/plugin-proposal-decorators'), { legacy: true }],
-            [require('@babel/plugin-proposal-class-properties'), { loose: true }],
-          ],
-        },
-      },
-    },
-  ],
+            [require("@babel/plugin-proposal-decorators"), { legacy: true }],
+            [
+              require("@babel/plugin-proposal-class-properties"),
+              { loose: true }
+            ]
+          ]
+        }
+      }
+    }
+  ]
 };
 
 const STATS_CONFIG = {
@@ -82,6 +91,8 @@ const plugins = [AUTOLOAD_REACT];
 //   }));
 //  }
 
+const minimize = NODE_ENV === "production";
+
 const conf = {
   cache: false,
   mode: NODE_ENV,
@@ -91,7 +102,7 @@ const conf = {
     jsonpFunction: "apps"
   },
   optimization: {
-    minimize: true,
+    minimize,
     minimizer: [COMMON_MINIFICATION_CONFIG]
   },
   stats: STATS_CONFIG.stats,
