@@ -3,9 +3,6 @@ const webpack = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
 // const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
-const reactPreset = require("@babel/preset-react");
-const classPropertiesPlugin = require("@babel/plugin-proposal-class-properties");
-
 // Used for toggling debug output. Inherit Django debug value to cut down on redundant environment variables:
 const {
   DJANGO_DEBUG: DEBUG = false,
@@ -47,34 +44,24 @@ const COMMON_MODULE_CONFIG = {
         loader: "babel-loader?cacheDirectory=true",
         options: {
           presets: [
-            [
-              "@babel/preset-env",
-              {
-                configPath: __dirname,
-                useBuiltIns: DEBUG ? "usage" : false,
-                debug: DEBUG,
-                targets: LAST_2_IE_11_UP
-              }
-            ],
-            [
-              reactPreset,
-              {
-                development: NODE_ENV === "development"
-              }
-            ]
+            ['@babel/preset-env', {
+              configPath: __dirname,
+              useBuiltIns: DEBUG ? 'usage' : false,
+              debug: DEBUG,
+              targets: LAST_2_IE_11_UP,
+            }],
+            [require('@babel/preset-react'), {
+              development: NODE_ENV === 'development',
+            }],
           ],
           plugins: [
-            [
-              classPropertiesPlugin,
-              {
-                loose: true
-              }
-            ]
-          ]
-        }
-      }
-    }
-  ]
+            [require('@babel/plugin-proposal-decorators'), { legacy: true }],
+            [require('@babel/plugin-proposal-class-properties'), { loose: true }],
+          ],
+        },
+      },
+    },
+  ],
 };
 
 const STATS_CONFIG = {
