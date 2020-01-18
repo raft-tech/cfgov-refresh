@@ -1,10 +1,10 @@
 export default function Hero() {
   return (
-    <section class="m-hero">
-      <div class="m-hero_wrapper wrapper">
-        <div class="m-hero_text">
-          <h1 class="m-hero_heading">My Money Calendar</h1>
-          <div class="m-hero_subhead">
+    <section classNameNameName="m-hero">
+      <div className="m-hero_wrapper wrapper">
+        <div className="m-hero_text">
+          <h1 className="m-hero_heading">My Money Calendar</h1>
+          <div className="m-hero_subhead">
             Visualize your spending and learn strategies to manage your weekly
             and monthly budget.
           </div>

@@ -4,10 +4,11 @@ export default function ExpensesStep() {
 
   return (
     <section className="expenses-step">
+      <Link to="/">Back Home</Link>
       <img
         src="/static/apps/mmt-my-money-calendar/img/pb_3.png"
         alt=""
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
 
       <h3 className="step-title">Expenses Step</h3>
@@ -15,7 +16,7 @@ export default function ExpensesStep() {
       <img
         src="/static/apps/mmt-my-money-calendar/img/expense-img.png"
         alt=""
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <br />
       <br />
@@ -25,10 +26,10 @@ export default function ExpensesStep() {
         src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
 
-      <label class="a-label">
+      <label className="a-label">
         <span>Housing</span>
       </label>
       <br />
@@ -36,7 +37,7 @@ export default function ExpensesStep() {
         src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <label class="a-label">
         <span>Transportation</span>
@@ -46,7 +47,7 @@ export default function ExpensesStep() {
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <label class="a-label">
         <span>Food</span>
@@ -56,7 +57,7 @@ export default function ExpensesStep() {
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <label class="a-label">
         <span>Utilities</span>
@@ -66,7 +67,7 @@ export default function ExpensesStep() {
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <label class="a-label" for="other">
         <span>Other</span>
@@ -75,8 +76,8 @@ export default function ExpensesStep() {
       <br />
       <br />
 
-      <Link to="/summary" className="a-btn a-btn__full-on-xs">
-        Great! Let's look at your Summary
+      <Link to="/expenses-step25" className="a-btn a-btn__full-on-xs">
+        Let's add the details for your expenses
       </Link>
       <br />
       <br />

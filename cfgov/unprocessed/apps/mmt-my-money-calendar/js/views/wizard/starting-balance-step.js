@@ -3,27 +3,31 @@ export default function StartingBalance() {
   // add class for step-title; center justify for the rest
 
   return (
-    <section className="wizard">
+    <section className="starting-balance-step">
+      <Link to="/">Back Home</Link>
       <img
         src="/static/apps/mmt-my-money-calendar/img/pb_1.png"
         alt=""
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <h3 className="step-title">Starting Balance</h3>
       <img
         src="/static/apps/mmt-my-money-calendar/img/starting_balance.png"
         alt=""
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <br />
       <br />
-      <h4>Tell us about your Cash on Hand</h4>
+      <h4>
+        Today is January 15, 2020. Tell us what cash your have on hand as of
+        today.
+      </h4>
       <br />
       <img
         src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <label class="a-label">
         <span>Checking account</span>
@@ -33,7 +37,7 @@ export default function StartingBalance() {
         src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <label class="a-label">
         <span>Savings account</span>
@@ -43,7 +47,7 @@ export default function StartingBalance() {
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <label class="a-label">
         <span>Cash</span>
@@ -53,7 +57,7 @@ export default function StartingBalance() {
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <label class="a-label">
         <span>Prepaid</span>
@@ -63,7 +67,7 @@ export default function StartingBalance() {
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
       <label class="a-label">
         <span>Other</span>
@@ -72,8 +76,8 @@ export default function StartingBalance() {
       <br />
       <br />
 
-      <Link to="/wizard/income-step" className="a-btn a-btn__full-on-xs">
-        Add your Cash on Hand
+      <Link to="/starting-balance-step25" className="a-btn a-btn__full-on-xs">
+        Add the details
       </Link>
       <br />
       <br />

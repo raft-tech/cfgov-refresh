@@ -13,10 +13,7 @@ export default function Home() {
         Estimates are acceptable
       </h3>
       <br />
-      <Link
-        to="/wizard/starting-balance-step"
-        className="a-btn a-btn__full-on-xs"
-      >
+      <Link to="/starting-balance-step" className="a-btn a-btn__full-on-xs">
         Let's Begin
       </Link>
     </main>

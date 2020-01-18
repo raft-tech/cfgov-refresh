@@ -4,10 +4,11 @@ export default function IncomeStep() {
 
   return (
     <section className="income-step">
+      <Link to="/">Back Home</Link>
       <img
         src="/static/apps/mmt-my-money-calendar/img/pb_2.png"
         alt=""
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
 
       <h3 className="step-title">Income Step</h3>
@@ -15,68 +16,120 @@ export default function IncomeStep() {
       <img
         src="/static/apps/mmt-my-money-calendar/img/income-img.png"
         alt=""
-        class="u-hide-on-print"
+        classNames="u-hide-on-print"
       />
       <br />
       <br />
-      <h4>Tell us about your Income</h4>
-      <p>Check off those that you currently have</p>
+      <h3>Tell us about your Income</h3>
+      <h4>Check off those that you currently have</h4>
       <img
         src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        classNames="u-hide-on-print"
+      />
+
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/job.png"
+        alt=""
+        width="35px"
+        className="u-hide-on-print"
       />
 
       <label class="a-label">
         <span>Job</span>
       </label>
       <br />
+      <br />
       <img
         src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
+      />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/childSupport.png"
+        alt=""
+        width="35px"
+        className="u-hide-on-print"
       />
       <label class="a-label">
-        <span>Transportation</span>
+        <span>Child support</span>
       </label>
+      <br />
       <br />
       <img
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
+      />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/disabilityBenefits.png"
+        alt=""
+        width="35px"
+        className="u-hide-on-print"
       />
       <label class="a-label">
-        <span>Food</span>
+        <span>Disability benefits</span>
       </label>
+      <br />
+      <br />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
+        alt=""
+        width="20px"
+        className="u-hide-on-print"
+      />
+      <img
+        src="/static/apps/mmt-my-money-calendar/SNAP.png"
+        alt=""
+        width="20px"
+        className="u-hide-on-print"
+      />
+      <label class="a-label">
+        <span>SNAP</span>
+      </label>
+      <br />
       <br />
       <img
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        classNames="u-hide-on-print"
+      />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/TANF.png"
+        alt=""
+        width="20px"
+        className="u-hide-on-print"
       />
       <label class="a-label">
-        <span>Utilities</span>
+        <span>TANF</span>
       </label>
+      <br />
       <br />
       <img
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
         width="20px"
-        class="u-hide-on-print"
+        className="u-hide-on-print"
       />
-      <label class="a-label" for="other">
-        <span>Other</span>
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/otherGovtPrograms.png"
+        alt=""
+        width="20px"
+        className="u-hide-on-print"
+      />
+      <label class="a-label">
+        <span>Other Government Programs</span>
       </label>
       <br />
       <br />
       <br />
 
-      <Link to="/wizard/expenses-step" className="a-btn a-btn__full-on-xs">
-        Let's add the details for your expenses
+      <Link to="/income-step25" className="a-btn a-btn__full-on-xs">
+        Let's add the details for your income
       </Link>
       <br />
       <br />
