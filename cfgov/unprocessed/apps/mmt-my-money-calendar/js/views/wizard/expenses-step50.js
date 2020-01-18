@@ -6,11 +6,11 @@ export default function ExpensesStep50() {
     <section className="starting-balance-step-25">
       <Link to="/">Back Home</Link>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/pb_1.25.png"
+        src="/static/apps/mmt-my-money-calendar/img/pb_3.50.png"
         alt=""
         className="u-hide-on-print"
       />
-      <h2 className="step-title">Starting Balance Step</h2>
+      <h3 className="step-title">Expenses Step</h3>
       <br />
       <br />
       <div>
@@ -18,28 +18,50 @@ export default function ExpensesStep50() {
         <img
           src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
           alt=""
-          width="30"
+          width="75px"
           className="u-hide-on-print"
         />
-        <h3 className="step-title">Checking Account</h3>
+        <h2 className="step-title">
+          Let's consider your <em>Grocery</em> costs
+        </h2>
       </div>
-
-      <br />
       <br />
       <h4>
-        What is the balance in your <em>checking account</em> right now?
+        Take an estimate of your weekly or monthly grocery bill and add it
+        below.
       </h4>
-      <br />
+
       <img
-        src="/static/apps/mmt-my-money-calendar/img/input-checking.png"
+        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
+        width="20"
         alt=""
         className="u-hide-on-print"
       />
+      <label>Weekly amount</label>
+      <br />
+      <br />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/checked-radio.png"
+        width="20"
+        alt=""
+        className="u-hide-on-print"
+      />
+      <label>Monthly amount</label>
+      <br />
+      <br />
+
+      <h4>How much do you spend?</h4>
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
+        alt=""
+        className="u-hide-on-print"
+      />
+
       <br />
       <br />
       <br />
 
-      <Link to="/starting-balance-step50" className="a-btn a-btn__full-on-xs">
+      <Link to="/expenses-step75" className="a-btn a-btn__full-on-xs">
         Next
       </Link>
       <br />

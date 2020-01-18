@@ -10,7 +10,7 @@ export default function StartingBalance25() {
         alt=""
         className="u-hide-on-print"
       />
-      <h2 className="step-title">Starting Balance Step</h2>
+      <h3 className="step-title">Starting Balance Step</h3>
       <br />
       <br />
       <div>
@@ -21,7 +21,7 @@ export default function StartingBalance25() {
           width="30"
           className="u-hide-on-print"
         />
-        <h3 className="step-title">Checking Account</h3>
+        <h2 className="step-title">Checking Account</h2>
       </div>
 
       <br />

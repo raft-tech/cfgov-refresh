@@ -20,7 +20,7 @@ export default function IncomeStep() {
       />
       <br />
       <br />
-      <h3>Tell us about your Income</h3>
+      <h2>Tell us about your Income</h2>
       <h4>Check off those that you currently have</h4>
       <img
         src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
@@ -32,7 +32,7 @@ export default function IncomeStep() {
       <img
         src="/static/apps/mmt-my-money-calendar/img/job.png"
         alt=""
-        width="35px"
+        width="25px"
         className="u-hide-on-print"
       />
 
@@ -50,7 +50,7 @@ export default function IncomeStep() {
       <img
         src="/static/apps/mmt-my-money-calendar/img/childSupport.png"
         alt=""
-        width="35px"
+        width="25px"
         className="u-hide-on-print"
       />
       <label class="a-label">
@@ -61,13 +61,13 @@ export default function IncomeStep() {
       <img
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
-        width="20px"
+        width="25px"
         className="u-hide-on-print"
       />
       <img
         src="/static/apps/mmt-my-money-calendar/img/disabilityBenefits.png"
         alt=""
-        width="35px"
+        width="25px"
         className="u-hide-on-print"
       />
       <label class="a-label">
@@ -78,13 +78,13 @@ export default function IncomeStep() {
       <img
         src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
         alt=""
-        width="20px"
+        width="25px"
         className="u-hide-on-print"
       />
       <img
-        src="/static/apps/mmt-my-money-calendar/SNAP.png"
+        src="/static/apps/mmt-my-money-calendar/img/SNAP.png"
         alt=""
-        width="20px"
+        width="25px"
         className="u-hide-on-print"
       />
       <label class="a-label">
@@ -95,13 +95,13 @@ export default function IncomeStep() {
       <img
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
-        width="20px"
+        width="25px"
         classNames="u-hide-on-print"
       />
       <img
         src="/static/apps/mmt-my-money-calendar/img/TANF.png"
         alt=""
-        width="20px"
+        width="25px"
         className="u-hide-on-print"
       />
       <label class="a-label">
@@ -112,13 +112,13 @@ export default function IncomeStep() {
       <img
         src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
         alt=""
-        width="20px"
+        width="25px"
         className="u-hide-on-print"
       />
       <img
         src="/static/apps/mmt-my-money-calendar/img/otherGovtPrograms.png"
         alt=""
-        width="20px"
+        width="25px"
         className="u-hide-on-print"
       />
       <label class="a-label">

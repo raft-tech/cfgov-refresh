@@ -20,10 +20,16 @@ export default function ExpensesStep() {
       />
       <br />
       <br />
-      <h4>Tell us about your Expenses</h4>
+      <h2>Tell us about your Expenses</h2>
       <p>Check off those that you currently have</p>
       <img
         src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
+        alt=""
+        width="20px"
+        className="u-hide-on-print"
+      />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/housingUtilities.png"
         alt=""
         width="20px"
         className="u-hide-on-print"
@@ -39,8 +45,14 @@ export default function ExpensesStep() {
         width="20px"
         className="u-hide-on-print"
       />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/groceriesOther.png"
+        alt=""
+        width="20px"
+        className="u-hide-on-print"
+      />
       <label class="a-label">
-        <span>Transportation</span>
+        <span>Groceries</span>
       </label>
       <br />
       <img
@@ -49,8 +61,30 @@ export default function ExpensesStep() {
         width="20px"
         className="u-hide-on-print"
       />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/eatingOut.png"
+        alt=""
+        width="20px"
+        className="u-hide-on-print"
+      />
       <label class="a-label">
-        <span>Food</span>
+        <span>Entertainment</span>
+      </label>
+      <br />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
+        alt=""
+        width="20px"
+        className="u-hide-on-print"
+      />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/phone.png"
+        alt=""
+        width="20px"
+        className="u-hide-on-print"
+      />
+      <label class="a-label">
+        <span>Phone</span>
       </label>
       <br />
       <img
@@ -59,18 +93,14 @@ export default function ExpensesStep() {
         width="20px"
         className="u-hide-on-print"
       />
-      <label class="a-label">
-        <span>Utilities</span>
-      </label>
-      <br />
       <img
-        src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
+        src="/static/apps/mmt-my-money-calendar/img/educationChildcare.png"
         alt=""
         width="20px"
         className="u-hide-on-print"
       />
       <label class="a-label" for="other">
-        <span>Other</span>
+        <span>Childcare</span>
       </label>
       <br />
       <br />

@@ -10,7 +10,10 @@ export default function StartingBalance50() {
         alt=""
         className="u-hide-on-print"
       />
-      <h3 className="step-title">Savings Account</h3>
+      <h3 className="step-title">Starting Balance Step</h3>
+      <br />
+      <br />
+      <h2 className="step-title">Savings Account</h2>
       <img
         src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
         alt=""

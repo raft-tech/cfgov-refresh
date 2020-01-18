@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-export default function ExpensesStep75() {
+export default function ExpensesStep50() {
   // add class for step-title; center justify for the rest
 
   return (
@@ -10,37 +10,44 @@ export default function ExpensesStep75() {
         alt=""
         className="u-hide-on-print"
       />
-      <h2 className="step-title">Starting Balance Step</h2>
+      <h3 className="step-title">Expenses Step</h3>
       <br />
       <br />
       <div>
         {" "}
         <img
-          src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+          src="/static/apps/mmt-my-money-calendar/img/phone.png"
           alt=""
-          width="30"
+          width="75px"
           className="u-hide-on-print"
         />
-        <h3 className="step-title">Checking Account</h3>
+        <h2 className="step-title">
+          Let's look at your <em>Phone</em> costs
+        </h2>
       </div>
 
       <br />
       <br />
-      <h4>
-        What is the balance in your <em>checking account</em> right now?
-      </h4>
-      <br />
+
+      <label>Due date</label>
       <img
         src="/static/apps/mmt-my-money-calendar/img/input-checking.png"
         alt=""
         className="u-hide-on-print"
       />
-      <br />
+      <p>How much is it?</p>
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
+        alt=""
+        className="u-hide-on-print"
+      />
+
       <br />
       <br />
 
       <Link to="/summary" className="a-btn a-btn__full-on-xs">
-        Great! Let's look at your Summary
+        Congratulations! You have completed your work. Let's look at the
+        calendar.
       </Link>
       <br />
       <br />

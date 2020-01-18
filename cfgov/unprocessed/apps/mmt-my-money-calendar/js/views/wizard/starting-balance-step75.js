@@ -10,24 +10,35 @@ export default function StartingBalance50() {
         alt=""
         className="u-hide-on-print"
       />
-      <h3 className="step-title">Savings Account</h3>
+      <h3 className="step-title">Starting Balance Step</h3>
+      <br />
+      <br />
+      <div>
+        {" "}
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+          alt=""
+          width="30"
+          className="u-hide-on-print"
+        />
+        <h2 className="step-title">Cash</h2>
+      </div>
+
+      <br />
+      <br />
+      <h4>
+        Do you have any other forms of <em>cash</em> right now? This includes
+        prepaid cards, cash in the house and any other sources
+      </h4>
+      <br />
       <img
-        src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-cash.png"
         alt=""
-        width="30"
         className="u-hide-on-print"
       />
       <br />
       <br />
-      <h4>
-        What is the balance in your <em>savings</em> right now?
-      </h4>
       <br />
-      <img src="/static/apps/mmt-my-money-calendar/cash.png" />
-      <br />
-      <br />
-      <br />
-
       <Link to="/income-step" className="a-btn a-btn__full-on-xs">
         Great! Now, Add your Incomes
       </Link>

@@ -5,11 +5,11 @@ export default function Summary() {
     <section id="summary-view">
       <Link to="/">Back Home</Link>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/done.png"
+        src="/static/apps/mmt-my-money-calendar/img/pb_done.png"
         alt=""
         className="u-hide-on-print"
       />
-      <h3 className="step-title">Here is your summary</h3>
+      <h3 className="step-title">Summary</h3>
       <img
         src="/static/apps/mmt-my-money-calendar/img/monthlyCalGrRed.png"
         alt=""

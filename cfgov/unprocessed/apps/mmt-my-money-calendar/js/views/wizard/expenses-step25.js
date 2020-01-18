@@ -6,30 +6,33 @@ export default function ExpensesStep25() {
     <section className="starting-balance-step-25">
       <Link to="/">Back Home</Link>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/pb_1.25.png"
+        src="/static/apps/mmt-my-money-calendar/img/pb_3.25.png"
         alt=""
         className="u-hide-on-print"
       />
-      <h2 className="step-title">Starting Balance Step</h2>
+      <h3 className="step-title">Expenses Step</h3>
       <br />
       <br />
       <div>
         {" "}
         <img
-          src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+          src="/static/apps/mmt-my-money-calendar/img/housingUtilities.png"
           alt=""
-          width="30"
+          width="75px"
           className="u-hide-on-print"
         />
-        <h3 className="step-title">Checking Account</h3>
+        <h2 className="step-title">
+          Tell us about your <em>Housing Costs</em>
+        </h2>
       </div>
-
       <br />
-      <br />
-      <h4>
-        What is the balance in your <em>checking account</em> right now?
-      </h4>
-      <br />
+      <h4>How much do you pay each month for housing (rent or mortgage)?</h4>
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/input-checking.png"
+        alt=""
+        className="u-hide-on-print"
+      />
+      <h4>What is the due date?</h4>
       <img
         src="/static/apps/mmt-my-money-calendar/img/input-checking.png"
         alt=""
@@ -39,7 +42,7 @@ export default function ExpensesStep25() {
       <br />
       <br />
 
-      <Link to="/starting-balance-step50" className="a-btn a-btn__full-on-xs">
+      <Link to="/expenses-step50" className="a-btn a-btn__full-on-xs">
         Next
       </Link>
       <br />

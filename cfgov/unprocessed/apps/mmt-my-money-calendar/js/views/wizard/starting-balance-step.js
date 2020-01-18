@@ -10,7 +10,7 @@ export default function StartingBalance() {
         alt=""
         className="u-hide-on-print"
       />
-      <h3 className="step-title">Starting Balance</h3>
+      <h3 className="step-title">Starting Balance Step</h3>
       <img
         src="/static/apps/mmt-my-money-calendar/img/starting_balance.png"
         alt=""
@@ -18,10 +18,10 @@ export default function StartingBalance() {
       />
       <br />
       <br />
-      <h4>
-        Today is January 15, 2020. Tell us what cash your have on hand as of
-        today.
-      </h4>
+      <h2>
+        Today is January 15, 2020. <br />
+        Tell us what cash your have on hand as of today.
+      </h2>
       <br />
       <img
         src="/static/apps/mmt-my-money-calendar/img/checked_box.png"

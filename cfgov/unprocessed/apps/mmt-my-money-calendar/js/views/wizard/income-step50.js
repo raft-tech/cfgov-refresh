@@ -10,36 +10,78 @@ export default function IncomeStep50() {
         alt=""
         className="u-hide-on-print"
       />
-      <h2 className="step-title">Starting Balance Step</h2>
+      <h3 className="step-title">Income Step</h3>
       <br />
       <br />
       <div>
         {" "}
         <img
-          src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+          src="/static/apps/mmt-my-money-calendar/img/childSupport.png"
           alt=""
           width="30"
           className="u-hide-on-print"
         />
-        <h3 className="step-title">Checking Account</h3>
+        <h2 className="step-title">Child Support</h2>
       </div>
 
       <br />
       <br />
+
       <h4>
-        What is the balance in your <em>checking account</em> right now?
+        How often do you receive your <em>child support payments</em>?
       </h4>
       <br />
       <img
-        src="/static/apps/mmt-my-money-calendar/img/input-checking.png"
+        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
+        width="20"
+        alt=""
+        className="u-hide-on-print"
+      />
+      <label>Weekly</label>
+      <br />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/checked-radio.png"
+        width="20"
+        alt=""
+        className="u-hide-on-print"
+      />
+      <label>Every two weeks</label>
+      <br />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
+        width="20"
+        alt=""
+        className="u-hide-on-print"
+      />
+      <label>Twice monthly</label>
+      <br />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
+        width="20"
+        alt=""
+        className="u-hide-on-print"
+      />
+      <label>Once a month</label>
+      <br />
+      <br />
+      <h4>
+        When do you expect to receive your next child support payment (get
+        calendar image?
+      </h4>
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
         alt=""
         className="u-hide-on-print"
       />
       <br />
-      <br />
-      <br />
+      <h4>How much do you expect your payment to be?</h4>
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
+        alt=""
+        className="u-hide-on-print"
+      />
 
-      <Link to="/starting-balance-step50" className="a-btn a-btn__full-on-xs">
+      <Link to="/income-step75" className="a-btn a-btn__full-on-xs">
         Next
       </Link>
       <br />

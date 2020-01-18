@@ -8,9 +8,9 @@ import IncomeStep from "./views/wizard/income-step";
 import IncomeStep25 from "./views/wizard/income-step25";
 import IncomeStep50 from "./views/wizard/income-step50";
 import IncomeStep75 from "./views/wizard/income-step75";
-import ExpensesStep from "./views/wizard/expenses-step25";
-import ExpensesStep25 from "./views/wizard/expenses-step50";
-import ExpensesStep50 from "./views/wizard/expenses-step";
+import ExpensesStep from "./views/wizard/expenses-step";
+import ExpensesStep25 from "./views/wizard/expenses-step25";
+import ExpensesStep50 from "./views/wizard/expenses-step50";
 import ExpensesStep75 from "./views/wizard/expenses-step75";
 import Summary from "./views/summary";
 

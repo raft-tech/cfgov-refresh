@@ -10,7 +10,7 @@ export default function IncomeStep25() {
         alt=""
         className="u-hide-on-print"
       />
-      <h2 className="step-title">Income Step</h2>
+      <h3 className="step-title">Income Step</h3>
       <br />
       <br />
       <div>
@@ -21,15 +21,13 @@ export default function IncomeStep25() {
           width="30"
           className="u-hide-on-print"
         />
-        <h3 className="step-title">Job</h3>
+        <h2 className="step-title">
+          Let's gather some details on your <em>Job</em>
+        </h2>
       </div>
+      <br />
 
-      <br />
-      <br />
-      <h3>
-        Give us some details on your <em>job</em>
-      </h3>
-      <h4>Job Name</h4>
+      <h4>Name</h4>
       <img
         src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
         alt=""
@@ -91,7 +89,7 @@ export default function IncomeStep25() {
 
       <h4>If you have another job with income, added it by clicking here.</h4>
 
-      <Link to="/starting-balance-step50" className="a-btn a-btn__full-on-xs">
+      <Link to="/income-step50" className="a-btn a-btn__full-on-xs">
         Next
       </Link>
       <br />
