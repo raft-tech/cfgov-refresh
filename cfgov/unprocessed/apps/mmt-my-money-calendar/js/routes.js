@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./views/home";
-import Wizard from "./views/wizard";
+import StartingBalance from "./views/wizard/starting-balance-step";
+import IncomeStep from "./views/wizard/income-step";
+import ExpensesStep from "./views/wizard/expenses-step";
 import Summary from "./views/summary";
 
 const Routes = () => (
@@ -11,8 +13,16 @@ const Routes = () => (
           <Home />
         </Route>
 
-        <Route path="/wizard">
-          <Wizard />
+        <Route path="/wizard/starting-balance-step">
+          <StartingBalance />
+        </Route>
+
+        <Route path="/wizard/income-step">
+          <IncomeStep />
+        </Route>
+
+        <Route path="/wizard/expenses-step">
+          <ExpensesStep />
         </Route>
 
         <Route path="/summary">
