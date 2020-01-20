@@ -4,6 +4,12 @@
 {% import 'templates/render_block.html' as render_block with context %}
 {% import 'templates/streamfield-sidefoot.html' as streamfield_sidefoot with context %}
 
+{% block css %}
+  <!-- Styles -->
+  {{ super() }}
+  <link rel="stylesheet" href="{{ static('apps/mmt-my-money-calendar/css/main.css') }}">
+{% endblock %}
+
 {% block content_main_modifiers -%}
     {{ super() }} content__flush-bottom
 {%- endblock %}
