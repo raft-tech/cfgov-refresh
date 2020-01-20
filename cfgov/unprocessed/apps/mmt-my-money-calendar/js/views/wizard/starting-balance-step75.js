@@ -10,7 +10,7 @@ export default function StartingBalance50() {
         alt=""
         className="u-hide-on-print"
       />
-      <h3 className="step-title">Starting Balance Step</h3>
+      <div className="c-step-title">Starting Balance Step</div>
       <br />
       <br />
       <div>

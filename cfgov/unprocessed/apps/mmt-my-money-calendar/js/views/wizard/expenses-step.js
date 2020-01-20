@@ -11,7 +11,7 @@ export default function ExpensesStep() {
         className="u-hide-on-print"
       />
 
-      <h3 className="step-title">Expenses Step</h3>
+      <div className="c-step-title">Expense Step</div>
 
       <img
         src="/static/apps/mmt-my-money-calendar/img/expense-img.png"

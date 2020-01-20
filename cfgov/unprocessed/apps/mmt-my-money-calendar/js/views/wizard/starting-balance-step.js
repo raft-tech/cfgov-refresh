@@ -3,26 +3,23 @@ export default function StartingBalance() {
   // add class for step-title; center justify for the rest
 
   return (
-    <section className="starting-balance-step">
+    <section className="c-starting-balance-step c-step">
       <Link to="/">Back Home</Link>
       <img
         src="/static/apps/mmt-my-money-calendar/img/pb_1.png"
         alt=""
         className="u-hide-on-print"
       />
-      <h3 className="step-title">Starting Balance Step</h3>
+      <div className="c-step-title">Starting Balance Step</div>
       <img
         src="/static/apps/mmt-my-money-calendar/img/starting_balance.png"
         alt=""
         className="u-hide-on-print"
       />
-      <br />
-      <br />
-      <h2>
+      <div className="c-subhead">
         Today is January 15, 2020. <br />
         Tell us what cash your have on hand as of today.
-      </h2>
-      <br />
+      </div>
       <img
         src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
         alt=""
@@ -72,7 +69,6 @@ export default function StartingBalance() {
       <label class="a-label">
         <span>Other</span>
       </label>
-      <br />
       <br />
       <br />
 

@@ -10,9 +10,7 @@ export default function IncomeStep50() {
         alt=""
         className="u-hide-on-print"
       />
-      <h3 className="step-title">Income Step</h3>
-      <br />
-      <br />
+      <div className="c-step-title">Income Step</div>
       <div>
         {" "}
         <img

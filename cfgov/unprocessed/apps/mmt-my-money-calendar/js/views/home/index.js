@@ -6,13 +6,10 @@ export default function Home() {
   return (
     <main className="mmt-view home">
       <Hero />
-      <br />
-      <br />
-      <h3>
+      <div className="c-subhead">
         Input your income, expenses and cash-on-hand to build your calendar.
         Estimates are acceptable
-      </h3>
-      <br />
+      </div>
       <Link to="/starting-balance-step" className="a-btn a-btn__full-on-xs">
         Let's Begin
       </Link>

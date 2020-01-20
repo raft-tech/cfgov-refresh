@@ -10,8 +10,7 @@ export default function StartingBalance50() {
         alt=""
         className="u-hide-on-print"
       />
-      <h3 className="step-title">Starting Balance Step</h3>
-      <br />
+      <div className="c-step-title">Starting Balance Step</div>
       <br />
       <h2 className="step-title">Savings Account</h2>
       <img
@@ -21,14 +20,10 @@ export default function StartingBalance50() {
         className="u-hide-on-print"
       />
       <br />
-      <br />
       <h4>
         What is the balance in your <em>savings</em> right now?
       </h4>
-      <br />
       <img src="/static/apps/mmt-my-money-calendar/input-checking.png" />
-      <br />
-      <br />
       <br />
 
       <Link to="/starting-balance-step75" className="a-btn a-btn__full-on-xs">

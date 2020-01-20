@@ -10,9 +10,8 @@ export default function ExpensesStep25() {
         alt=""
         className="u-hide-on-print"
       />
-      <h3 className="step-title">Expenses Step</h3>
-      <br />
-      <br />
+      <div className="c-step-title">Expense Step</div>
+
       <div>
         {" "}
         <img

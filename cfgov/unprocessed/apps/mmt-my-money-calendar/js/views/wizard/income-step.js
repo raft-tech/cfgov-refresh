@@ -11,7 +11,7 @@ export default function IncomeStep() {
         className="u-hide-on-print"
       />
 
-      <h3 className="step-title">Income Step</h3>
+      <div className="c-step-title">Income Step</div>
 
       <img
         src="/static/apps/mmt-my-money-calendar/img/income-img.png"
