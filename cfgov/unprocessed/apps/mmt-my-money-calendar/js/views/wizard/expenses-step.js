@@ -26,8 +26,9 @@ export default function ExpensesStep() {
           <h3>Tell us about your expenses</h3>
         </div>
       </div>
-
-      <h4>Check off those that you currently have</h4>
+      <div className="c-increment-subtitle">
+        <h4>Check off those that you currently have</h4>
+      </div>
 
       <div className="c-item-list">
         <div className="c-item">
@@ -40,7 +41,7 @@ export default function ExpensesStep() {
           </div>
           <div className="c-increment-icon">
             <img
-              src="/static/apps/mmt-my-money-calendar/img/housingUtilities.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-housing.png"
               alt=""
               className="u-hide-on-print"
             />
@@ -60,7 +61,7 @@ export default function ExpensesStep() {
           <div className="c-increment-icon">
             {" "}
             <img
-              src="/static/apps/mmt-my-money-calendar/img/groceriesOther.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-groceries.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
@@ -79,7 +80,7 @@ export default function ExpensesStep() {
           </div>
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/eatingOut.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-entertainment.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
@@ -98,7 +99,7 @@ export default function ExpensesStep() {
           </div>
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/phone.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-phone.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
@@ -117,7 +118,7 @@ export default function ExpensesStep() {
           </div>
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/educationChildcare.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-childcare.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
@@ -136,7 +137,7 @@ export default function ExpensesStep() {
           </div>
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/otherGovtPrograms.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-otherGovt.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />

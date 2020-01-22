@@ -12,23 +12,26 @@ export default function ExpensesStep50() {
       <div className="c-step-title">
         <h4>Expense Step</h4>
       </div>
-      <div>
-        {" "}
-        <img
-          src="/static/apps/mmt-my-money-calendar/img/groceriesOther.png"
-          alt=""
-          width="75px"
-          className="u-hide-on-print"
-        />
-        <h2 className="step-title">
-          Let's consider your <em>Grocery</em> costs
-        </h2>
+
+      <div className="c-row-container c-increment-title-container">
+        <div className="c-increment-img">
+          <img
+            src="/static/apps/mmt-my-money-calendar/img/icon-groceries.png"
+            alt=""
+            className="u-hide-on-print c-increment-icon"
+          />
+        </div>
+        <div className="c-increment-title">
+          <h3>Groceries</h3>
+        </div>
       </div>
+
       <br />
-      <h4>
-        Take an estimate of your weekly or monthly grocery bill and add it
-        below.
-      </h4>
+      <div>
+        <h3 className="c-increment-subtitle">
+          Estimate what you spend on your <em>groceries.</em>
+        </h3>
+      </div>
 
       <img
         src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
@@ -51,7 +54,7 @@ export default function ExpensesStep50() {
 
       <h4>How much do you spend?</h4>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-grocery-month.png"
         alt=""
         className="u-hide-on-print"
       />
@@ -66,7 +69,7 @@ export default function ExpensesStep50() {
           </Link>
         </div>
         <div>
-          <Link to="/expenses-step50" className="a-btn a-btn__full-on-xs">
+          <Link to="/expenses-step25" className="a-btn a-btn__full-on-xs">
             Back
           </Link>
         </div>

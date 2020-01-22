@@ -13,37 +13,41 @@ export default function ExpensesStep25() {
         <h4>Expense Step</h4>
       </div>
 
-      <div>
-        {" "}
-        <div className="c-row-container">
-          <div>
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/housingUtilities.png"
-              alt=""
-              className="u-hide-on-print c-increment-icon"
-            />
-          </div>
-          <div>
-            <h2 className="step-title">Housing</h2>
-          </div>
+      <div className="c-row-container c-increment-title-container">
+        <div className="c-increment-img">
+          <img
+            src="/static/apps/mmt-my-money-calendar/img/icon-housing.png"
+            alt=""
+            className="u-hide-on-print c-increment-icon"
+          />
         </div>
-        <h3 className="step-title">
+        <div className="c-increment-title">
+          <h3>Housing</h3>
+        </div>
+      </div>
+      <br />
+
+      <div>
+        <h3 className="c-increment-subtitle">
           Tell us about your <em>Housing Costs</em>
         </h3>
       </div>
-      <br />
-      <h4>How much do you pay each month for housing (rent or mortgage)?</h4>
+      <h4>What is your housing payment due?</h4>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/input-checking.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-rent-date.png"
         alt=""
         className="u-hide-on-print"
       />
-      <h4>What is the due date?</h4>
+      <div>
+        <h4>How much do you pay each month for housing (rent or mortgage)?</h4>
+      </div>
+
       <img
-        src="/static/apps/mmt-my-money-calendar/img/input-checking.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-rent-amount.png"
         alt=""
         className="u-hide-on-print"
       />
+
       <br />
       <br />
 
@@ -54,7 +58,7 @@ export default function ExpensesStep25() {
           </Link>
         </div>
         <div>
-          <Link to="/expenses-step25" className="a-btn a-btn__full-on-xs">
+          <Link to="/expenses-step" className="a-btn a-btn__full-on-xs">
             Back
           </Link>
         </div>

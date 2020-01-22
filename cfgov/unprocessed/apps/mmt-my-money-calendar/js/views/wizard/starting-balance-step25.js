@@ -13,16 +13,16 @@ export default function StartingBalance25() {
       <div className="c-step-title">
         <h4>Starting Balance Step</h4>
       </div>
-      <div className="c-row-container">
-        <div>
+      <div className="c-row-container c-increment-title-container">
+        <div className="c-increment-img">
           <img
-            src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+            src="/static/apps/mmt-my-money-calendar/img/icon-debt.png"
             alt=""
             className="u-hide-on-print c-increment-icon"
           />
         </div>
-        <div>
-          <h2 className="step-title">Checking Account</h2>
+        <div className="c-increment-title">
+          <h3>Checking Account</h3>
         </div>
       </div>
       <br />

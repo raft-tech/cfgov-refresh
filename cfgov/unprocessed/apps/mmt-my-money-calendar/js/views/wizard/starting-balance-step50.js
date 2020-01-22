@@ -12,17 +12,17 @@ export default function StartingBalance50() {
       <div className="c-step-title">
         <h4>Starting Balance Step</h4>
       </div>
-      <br />
-      <div className="c-row-container">
-        <div>
+
+      <div className="c-row-container c-increment-title-container">
+        <div className="c-increment-img">
           <img
-            src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+            src="/static/apps/mmt-my-money-calendar/img/icon-debt.png"
             alt=""
             className="u-hide-on-print c-increment-icon"
           />
         </div>
-        <div>
-          <h2 className="step-title">Savings Account</h2>
+        <div className="c-increment-title">
+          <h3>Savings Account</h3>
         </div>
       </div>
 
@@ -30,7 +30,11 @@ export default function StartingBalance50() {
       <h4>
         What is the balance in your <em>savings</em> right now?
       </h4>
-      <img src="/static/apps/mmt-my-money-calendar/input-checking.png" />
+      <img
+        src="/static/apps/mmt-my-money-calendar/img/input-savings.png"
+        alt=""
+        className="u-hide-on-print"
+      />
       <br />
 
       <div className="c-nav-buttons">

@@ -12,28 +12,31 @@ export default function IncomeStep25() {
       <div className="c-step-title">
         <h4>Income Step</h4>
       </div>
-      <div className="c-row-container">
-        <div>
+      <div className="c-row-container c-increment-title-container">
+        <div className="c-increment-img">
           <img
-            src="/static/apps/mmt-my-money-calendar/img/Job.png"
+            src="/static/apps/mmt-my-money-calendar/img/icon-job.png"
             alt=""
             className="u-hide-on-print c-increment-icon"
           />
         </div>
-        <div>
-          <h2 className="step-title">Job</h2>
+        <div className="c-increment-title">
+          <h3>Job</h3>
         </div>
       </div>
+      <br />
 
-      <div>
-        Let's gather some details on your <em>Job</em>
+      <div className="c-increment-subtitle">
+        <h3>
+          Let's gather some details on your <em>Job</em>
+        </h3>
       </div>
 
       <br />
 
       <h4>Name</h4>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-jobname.png"
         alt=""
         className="u-hide-on-print"
       />
@@ -41,52 +44,68 @@ export default function IncomeStep25() {
       <br />
       <h4>When do you get paid?</h4>
       <br />
+      <div className="c-item-list">
+        <div className="c-item">
+          <div className="c-checkedbox-icon">
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
+              alt=""
+              classNames="u-hide-on-print"
+            />
+          </div>
+
+          <div>
+            <span>Weekly</span>
+          </div>
+        </div>
+        <div className="c-item">
+          <div className="c-checkedbox-icon">
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/checked-radio.png"
+              alt=""
+              classNames="u-hide-on-print"
+            />
+          </div>
+          <div>
+            <span>Every two weeks</span>
+          </div>
+        </div>
+        <div className="c-item">
+          <div className="c-checkedbox-icon">
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
+              alt=""
+              classNames="u-hide-on-print"
+            />
+          </div>
+          <div>
+            <span>Twice monthly</span>
+          </div>
+        </div>
+        <div className="c-item">
+          <div className="c-checkedbox-icon">
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
+              alt=""
+              classNames="u-hide-on-print"
+            />
+          </div>
+          <div>
+            <span>Once a month</span>
+          </div>
+        </div>
+      </div>
+      <br />
+      <h4>When is your next paycheck</h4>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
-        width="20"
-        alt=""
-        className="u-hide-on-print"
-      />
-      <label>Weekly</label>
-      <br />
-      <br />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/checked-radio.png"
-        width="20"
-        alt=""
-        className="u-hide-on-print"
-      />
-      <label>Every two weeks</label>
-      <br />
-      <br />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
-        width="20"
-        alt=""
-        className="u-hide-on-print"
-      />
-      <label>Twice monthly</label>
-      <br />
-      <br />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
-        width="20"
-        alt=""
-        className="u-hide-on-print"
-      />
-      <label>Once a month</label>
-      <br />
-      <br />
-      <h4>When is your next paycheck (get calendar image)</h4>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-next-paycheck-date.png"
         alt=""
         className="u-hide-on-print"
       />
       <br />
       <h4>How much do you expect your check to be?</h4>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-next-paycheck-amount.png"
         alt=""
         className="u-hide-on-print"
       />

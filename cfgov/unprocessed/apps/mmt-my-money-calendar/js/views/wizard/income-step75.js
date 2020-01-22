@@ -5,81 +5,71 @@ export default function IncomeStep75() {
   return (
     <section className="starting-balance-step-25">
       <img
-        src="/static/apps/mmt-my-money-calendar/img/pb_1.25.png"
+        src="/static/apps/mmt-my-money-calendar/img/pb_2.75.png"
         alt=""
         className="u-hide-on-print"
       />
       <div className="c-step-title">
         <h4>Income Step</h4>
       </div>
-      <br />
-      <br />
-      <div className="c-row-container">
-        <div>
+      <div className="c-row-container c-increment-title-container">
+        <div className="c-increment-img">
           <img
-            src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+            src="/static/apps/mmt-my-money-calendar/img/icon-debt.png"
             alt=""
             className="u-hide-on-print c-increment-icon"
           />
         </div>
-        <div>
-          <h2 className="step-title">SNAP</h2>
+        <div className="c-increment-title">
+          <h3>SNAP</h3>
         </div>
       </div>
+      <br />
+      <div>
+        <h3 className="c-increment-subtitle">
+          When do you receive your <em>SNAP</em> payments?
+        </h3>
+      </div>
 
+      <div className="c-item-list">
+        <div className="c-item">
+          <div className="c-checkedbox-icon">
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
+              alt=""
+              classNames="u-hide-on-print"
+            />
+          </div>
+
+          <div>
+            <span>Weekly</span>
+          </div>
+        </div>
+        <div className="c-item">
+          <div className="c-checkedbox-icon">
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/checked-radio.png"
+              alt=""
+              classNames="u-hide-on-print"
+            />
+          </div>
+          <div>
+            <span>Monthly</span>
+          </div>
+        </div>
+      </div>
       <br />
       <br />
-      <h4>How often do you receive your SNAP payments?</h4>
-      <br />
+      <h4>When do you expect to receive your next SNAP payment?</h4>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
-        width="20"
-        alt=""
-        className="u-hide-on-print"
-      />
-      <label>Weekly</label>
-      <br />
-      <br />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/checked-radio.png"
-        width="20"
-        alt=""
-        className="u-hide-on-print"
-      />
-      <label>Every two weeks</label>
-      <br />
-      <br />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
-        width="20"
-        alt=""
-        className="u-hide-on-print"
-      />
-      <label>Twice monthly</label>
-      <br />
-      <br />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
-        width="20"
-        alt=""
-        className="u-hide-on-print"
-      />
-      <label>Once a month</label>
-      <br />
-      <br />
-      <h4>
-        When do you expect to receive your next SNAP payment (get calendar
-        image?
-      </h4>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-snap-payment-date.png"
         alt=""
         className="u-hide-on-print"
       />
       <br />
       <h4>How much do you expect your payment to be?</h4>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-snap-payment-amount.png"
         alt=""
         className="u-hide-on-print"
       />

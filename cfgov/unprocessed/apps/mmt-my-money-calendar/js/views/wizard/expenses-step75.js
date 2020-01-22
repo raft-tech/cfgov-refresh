@@ -12,41 +12,38 @@ export default function ExpensesStep50() {
       <div className="c-step-title">
         <h4>Expense Step</h4>
       </div>
-      <div className="c-row-container">
-        <div>
+
+      <div className="c-row-container c-increment-title-container">
+        <div className="c-increment-img">
           <img
-            src="/static/apps/mmt-my-money-calendar/img/phone.png"
+            src="/static/apps/mmt-my-money-calendar/img/icon-phone.png"
             alt=""
             className="u-hide-on-print c-increment-icon"
           />
         </div>
-        <div>
-          <h2 className="step-title">Phone</h2>
+        <div className="c-increment-title">
+          <h3>Phone</h3>
         </div>
       </div>
-
-      <div>
-        <h2 className="step-title">
+      <br />
+      <div className="c-increment-subtitle">
+        <h3>
           Let's look at your <em>Phone</em> costs
-        </h2>
+        </h3>
       </div>
-
       <br />
-      <br />
-
       <label>Due date</label>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/input-checking.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-phone-date.png"
         alt=""
         className="u-hide-on-print"
       />
       <p>How much is it?</p>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/input-empty.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-phone-amount.png"
         alt=""
         className="u-hide-on-print"
       />
-      <br />
       <br />
 
       <div className="c-nav-buttons">
@@ -57,7 +54,7 @@ export default function ExpensesStep50() {
           </Link>
         </div>
         <div>
-          <Link to="/expenses-step75" className="a-btn a-btn__full-on-xs">
+          <Link to="/expenses-step50" className="a-btn a-btn__full-on-xs">
             Back
           </Link>
         </div>

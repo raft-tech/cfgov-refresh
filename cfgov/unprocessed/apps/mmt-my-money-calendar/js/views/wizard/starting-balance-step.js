@@ -20,12 +20,10 @@ export default function StartingBalance() {
           className="u-hide-on-print"
         />
         <div className="c-step-title">
-          <h3>
-            Today is January 15, 2020. Tell us what cash your have on hand as of
-            today.
-          </h3>
+          <h4>Let's look at the cash you have on hand.</h4>
         </div>
       </div>
+      <h4>This is cash as of today, January 15, 2020.</h4>
       <h4>Check off those that apply to you.</h4>
       <div className="c-item-list">
         <div className="c-item">
@@ -38,7 +36,7 @@ export default function StartingBalance() {
           </div>
           <div className="c-increment-icon">
             <img
-              src="/static/apps/mmt-my-money-calendar/img/job.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-job.png"
               alt=""
               className="u-hide-on-print"
             />
@@ -58,7 +56,7 @@ export default function StartingBalance() {
           <div className="c-increment-icon">
             {" "}
             <img
-              src="/static/apps/mmt-my-money-calendar/img/childSupport.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-childsupport.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
@@ -77,7 +75,7 @@ export default function StartingBalance() {
           </div>
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/disabilityBenefits.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-otherGovt.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
@@ -96,7 +94,7 @@ export default function StartingBalance() {
           </div>
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/SNAP.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-SNAP.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
@@ -115,7 +113,7 @@ export default function StartingBalance() {
           </div>
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/TANF.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-TANF.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />

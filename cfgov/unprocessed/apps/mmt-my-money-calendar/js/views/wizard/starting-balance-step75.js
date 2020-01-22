@@ -12,20 +12,19 @@ export default function StartingBalance50() {
       <div className="c-step-title">
         <h4>Starting Balance Step</h4>
       </div>
-      <br />
-      <br />
-      <div className="c-row-container">
-        <div>
+      <div className="c-row-container c-increment-title-container">
+        <div className="c-increment-img">
           <img
-            src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+            src="/static/apps/mmt-my-money-calendar/img/icon-debt.png"
             alt=""
             className="u-hide-on-print c-increment-icon"
           />
         </div>
-        <div>
-          <h2 className="step-title">Cash</h2>
+        <div className="c-increment-title">
+          <h3>Cash</h3>
         </div>
       </div>
+      <br />
       <h4>
         Do you have any other forms of <em>cash</em> right now? This includes
         prepaid cards, cash in the house and any other sources
@@ -45,7 +44,7 @@ export default function StartingBalance50() {
         </div>
         <div>
           <Link
-            to="/starting-balance-step75"
+            to="/starting-balance-step50"
             className="a-btn a-btn__full-on-xs"
           >
             Back

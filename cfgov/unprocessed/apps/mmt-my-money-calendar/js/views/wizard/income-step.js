@@ -38,7 +38,7 @@ export default function IncomeStep() {
           </div>
           <div className="c-increment-icon">
             <img
-              src="/static/apps/mmt-my-money-calendar/img/job.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-job.png"
               alt=""
               className="u-hide-on-print"
             />
@@ -58,7 +58,7 @@ export default function IncomeStep() {
           <div className="c-increment-icon">
             {" "}
             <img
-              src="/static/apps/mmt-my-money-calendar/img/childSupport.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-childsupport.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
@@ -77,7 +77,7 @@ export default function IncomeStep() {
           </div>
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/disabilityBenefits.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-disability.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
@@ -96,7 +96,7 @@ export default function IncomeStep() {
           </div>
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/SNAP.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-snap.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
@@ -115,7 +115,7 @@ export default function IncomeStep() {
           </div>
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/TANF.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-tanf.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
@@ -134,7 +134,7 @@ export default function IncomeStep() {
           </div>
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/otherGovtPrograms.png"
+              src="/static/apps/mmt-my-money-calendar/img/icon-.png"
               alt=""
               className="u-hide-on-print c-increment-icon"
             />
