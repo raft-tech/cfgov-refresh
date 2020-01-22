@@ -108,7 +108,7 @@ export default function IncomeStep() {
         <div className="c-item">
           <div>
             <img
-              src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
+              src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
               alt=""
               className="u-hide-on-print c-checkedbox-icon"
             />

@@ -34,7 +34,7 @@ export default function ExpensesStep50() {
       </div>
 
       <img
-        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
+        src="/static/apps/mmt-my-money-calendar/img/checked-radio.png"
         width="20"
         alt=""
         className="u-hide-on-print"
@@ -43,7 +43,7 @@ export default function ExpensesStep50() {
       <br />
       <br />
       <img
-        src="/static/apps/mmt-my-money-calendar/img/checked-radio.png"
+        src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
         width="20"
         alt=""
         className="u-hide-on-print"

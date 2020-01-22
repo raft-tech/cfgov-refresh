@@ -38,8 +38,11 @@ export default function StartingBalance50() {
 
       <div className="c-nav-buttons">
         <div>
-          <Link to="/income-step" className="a-btn a-btn__full-on-xs">
-            Great! Now, Add your Incomes
+          <Link
+            to="/starting-balance-step-summary"
+            className="a-btn a-btn__full-on-xs"
+          >
+            Great! Take a look at your summary next.
           </Link>
         </div>
         <div>

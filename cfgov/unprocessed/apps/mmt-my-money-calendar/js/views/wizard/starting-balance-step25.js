@@ -41,7 +41,7 @@ export default function StartingBalance25() {
             to="/starting-balance-step50"
             className="a-btn a-btn__full-on-xs"
           >
-            Add the details
+            Next
           </Link>
         </div>
         <div>
