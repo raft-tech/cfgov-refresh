@@ -54,7 +54,7 @@ export default function ExpensesStep50() {
 
       <h4>How much do you spend?</h4>
       <img
-        src="/static/apps/mmt-my-money-calendar/img/input-grocery-month.png"
+        src="/static/apps/mmt-my-money-calendar/img/input-grocery-week.png"
         alt=""
         className="u-hide-on-print"
       />

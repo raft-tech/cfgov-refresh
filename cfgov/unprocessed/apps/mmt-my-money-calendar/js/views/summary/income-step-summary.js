@@ -23,7 +23,7 @@ export default function IncomeStepSummary() {
       </div>
       <div className="c-increment-subtitle">
         <h4>You have added</h4>
-        <ul>
+        <ul className="c-item-list">
           <li>
             <div>Job</div>
             <div>every two weeks, beginning 1/17</div>
@@ -41,12 +41,13 @@ export default function IncomeStepSummary() {
           </li>
         </ul>
       </div>
-
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/jan-month-incomes.png"
-        alt=""
-        classNames="u-hide-on-print"
-      />
+      <div className="c-calendar-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/jan-month-incomes.png"
+          alt=""
+          classNames="u-hide-on-print"
+        />
+      </div>
       <br />
       <br />
 

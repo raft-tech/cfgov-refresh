@@ -23,7 +23,7 @@ export default function ExpensesStepSummary() {
       </div>
       <div className="c-increment-subtitle">
         <h4>You have added</h4>
-        <ul>
+        <ul className="c-item-list">
           <li>
             <div>Housing</div>
             <div>once a month, beginning 02/01</div>
@@ -41,12 +41,13 @@ export default function ExpensesStepSummary() {
           </li>
         </ul>
       </div>
-
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/jan-month-expenses.png"
-        alt=""
-        classNames="u-hide-on-print"
-      />
+      <div className="c-calendar-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/jan-month-expenses.png"
+          alt=""
+          classNames="u-hide-on-print"
+        />
+      </div>
 
       <br />
       <br />

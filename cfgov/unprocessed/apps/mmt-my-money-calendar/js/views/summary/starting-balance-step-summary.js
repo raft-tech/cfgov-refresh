@@ -23,7 +23,7 @@ export default function StartingBalanceStepSummary() {
       </div>
       <div className="c-increment-subtitle">
         <h4>You have added</h4>
-        <ul>
+        <ul className="c-item-list">
           <li>
             <div>Checking Account</div>
             <div>$400</div>
@@ -39,12 +39,13 @@ export default function StartingBalanceStepSummary() {
         </ul>
         <h4>for a total of $825</h4>
       </div>
-
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/jan-month-beg-balance.png"
-        alt=""
-        classNames="u-hide-on-print"
-      />
+      <div className="c-calendar-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/jan-month-beg-balance.png"
+          alt=""
+          classNames="u-hide-on-print"
+        />
+      </div>
 
       <br />
       <br />
