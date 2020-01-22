@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Hero from "../../components/shared/hero";
 
 export default function Home() {
   // This is the Home Page of the app
