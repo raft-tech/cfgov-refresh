@@ -76,8 +76,8 @@ export default function IncomeStep75() {
 
       <div className="c-nav-buttons">
         <div>
-          <Link to="/expenses-step-summary" className="a-btn a-btn__full-on-xs">
-            Good work! Let's look at the summary of your expenses.
+          <Link to="/income-step-summary" className="a-btn a-btn__full-on-xs">
+            Good work! Let's look at the summary of your income.
           </Link>
         </div>
         <div>

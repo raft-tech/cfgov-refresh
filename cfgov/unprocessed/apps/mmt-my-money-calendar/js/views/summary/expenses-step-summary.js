@@ -11,19 +11,19 @@ export default function ExpensesStepSummary() {
       />
 
       <div className="c-step-title">
-        <h4>Expenses Summary Step</h4>
+        <h4>Income Summary Step</h4>
       </div>
 
       <div className="c-step-container">
-        <div className="c-step-title">
-          <h3>
+        <div>
+          <h4>
             Yeah! You added some details on your <em>Income.</em>
-          </h3>
+          </h4>
         </div>
       </div>
-      <div className="c-increment-subtitle">
+      <div>
         <h4>You have added</h4>
-        <ul className="c-item-list">
+        <ul>
           <li>
             <div>Housing</div>
             <div>once a month, beginning 02/01</div>

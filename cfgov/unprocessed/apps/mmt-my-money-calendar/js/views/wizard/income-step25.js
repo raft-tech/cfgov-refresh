@@ -9,9 +9,9 @@ export default function IncomeStep25() {
         alt=""
         className="u-hide-on-print"
       />
-      <div className="c-step-title">
-        <h4>Income Step</h4>
-      </div>
+
+      <h4>Income Step: Job</h4>
+
       <div className="c-row-container c-increment-title-container">
         <div className="c-increment-img">
           <img
@@ -19,9 +19,6 @@ export default function IncomeStep25() {
             alt=""
             className="u-hide-on-print c-increment-icon"
           />
-        </div>
-        <div className="c-increment-title">
-          <h3>Job</h3>
         </div>
       </div>
       <br />
@@ -32,18 +29,17 @@ export default function IncomeStep25() {
         </h3>
       </div>
 
-      <br />
-
       <h4>Name</h4>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-jobname.png"
-        alt=""
-        className="u-hide-on-print"
-      />
-
+      <div className="c-input-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/input-jobname.png"
+          alt=""
+          className="u-hide-on-print"
+        />
+      </div>
       <br />
       <h4>When do you get paid?</h4>
-      <br />
+
       <div className="c-item-list">
         <div className="c-item">
           <div className="c-checkedbox-icon">
@@ -97,18 +93,23 @@ export default function IncomeStep25() {
       </div>
       <br />
       <h4>When is your next paycheck</h4>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-next-paycheck-date.png"
-        alt=""
-        className="u-hide-on-print"
-      />
+      <div className="c-input-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/input-next-paycheck-date.png"
+          alt=""
+          className="u-hide-on-print"
+        />
+      </div>
+
       <br />
       <h4>How much do you expect your check to be?</h4>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-next-paycheck-amount.png"
-        alt=""
-        className="u-hide-on-print"
-      />
+      <div className="c-input-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/input-next-paycheck-amount.png"
+          alt=""
+          className="u-hide-on-print"
+        />
+      </div>
 
       <h4>If you have another job with income, added it by clicking here.</h4>
 

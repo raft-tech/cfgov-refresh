@@ -23,7 +23,7 @@ export default function IncomeStepSummary() {
       </div>
       <div className="c-increment-subtitle">
         <h4>You have added</h4>
-        <ul className="c-item-list">
+        <ul>
           <li>
             <div>Job</div>
             <div>every two weeks, beginning 1/17</div>

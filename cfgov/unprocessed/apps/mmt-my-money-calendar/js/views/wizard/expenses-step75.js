@@ -48,9 +48,8 @@ export default function ExpensesStep50() {
 
       <div className="c-nav-buttons">
         <div>
-          <Link to="/summary" className="a-btn a-btn__full-on-xs">
-            Congratulations! You have completed your work. Let's look at the
-            calendar.
+          <Link to="/expenses-step-summary" className="a-btn a-btn__full-on-xs">
+            You finished adding expenses! Take a look at a summary.
           </Link>
         </div>
         <div>

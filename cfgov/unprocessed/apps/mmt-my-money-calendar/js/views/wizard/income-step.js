@@ -9,10 +9,8 @@ export default function IncomeStep() {
         alt=""
         className="u-hide-on-print"
       />
+      <h4>Income Step</h4>
 
-      <div className="c-step-title">
-        <h4>Income Step</h4>
-      </div>
       <div className="c-step-container">
         <div className="c-step-img">
           <img
@@ -22,11 +20,11 @@ export default function IncomeStep() {
           />
         </div>
         <div className="c-step-title">
-          <h3>Tell us about your Income</h3>
+          <h4>Tell us about your income</h4>
         </div>
       </div>
 
-      <h4>Check off those that apply to you.</h4>
+      <div>Check off those that apply to you.</div>
       <div className="c-item-list">
         <div className="c-item">
           <div className="c-checkedbox-icon">
@@ -36,13 +34,7 @@ export default function IncomeStep() {
               classNames="u-hide-on-print"
             />
           </div>
-          <div className="c-increment-icon">
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-job.png"
-              alt=""
-              className="u-hide-on-print"
-            />
-          </div>
+
           <div>
             <span>Job</span>
           </div>
@@ -55,14 +47,7 @@ export default function IncomeStep() {
               className="u-hide-on-print c-checkedbox-icon"
             />
           </div>
-          <div className="c-increment-icon">
-            {" "}
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-childsupport.png"
-              alt=""
-              className="u-hide-on-print c-increment-icon"
-            />
-          </div>
+
           <div>
             <span>Child support</span>
           </div>
@@ -75,13 +60,7 @@ export default function IncomeStep() {
               className="u-hide-on-print c-checkedbox-icon"
             />
           </div>
-          <div>
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-disability.png"
-              alt=""
-              className="u-hide-on-print c-increment-icon"
-            />
-          </div>
+
           <div>
             <span>Disability Benefits</span>
           </div>
@@ -94,13 +73,7 @@ export default function IncomeStep() {
               className="u-hide-on-print c-checkedbox-icon"
             />
           </div>
-          <div>
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-snap.png"
-              alt=""
-              className="u-hide-on-print c-increment-icon"
-            />
-          </div>
+
           <div>
             <span>SNAP</span>
           </div>
@@ -113,13 +86,7 @@ export default function IncomeStep() {
               className="u-hide-on-print c-checkedbox-icon"
             />
           </div>
-          <div>
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-tanf.png"
-              alt=""
-              className="u-hide-on-print c-increment-icon"
-            />
-          </div>
+
           <div>
             <span>TANF</span>
           </div>
@@ -132,13 +99,7 @@ export default function IncomeStep() {
               className="u-hide-on-print c-checkedbox-icon"
             />
           </div>
-          <div>
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-.png"
-              alt=""
-              className="u-hide-on-print c-increment-icon"
-            />
-          </div>
+
           <div>
             <span>Other</span>
           </div>
