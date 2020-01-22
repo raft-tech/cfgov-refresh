@@ -11,7 +11,7 @@ export default function ExpensesStep() {
       />
 
       <div className="c-step-title">
-        <h4>Expense Step</h4>
+        <h4>Expenses</h4>
       </div>
 
       <div className="c-step-container">
@@ -22,12 +22,10 @@ export default function ExpensesStep() {
             classNames="u-hide-on-print"
           />
         </div>
-        <div className="c-step-title">
-          <h3>Tell us about your expenses</h3>
-        </div>
+        <div className="c-step-title">Tell us about your expenses</div>
       </div>
       <div className="c-increment-subtitle">
-        <h4>Check off those that you currently have</h4>
+        Check off those that you currently have
       </div>
 
       <div className="c-item-list">
@@ -39,13 +37,7 @@ export default function ExpensesStep() {
               classNames="u-hide-on-print"
             />
           </div>
-          <div className="c-increment-icon">
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-housing.png"
-              alt=""
-              className="u-hide-on-print"
-            />
-          </div>
+
           <div>
             <span>Housing</span>
           </div>
@@ -58,14 +50,7 @@ export default function ExpensesStep() {
               className="u-hide-on-print c-checkedbox-icon"
             />
           </div>
-          <div className="c-increment-icon">
-            {" "}
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-groceries.png"
-              alt=""
-              className="u-hide-on-print c-increment-icon"
-            />
-          </div>
+
           <div>
             <span>Groceries</span>
           </div>
@@ -78,13 +63,7 @@ export default function ExpensesStep() {
               className="u-hide-on-print c-checkedbox-icon"
             />
           </div>
-          <div>
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-entertainment.png"
-              alt=""
-              className="u-hide-on-print c-increment-icon"
-            />
-          </div>
+
           <div>
             <span>Entertainment</span>
           </div>
@@ -97,13 +76,7 @@ export default function ExpensesStep() {
               className="u-hide-on-print c-checkedbox-icon"
             />
           </div>
-          <div>
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-phone.png"
-              alt=""
-              className="u-hide-on-print c-increment-icon"
-            />
-          </div>
+
           <div>
             <span>Phone</span>
           </div>
@@ -116,13 +89,7 @@ export default function ExpensesStep() {
               className="u-hide-on-print c-checkedbox-icon"
             />
           </div>
-          <div>
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-childcare.png"
-              alt=""
-              className="u-hide-on-print c-increment-icon"
-            />
-          </div>
+
           <div>
             <span>Childcare</span>
           </div>
@@ -135,13 +102,7 @@ export default function ExpensesStep() {
               className="u-hide-on-print c-checkedbox-icon"
             />
           </div>
-          <div>
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/icon-otherGovt.png"
-              alt=""
-              className="u-hide-on-print c-increment-icon"
-            />
-          </div>
+
           <div>
             <span>Other</span>
           </div>

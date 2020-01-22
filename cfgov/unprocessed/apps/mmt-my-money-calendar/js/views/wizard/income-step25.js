@@ -10,7 +10,9 @@ export default function IncomeStep25() {
         className="u-hide-on-print"
       />
 
-      <h4>Income Step: Job</h4>
+      <div className="c-step-title">
+        <h4>Income: Job</h4>
+      </div>
 
       <div className="c-row-container c-increment-title-container">
         <div className="c-increment-img">

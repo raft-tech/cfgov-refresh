@@ -10,7 +10,7 @@ export default function ExpensesStep50() {
         className="u-hide-on-print"
       />
       <div className="c-step-title">
-        <h4>Expense Step</h4>
+        <h4>Expense: Groceries</h4>
       </div>
 
       <div className="c-row-container c-increment-title-container">
@@ -32,7 +32,6 @@ export default function ExpensesStep50() {
           Estimate what you spend on your <em>groceries.</em>
         </h3>
       </div>
-
       <img
         src="/static/apps/mmt-my-money-calendar/img/checked-radio.png"
         width="20"
@@ -40,7 +39,6 @@ export default function ExpensesStep50() {
         className="u-hide-on-print"
       />
       <label>Weekly amount</label>
-      <br />
       <br />
       <img
         src="/static/apps/mmt-my-money-calendar/img/unchecked-radio.png"
@@ -53,11 +51,14 @@ export default function ExpensesStep50() {
       <br />
 
       <h4>How much do you spend?</h4>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-grocery-week.png"
-        alt=""
-        className="u-hide-on-print"
-      />
+
+      <div className="c-input-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/input-grocery-week.png"
+          alt=""
+          className="u-hide-on-print"
+        />
+      </div>
 
       <br />
       <br />

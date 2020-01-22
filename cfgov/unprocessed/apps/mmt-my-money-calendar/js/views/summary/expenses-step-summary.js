@@ -11,32 +11,33 @@ export default function ExpensesStepSummary() {
       />
 
       <div className="c-step-title">
-        <h4>Income Summary Step</h4>
+        <h4>Income Summary</h4>
       </div>
 
       <div className="c-step-container">
         <div>
-          <h4>
-            Yeah! You added some details on your <em>Income.</em>
-          </h4>
+          Yeah! You added some details on your <em>income.</em>
         </div>
       </div>
-      <div>
-        <h4>You have added</h4>
+      <div className="c-item-list-four red">
+        <h4>You have added the following:</h4>
         <ul>
           <li>
             <div>Housing</div>
-            <div>once a month, beginning 02/01</div>
+            <div>once a month</div>
+            <div>beginning 02/01</div>
             <div>$487</div>
           </li>
           <li>
             <div>Groceries</div>
             <div>every week</div>
+            <div></div>
             <div>$200</div>
           </li>
           <li>
             <div>Phone</div>
-            <div>every month, beginning 01/26</div>
+            <div>every month</div>
+            <div>beginning 01/26</div>
             <div>$272</div>
           </li>
         </ul>
@@ -49,13 +50,16 @@ export default function ExpensesStepSummary() {
         />
       </div>
 
-      <br />
-      <br />
       <div>
-        Let's go to the final calendar. You can add, delete, and edit your work
-        there. You can also look at each week, each month of the quarter, the
-        whole quarter and see totals to help you make decisions on where to
-        spend your money.
+        Let's go to the final calendar. You can:
+        <ul>
+          <li>add</li>
+          <li>delete</li>
+          <li>edit</li>
+          <li>look at your month</li>
+          <li>look at your week</li>
+        </ul>
+        This will help you make decisions on where to spend your money.
       </div>
       <div className="c-nav-buttons">
         <div>

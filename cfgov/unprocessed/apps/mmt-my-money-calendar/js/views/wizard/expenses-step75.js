@@ -10,7 +10,7 @@ export default function ExpensesStep50() {
         className="u-hide-on-print"
       />
       <div className="c-step-title">
-        <h4>Expense Step</h4>
+        <h4>Expense: Phone</h4>
       </div>
 
       <div className="c-row-container c-increment-title-container">
@@ -33,17 +33,23 @@ export default function ExpensesStep50() {
       </div>
       <br />
       <label>Due date</label>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-phone-date.png"
-        alt=""
-        className="u-hide-on-print"
-      />
+
+      <div className="c-input-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/input-phone-date.png"
+          alt=""
+          className="u-hide-on-print"
+        />
+      </div>
       <p>How much is it?</p>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-phone-amount.png"
-        alt=""
-        className="u-hide-on-print"
-      />
+
+      <div className="c-input-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/input-phone-amount.png"
+          alt=""
+          className="u-hide-on-print"
+        />
+      </div>
       <br />
 
       <div className="c-nav-buttons">

@@ -15,28 +15,27 @@ export default function IncomeStepSummary() {
       </div>
 
       <div className="c-step-container">
-        <div className="c-step-title">
-          <h3>
-            Yeah! You added some details on your <em>Income.</em>
-          </h3>
-        </div>
+        Yeah! You added some details on your <em>Income.</em>
       </div>
       <div className="c-increment-subtitle">
-        <h4>You have added</h4>
-        <ul>
+        You have added the following:
+        <ul className="c-item-list-four green">
           <li>
             <div>Job</div>
-            <div>every two weeks, beginning 1/17</div>
+            <div>every two weeks</div>
+            <div>beginning 1/17</div>
             <div>$487</div>
           </li>
           <li>
             <div>Child Support</div>
-            <div>every month, beginning 2/01</div>
+            <div>every month</div>
+            <div>beginning 2/01</div>
             <div>$350</div>
           </li>
           <li>
             <div>SNAP</div>
-            <div>every month, beginning 2/01</div>
+            <div>every month</div>
+            <div>beginning 2/01</div>
             <div>$196</div>
           </li>
         </ul>
@@ -48,7 +47,6 @@ export default function IncomeStepSummary() {
           classNames="u-hide-on-print"
         />
       </div>
-      <br />
       <br />
 
       <div className="c-nav-buttons">

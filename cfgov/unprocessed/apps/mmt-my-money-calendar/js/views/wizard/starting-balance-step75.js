@@ -10,7 +10,7 @@ export default function StartingBalance50() {
         className="u-hide-on-print"
       />
       <div className="c-step-title">
-        <h4>Starting Balance Step</h4>
+        <h4>Starting Balance: Cash</h4>
       </div>
       <div className="c-row-container c-increment-title-container">
         <div className="c-increment-img">
@@ -20,20 +20,19 @@ export default function StartingBalance50() {
             className="u-hide-on-print c-increment-icon"
           />
         </div>
-        <div className="c-increment-title">
-          <h3>Cash</h3>
-        </div>
       </div>
       <br />
       <h4>
         Do you have any other forms of <em>cash</em> right now? This includes
         prepaid cards, cash in the house and any other sources
       </h4>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-cash.png"
-        alt=""
-        className="u-hide-on-print"
-      />
+      <div className="c-input-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/input-cash.png"
+          alt=""
+          className="u-hide-on-print"
+        />
+      </div>
       <br />
 
       <div className="c-nav-buttons">

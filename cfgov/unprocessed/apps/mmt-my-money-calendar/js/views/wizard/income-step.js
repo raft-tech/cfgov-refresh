@@ -9,7 +9,9 @@ export default function IncomeStep() {
         alt=""
         className="u-hide-on-print"
       />
-      <h4>Income Step</h4>
+      <div className="c-step-title">
+        <h4>Income</h4>
+      </div>
 
       <div className="c-step-container">
         <div className="c-step-img">
@@ -19,9 +21,7 @@ export default function IncomeStep() {
             classNames="u-hide-on-print"
           />
         </div>
-        <div className="c-step-title">
-          <h4>Tell us about your income</h4>
-        </div>
+        <div className="c-step-title">Tell us about your income</div>
       </div>
 
       <div>Check off those that apply to you.</div>
@@ -40,7 +40,7 @@ export default function IncomeStep() {
           </div>
         </div>
         <div className="c-item">
-          <div className="c-checkedbox-icon">
+          <div>
             <img
               src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
               alt=""

@@ -10,7 +10,7 @@ export default function ExpensesStep25() {
         className="u-hide-on-print"
       />
       <div className="c-step-title">
-        <h4>Expense Step</h4>
+        <h4>Expense: Housing</h4>
       </div>
 
       <div className="c-row-container c-increment-title-container">
@@ -33,20 +33,23 @@ export default function ExpensesStep25() {
         </h3>
       </div>
       <h4>What is your housing payment due?</h4>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-rent-date.png"
-        alt=""
-        className="u-hide-on-print"
-      />
+      <div className="c-input-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/input-rent-date.png"
+          alt=""
+          className="u-hide-on-print"
+        />
+      </div>
       <div>
         <h4>How much do you pay each month for housing (rent or mortgage)?</h4>
       </div>
-
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-rent-amount.png"
-        alt=""
-        className="u-hide-on-print"
-      />
+      <div className="c-input-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/input-rent-amount.png"
+          alt=""
+          className="u-hide-on-print"
+        />
+      </div>
 
       <br />
       <br />

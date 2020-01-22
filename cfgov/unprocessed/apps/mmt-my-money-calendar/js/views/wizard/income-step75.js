@@ -10,7 +10,7 @@ export default function IncomeStep75() {
         className="u-hide-on-print"
       />
       <div className="c-step-title">
-        <h4>Income Step</h4>
+        <h4>Income: SNAP</h4>
       </div>
       <div className="c-row-container c-increment-title-container">
         <div className="c-increment-img">
@@ -19,9 +19,6 @@ export default function IncomeStep75() {
             alt=""
             className="u-hide-on-print c-increment-icon"
           />
-        </div>
-        <div className="c-increment-title">
-          <h3>SNAP</h3>
         </div>
       </div>
       <br />
@@ -61,18 +58,22 @@ export default function IncomeStep75() {
       <br />
       <br />
       <h4>When do you expect to receive your next SNAP payment?</h4>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-snap-payment-date.png"
-        alt=""
-        className="u-hide-on-print"
-      />
+      <div className="c-input-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/input-snap-payment-date.png"
+          alt=""
+          className="u-hide-on-print"
+        />
+      </div>
       <br />
       <h4>How much do you expect your payment to be?</h4>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/input-snap-payment-amount.png"
-        alt=""
-        className="u-hide-on-print"
-      />
+      <div className="c-input-img">
+        <img
+          src="/static/apps/mmt-my-money-calendar/img/input-snap-payment-amount.png"
+          alt=""
+          className="u-hide-on-print"
+        />
+      </div>
 
       <div className="c-nav-buttons">
         <div>
