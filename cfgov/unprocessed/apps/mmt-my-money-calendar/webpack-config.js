@@ -14,7 +14,12 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 // Used for toggling debug output. Inherit Django debug value to cut down on redundant environment variables:
-const { DJANGO_DEBUG: DEBUG = false, NODE_ENV = 'development', ANALYZE = false } = process.env;
+const {
+  DJANGO_DEBUG: DEBUG = false,
+  NODE_ENV = 'development',
+  ANALYZE = false,
+  SERVICE_WORKER_URL = `${APP_NAME}/service-worker.js`,
+} = process.env;
 
 const COMMON_BUNDLE_NAME = 'common.js';
 //const SERVICE_WORKER_DESTINATION = '../../../../jinja2/v1/mmt-my-money-calendar/service-worker.js';
@@ -27,6 +32,7 @@ const AUTOLOAD_REACT = new webpack.ProvidePlugin({
 const ENVIRONMENT_VARIABLES = new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
   'process.env.DEBUG': JSON.stringify(DEBUG),
+  'process.env.SERVICE_WORKER_URL': JSON.stringify(SERVICE_WORKER_URL),
 });
 
 const COPY_PWA_MANIFEST = new CopyPlugin([
