@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./views/home";
+import Home from "./views/home-new-user";
+import Home from "./views/home-returning-user";
 import StartingBalance from "./views/wizard/starting-balance-step";
 import StartingBalance25 from "./views/wizard/starting-balance-step25";
 import StartingBalance50 from "./views/wizard/starting-balance-step50";
@@ -19,6 +21,12 @@ const Routes = () => (
     <div className="app">
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/home-new-user" component={HomeNewUser} />
+        <Route
+          exact
+          path="/home-returning-user"
+          component={HomeReturningUser}
+        />
         <Route
           exact
           path="/starting-balance-step"
