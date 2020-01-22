@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import ScrollToTop from "./lib/scroll-to-top";
+
 import Home from "./views/home";
 import HomeNewUser from "./views/home/home-new-user";
 import HomeReturningUser from "./views/home/home-returning-user";
@@ -21,63 +24,65 @@ import Summary from "./views/summary";
 
 const Routes = () => (
   <Router basename="/mmt-my-money-calendar">
-    <div className="app">
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/home-new-user" component={HomeNewUser} />
-        <Route
-          exact
-          path="/home-returning-user"
-          component={HomeReturningUser}
-        />
-        <Route
-          exact
-          path="/starting-balance-step"
-          component={StartingBalance}
-        />
-        <Route
-          exact
-          path="/starting-balance-step25"
-          component={StartingBalance25}
-        />
-        <Route
-          exact
-          path="/starting-balance-step50"
-          component={StartingBalance50}
-        />
-        <Route
-          exact
-          path="/starting-balance-step75"
-          component={StartingBalance75}
-        />
-        <Route
-          exact
-          path="/starting-balance-step-summary"
-          component={StartingBalanceStepSummary}
-        />
-        <Route exact path="/income-step" component={IncomeStep} />
-        <Route exact path="/income-step25" component={IncomeStep25} />
-        <Route exact path="/income-step50" component={IncomeStep50} />
-        <Route exact path="/income-step75" component={IncomeStep75} />
+    <ScrollToTop>
+      <div className="app">
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/home-new-user" component={HomeNewUser} />
+          <Route
+            exact
+            path="/home-returning-user"
+            component={HomeReturningUser}
+          />
+          <Route
+            exact
+            path="/starting-balance-step"
+            component={StartingBalance}
+          />
+          <Route
+            exact
+            path="/starting-balance-step25"
+            component={StartingBalance25}
+          />
+          <Route
+            exact
+            path="/starting-balance-step50"
+            component={StartingBalance50}
+          />
+          <Route
+            exact
+            path="/starting-balance-step75"
+            component={StartingBalance75}
+          />
+          <Route
+            exact
+            path="/starting-balance-step-summary"
+            component={StartingBalanceStepSummary}
+          />
+          <Route exact path="/income-step" component={IncomeStep} />
+          <Route exact path="/income-step25" component={IncomeStep25} />
+          <Route exact path="/income-step50" component={IncomeStep50} />
+          <Route exact path="/income-step75" component={IncomeStep75} />
 
-        <Route
-          exact
-          path="/income-step-summary"
-          component={IncomeStepSummary}
-        />
+          <Route
+            exact
+            path="/income-step-summary"
+            component={IncomeStepSummary}
+          />
 
-        <Route exact path="/expenses-step" component={ExpensesStep} />
-        <Route exact path="/expenses-step25" component={ExpensesStep25} />
-        <Route exact path="/expenses-step50" component={ExpensesStep50} />
-        <Route exact path="/expenses-step75" component={ExpensesStep75} />
-        <Route
-          exact
-          path="/expenses-step-summary"
-          component={ExpensesStepSummary}
-        />
-        <Route exact path="/summary" component={Summary} />
-      </Switch>
-    </div>
+          <Route exact path="/expenses-step" component={ExpensesStep} />
+          <Route exact path="/expenses-step25" component={ExpensesStep25} />
+          <Route exact path="/expenses-step50" component={ExpensesStep50} />
+          <Route exact path="/expenses-step75" component={ExpensesStep75} />
+          <Route
+            exact
+            path="/expenses-step-summary"
+            component={ExpensesStepSummary}
+          />
+          <Route exact path="/summary" component={Summary} />
+        </Switch>
+      </div>
+    </ScrollToTop>
   </Router>
 );
 
