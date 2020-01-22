@@ -4,24 +4,27 @@ export default function IncomeStep75() {
 
   return (
     <section className="starting-balance-step-25">
-      <Link to="/">Back Home</Link>
       <img
         src="/static/apps/mmt-my-money-calendar/img/pb_1.25.png"
         alt=""
         className="u-hide-on-print"
       />
-      <div className="c-step-title">Income Step</div>
+      <div className="c-step-title">
+        <h4>Income Step</h4>
+      </div>
       <br />
       <br />
-      <div>
-        {" "}
-        <img
-          src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
-          alt=""
-          width="30"
-          className="u-hide-on-print"
-        />
-        <h2 className="step-title">SNAP</h2>
+      <div className="c-row-container">
+        <div>
+          <img
+            src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+            alt=""
+            className="u-hide-on-print c-increment-icon"
+          />
+        </div>
+        <div>
+          <h2 className="step-title">SNAP</h2>
+        </div>
       </div>
 
       <br />
@@ -81,9 +84,22 @@ export default function IncomeStep75() {
         className="u-hide-on-print"
       />
 
-      <Link to="/expenses-step" className="a-btn a-btn__full-on-xs">
-        Let's go on to Step 3, and look at your expenses
-      </Link>
+      <div className="c-nav-buttons">
+        <div>
+          <Link to="/expenses-step" className="a-btn a-btn__full-on-xs">
+            Next
+          </Link>
+        </div>
+        <div>
+          <Link to="/income-step50" className="a-btn a-btn__full-on-xs">
+            Back
+          </Link>
+        </div>
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+      </div>
+
       <br />
       <br />
     </section>

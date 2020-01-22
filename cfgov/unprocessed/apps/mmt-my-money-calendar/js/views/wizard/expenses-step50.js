@@ -4,17 +4,18 @@ export default function ExpensesStep50() {
 
   return (
     <section className="starting-balance-step-25">
-      <Link to="/">Back Home</Link>
       <img
         src="/static/apps/mmt-my-money-calendar/img/pb_3.50.png"
         alt=""
         className="u-hide-on-print"
       />
-      <div className="c-step-title">Expense Step</div>
+      <div className="c-step-title">
+        <h4>Expense Step</h4>
+      </div>
       <div>
         {" "}
         <img
-          src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+          src="/static/apps/mmt-my-money-calendar/img/groceriesOther.png"
           alt=""
           width="75px"
           className="u-hide-on-print"
@@ -57,11 +58,23 @@ export default function ExpensesStep50() {
 
       <br />
       <br />
-      <br />
 
-      <Link to="/expenses-step75" className="a-btn a-btn__full-on-xs">
-        Next
-      </Link>
+      <div className="c-nav-buttons">
+        <div>
+          <Link to="/expenses-step75" className="a-btn a-btn__full-on-xs">
+            Next
+          </Link>
+        </div>
+        <div>
+          <Link to="/expenses-step50" className="a-btn a-btn__full-on-xs">
+            Back
+          </Link>
+        </div>
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+      </div>
+
       <br />
       <br />
     </section>

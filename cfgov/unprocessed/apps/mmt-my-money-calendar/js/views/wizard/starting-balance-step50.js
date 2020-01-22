@@ -4,21 +4,28 @@ export default function StartingBalance50() {
 
   return (
     <section className="starting-balance-step-25">
-      <Link to="/">Back Home</Link>
       <img
         src="/static/apps/mmt-my-money-calendar/img/pb_1.50.png"
         alt=""
         className="u-hide-on-print"
       />
-      <div className="c-step-title">Starting Balance Step</div>
+      <div className="c-step-title">
+        <h4>Starting Balance Step</h4>
+      </div>
       <br />
-      <h2 className="step-title">Savings Account</h2>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
-        alt=""
-        width="30"
-        className="u-hide-on-print"
-      />
+      <div className="c-row-container">
+        <div>
+          <img
+            src="/static/apps/mmt-my-money-calendar/img/debtPayment.png"
+            alt=""
+            className="u-hide-on-print c-increment-icon"
+          />
+        </div>
+        <div>
+          <h2 className="step-title">Savings Account</h2>
+        </div>
+      </div>
+
       <br />
       <h4>
         What is the balance in your <em>savings</em> right now?
@@ -26,9 +33,28 @@ export default function StartingBalance50() {
       <img src="/static/apps/mmt-my-money-calendar/input-checking.png" />
       <br />
 
-      <Link to="/starting-balance-step75" className="a-btn a-btn__full-on-xs">
-        Next
-      </Link>
+      <div className="c-nav-buttons">
+        <div>
+          <Link
+            to="/starting-balance-step75"
+            className="a-btn a-btn__full-on-xs"
+          >
+            Next
+          </Link>
+        </div>
+        <div>
+          <Link
+            to="/starting-balance-step25"
+            className="a-btn a-btn__full-on-xs"
+          >
+            Back
+          </Link>
+        </div>
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+      </div>
+
       <br />
       <br />
     </section>

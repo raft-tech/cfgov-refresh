@@ -10,7 +10,9 @@ export default function Summary() {
         alt=""
         className="u-hide-on-print"
       />
-      <h3 className="step-title">Summary</h3>
+      <div className="c-step-title">
+        <h4>Summary</h4>
+      </div>
       <img
         src="/static/apps/mmt-my-money-calendar/img/monthlyCalGrRed.png"
         alt=""

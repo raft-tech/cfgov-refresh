@@ -4,133 +4,168 @@ export default function IncomeStep() {
 
   return (
     <section className="income-step">
-      <Link to="/">Back Home</Link>
       <img
         src="/static/apps/mmt-my-money-calendar/img/pb_2.png"
         alt=""
         className="u-hide-on-print"
       />
 
-      <div className="c-step-title">Income Step</div>
+      <div className="c-step-title">
+        <h4>Income Step</h4>
+      </div>
+      <div className="c-step-container">
+        <div className="c-step-img">
+          <img
+            src="/static/apps/mmt-my-money-calendar/img/income-img.png"
+            alt=""
+            classNames="u-hide-on-print"
+          />
+        </div>
+        <div className="c-step-title">
+          <h3>Tell us about your Income</h3>
+        </div>
+      </div>
 
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/income-img.png"
-        alt=""
-        classNames="u-hide-on-print"
-      />
-      <br />
-      <br />
-      <h2>Tell us about your Income</h2>
-      <h4>Check off those that you currently have</h4>
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
-        alt=""
-        width="20px"
-        classNames="u-hide-on-print"
-      />
+      <h4>Check off those that apply to you.</h4>
+      <div className="c-item-list">
+        <div className="c-item">
+          <div className="c-checkedbox-icon">
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
+              alt=""
+              classNames="u-hide-on-print"
+            />
+          </div>
+          <div className="c-increment-icon">
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/job.png"
+              alt=""
+              className="u-hide-on-print"
+            />
+          </div>
+          <div>
+            <span>Job</span>
+          </div>
+        </div>
+        <div className="c-item">
+          <div className="c-checkedbox-icon">
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
+              alt=""
+              className="u-hide-on-print c-checkedbox-icon"
+            />
+          </div>
+          <div className="c-increment-icon">
+            {" "}
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/childSupport.png"
+              alt=""
+              className="u-hide-on-print c-increment-icon"
+            />
+          </div>
+          <div>
+            <span>Child support</span>
+          </div>
+        </div>
+        <div className="c-item">
+          <div>
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
+              alt=""
+              className="u-hide-on-print c-checkedbox-icon"
+            />
+          </div>
+          <div>
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/disabilityBenefits.png"
+              alt=""
+              className="u-hide-on-print c-increment-icon"
+            />
+          </div>
+          <div>
+            <span>Disability Benefits</span>
+          </div>
+        </div>
+        <div className="c-item">
+          <div>
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
+              alt=""
+              className="u-hide-on-print c-checkedbox-icon"
+            />
+          </div>
+          <div>
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/SNAP.png"
+              alt=""
+              className="u-hide-on-print c-increment-icon"
+            />
+          </div>
+          <div>
+            <span>SNAP</span>
+          </div>
+        </div>
+        <div className="c-item">
+          <div>
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
+              alt=""
+              className="u-hide-on-print c-checkedbox-icon"
+            />
+          </div>
+          <div>
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/TANF.png"
+              alt=""
+              className="u-hide-on-print c-increment-icon"
+            />
+          </div>
+          <div>
+            <span>TANF</span>
+          </div>
+        </div>
+        <div className="c-item">
+          <div>
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
+              alt=""
+              className="u-hide-on-print c-checkedbox-icon"
+            />
+          </div>
+          <div>
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/otherGovtPrograms.png"
+              alt=""
+              className="u-hide-on-print c-increment-icon"
+            />
+          </div>
+          <div>
+            <span>Other</span>
+          </div>
+        </div>
+      </div>
 
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/job.png"
-        alt=""
-        width="25px"
-        className="u-hide-on-print"
-      />
-
-      <label class="a-label">
-        <span>Job</span>
-      </label>
-      <br />
-      <br />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
-        alt=""
-        width="20px"
-        className="u-hide-on-print"
-      />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/childSupport.png"
-        alt=""
-        width="25px"
-        className="u-hide-on-print"
-      />
-      <label class="a-label">
-        <span>Child support</span>
-      </label>
-      <br />
-      <br />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
-        alt=""
-        width="25px"
-        className="u-hide-on-print"
-      />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/disabilityBenefits.png"
-        alt=""
-        width="25px"
-        className="u-hide-on-print"
-      />
-      <label class="a-label">
-        <span>Disability benefits</span>
-      </label>
-      <br />
-      <br />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
-        alt=""
-        width="25px"
-        className="u-hide-on-print"
-      />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/SNAP.png"
-        alt=""
-        width="25px"
-        className="u-hide-on-print"
-      />
-      <label class="a-label">
-        <span>SNAP</span>
-      </label>
-      <br />
-      <br />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
-        alt=""
-        width="25px"
-        classNames="u-hide-on-print"
-      />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/TANF.png"
-        alt=""
-        width="25px"
-        className="u-hide-on-print"
-      />
-      <label class="a-label">
-        <span>TANF</span>
-      </label>
-      <br />
-      <br />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/unchecked_box.png"
-        alt=""
-        width="25px"
-        className="u-hide-on-print"
-      />
-      <img
-        src="/static/apps/mmt-my-money-calendar/img/otherGovtPrograms.png"
-        alt=""
-        width="25px"
-        className="u-hide-on-print"
-      />
-      <label class="a-label">
-        <span>Other Government Programs</span>
-      </label>
-      <br />
-      <br />
       <br />
 
-      <Link to="/income-step25" className="a-btn a-btn__full-on-xs">
-        Let's add the details for your income
-      </Link>
+      <div className="c-nav-buttons">
+        <div>
+          <Link to="/income-step25" className="a-btn a-btn__full-on-xs">
+            Next
+          </Link>
+        </div>
+        <div>
+          <Link
+            to="/starting-balance-step75"
+            className="a-btn a-btn__full-on-xs"
+          >
+            Back
+          </Link>
+        </div>
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+      </div>
+
       <br />
       <br />
     </section>
