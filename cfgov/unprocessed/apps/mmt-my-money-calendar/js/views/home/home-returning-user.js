@@ -12,7 +12,7 @@ export default function HomeReturningUser() {
           </Link>
         </div>
         <div>
-          <Link to="/summary-month" className="a-btn a-btn__full-on-xs">
+          <Link to="/summary-month-jan" className="a-btn a-btn__full-on-xs">
             View my data
           </Link>
         </div>

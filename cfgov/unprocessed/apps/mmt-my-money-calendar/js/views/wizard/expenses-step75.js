@@ -47,7 +47,6 @@ export default function ExpensesStep50() {
           className="u-hide-on-print"
         />
       </div>
-      <br />
 
       <div className="c-nav-buttons">
         <div>

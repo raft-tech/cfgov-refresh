@@ -11,7 +11,7 @@ export default function IncomeStepSummary() {
       />
 
       <div className="c-step-title">
-        <h4>Income Summary Step</h4>
+        <h4>Income Step: Summary</h4>
       </div>
 
       <div className="c-step-container">
@@ -19,7 +19,7 @@ export default function IncomeStepSummary() {
       </div>
       <div className="c-increment-subtitle">
         You have added the following:
-        <ul className="c-item-list-four green">
+        <ul className="c-item-list-four">
           <li>
             <div>Job</div>
             <div>every 2 weeks</div>

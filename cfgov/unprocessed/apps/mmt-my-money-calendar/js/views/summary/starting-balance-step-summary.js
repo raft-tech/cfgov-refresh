@@ -9,7 +9,7 @@ export default function StartingBalanceStepSummary() {
       />
 
       <div className="c-step-title">
-        <h4>Starting Balance Summary</h4>
+        <h4>Starting Balance: Summary</h4>
       </div>
 
       <div className="c-step-container">

@@ -11,7 +11,7 @@ export default function ExpensesStepSummary() {
       />
 
       <div className="c-step-title">
-        <h4>Expenses Summary</h4>
+        <h4>Expenses Step: Summary</h4>
       </div>
 
       <div className="c-step-container">
@@ -20,7 +20,7 @@ export default function ExpensesStepSummary() {
         </div>
       </div>
       <h4>You have added the following:</h4>
-      <div className="c-item-list-four red">
+      <div className="c-item-list-four">
         <ul>
           <li>
             <div>Housing</div>
@@ -63,7 +63,7 @@ export default function ExpensesStepSummary() {
       </div>
       <div className="c-nav-buttons">
         <div>
-          <Link to="/summary-month" className="a-btn a-btn__full-on-xs">
+          <Link to="/summary-month-jan" className="a-btn a-btn__full-on-xs">
             Let's go!
           </Link>
         </div>
