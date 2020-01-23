@@ -24,33 +24,29 @@ export default function ExpensesStep() {
         </div>
         <div className="c-step-title">Tell us about your expenses</div>
       </div>
-      <div className="c-increment-subtitle">
-        Check off those that you currently have
-      </div>
+      <div>Check off those that you currently have</div>
 
       <div className="c-item-list">
         <div className="c-item">
-          <div className="c-checkedbox-icon">
-            <img
-              src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
-              alt=""
-              classNames="u-hide-on-print"
-            />
-          </div>
-
           <div>
-            <span>Housing</span>
-          </div>
-        </div>
-        <div className="c-item">
-          <div className="c-checkedbox-icon">
             <img
               src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
               alt=""
               className="u-hide-on-print c-checkedbox-icon"
             />
           </div>
-
+          <div>
+            <span>Housing</span>
+          </div>
+        </div>
+        <div className="c-item">
+          <div>
+            <img
+              src="/static/apps/mmt-my-money-calendar/img/checked_box.png"
+              alt=""
+              className="u-hide-on-print c-checkedbox-icon"
+            />
+          </div>
           <div>
             <span>Groceries</span>
           </div>

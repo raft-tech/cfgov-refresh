@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
 // this is a testlkdjf;slkdgf
 
-export default function Summary() {
+export default function SummaryMonth() {
   return (
-    <section id="summary-view">
-      <Link to="/">Back Home</Link>
+    <section id="summary-month">
       <img
         src="/static/apps/mmt-my-money-calendar/img/pb_done.png"
         alt=""
         className="u-hide-on-print"
       />
       <div className="c-step-title">
-        <h4>Summary</h4>
+        <h4>Summary: Month View</h4>
       </div>
       <p>
         Take a look at your calendar.
@@ -21,6 +20,9 @@ export default function Summary() {
           <li>elipses = you have transactions.</li>
         </ul>
       </p>
+      <div className="c-nav-buttons">
+        <Link to="/summary-week">Click to view weeks</Link>
+      </div>
       <div className="c-increment-subtitle">
         <h4>Here is a summary of your inputs</h4>
         <ul>
@@ -45,7 +47,10 @@ export default function Summary() {
           className="u-hide-on-print"
         />
       </div>
-
+      <br />
+      <div className="c-nav-buttons">
+        <Link to="/">Home</Link>
+      </div>
       <br />
       <br />
     </section>

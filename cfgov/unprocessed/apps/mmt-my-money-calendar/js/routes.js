@@ -20,7 +20,8 @@ import ExpensesStep25 from "./views/wizard/expenses-step25";
 import ExpensesStep50 from "./views/wizard/expenses-step50";
 import ExpensesStep75 from "./views/wizard/expenses-step75";
 import ExpensesStepSummary from "./views/summary/expenses-step-summary";
-import Summary from "./views/summary";
+import SummaryMonth from "./views/summary/summary-month";
+import SummaryWeek from "./views/summary/summary-week";
 
 const Routes = () => (
   <Router basename="/mmt-my-money-calendar">
@@ -79,7 +80,8 @@ const Routes = () => (
             path="/expenses-step-summary"
             component={ExpensesStepSummary}
           />
-          <Route exact path="/summary" component={Summary} />
+          <Route exact path="/summary-month" component={SummaryMonth} />
+          <Route exact path="/summary-week" component={SummaryWeek} />
         </Switch>
       </div>
     </ScrollToTop>

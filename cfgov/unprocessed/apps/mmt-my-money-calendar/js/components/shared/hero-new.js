@@ -1,4 +1,4 @@
-export default function Hero() {
+export default function HeroNew() {
   return (
     <section className="m-hero">
       <div className="m-hero_wrapper wrapper">

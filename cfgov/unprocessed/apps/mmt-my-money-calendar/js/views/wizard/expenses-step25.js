@@ -21,9 +21,6 @@ export default function ExpensesStep25() {
             className="u-hide-on-print c-increment-icon"
           />
         </div>
-        <div className="c-increment-title">
-          <h3>Housing</h3>
-        </div>
       </div>
       <br />
 

@@ -11,33 +11,33 @@ export default function ExpensesStepSummary() {
       />
 
       <div className="c-step-title">
-        <h4>Income Summary</h4>
+        <h4>Expenses Summary</h4>
       </div>
 
       <div className="c-step-container">
         <div>
-          Yeah! You added some details on your <em>income.</em>
+          Yeah! You added some details on your <em>expenses.</em>
         </div>
       </div>
+      <h4>You have added the following:</h4>
       <div className="c-item-list-four red">
-        <h4>You have added the following:</h4>
         <ul>
           <li>
             <div>Housing</div>
-            <div>once a month</div>
-            <div>beginning 02/01</div>
+            <div>monthly</div>
+            <div>starts 02/01</div>
             <div>$487</div>
           </li>
           <li>
             <div>Groceries</div>
-            <div>every week</div>
+            <div>weekly</div>
             <div></div>
             <div>$200</div>
           </li>
           <li>
             <div>Phone</div>
-            <div>every month</div>
-            <div>beginning 01/26</div>
+            <div>monthly</div>
+            <div>starts 01/26</div>
             <div>$272</div>
           </li>
         </ul>
@@ -63,7 +63,7 @@ export default function ExpensesStepSummary() {
       </div>
       <div className="c-nav-buttons">
         <div>
-          <Link to="/summary" className="a-btn a-btn__full-on-xs">
+          <Link to="/summary-month" className="a-btn a-btn__full-on-xs">
             Let's go!
           </Link>
         </div>
@@ -76,7 +76,6 @@ export default function ExpensesStepSummary() {
           <Link to="/">Home</Link>
         </div>
       </div>
-
       <br />
       <br />
     </section>

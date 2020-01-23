@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import Hero from "../../components/shared/hero";
+import HeroNew from "../../components/shared/hero-new";
 
 export default function HomeNewUser() {
   // This is the Home Page of the app
   return (
     <main className="mmt-view home">
-      <Hero />
+      <HeroNew />
       <div className="c-subhead">
         Input your income, expenses and cash-on-hand to build your calendar.
         Estimates are acceptable

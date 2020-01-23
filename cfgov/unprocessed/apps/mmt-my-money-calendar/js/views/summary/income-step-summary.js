@@ -22,20 +22,20 @@ export default function IncomeStepSummary() {
         <ul className="c-item-list-four green">
           <li>
             <div>Job</div>
-            <div>every two weeks</div>
-            <div>beginning 1/17</div>
+            <div>every 2 weeks</div>
+            <div>starts 1/17</div>
             <div>$487</div>
           </li>
           <li>
             <div>Child Support</div>
-            <div>every month</div>
-            <div>beginning 2/01</div>
+            <div>monthly</div>
+            <div>starts 2/01</div>
             <div>$350</div>
           </li>
           <li>
             <div>SNAP</div>
-            <div>every month</div>
-            <div>beginning 2/01</div>
+            <div>monthly</div>
+            <div>starts 2/01</div>
             <div>$196</div>
           </li>
         </ul>

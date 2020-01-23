@@ -3,7 +3,7 @@ export default function ExpensesStep50() {
   // add class for step-title; center justify for the rest
 
   return (
-    <section className="starting-balance-step-25">
+    <section className="starting-balance-step-75">
       <img
         src="/static/apps/mmt-my-money-calendar/img/pb_3.75.png"
         alt=""
@@ -20,9 +20,6 @@ export default function ExpensesStep50() {
             alt=""
             className="u-hide-on-print c-increment-icon"
           />
-        </div>
-        <div className="c-increment-title">
-          <h3>Phone</h3>
         </div>
       </div>
       <br />
