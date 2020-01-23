@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Editing the Mega Menu - cfgov-refresh</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/overrides.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Editing the Mega Menu";
+    var mkdocs_page_input_path = "mega-menu.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> cfgov-refresh</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Introduction</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Running this Project</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../running-virtualenv/">Running in a Virtual Environment</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../running-docker/">Running in Docker</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../debugging-monitoring/">Debugging and Monitoring</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../deployment/">Artifacts and Deployment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Pages and Components</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../atomic-structure/">Atomic Structure and Design</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../editing-components/">Creating and Editing Components</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../migrations/">Django and Wagtail Migrations</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Editing the Mega Menu</a>
+    <ul class="subnav">
+            
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#page-contents">Page contents</a></li>
+        
+            <li><a class="toctree-l4" href="#accessing-the-mega-menu-in-wagtail">Accessing the Mega Menu in Wagtail</a></li>
+        
+            <li><a class="toctree-l4" href="#editing-menu-items">Editing Menu Items</a></li>
+        
+            <li><a class="toctree-l4" href="#mega-menu-draft-state">Mega Menu draft state</a></li>
+        
+            <li><a class="toctree-l4" href="#akamai-cache">Akamai cache</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../forms-in-wagtail/">Forms in Wagtail Page Context</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../wagtail-pages/">Wagtail Pages</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Supporting Features</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../caching/">Caching</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../feature-flags/">Feature Flags</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../split-testing/">Split Testing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../translation/">Translation</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Testing</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../browser-acceptance-tests/">Browser/Acceptance Testing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../javascript-unit-tests/">JavaScript Unit Testing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../python-unit-tests/">Python Unit Testing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Contributing</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../branching-merging/">Branching and Merging</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../contributing-docs/">Contributing to the Docs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../related-projects/">Related Projects</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../development-tips/">Development Tips</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../travis/">How We Use Travis CI</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">APIs and Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../ask-cfpb/">Ask CFPB</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../consumer-complaint-database/">Consumer Complaints</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../housing-counselor-tool/">Find a Housing Counselor Tool</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hmda/">HMDA Data</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../website-feedback/">Website Feedback</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">cfgov-refresh</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Pages and Components &raquo;</li>
+        
+      
+    
+    <li>Editing the Mega Menu</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/cfpb/cfgov-refresh/edit/master/docs/mega-menu.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="how-to-edit-the-mega-menu">How to Edit the Mega Menu<a class="headerlink" href="#how-to-edit-the-mega-menu" title="Permanent link">¶</a></h1>
+<h2 id="page-contents">Page contents<a class="headerlink" href="#page-contents" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="#accessing-the-mega-menu-in-wagtail">Accessing the Mega Menu in Wagtail</a></li>
+<li><a href="#editing-menu-items">Editing Mega Menu items</a><ul>
+<li><a href="#editing-menu-item-general-information">Editing Menu Item general information</a></li>
+<li><a href="#editing-navigation-links-and-featured-content">Editing navigation links and featured content</a></li>
+<li><a href="#editing-the-menu-item-footer">Editing the Menu Item footer</a></li>
+</ul>
+</li>
+<li><a href="#mega-menu-draft-state">Mega Menu draft state</a><ul>
+<li><a href="#block-draft-state">Block draft state</a></li>
+<li><a href="#link-draft-state">Link draft state</a></li>
+</ul>
+</li>
+<li><a href="#akamai-cache">Akamai cache</a><ul>
+<li><a href="#clearing-the-cache">Clearing the cache</a></li>
+<li><a href="#previewing-production-changes">Previewing production changes</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="accessing-the-mega-menu-in-wagtail">Accessing the Mega Menu in Wagtail<a class="headerlink" href="#accessing-the-mega-menu-in-wagtail" title="Permanent link">¶</a></h2>
+<p>If you have permission to edit the menu in Wagtail, a <strong>Mega Menu</strong> link
+will appear in the sidebar nav when you are logged into the Wagtail admin.
+Clicking it will bring up a screen where you can add or edit Menu Items.</p>
+<p><img alt="Wagtail admin showing the Mega Menu sidebar option highlighted and the main Menu Items page" src="../img/mega-menu/mega-menu-access.png" /></p>
+<p>You can find more information about permissions in Wagtail on the
+“Wagtail accounts and permissions (production)” page on the Platform wiki).</p>
+<h2 id="editing-menu-items">Editing Menu Items<a class="headerlink" href="#editing-menu-items" title="Permanent link">¶</a></h2>
+<p>Each <strong>Menu Item</strong> represents a section (aka "vertical") in the mega menu,
+like the Consumer Tools vertical below:</p>
+<p><img alt="The consumerfinance.gov mega menu with the Consumer Tools section open" src="../img/mega-menu/mega-menu.png" /></p>
+<h3 id="editing-menu-item-general-information">Editing Menu Item general information<a class="headerlink" href="#editing-menu-item-general-information" title="Permanent link">¶</a></h3>
+<p>The name of the vertical (“Menu label”),
+its Wagtail overview page (“Overview page link”),
+and the order in which it appears in the cf.gov header (“Order”)
+can be edited in the Menu Information and Order panels.</p>
+<p><img alt="The Consumer Tools Menu Item editing screen showing the menu information and order panels" src="../img/mega-menu/general-information.png" /></p>
+<h3 id="editing-navigation-links-and-featured-content">Editing navigation links and featured content<a class="headerlink" href="#editing-navigation-links-and-featured-content" title="Permanent link">¶</a></h3>
+<p>A Menu Item has four column panels, one for each of its possible columns.
+The first three columns can only contain groups of navigation links
+(<strong>Menu Items Group</strong>), while the fourth also includes
+a <strong>Featured Image Item</strong> option.</p>
+<p><img alt="A Menu Item editing screen showing its four column panels, showing that a Menu Items Group can be added to all three, and a Featured Image Item can be added to the fourth" src="../img/mega-menu/mega-menu-columns.png" /></p>
+<h4 id="navigation-links-the-menu-items-group">Navigation links – the Menu Items Group<a class="headerlink" href="#navigation-links-the-menu-items-group" title="Permanent link">¶</a></h4>
+<p>The Menu Items Group block lets you manage a column’s navigation links.</p>
+<p><img alt="A section of the Money Topics Menu Items Group showing its group-wide fields and its first link, Auto Loans" src="../img/mega-menu/menu-items-group.png" /></p>
+<p>Links are added to the “Menu items” list
+(which is not to be confused with the <em>top-level</em> Menu Item
+that represents the main sections, or verticals, of the site).
+Each link has a text field and options to specify either a Wagtail page
+or the direct URL of a page outside of Wagtail.
+See the main “Mega Menu” page on Hubcap for
+editorial guidelines on writing links, link and character count guidance,
+and specific guidelines for
+the Consumer Tools and Practitioner Resources section links.</p>
+<p>The optional “Child items” list lets you create a secondary level of navigation
+for a link that will only be shown at screen sizes under 900px.
+For example, in the Policy &amp; Compliance vertical, each of the five main links
+has child items that can be accessed in the small-screen version of the menu,
+as indicated by the right arrows in the screenshot below.</p>
+<p><img alt="The mega menu on a smaller screen, on the Policy &amp; Compliance section" src="../img/mega-menu/secondary-nav.png" /></p>
+<p>The optional “Column title” field lets you
+specify a title that will be displayed above the column’s links.
+Column titles should be brief and fit on one line at max screen width.
+If two adjacent columns share the same title, enter the title in both columns,
+but check the “Hide column title” box in the second column
+so the title will only be displayed once (as in the Money Topics columns below).</p>
+<p><img alt="Snippet of the Consumer Tools menu showing that only the first column displays the ”Money topics” heading" src="../img/mega-menu/column-title.png" /></p>
+<h4 id="featured-content-the-featured-image-item">Featured content – the Featured Image Item<a class="headerlink" href="#featured-content-the-featured-image-item" title="Permanent link">¶</a></h4>
+<p>The Featured Image Item block lets you feature a link to
+a single resource in the last column of the menu vertical.
+(This component used to be called “featured menu content”.)
+It provides fields for the text of the link, its Wagtail page or external URL,
+a short paragraph of supporting text, and an image.
+Content guidelines for this block can be found on the “Featured Menu Content”
+and “Mega Menu” pages on Hubcap.</p>
+<p><img alt="The editing screen for a Featured Image Item block" src="../img/mega-menu/featured-image-item-admin.png" /></p>
+<p>The Featured Image Item will be the only contents of its column:  </p>
+<p><img alt="Snippet of the Consumer Tools menu showing a Featured Image Item in the fourth column" src="../img/mega-menu/featured-image-item.png" /></p>
+<h3 id="editing-the-menu-item-footer">Editing the Menu Item footer<a class="headerlink" href="#editing-the-menu-item-footer" title="Permanent link">¶</a></h3>
+<p>The optional Nav Footer panel of a Menu Item can be used to
+display links to related resources with optional additional text.
+A <strong>Menu Footer</strong> block consists of a single “Content” rich text field that only accepts paragraphs and links.</p>
+<p><img alt="The editing screen for a menu footer block" src="../img/mega-menu/nav-footer.png" /></p>
+<p>Footer items should be no longer than one line at max screen width, and can
+either consist entirely of a link or be a brief sentence that ends in a link.
+If a footer item contains non-link text, the full text of the item
+will be automatically added as an <code>aria-label</code> attribute on its link
+for users navigating the site via screen reader,
+so it should be written to be comprehensible when read aloud.
+Additional content guidance for footer links can be found on
+the main “Mega Menu” page on Hubcap.</p>
+<h2 id="mega-menu-draft-state">Mega Menu draft state<a class="headerlink" href="#mega-menu-draft-state" title="Permanent link">¶</a></h2>
+<p>Unlike Wagtail pages, Menu Items don’t have a <strong>Save draft</strong> option,
+but if you have a sharing site set up with
+<a href="https://github.com/cfpb/wagtail-sharing">wagtail-sharing</a>,
+you can specify draft state for a particular block or link.
+Blocks or links that are marked as draft will only
+be shown on the sharing site and hidden on the live site.</p>
+<p>When you add a block or link with draft state, you can verify that
+it is only showing up on the sharing site
+by checking the production servers directly.
+<a href="#previewing-production-changes">See the “Previewing production changes” section</a>
+below for more information.</p>
+<h3 id="block-draft-state">Block draft state<a class="headerlink" href="#block-draft-state" title="Permanent link">¶</a></h3>
+<p>The Menu Items Group, Featured Image Item, and Menu Footer blocks
+all have a “Mark block as draft” checkbox:</p>
+<p><img alt="A ‘Mark block as draft’ checkbox in a Featured Image Item block" src="../img/mega-menu/block-draft-state.png" /></p>
+<p>If you want to test different column or footer content
+(like a new Featured Image Item or updated Menu Footer),
+add another block to the section and check its “Mark block as draft” field.
+The new block will only be displayed on the sharing site,
+while the non-draft block will continue to be displayed on the live site.</p>
+<p><img alt="A Nav Footer panel with two Menu Footer blocks, one with ‘Mark block as draft’ checked that will be displayed on Content and one without that checked that will be displayed on Production" src="../img/mega-menu/draft-footer-block.png" /></p>
+<p>When you’re ready to publish the new block,
+uncheck the draft box on the new block.
+You can now either delete the old block or move the new block up
+so it is the first block in its section.
+When there are multiple blocks in a section,
+the code that generates the production version of the menu
+looks for the first block that isn’t in draft state,
+so either way, your new block will now be displayed in production
+once the cache is cleared.</p>
+<p><img alt="A Nav Footer panel with two Menu Footer blocks with text indicating that the first block in the list will be shown" src="../img/mega-menu/two-footer-blocks.png" /></p>
+<p>Since we don’t save revisions of Menu Items,
+it might be safer to temporarily keep the old block
+until the new one is successfully deployed to production.</p>
+<h3 id="link-draft-state">Link draft state<a class="headerlink" href="#link-draft-state" title="Permanent link">¶</a></h3>
+<p>Instead of a “Mark as draft” checkbox, links within a Menu Items Group
+have a “State” field with three options:</p>
+<p><img alt="A menu link showing its State field expanded to show the three options described below" src="../img/mega-menu/link-draft-state.png" /></p>
+<p>If you want to test a new link (or a new version of an existing link),
+click the <strong>Add another</strong> button to create a new link
+and set it to “Show on Content only”.
+The new link will now only appear on the sharing site.
+If you are testing a new version of an existing link,
+you can either set the original link to “Show on Production only”
+or leave it as “Show always”, depending on whether you want
+both versions to show up on the sharing site.
+Anything marked as “Show always” (the default value of the State field)
+will show on both the sharing and live sites.</p>
+<h2 id="akamai-cache">Akamai cache<a class="headerlink" href="#akamai-cache" title="Permanent link">¶</a></h2>
+<h3 id="clearing-the-cache">Clearing the cache<a class="headerlink" href="#clearing-the-cache" title="Permanent link">¶</a></h3>
+<p>Since the mega menu is cached on all pages, the Akamai cache must be flushed
+to make changes to the menu on the live site.
+See the “Flushing the Akamai cache” page on Hubcap for instructions.</p>
+<h3 id="previewing-production-changes">Previewing production changes<a class="headerlink" href="#previewing-production-changes" title="Permanent link">¶</a></h3>
+<p>You can preview changes to the production version of the menu
+before clearing the Akamai cache by going to the internal hostname
+of a production server.
+By hitting the server directly, the Akamai cache is bypassed,
+so it will show the updated menu as soon as a change is saved to a Menu Item.
+This is a good way to make sure that changes are displaying correctly
+before generally pushing them out to to the live site by flushing the cache.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../forms-in-wagtail/" class="btn btn-neutral float-right" title="Forms in Wagtail Page Context">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../migrations/" class="btn btn-neutral" title="Django and Wagtail Migrations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/cfpb/cfgov-refresh/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../migrations/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../forms-in-wagtail/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
