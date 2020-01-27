@@ -26,72 +26,84 @@ import SummaryMonthMar from "./views/summary/summary-month-mar";
 import SummaryWeek from "./views/summary/summary-week";
 import StrategiesList from "./views/strategies/strategies-list";
 
-const Routes = () => (
-  <Router basename="/mmt-my-money-calendar">
-    <ScrollToTop>
-      <div className="app">
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/home-new-user" component={HomeNewUser} />
-          <Route
-            exact
-            path="/home-returning-user"
-            component={HomeReturningUser}
-          />
-          <Route
-            exact
-            path="/starting-balance-step"
-            component={StartingBalance}
-          />
-          <Route
-            exact
-            path="/starting-balance-step25"
-            component={StartingBalance25}
-          />
-          <Route
-            exact
-            path="/starting-balance-step50"
-            component={StartingBalance50}
-          />
-          <Route
-            exact
-            path="/starting-balance-step75"
-            component={StartingBalance75}
-          />
-          <Route
-            exact
-            path="/starting-balance-step-summary"
-            component={StartingBalanceStepSummary}
-          />
-          <Route exact path="/income-step" component={IncomeStep} />
-          <Route exact path="/income-step25" component={IncomeStep25} />
-          <Route exact path="/income-step50" component={IncomeStep50} />
-          <Route exact path="/income-step75" component={IncomeStep75} />
+export default function Routes() {
+  return (
+    <Router basename="/mmt-my-money-calendar">
+      <ScrollToTop>
+        <div className="app">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/home-new-user" component={HomeNewUser} />
+            <Route
+              exact
+              path="/home-returning-user"
+              component={HomeReturningUser}
+            />
+            <Route
+              exact
+              path="/starting-balance-step"
+              component={StartingBalance}
+            />
+            <Route
+              exact
+              path="/starting-balance-step25"
+              component={StartingBalance25}
+            />
+            <Route
+              exact
+              path="/starting-balance-step50"
+              component={StartingBalance50}
+            />
+            <Route
+              exact
+              path="/starting-balance-step75"
+              component={StartingBalance75}
+            />
+            <Route
+              exact
+              path="/starting-balance-step-summary"
+              component={StartingBalanceStepSummary}
+            />
+            <Route exact path="/income-step" component={IncomeStep} />
+            <Route exact path="/income-step25" component={IncomeStep25} />
+            <Route exact path="/income-step50" component={IncomeStep50} />
+            <Route exact path="/income-step75" component={IncomeStep75} />
 
-          <Route
-            exact
-            path="/income-step-summary"
-            component={IncomeStepSummary}
-          />
+            <Route
+              exact
+              path="/income-step-summary"
+              component={IncomeStepSummary}
+            />
 
-          <Route exact path="/expenses-step" component={ExpensesStep} />
-          <Route exact path="/expenses-step25" component={ExpensesStep25} />
-          <Route exact path="/expenses-step50" component={ExpensesStep50} />
-          <Route exact path="/expenses-step75" component={ExpensesStep75} />
-          <Route
-            exact
-            path="/expenses-step-summary"
-            component={ExpensesStepSummary}
-          />
-          <Route exact path="/summary-month-jan" component={SummaryMonthJan} />
-          <Route exact path="/summary-month-feb" component={SummaryMonthFeb} />
-          <Route exact path="/summary-month-mar" component={SummaryMonthMar} />
-          <Route exact path="/summary-week" component={SummaryWeek} />
-          <Route exact path="/strategies-list" component={StrategiesList} />
-        </Switch>
-      </div>
-    </ScrollToTop>
-  </Router>
-);
-
-export default Routes;
+            <Route exact path="/expenses-step" component={ExpensesStep} />
+            <Route exact path="/expenses-step25" component={ExpensesStep25} />
+            <Route exact path="/expenses-step50" component={ExpensesStep50} />
+            <Route exact path="/expenses-step75" component={ExpensesStep75} />
+            <Route
+              exact
+              path="/expenses-step-summary"
+              component={ExpensesStepSummary}
+            />
+            <Route
+              exact
+              path="/summary-month-jan"
+              component={SummaryMonthJan}
+            />
+            <Route
+              exact
+              path="/summary-month-feb"
+              component={SummaryMonthFeb}
+            />
+            <Route
+              exact
+              path="/summary-month-mar"
+              component={SummaryMonthMar}
+            />
+            <Route exact path="/summary-week" component={SummaryWeek} />
+            <Route exact path="/strategies-list" component={StrategiesList} />
+          </Switch>
+        </div>
+      </ScrollToTop>
+    </Router>
+  );
+}
