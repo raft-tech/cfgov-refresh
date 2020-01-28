@@ -3,14 +3,20 @@ import { useState, useCallback } from 'react';
 function Counter({ initial = 0 }) {
   const [count, setCount] = useState(initial);
 
-  const increment = useCallback((evt) => {
-    evt.preventDefault();
-    setCount(count + 1);
-  }, [count]);
-  const decrement = useCallback((evt) => {
-    evt.preventDefault();
-    setCount(count - 1);
-  }, [count]);
+  const increment = useCallback(
+    (evt) => {
+      evt.preventDefault();
+      setCount(count + 1);
+    },
+    [count]
+  );
+  const decrement = useCallback(
+    (evt) => {
+      evt.preventDefault();
+      setCount(count - 1);
+    },
+    [count]
+  );
 
   return (
     <div className="counter">
