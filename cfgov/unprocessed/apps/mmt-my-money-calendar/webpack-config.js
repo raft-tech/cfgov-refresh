@@ -96,6 +96,7 @@ const COMMON_MODULE_CONFIG = {
           plugins: [
             [require('@babel/plugin-proposal-decorators'), { legacy: true }],
             [require('@babel/plugin-proposal-class-properties'), { loose: true }],
+            require('@babel/plugin-transform-runtime'),
           ],
         },
       },
@@ -103,8 +104,14 @@ const COMMON_MODULE_CONFIG = {
 
     // Enable import and usage of images in bundle code
     {
-      test: /\.(jpe?g|png|gif|svg)$/,
+      test: /\.(jpe?g|png|gif)$/,
       use: ['file-loader'],
+    },
+
+    // Allow SVGs to load inline
+    {
+      test: /\.svg$/,
+      use: ['svg-inline-loader'],
     },
 
     // Enable import of static CSS stylesheets
@@ -165,7 +172,8 @@ const conf = {
   module: COMMON_MODULE_CONFIG,
   resolve: {
     alias: {
-      images: path.resolve(__dirname, 'img'),
+      img: path.resolve(__dirname, 'img'),
+      rrule: 'rrule/dist/esm/src',
     },
   },
   output: {

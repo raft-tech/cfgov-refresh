@@ -4,19 +4,29 @@ import Greeting from './components/greeting';
 import Counter from './components/counter';
 import { configure as configureMobX } from 'mobx';
 import { Workbox } from 'workbox-window';
+import { StoreProvider } from './stores';
 import Routes from './routes';
-
-import '../css/style.css';
+import CashFlowEvent from './stores/models/cash-flow-event';
 
 configureMobX({ enforceActions: 'observed' });
 
 const App = () => (
-  <section className="my-money-calendar">
-    <Routes />
-  </section>
+  <StoreProvider>
+    <section className="my-money-calendar">
+      <Routes />
+    </section>
+  </StoreProvider>
 );
 
 window.idb = idb;
+window.CashFlowEvent = CashFlowEvent;
+
+window.seedTestData = async function seedTestData() {
+  const { seedData } = await import(/* webpackChunkName: "seed-data.js" */ './seed-data.js');
+  console.info('Imported seed data script');
+  const results = await seedData();
+  console.info('Seeding complete %O', results);
+};
 
 render(<App />, document.querySelector('#mmt-my-money-calendar'));
 
