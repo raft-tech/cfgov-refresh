@@ -1,9 +1,9 @@
 // import * as idb from 'idb';
 import { render } from 'react-dom';
 
-import { configure as configureMobX } from 'mobx';
+// import { configure as configureMobX } from 'mobx';
 // import { Workbox } from 'workbox-window';
-import { StoreProvider } from './stores';
+// import { StoreProvider } from './stores';
 import Routes from './routes';
 // import CashFlowEvent from './stores/models/cash-flow-event';
 // import UiEvent from './stores/models/ui-event';
@@ -11,11 +11,13 @@ import Routes from './routes';
 configureMobX({ enforceActions: 'observed' });
 
 const App = () => (
-  <StoreProvider>
-    <section className="my-money-calendar">
-      <Routes />
-    </section>
-  </StoreProvider>
+  // <StoreProvider>
+
+  <section className="my-money-calendar">
+    missy
+    <Routes />
+  </section>
+  // </StoreProvider>
 );
 
 // window.idb = idb;

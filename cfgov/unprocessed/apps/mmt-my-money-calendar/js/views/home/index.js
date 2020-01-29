@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link } from 'react-router-dom';
 import Hero from '../../components/hero';
 import Button from '../../components/button';
 
@@ -9,10 +9,13 @@ import arrowRight from 'cf-icons/src/icons/arrow-right.svg';
 export default function Home() {
   const history = useHistory();
 
-  const nextPage = useCallback((evt) => {
-    evt.preventDefault();
-    history.push('/wizard/starting-balance');
-  }, [history]);
+  const nextPage = useCallback(
+    (evt) => {
+      evt.preventDefault();
+      history.push('/wizard/starting-balance');
+    },
+    [history]
+  );
 
   // This is the Home Page of the app
   return (
@@ -23,15 +26,12 @@ export default function Home() {
         image={heroImg}
         alt="My Money Calendar"
       />
-      <br />
-      <div className="m-hero_subhead">
-        Input your income, expenses, and cash-on-hand to build your calendar,
-        Estimates are acceptable.
+      <div className="c-subhead">
+        Input your income, expenses and cash-on-hand to build your calendar. Estimates are acceptable.
       </div>
-      <br />
-      <Button icon={arrowRight} iconSide="right" onClick={nextPage}>Get started</Button>
-      <br />
-      <br />
+      <Button icon={arrowRight} iconSide="right" onClick={nextPage} className="a-btn a-btn__full-on-xs">
+        Let's Begin
+      </Button>
     </main>
   );
 }

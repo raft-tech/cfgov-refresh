@@ -1,6 +1,6 @@
 import { observable, action, computed } from 'mobx';
 import logger from '../lib/logger';
-import UIStore from './ui-store';
+import UiStore from './ui-store';
 import CashFlowStore from './cash-flow-store';
 
 export default class RootStore {
