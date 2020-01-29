@@ -2,6 +2,7 @@ import { observer } from 'mobx-react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useStore } from '../../stores';
 import { useEffect, useState, useCallback } from 'react';
+import '../../../img/';
 
 function CategoryInputScreen() {
   const store = useStore();
