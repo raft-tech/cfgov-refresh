@@ -2,7 +2,6 @@ import { observer } from 'mobx-react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useStore } from '../../stores';
 import { useEffect, useState, useCallback } from 'react';
-import '../../../img/';
 
 function CategoryInputScreen() {
   const store = useStore();
@@ -20,9 +19,6 @@ function CategoryInputScreen() {
       <div className="c-row-container c-increment-title-container">
         <div className="c-increment-img">
           <img src={uiStore.pageImage} alt="" className="u-hide-on-print c-increment-icon" />
-        </div>
-        <div className="c-increment-img">
-          <img src="../../..img/expense-img.png" alt="" className="u-hide-on-print c-increment-icon" />
         </div>
       </div>
       <br />

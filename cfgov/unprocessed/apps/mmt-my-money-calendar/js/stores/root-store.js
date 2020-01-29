@@ -8,7 +8,7 @@ export default class RootStore {
 
   constructor() {
     this.logger = logger.addGroup('rootStore');
-    this.uiStore = new UIStore(this);
+    this.uiStore = new UiStore(this);
     this.eventStore = new CashFlowStore(this);
 
     this.logger.debug('Initialize RootStore: %O', this);

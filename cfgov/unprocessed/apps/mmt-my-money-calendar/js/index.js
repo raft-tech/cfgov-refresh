@@ -1,12 +1,12 @@
 import * as idb from 'idb';
 import { render } from 'react-dom';
-import Greeting from './components/greeting';
-import Counter from './components/counter';
+
 import { configure as configureMobX } from 'mobx';
 import { Workbox } from 'workbox-window';
 import { StoreProvider } from './stores';
 import Routes from './routes';
 import CashFlowEvent from './stores/models/cash-flow-event';
+import UiEvent from './stores/models/ui-event';
 
 configureMobX({ enforceActions: 'observed' });
 
@@ -20,6 +20,9 @@ const App = () => (
 
 window.idb = idb;
 window.CashFlowEvent = CashFlowEvent;
+
+window.idb = idb;
+window.UiEvent = UiEvent;
 
 // window.seedTestData = async function seedTestData() {
 //   const { seedData } = await import(/* webpackChunkName: "seed-data.js" */ './seed-data.js');

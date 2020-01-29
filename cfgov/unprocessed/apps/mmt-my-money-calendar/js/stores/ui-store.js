@@ -1,56 +1,30 @@
 import { observable, computed, action } from 'mobx';
 import logger from '../lib/logger';
+import UiEvent from './models/ui-event';
 
-export default class UIStore {
-  @observable navOpen = false;
-  @observable pageTitle = 'Expense: Housing';
-  @observable pageImage = '../../../img/expense-img.png';
-  @observable subtitle = 'Tell us about your Housing Costs';
-  @observable description = 'This is where any additional description will go.';
-  @observable nextScreenPath = '/expense/transportation';
-  @observable prevScreenPath = '/expense';
-  @observable progress = 0;
+export default class UiStore {
+  @observable uieventsById = new Map();
 
   constructor(rootStore) {
-    this.rootStore = rootStore;
+    this.rootStor = rootStore;
     this.logger = logger.addGroup('uiStore');
 
-    this.logger.debug('Initialize UI Store: %O', this);
+    this.logger.debug('Initialize CashFlowStore: %0', this);
   }
 
-  @action setNavOpen(val) {
-    this.navOpen = Boolean(val);
+  /**
+   * Whenever uieventsById is updates, this will regenerate the Map of uievents by order that they are entered automatically
+   */
+
+  @computed get allEvents() {
+    return [...this.uieventsById.values()];
   }
 
-  @action setPageTitle(title) {
-    this.pageTitle = title;
-  }
-  @action setPageImage(image) {
-    this.pageImage = image;
+  @action addEvent(event) {
+    this.uieventsById.set(event.id, new UiEvent(this.event));
   }
 
-  @action setSubtitle(subtitle) {
-    this.subtitle = subtitle;
-  }
-
-  @action setNextScreenPath(nextScreenPath) {
-    this.nextScreenPath = nextScreen;
-  }
-
-  @action setPrevScreenPath(prevScreenPath) {
-    this.prevScreenPath = prevtScreen;
-  }
-
-  @action updateWizardStep({ pageTitle, subtitle, description, nextStepPath, prevStepPath, progress }) {
-    this.pageTitle = pageTitle;
-    this.subtitle = subtitle;
-    this.description = description;
-    this.nextStepPath = nextStepPath;
-    this.prevStepPath = prevStepPath;
-    this.progress = progress;
-  }
-
-  toggleNav() {
-    this.setNavOpen(!this.navOpen);
+  @action deleteEvent(id) {
+    this.uieventsById.delete(id);
   }
 }
