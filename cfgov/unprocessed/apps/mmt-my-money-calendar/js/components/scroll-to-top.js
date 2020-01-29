@@ -13,3 +13,9 @@ export function useScrollToTop() {
     window.scrollTo(0, 0);
   }, [pathname]);
 }
+
+export function useScrollToTopOnMount() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+}
