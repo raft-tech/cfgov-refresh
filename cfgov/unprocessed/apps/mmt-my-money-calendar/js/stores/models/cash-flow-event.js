@@ -6,13 +6,14 @@ import dbPromise from '../../lib/database';
 import { transform } from '../../lib/object-helpers';
 
 export default class CashFlowEvent {
-  @observable name;
-  @observable date;
+  @observable step;
   @observable category;
   @observable subcategory;
-  @observable totalCents = 0;
+  @observable name;
   @observable recurs = false;
-  @observable recurrence;
+  @observable frequency;
+  @observable startdate;
+  @observable amount = 0;
   @observable errors;
   @observable persisted = false;
 
@@ -20,11 +21,13 @@ export default class CashFlowEvent {
 
   static schema = {
     name: yup.string().required(),
-    date: yup.date().required(),
     category: yup.string().required(),
     subcategory: yup.string(),
-    totalCents: yup.number().integer(),
-    recurrence: yup.string(),
+    name: yup.string().required(),
+    recurs: yup.string(),
+    frequency: yup.string(),
+    amount: yup.number().integer(),
+    date: yup.date().required(),
   };
 
   static isCashFlowEvent(obj) {
@@ -89,7 +92,7 @@ export default class CashFlowEvent {
   }
 
   @computed get recurrenceRule() {
-    if (!this.recurrence || (typeof this.recurrence !== 'string')) return null;
+    if (!this.recurrence || typeof this.recurrence !== 'string') return null;
     return rrulestr(this.recurrence);
   }
 

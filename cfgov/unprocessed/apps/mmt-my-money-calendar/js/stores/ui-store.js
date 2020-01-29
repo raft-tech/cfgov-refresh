@@ -3,11 +3,12 @@ import logger from '../lib/logger';
 
 export default class UIStore {
   @observable navOpen = false;
-  @observable pageTitle = 'myMoney Calendar';
-  @observable subtitle;
-  @observable description;
-  @observable nextStepPath;
-  @observable prevStepPath;
+  @observable pageTitle = 'Expense: Housing';
+  @observable pageImage = '../../../img/expense-img.png';
+  @observable subtitle = 'Tell us about your Housing Costs';
+  @observable description = 'This is where any additional description will go.';
+  @observable nextScreenPath = '/expense/transportation';
+  @observable prevScreenPath = '/expense';
   @observable progress = 0;
 
   constructor(rootStore) {
@@ -24,13 +25,20 @@ export default class UIStore {
   @action setPageTitle(title) {
     this.pageTitle = title;
   }
+  @action setPageImage(image) {
+    this.pageImage = image;
+  }
 
   @action setSubtitle(subtitle) {
     this.subtitle = subtitle;
   }
 
-  @action setDescription(desc) {
-    this.description = desc;
+  @action setNextScreenPath(nextScreenPath) {
+    this.nextScreenPath = nextScreen;
+  }
+
+  @action setPrevScreenPath(prevScreenPath) {
+    this.prevScreenPath = prevtScreen;
   }
 
   @action updateWizardStep({ pageTitle, subtitle, description, nextStepPath, prevStepPath, progress }) {

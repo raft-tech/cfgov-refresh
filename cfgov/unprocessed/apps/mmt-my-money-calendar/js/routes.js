@@ -1,12 +1,16 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./views/home";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './views/home';
 import Wizard from './views/wizard';
-import Summary from "./views/summary";
+import Summary from './views/summary';
+import CategoryInputScreen from './views/wizard/category-input-screen';
 
 const Routes = () => (
   <Router basename="/mmt-my-money-calendar">
     <div className="app">
       <Switch>
+        <Route path="/wizard/category-input-screen">
+          <CategoryInputScreen />
+        </Route>
         <Route exact path="/">
           <Home />
         </Route>
