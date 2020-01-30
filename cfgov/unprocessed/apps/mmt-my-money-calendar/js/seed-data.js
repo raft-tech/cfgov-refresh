@@ -49,7 +49,7 @@ function seedCashFlowEvents() {
       date: randDay(),
       category: 'Housing',
       subcategory: 'Rent',
-      totalCents: 80000,
+      totalCents: -80000,
       recurs: true,
       recurrence: new RRule({
         freq: RRule.MONTHLY,
@@ -61,7 +61,7 @@ function seedCashFlowEvents() {
       name: 'Groceries',
       date: randDay(),
       category: 'Groceries',
-      totalCents: 20000,
+      totalCents: -20000,
       recurs: true,
       recurrence: new RRule({
         freq: RRule.WEEKLY,
