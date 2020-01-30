@@ -1,6 +1,6 @@
 @cols: 7;
 @gap: 10px;
-@inactiveMonthColor: #808080;
+@inactiveMonthColor: #a4a4a4;
 @positiveColor: #cbf0b6;
 @negativeColor: #f0b6b6;
 @breakpointMed: 500px;
@@ -8,6 +8,14 @@
 .calendar {
   display: flex;
   flex-direction: column;
+
+  &__nav {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
 
   &__row {
     display: flex;
