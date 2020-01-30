@@ -31,7 +31,7 @@ function Calendar() {
 
   useEffect(() => {
     uiStore.setPageTitle('myMoney Calendar');
-    uiStore.setSubtitle(uiStore.currentMonth.get('monthLong'));
+    uiStore.setSubtitle(uiStore.currentMonth.toFormat('MMMM, y'));
   }, [location, params, uiStore.currentMonth]);
 
   return (
