@@ -1,17 +1,39 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { useStore } from '../../stores';
 
 export default function CategorySelectionScreen() {
+  const store = useStore();
+  const { uiStore } = store;
+  console.log('this line is right above the useEffect');
+  useEffect(() => console.log(uiStore.uieventsById), [uiStore.uieventsById]);
+
+  // This will log the state of the store as an object
+
   const [housing, setHousing] = useState(false);
   const [transportation, setTransportation] = useState(false);
   const [groceries, setGroceries] = useState(false);
   const [entertainment, setEntertainment] = useState(false);
   const [phone, setPhone] = useState(false);
-
-  console.log('housing is ', housing);
   console.log('transportation is ', transportation);
-  console.log('groceries is ', groceries);
-  console.log('entertainment is ', entertainment);
-  console.log('phone is ', phone);
+
+  const handleTransportation = useCallback(
+    (event) => {
+      event.preventDefault();
+      setTransportation(!transportation);
+
+      console.log('inside handleTransportation', transportation);
+
+      uiStore.addEvent({
+        pageTitle: 'Expense: Transportation',
+        pageImage: '../../../img/icon-transportation.png',
+        subtitle: 'Tell us about your Transportation Costs',
+        description: 'This is where any additional description will go.',
+      });
+    },
+    [transportation, uiStore]
+  );
+
+  // useEffect(() => console.log(uiStore.uieventsById), [uiStore.uieventsById]);
 
   return (
     <section className="expenses-step">
@@ -28,30 +50,34 @@ export default function CategorySelectionScreen() {
         <div className="c-step-title">Tell us about your expenses</div>
       </div>
       <div>Check off those that you currently have</div>
-      <form className="wizard-form">
-        <div>
-          <input
-            className="a-checkbox"
-            type="checkbox"
-            value=false
-            id="housing"
-            name="Housing"
-            onChange={(event) => setHousing(event.target.value)}
-          />
-          <label className="a-label" htmlFor="starting-balance">
-            Housing
-          </label>
-        </div>
+      <br />
+
+      <form className="wizard-form" onSubmit={handleTransportation}>
         {/* <Button type="submit">Add Housing to List</Button> */}
         <fieldset className="o-form_fieldset ">
+          <div className="m-form-field m-form-field__lg-target m-form-field__checkbox">
+            <input
+              className="a-checkbox"
+              type="checkbox"
+              value={housing}
+              id="housing"
+              name="Housing"
+              onChange={(event) => setHousing(event.target.value)}
+            />
+            <label className="a-label" htmlFor="starting-balance">
+              Housing
+            </label>
+          </div>
           <div className="m-form-field m-form-field__lg-target m-form-field__checkbox ">
             <input
               className="a-checkbox"
               type="checkbox"
-              value="transportation"
               id="transportation"
+              value={transportation}
               name="Transportation"
-              onChange={(event) => setTransportation(event.target.value)}
+              onClick={() => {
+                handleTransportation;
+              }}
             />
             <label className="a-label" htmlFor="transportation">
               <span>Transportation</span>
@@ -119,6 +145,7 @@ export default function CategorySelectionScreen() {
           </div>
           {/* <Button type="submit">Add Childcare to List</Button> */}
         </fieldset>
+        <input type="submit" value="Submit" />
       </form>
 
       <br />

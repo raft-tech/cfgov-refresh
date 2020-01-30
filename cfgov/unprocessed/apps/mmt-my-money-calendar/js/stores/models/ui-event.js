@@ -6,14 +6,14 @@ import { transform } from '../../lib/object-helpers';
 
 export default class UiEvent {
   @observable navOpen = false;
-  @observable pageTitle = 'Expense: Housing';
-  @observable pageImage = '../../../img/icon-housing.png';
-  @observable subtitle = 'Tell us about your Housing Costs';
-  @observable description = 'This is where any additional description will go.';
-  @observable nextScreenPath = '/expense/transportation';
-  @observable prevScreenPath = '/expense';
-  @observable nextButtonText = '/expense/transportation';
-  @observable prevButtonText = '/expense';
+  @observable pageTitle;
+  @observable pageImage;
+  @observable subtitle;
+  @observable description;
+  @observable nextScreenPath;
+  @observable prevScreenPath;
+  @observable nextButtonText;
+  @observable prevButtonText;
   @observable progress = 0;
 
   static store = 'uievents';
@@ -64,6 +64,7 @@ export default class UiEvent {
 
   constructor(props) {
     this.logger = logger.addGroup('uiEvent');
+    console.log('props', props);
     this.updateWizardStep(props);
   }
 
@@ -134,6 +135,7 @@ export default class UiEvent {
 
   @action updateWizardStep({
     pageTitle,
+    pageImage,
     subtitle,
     description,
     nextStepPath,
@@ -143,6 +145,7 @@ export default class UiEvent {
     progress,
   }) {
     this.pageTitle = pageTitle;
+    this.pageImage = pageImage;
     this.subtitle = subtitle;
     this.description = description;
     this.nextStepPath = nextStepPath;

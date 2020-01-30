@@ -1,4 +1,5 @@
 import { observable, computed, action } from 'mobx';
+
 import logger from '../lib/logger';
 import UiEvent from './models/ui-event';
 
@@ -6,7 +7,7 @@ export default class UiStore {
   @observable uieventsById = new Map();
 
   constructor(rootStore) {
-    this.rootStor = rootStore;
+    this.rootStore = rootStore;
     this.logger = logger.addGroup('uiStore');
 
     this.logger.debug('Initialize CashFlowStore: %0', this);
@@ -21,7 +22,9 @@ export default class UiStore {
   }
 
   @action addEvent(event) {
-    this.uieventsById.set(event.id, new UiEvent(this.event));
+    console.log('made it to addEvent', event);
+    // this.uieventsById.set(event.id, new UiEvent(this.event));
+    this.uieventsById.set(event.id, new UiEvent(event));
   }
 
   @action deleteEvent(id) {
