@@ -39,39 +39,19 @@ export default class CashFlowStore {
     return new Map(this.events.map((event) => [event.id, event]));
   }
 
-  getBalanceForDate = (function getBalanceForDate(stopDate) {
+  getBalanceForDate = computedFn(function getBalanceForDate(stopDate) {
     stopDate = toDateTime(stopDate).endOf('day');
-    const stopDay = dayOfYear(stopDate);
-    let totalInCents = 0;
+    const stopTimestamp = stopDate.valueOf();
 
     if (!this.events.length) return totalInCents;
 
-    console.time(`Balance for date ${stopDate.toFormat('D')}`);
+    const totalInCents = this.events.reduce((total, event) => {
+      const eventTimestamp = event.dateTime.endOf('day').valueOf();
 
-    /*
-    for (const event of this.events) {
-      const eventDay = dayOfYear(event.dateTime);
-
-      if (eventDay > stopDay) break;
-
-      totalInCents += event.totalCents;
-    }
-
-    this.logger.info('Balance in cents for date %s: %d', stopDate.toFormat('D'), totalInCents);
-    console.timeEnd(`Balance for date ${stopDate.toFormat('D')}`);
-
-    return totalInCents / 100;
-    */
-
-    totalInCents = this.events.reduce((total, event) => {
-      const eventDay = dayOfYear(event.dateTime);
-
-      if (eventDay > stopDay) return total;
+      if (eventTimestamp > stopTimestamp) return total;
 
       return total + event.totalCents;
     }, 0);
-
-    console.timeEnd(`Balance for date ${stopDate.toFormat('D')}`);
 
     return totalInCents / 100;
   });
