@@ -1,7 +1,7 @@
 import { flow, observable, computed, action } from 'mobx';
 import { computedFn } from 'mobx-utils';
 import logger from '../lib/logger';
-import { toDateTime } from '../lib/calendar-helpers';
+import { toDateTime, dayOfYear } from '../lib/calendar-helpers';
 import CashFlowEvent from './models/cash-flow-event';
 import { DateTime } from 'luxon';
 
@@ -39,20 +39,39 @@ export default class CashFlowStore {
     return new Map(this.events.map((event) => [event.id, event]));
   }
 
-  getBalanceForDate = computedFn(function getBalanceForDate(stopDate) {
+  getBalanceForDate = (function getBalanceForDate(stopDate) {
     stopDate = toDateTime(stopDate).endOf('day');
+    const stopDay = dayOfYear(stopDate);
+    let totalInCents = 0;
 
-    if (!this.events.length) return 0;
+    if (!this.events.length) return totalInCents;
 
-    const totalInCents = this.events.reduce((total, event) => {
-      const { milliseconds: diff } = event.dateTime.diff(stopDate).toObject();
+    console.time(`Balance for date ${stopDate.toFormat('D')}`);
 
-      if (diff > 0) return total;
+    /*
+    for (const event of this.events) {
+      const eventDay = dayOfYear(event.dateTime);
+
+      if (eventDay > stopDay) break;
+
+      totalInCents += event.totalCents;
+    }
+
+    this.logger.info('Balance in cents for date %s: %d', stopDate.toFormat('D'), totalInCents);
+    console.timeEnd(`Balance for date ${stopDate.toFormat('D')}`);
+
+    return totalInCents / 100;
+    */
+
+    totalInCents = this.events.reduce((total, event) => {
+      const eventDay = dayOfYear(event.dateTime);
+
+      if (eventDay > stopDay) return total;
 
       return total + event.totalCents;
     }, 0);
 
-    this.logger.info('Balance in cents for date %s: %d', stopDate.toFormat('D'), totalInCents);
+    console.timeEnd(`Balance for date ${stopDate.toFormat('D')}`);
 
     return totalInCents / 100;
   });
