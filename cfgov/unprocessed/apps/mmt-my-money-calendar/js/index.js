@@ -4,6 +4,7 @@ import Greeting from './components/greeting';
 import Counter from './components/counter';
 import { configure as configureMobX } from 'mobx';
 import { Workbox } from 'workbox-window';
+import { DateTime, Info } from 'luxon';
 import { StoreProvider } from './stores';
 import Routes from './routes';
 import CashFlowEvent from './stores/models/cash-flow-event';
@@ -37,6 +38,8 @@ if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
 if (process.env.NODE_ENV === 'development') {
   window.idb = idb;
   window.CashFlowEvent = CashFlowEvent;
+  window.DateTime = DateTime;
+  window.Info = Info;
 
   window.seedTestData = async function seedTestData() {
     const { seedData } = await import(/* webpackChunkName: "seed-data.js" */ './seed-data.js');
