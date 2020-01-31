@@ -4,7 +4,6 @@ import heroImg from 'img/Hero_2.png';
 import arrowRight from 'cf-icons/src/icons/arrow-right.svg';
 
 export default function Home() {
-  // This is the Home Page of the app
   return (
     <main className="mmt-view home">
       <Hero
@@ -16,9 +15,7 @@ export default function Home() {
       <div className="c-subhead">
         Input your income, expenses and cash-on-hand to build your calendar. Estimates are acceptable.
       </div>
-      {/* <Button icon={arrowRight} iconSide="right" onClick={nextPage} className="a-btn a-btn__full-on-xs">
-        Let's Begin
-      </Button> */}
+
       <div className="c-nav-buttons">
         <div>
           <Link
