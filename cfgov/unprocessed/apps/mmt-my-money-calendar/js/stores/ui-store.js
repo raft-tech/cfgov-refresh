@@ -71,6 +71,10 @@ export default class UIStore {
     this.selectedDate = toDateTime(date).startOf('day');
   }
 
+  @action clearSelectedDate() {
+    this.selectedDate = null;
+  }
+
   @action gotoDate(date) {
     date = toDateTime(date);
     this.currentMonth = date.startOf('month');
