@@ -1,13 +1,12 @@
 import { observer } from 'mobx-react';
 import { useState, useCallback, useEffect } from 'react';
 import { useStore } from '../../stores';
-import routeOptionReducer from '../../../../youth-employment-success/js/reducers/route-option-reducer';
 
 function CategorySelectionScreen() {
   const store = useStore();
-  const { wizardStepStore } = store;
+  const { uiStore } = store;
   console.log('this line is right above the useEffect');
-  // useEffect(() => console.log(wizardStepStore.category), [wizardStepStore.cateo]);
+  useEffect(() => console.log(uiStore.uieventsById), [uiStore.uieventsById]);
 
   // This will log the state of the store as an object
 
@@ -16,44 +15,26 @@ function CategorySelectionScreen() {
   const [groceries, setGroceries] = useState(false);
   const [entertainment, setEntertainment] = useState(false);
   const [phone, setPhone] = useState(false);
-  const [childcare, setChildcare] = useState(false);
-  const [selectedCategoriesArray, setSelectedCategoriesArray] = useState([]);
+  console.log('transportation is ', transportation);
+
+  const handleTransportation = useCallback(
+    (event) => {
+      event.preventDefault();
+      setTransportation(!transportation);
+
+      console.log('inside handleTransportation', transportation);
+
+      uiStore.addEvent({
+        pageTitle: 'Expense: Transportation',
+        pageImage: '../../../img/icon-transportation.png',
+        subtitle: 'Tell us about your Transportation Costs',
+        description: 'This is where any additional description will go.',
+      });
+    },
+    [transportation, uiStore]
+  );
 
   // useEffect(() => console.log(uiStore.uieventsById), [uiStore.uieventsById]);
-  const handleHousing = useCallback((event) => {
-    event.preventDefault();
-    console.log('selected housing is ', selectedCategoriesArray);
-    setHousing(!housing);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'housing']);
-  });
-
-  const handleTransportation = useCallback((event) => {
-    event.preventDefault();
-    console.log('selected categories is ', selectedCategoriesArray);
-    setTransportation(!transportation);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'transportation']);
-  });
-
-  const handleGroceries = useCallback((event) => {
-    event.preventDefault();
-    setGroceries(!groceries);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'groceries']);
-  });
-  const handleEntertainment = useCallback((event) => {
-    event.preventDefault();
-    setTransportation(!entertainment);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'entertainment']);
-  });
-  const handlePhone = useCallback((event) => {
-    event.preventDefault();
-    setPhone(!phone);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'phone']);
-  });
-  const handleChildcare = useCallback((event) => {
-    event.preventDefault();
-    setChildcare(!childcare);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'childcare']);
-  });
 
   return (
     <section className="expenses-step">
@@ -62,8 +43,6 @@ function CategorySelectionScreen() {
       <div className="c-step-title">
         <h4>Expenses</h4>
       </div>
-      <div>On clicking 'Next' following step input screens will come up in order</div>
-      <div>{selectedCategoriesArray}</div>
 
       <div className="c-step-container">
         <div className="c-step-img">
@@ -74,7 +53,8 @@ function CategorySelectionScreen() {
       <div>Check off those that you currently have</div>
       <br />
 
-      <form className="wizard-form">
+      <form className="wizard-form" onSubmit={handleTransportation}>
+        {/* <Button type="submit">Add Housing to List</Button> */}
         <fieldset className="o-form_fieldset ">
           <div className="m-form-field m-form-field__lg-target m-form-field__checkbox">
             <input
@@ -83,7 +63,7 @@ function CategorySelectionScreen() {
               value={housing}
               id="housing"
               name="Housing"
-              onChange={handleHousing}
+              onChange={(event) => setHousing(event.target.value)}
             />
             <label className="a-label" htmlFor="starting-balance">
               Housing
@@ -96,12 +76,15 @@ function CategorySelectionScreen() {
               id="transportation"
               value={transportation}
               name="Transportation"
-              onClick={handleTransportation}
+              onClick={() => {
+                handleTransportation;
+              }}
             />
             <label className="a-label" htmlFor="transportation">
               <span>Transportation</span>
             </label>
           </div>
+          {/* <Button type="submit">Add Transportation to List</Button> */}
 
           <div className="m-form-field m-form-field__lg-target m-form-field__checkbox ">
             <input
@@ -110,12 +93,13 @@ function CategorySelectionScreen() {
               value="groceries"
               id="groceries"
               name="Groceries"
-              onChange={handleGroceries}
+              onChange={(event) => setGroceries(event.target.value)}
             />
             <label className="a-label" htmlFor="groceries">
               <span>Groceries</span>
             </label>
           </div>
+          {/* <Button type="submit">Add Groceries to List</Button> */}
 
           <div className="m-form-field m-form-field__lg-target m-form-field__checkbox ">
             <input
@@ -124,12 +108,13 @@ function CategorySelectionScreen() {
               value="entertainment"
               id="entertainment"
               name="Entertainment"
-              onChange={handleEntertainment}
+              onChange={(event) => setEntertainment(event.target.value)}
             />
             <label className="a-label" htmlFor="entertainment">
               <span>Entertainment</span>
             </label>
           </div>
+          {/* <Button type="submit">Add Entertainment to list</Button> */}
 
           <div className="m-form-field m-form-field__lg-target m-form-field__checkbox ">
             <input
@@ -138,12 +123,13 @@ function CategorySelectionScreen() {
               value="phone"
               id="phone"
               name="Phone"
-              onChange={handlePhone}
+              onChange={(event) => setPhone(event.target.value)}
             />
             <label className="a-label" htmlFor="phone">
               <span>Phone</span>
             </label>
           </div>
+          {/* <Button type="submit">Add Phone to List</Button> */}
 
           <div className="m-form-field m-form-field__lg-target m-form-field__checkbox ">
             <input
@@ -152,12 +138,13 @@ function CategorySelectionScreen() {
               value="childcare"
               id="childcare"
               name="Childcare"
-              onChange={handleChildcare}
+              onChange={(event) => setChildcare(event.target.value)}
             />
             <label className="a-label" htmlFor="childcare">
               <span>Childcare</span>
             </label>
           </div>
+          {/* <Button type="submit">Add Childcare to List</Button> */}
         </fieldset>
         <input type="submit" value="Submit" />
       </form>

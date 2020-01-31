@@ -8,6 +8,7 @@ function CategoryInputScreen() {
   const { uiStore, eventStore } = store;
 
   console.log('Category Input Screen loaded');
+  useEffect(() => console.log(uiStore.uieventsById), [uiStore.uieventsById]);
 
   return (
     <section className="starting-balance-step-25">

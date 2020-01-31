@@ -1,17 +1,14 @@
 import { observable, action, computed } from 'mobx';
-import logger from '../lib/logger';
-import UiStore from './ui-store';
+
+import WizardStepStore from './wizard-step-store';
 import CashFlowStore from './cash-flow-store';
 
 export default class RootStore {
   @observable networkStatus = 'idle';
 
   constructor() {
-    this.logger = logger.addGroup('rootStore');
-    this.uiStore = new UiStore(this);
     this.eventStore = new CashFlowStore(this);
-
-    this.logger.debug('Initialize RootStore: %O', this);
+    this.wizardStepStore = new WizardStepStore(this);
   }
 
   @computed get isLoading() {

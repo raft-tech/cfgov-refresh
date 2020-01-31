@@ -6,6 +6,7 @@ import { transform } from '../../lib/object-helpers';
 
 export default class UiEvent {
   @observable navOpen = false;
+  @observable category;
   @observable pageTitle;
   @observable pageImage;
   @observable subtitle;
@@ -20,6 +21,7 @@ export default class UiEvent {
 
   static schema = {
     navOpen: yup.boolean(),
+    category: yup.string().required(),
     pageTitle: yup.string().required(),
     pageImage: yup.string().required(),
     subtitle: yup.string().required(),
@@ -106,6 +108,10 @@ export default class UiEvent {
     this.navOpen = Boolean(val);
   }
 
+  @action setCategory(category) {
+    this.category = category;
+  }
+
   @action setPageTitle(title) {
     this.pageTitle = title;
   }
@@ -134,6 +140,7 @@ export default class UiEvent {
   }
 
   @action updateWizardStep({
+    category,
     pageTitle,
     pageImage,
     subtitle,
@@ -144,6 +151,7 @@ export default class UiEvent {
     prevButtonText,
     progress,
   }) {
+    this.category = category;
     this.pageTitle = pageTitle;
     this.pageImage = pageImage;
     this.subtitle = subtitle;
