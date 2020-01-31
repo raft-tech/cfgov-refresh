@@ -78,6 +78,22 @@ export default class CashFlowStore {
     return totalInCents / 100;
   });
 
+  dateHasIncome(date) {
+    const events = this.getEventsForDate(date);
+
+    if (!events) return false;
+
+    return Boolean(events.find(({ totalCents }) => totalCents > 0));
+  }
+
+  dateHasExpenses(date) {
+    const events = this.getEventsForDate(date);
+
+    if (!events) return false;
+
+    return Boolean(events.find(({ totalCents }) => totalCents < 0));
+  }
+
   getEventsForDate(date) {
     date = toDateTime(date);
     return this.eventsByDate.get(date.startOf('day').valueOf());
