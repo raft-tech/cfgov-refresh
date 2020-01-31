@@ -9,6 +9,11 @@ import Button from '../../components/button';
 import arrowRight from 'cf-icons/src/icons/arrow-right.svg';
 import arrowLeft from 'cf-icons/src/icons/arrow-left.svg';
 
+const ifDevelopment = (fn) => {
+  if (process.env.NODE_ENV !== 'development') return null;
+  return fn();
+};
+
 const CalendarWeekRow = ({ days }) => (
   <div className="calendar__row">
     {days.map((day) => <Day day={day} key={`day-${day.toFormat('ooo')}`} />)}
@@ -16,7 +21,7 @@ const CalendarWeekRow = ({ days }) => (
 );
 
 function Calendar() {
-  const { uiStore, } = useStore();
+  const { uiStore, eventStore } = useStore();
   const location = useLocation();
   const params = useParams();
 
@@ -32,13 +37,32 @@ function Calendar() {
 
   const gotoToday = useCallback((evt) => {
     evt.preventDefault();
-    uiStore.setCurrentMonth(DateTime.local().startOf('day'));
-  })
+    const now = DateTime.local();
+    uiStore.setCurrentMonth(now.startOf('month'));
+    uiStore.setSelectedDate(now.startOf('day'));
+  });
+
+  const loadSeedData = useCallback(async (evt) => {
+    evt.preventDefault();
+    await window.seedTestData();
+    await eventStore.loadEvents();
+    alert('Seed data loaded');
+  }, []);
+
+  const clearDatabase = useCallback(async (evt) => {
+    evt.preventDefault();
+    await window.clearTestData();
+    await eventStore.loadEvents();
+    alert('Database cleared');
+  }, []);
 
   useEffect(() => {
     uiStore.setPageTitle('myMoney Calendar');
     uiStore.setSubtitle(uiStore.currentMonth.toFormat('MMMM, y'));
   }, [location, params, uiStore.currentMonth]);
+
+  const seedButton = ifDevelopment(() => <Button onClick={loadSeedData} variant="secondary" style={{margin: '.5rem 0'}}>Seed Database</Button>);
+  const clearButton = ifDevelopment(() => <Button onClick={clearDatabase} variant="secondary">Clear Database</Button>);
 
   return (
     <section className="calendar">
@@ -58,6 +82,9 @@ function Calendar() {
       <div className="calendar__rows">
         {uiStore.monthCalendarRows.map(({ days, weekNumber }) => <CalendarWeekRow days={days} key={`week-${weekNumber}`} />)}
       </div>
+
+      {seedButton}
+      {clearButton}
     </section>
   );
 }
