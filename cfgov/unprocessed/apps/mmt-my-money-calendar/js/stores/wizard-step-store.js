@@ -1,5 +1,5 @@
 import { observable, action, computed } from 'mobx';
-import WizardStepModel from './models/wizard-step-model';
+
 import logger from '../lib/logger';
 
 export default class WizardStepStore {
