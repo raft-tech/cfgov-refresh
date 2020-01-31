@@ -71,6 +71,12 @@ export default class UIStore {
     this.selectedDate = toDateTime(date).startOf('day');
   }
 
+  @action gotoDate(date) {
+    date = toDateTime(date);
+    this.currentMonth = date.startOf('month');
+    this.selectedDate = date.startOf('day');
+  }
+
   toggleNav() {
     this.setNavOpen(!this.navOpen);
   }

@@ -3,6 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import { observer } from 'mobx-react';
 import { useStore } from '../../stores';
+import { useClickHandler } from '../../lib/hooks';
 import Day from './day';
 import Button from '../../components/button';
 
@@ -25,32 +26,17 @@ function Calendar() {
   const location = useLocation();
   const params = useParams();
 
-  const nextMonth = useCallback((evt) => {
-    evt.preventDefault();
-    uiStore.nextMonth();
-  }, [uiStore.currentMonth]);
+  const nextMonth = useClickHandler(() => uiStore.nextMonth(), []);
+  const prevMonth = useClickHandler(() => uiStore.prevMonth(), []);
+  const gotoToday = useClickHandler(() => uiStore.gotoDate(DateTime.local()), []);
 
-  const prevMonth = useCallback((evt) => {
-    evt.preventDefault();
-    uiStore.prevMonth();
-  }, [uiStore.currentMonth]);
-
-  const gotoToday = useCallback((evt) => {
-    evt.preventDefault();
-    const now = DateTime.local();
-    uiStore.setCurrentMonth(now.startOf('month'));
-    uiStore.setSelectedDate(now.startOf('day'));
-  });
-
-  const loadSeedData = useCallback(async (evt) => {
-    evt.preventDefault();
+  const loadSeedData = useClickHandler(async () => {
     await window.seedTestData();
     await eventStore.loadEvents();
     alert('Seed data loaded');
   }, []);
 
-  const clearDatabase = useCallback(async (evt) => {
-    evt.preventDefault();
+  const clearDatabase = useClickHandler(async () => {
     await window.clearTestData();
     await eventStore.loadEvents();
     alert('Database cleared');
