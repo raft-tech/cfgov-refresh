@@ -1,58 +1,89 @@
 import { observer } from 'mobx-react';
+import { Link } from 'react-router-dom';
 import { useState, useCallback, useEffect } from 'react';
 import { useStore } from '../../stores';
-import routeOptionReducer from '../../../../youth-employment-success/js/reducers/route-option-reducer';
 
 function CategorySelectionScreen() {
   const store = useStore();
   const { wizardStepStore } = store;
-  console.log('this line is right above the useEffect');
-  // useEffect(() => console.log(wizardStepStore.category), [wizardStepStore.cateo]);
 
-  // This will log the state of the store as an object
-
-  const [housing, setHousing] = useState(false);
-  const [transportation, setTransportation] = useState(false);
-  const [groceries, setGroceries] = useState(false);
-  const [entertainment, setEntertainment] = useState(false);
-  const [phone, setPhone] = useState(false);
-  const [childcare, setChildcare] = useState(false);
   const [selectedCategoriesArray, setSelectedCategoriesArray] = useState([]);
 
-  // useEffect(() => console.log(uiStore.uieventsById), [uiStore.uieventsById]);
-  const handleHousing = useCallback((event) => {
-    event.preventDefault();
-    console.log('selected housing is ', selectedCategoriesArray);
-    setHousing(!housing);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'housing']);
+  const handleCheckbox = useCallback((event) => {
+    if (!event.target.checked) {
+      return;
+    }
+
+    switch (event.target.name) {
+      case 'Housing':
+        var stepDetails = {
+          category: 'housing',
+          pageTitle: 'Expense: Housing',
+          pageImage: '../../../img/icon-housing.png',
+          subtitle: 'Tell us about your Housing Costs',
+          description: 'This is where any additional description will go.',
+        };
+        break;
+      case 'Transportation':
+        var stepDetails = {
+          category: 'transportation',
+          pageTitle: 'Expense: Transportation',
+          pageImage: '../../../img/icon-transportation.png',
+          subtitle: 'Tell us about your Transportation Costs',
+          description: 'This is where any additional description will go.',
+        };
+
+        break;
+      case 'Groceries':
+        var stepDetails = {
+          category: 'groceries',
+          pageTitle: 'Expense: Groceries',
+          pageImage: '../../../img/icon-transportation.png',
+          subtitle: 'Tell us about your Groceris Costs',
+          description: 'This is where any additional description will go.',
+        };
+
+        break;
+      case 'Entertainment':
+        var stepDetails = {
+          category: 'transportation',
+          pageTitle: 'Expense: Transportation',
+          pageImage: '../../../img/icon-transportation.png',
+          subtitle: 'Tell us about your Entertainment Costs',
+          description: 'This is where any additional description will go.',
+        };
+
+        break;
+      case 'Phone':
+        var stepDetails = {
+          category: 'phone',
+          pageTitle: 'Expense: Phone',
+          pageImage: '../../../img/icon-transportation.png',
+          subtitle: 'Tell us about your Phone Costs',
+          description: 'This is where any additional description will go.',
+        };
+
+        break;
+      case 'Childcare':
+        var stepDetails = {
+          category: 'childcare',
+          pageTitle: 'Expense: Childcare',
+          pageImage: '../../../img/icon-transportation.png',
+          subtitle: 'Tell us about your Childcare Costs',
+          description: 'This is where any additional description will go.',
+        };
+
+        break;
+      default:
+        console.log('inside switch default', event.target.name);
+    }
+    console.log('wizardStep', stepDetails);
+    wizardStepStore.addWizardStep(event.target.name);
+    // wizardStepStore.addWizardStep(stepDetails);
   });
 
-  const handleTransportation = useCallback((event) => {
-    event.preventDefault();
-    console.log('selected categories is ', selectedCategoriesArray);
-    setTransportation(!transportation);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'transportation']);
-  });
-
-  const handleGroceries = useCallback((event) => {
-    event.preventDefault();
-    setGroceries(!groceries);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'groceries']);
-  });
-  const handleEntertainment = useCallback((event) => {
-    event.preventDefault();
-    setTransportation(!entertainment);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'entertainment']);
-  });
-  const handlePhone = useCallback((event) => {
-    event.preventDefault();
-    setPhone(!phone);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'phone']);
-  });
-  const handleChildcare = useCallback((event) => {
-    event.preventDefault();
-    setChildcare(!childcare);
-    setSelectedCategoriesArray((selectedCategoriesArray) => [...selectedCategoriesArray, 'childcare']);
+  const categoryList = wizardStepStore.wizardSteps.map((selectedCategory) => {
+    return <li key={selectedCategory}>{selectedCategory}</li>;
   });
 
   return (
@@ -63,7 +94,7 @@ function CategorySelectionScreen() {
         <h4>Expenses</h4>
       </div>
       <div>On clicking 'Next' following step input screens will come up in order</div>
-      <div>{selectedCategoriesArray}</div>
+      <ul>{categoryList}</ul>
 
       <div className="c-step-container">
         <div className="c-step-img">
@@ -76,17 +107,17 @@ function CategorySelectionScreen() {
 
       <form className="wizard-form">
         <fieldset className="o-form_fieldset ">
-          <div className="m-form-field m-form-field__lg-target m-form-field__checkbox">
+          <div className="m-form-field m-form-field__lg-target m-form-field__checkbox ">
             <input
               className="a-checkbox"
               type="checkbox"
-              value={housing}
               id="housing"
               name="Housing"
-              onChange={handleHousing}
+              onChange={handleCheckbox}
+              checked={wizardStepStore.wizardSteps.includes('Housing')}
             />
-            <label className="a-label" htmlFor="starting-balance">
-              Housing
+            <label className="a-label" htmlFor="transportation">
+              <span>Housing</span>
             </label>
           </div>
           <div className="m-form-field m-form-field__lg-target m-form-field__checkbox ">
@@ -94,9 +125,9 @@ function CategorySelectionScreen() {
               className="a-checkbox"
               type="checkbox"
               id="transportation"
-              value={transportation}
               name="Transportation"
-              onClick={handleTransportation}
+              onChange={handleCheckbox}
+              checked={wizardStepStore.wizardSteps.includes('Transportation')}
             />
             <label className="a-label" htmlFor="transportation">
               <span>Transportation</span>
@@ -107,10 +138,10 @@ function CategorySelectionScreen() {
             <input
               className="a-checkbox"
               type="checkbox"
-              value="groceries"
               id="groceries"
               name="Groceries"
-              onChange={handleGroceries}
+              onChange={handleCheckbox}
+              checked={wizardStepStore.wizardSteps.includes('Groceries')}
             />
             <label className="a-label" htmlFor="groceries">
               <span>Groceries</span>
@@ -124,7 +155,8 @@ function CategorySelectionScreen() {
               value="entertainment"
               id="entertainment"
               name="Entertainment"
-              onChange={handleEntertainment}
+              onChange={handleCheckbox}
+              checked={wizardStepStore.wizardSteps.includes('Entertainment')}
             />
             <label className="a-label" htmlFor="entertainment">
               <span>Entertainment</span>
@@ -138,7 +170,8 @@ function CategorySelectionScreen() {
               value="phone"
               id="phone"
               name="Phone"
-              onChange={handlePhone}
+              onChange={handleCheckbox}
+              checked={wizardStepStore.wizardSteps.includes('Phone')}
             />
             <label className="a-label" htmlFor="phone">
               <span>Phone</span>
@@ -152,15 +185,31 @@ function CategorySelectionScreen() {
               value="childcare"
               id="childcare"
               name="Childcare"
-              onChange={handleChildcare}
+              onChange={handleCheckbox}
+              checked={wizardStepStore.wizardSteps.includes('Childcare')}
             />
             <label className="a-label" htmlFor="childcare">
               <span>Childcare</span>
             </label>
           </div>
         </fieldset>
-        <input type="submit" value="Submit" />
+        {/* <input type="submit" value="Submit" /> */}
       </form>
+      <div className="c-nav-buttons">
+        <div>
+          <Link to="/wizard/category-input-screen" className="a-btn a-btn__full-on-xs">
+            Input your {wizardStepStore.wizardSteps[0]}
+          </Link>
+        </div>
+        <div>
+          <Link to="/home" className="a-btn a-btn__full-on-xs">
+            Back
+          </Link>
+        </div>
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+      </div>
 
       <br />
       <br />

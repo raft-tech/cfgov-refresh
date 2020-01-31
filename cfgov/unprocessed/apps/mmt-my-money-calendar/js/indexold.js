@@ -1,24 +1,22 @@
 // import * as idb from 'idb';
-import { render } from 'react-dom';
+// import { render } from 'react-dom';
 
 // import { configure as configureMobX } from 'mobx';
 // import { Workbox } from 'workbox-window';
 // import { StoreProvider } from './stores';
-import Routes from './routes';
+// import Routes from './routes';
 // import CashFlowEvent from './stores/models/cash-flow-event';
 // import UiEvent from './stores/models/ui-event';
 
-configureMobX({ enforceActions: 'observed' });
+// configureMobX({ enforceActions: 'observed' });
 
-const App = () => (
-  // <StoreProvider>
-
-  <section className="my-money-calendar">
-    missy
-    <Routes />
-  </section>
-  // </StoreProvider>
-);
+// const App = () => (
+//   <StoreProvider>
+//     <section className="my-money-calendar">
+//       <Routes />
+//     </section>
+//   </StoreProvider>
+// );
 
 // window.idb = idb;
 // window.CashFlowEvent = CashFlowEvent;
@@ -33,7 +31,7 @@ const App = () => (
 //   console.info('Seeding complete %O', results);
 // };
 
-render(<App />, document.querySelector('#mmt-my-money-calendar'));
+// render(<App />, document.querySelector('#mmt-my-money-calendar'));
 
 // if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
 //   const wb = new Workbox('/mmt-my-money-calendar/service-worker.js', { scope: '/mmt-my-money-calendar' });

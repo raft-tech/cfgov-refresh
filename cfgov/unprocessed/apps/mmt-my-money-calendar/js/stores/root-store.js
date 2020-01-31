@@ -1,13 +1,13 @@
 import { observable, action, computed } from 'mobx';
 
 import WizardStepStore from './wizard-step-store';
-import CashFlowStore from './cash-flow-store';
+// import CashFlowStore from './cash-flow-store';
 
 export default class RootStore {
   @observable networkStatus = 'idle';
 
   constructor() {
-    this.eventStore = new CashFlowStore(this);
+    // this.eventStore = new CashFlowStore(this);
     this.wizardStepStore = new WizardStepStore(this);
   }
 
