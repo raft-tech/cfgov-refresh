@@ -21,13 +21,15 @@ function Details() {
         {events &&
           events.map((e) => (
             <li className="calendar-details__event" key={e.id}>
-              {e.name}: {formatCurrency(e.total)}
+              <div className="calendar-details__event-name">{e.name}</div>
+              <div className="calendar-details__event-total">{formatCurrency(e.total)}</div>
             </li>
           ))}
       </ul>
 
       <div className="calendar-details__total">
-        <strong>Your Balance:</strong> {formatCurrency(balance)}
+        <strong className="calendar-details__total-label">Total Balance:</strong>
+        <span className="calendar-details__total-value">{formatCurrency(balance)}</span>
       </div>
     </div>
   );
