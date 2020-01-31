@@ -24,8 +24,9 @@ export default class CashFlowStore {
    */
   @computed get eventsByDate() {
     return this.events.reduce((output, event) => {
-      const list = output.get(event.date) || [];
-      output.set(event.date, [...list, event]);
+      const key = event.dateTime.startOf('day').valueOf();
+      const list = output.get(key) || [];
+      output.set(key, [...list, event]);
       return output;
     }, new Map());
   }

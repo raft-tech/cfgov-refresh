@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import { useStore } from '../../stores';
 import { useClickHandler } from '../../lib/hooks';
 import Day from './day';
+import Details from './details';
 import Button from '../../components/button';
 
 import arrowRight from 'cf-icons/src/icons/arrow-right.svg';
@@ -68,6 +69,8 @@ function Calendar() {
       <div className="calendar__rows">
         {uiStore.monthCalendarRows.map(({ days, weekNumber }) => <CalendarWeekRow days={days} key={`week-${weekNumber}`} />)}
       </div>
+
+      <Details />
 
       {seedButton}
       {clearButton}
