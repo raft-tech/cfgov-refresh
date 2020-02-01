@@ -13,8 +13,17 @@ export default class WizardStepStore {
   }
 
   @action addWizardStep(wizardStep) {
-    this.logger.log('wizardStep', wizardStep);
     this.wizardSteps.push(wizardStep);
+  }
+
+  @action deleteWizardStep(category) {
+    console.log('category to be deleted', category);
+
+    var filteredSteps = this.wizardSteps.filter((step) => step.category !== category);
+    console.log('filteredSteps', filteredSteps);
+    this.wizardSteps.replace(filteredSteps);
+    // // this.wizardSteps.delete(category);
+    console.log('wizardStep after delete', this.wizardSteps);
   }
 
   @computed get allWizardSteps() {

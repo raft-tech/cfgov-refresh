@@ -10,80 +10,80 @@ function CategorySelectionScreen() {
   const [selectedCategoriesArray, setSelectedCategoriesArray] = useState([]);
 
   const handleCheckbox = useCallback((event) => {
-    if (!event.target.checked) {
-      return;
+    if (event.target.checked) {
+      switch (event.target.name) {
+        case 'Housing':
+          var stepDetails = {
+            category: 'Housing',
+            pageTitle: 'Expense: Housing',
+            pageImage: '../../../img/icon-housing.png',
+            subtitle: 'Tell us about your Housing Costs',
+            description: 'This is where any additional description will go.',
+          };
+          break;
+        case 'Transportation':
+          var stepDetails = {
+            category: 'Transportation',
+            pageTitle: 'Expense: Transportation',
+            pageImage: '../../../img/icon-transportation.png',
+            subtitle: 'Tell us about your Transportation Costs',
+            description: 'This is where any additional description will go.',
+          };
+
+          break;
+        case 'Groceries':
+          var stepDetails = {
+            category: 'Groceries',
+            pageTitle: 'Expense: Groceries',
+            pageImage: '../../../img/icon-transportation.png',
+            subtitle: 'Tell us about your Groceris Costs',
+            description: 'This is where any additional description will go.',
+          };
+
+          break;
+        case 'Entertainment':
+          var stepDetails = {
+            category: 'Entertainment',
+            pageTitle: 'Expense: Entertainment',
+            pageImage: '../../../img/icon-transportation.png',
+            subtitle: 'Tell us about your Entertainment Costs',
+            description: 'This is where any additional description will go.',
+          };
+
+          break;
+        case 'Phone':
+          var stepDetails = {
+            category: 'Phone',
+            pageTitle: 'Expense: Phone',
+            pageImage: '../../../img/icon-transportation.png',
+            subtitle: 'Tell us about your Phone Costs',
+            description: 'This is where any additional description will go.',
+          };
+
+          break;
+        case 'Childcare':
+          var stepDetails = {
+            category: 'Childcare',
+            pageTitle: 'Expense: Childcare',
+            pageImage: '../../../img/icon-transportation.png',
+            subtitle: 'Tell us about your Childcare Costs',
+            description: 'This is where any additional description will go.',
+          };
+
+          break;
+        default:
+          console.log('inside switch default', event.target.name);
+      }
+
+      wizardStepStore.addWizardStep(stepDetails);
+    } else {
+      wizardStepStore.deleteWizardStep(event.target.name);
+      console.log(`${event.target.name} category has been deleted`);
     }
-
-    switch (event.target.name) {
-      case 'Housing':
-        var stepDetails = {
-          category: 'housing',
-          pageTitle: 'Expense: Housing',
-          pageImage: '../../../img/icon-housing.png',
-          subtitle: 'Tell us about your Housing Costs',
-          description: 'This is where any additional description will go.',
-        };
-        break;
-      case 'Transportation':
-        var stepDetails = {
-          category: 'transportation',
-          pageTitle: 'Expense: Transportation',
-          pageImage: '../../../img/icon-transportation.png',
-          subtitle: 'Tell us about your Transportation Costs',
-          description: 'This is where any additional description will go.',
-        };
-
-        break;
-      case 'Groceries':
-        var stepDetails = {
-          category: 'groceries',
-          pageTitle: 'Expense: Groceries',
-          pageImage: '../../../img/icon-transportation.png',
-          subtitle: 'Tell us about your Groceris Costs',
-          description: 'This is where any additional description will go.',
-        };
-
-        break;
-      case 'Entertainment':
-        var stepDetails = {
-          category: 'transportation',
-          pageTitle: 'Expense: Transportation',
-          pageImage: '../../../img/icon-transportation.png',
-          subtitle: 'Tell us about your Entertainment Costs',
-          description: 'This is where any additional description will go.',
-        };
-
-        break;
-      case 'Phone':
-        var stepDetails = {
-          category: 'phone',
-          pageTitle: 'Expense: Phone',
-          pageImage: '../../../img/icon-transportation.png',
-          subtitle: 'Tell us about your Phone Costs',
-          description: 'This is where any additional description will go.',
-        };
-
-        break;
-      case 'Childcare':
-        var stepDetails = {
-          category: 'childcare',
-          pageTitle: 'Expense: Childcare',
-          pageImage: '../../../img/icon-transportation.png',
-          subtitle: 'Tell us about your Childcare Costs',
-          description: 'This is where any additional description will go.',
-        };
-
-        break;
-      default:
-        console.log('inside switch default', event.target.name);
-    }
-    console.log('wizardStep', stepDetails);
-    wizardStepStore.addWizardStep(event.target.name);
-    // wizardStepStore.addWizardStep(stepDetails);
   });
 
   const categoryList = wizardStepStore.wizardSteps.map((selectedCategory) => {
-    return <li key={selectedCategory}>{selectedCategory}</li>;
+    return <li key={selectedCategory.category}>{selectedCategory.category}</li>;
   });
 
   return (
@@ -111,12 +111,12 @@ function CategorySelectionScreen() {
             <input
               className="a-checkbox"
               type="checkbox"
-              id="housing"
+              id="Housing"
               name="Housing"
               onChange={handleCheckbox}
-              checked={wizardStepStore.wizardSteps.includes('Housing')}
+              checked={Boolean(wizardStepStore.wizardSteps.find((step) => step.category === 'Housing'))}
             />
-            <label className="a-label" htmlFor="transportation">
+            <label className="a-label" htmlFor="Housing">
               <span>Housing</span>
             </label>
           </div>
@@ -124,12 +124,12 @@ function CategorySelectionScreen() {
             <input
               className="a-checkbox"
               type="checkbox"
-              id="transportation"
+              id="Transportation"
               name="Transportation"
               onChange={handleCheckbox}
-              checked={wizardStepStore.wizardSteps.includes('Transportation')}
+              checked={!!wizardStepStore.wizardSteps.find((step) => step.category === 'Transportation')}
             />
-            <label className="a-label" htmlFor="transportation">
+            <label className="a-label" htmlFor="Transportation">
               <span>Transportation</span>
             </label>
           </div>
@@ -138,12 +138,12 @@ function CategorySelectionScreen() {
             <input
               className="a-checkbox"
               type="checkbox"
-              id="groceries"
+              id="Groceries"
               name="Groceries"
               onChange={handleCheckbox}
-              checked={wizardStepStore.wizardSteps.includes('Groceries')}
+              checked={!!wizardStepStore.wizardSteps.find((step) => step.category === 'Groceries')}
             />
-            <label className="a-label" htmlFor="groceries">
+            <label className="a-label" htmlFor="Groceries">
               <span>Groceries</span>
             </label>
           </div>
@@ -152,13 +152,13 @@ function CategorySelectionScreen() {
             <input
               className="a-checkbox"
               type="checkbox"
-              value="entertainment"
-              id="entertainment"
+              value="Entertainment"
+              id="Entertainment"
               name="Entertainment"
               onChange={handleCheckbox}
-              checked={wizardStepStore.wizardSteps.includes('Entertainment')}
+              checked={Boolean(wizardStepStore.wizardSteps.find((step) => step.category === 'Entertainment'))}
             />
-            <label className="a-label" htmlFor="entertainment">
+            <label className="a-label" htmlFor="Entertainment">
               <span>Entertainment</span>
             </label>
           </div>
@@ -167,13 +167,13 @@ function CategorySelectionScreen() {
             <input
               className="a-checkbox"
               type="checkbox"
-              value="phone"
-              id="phone"
+              value="Phone"
+              id="Phone"
               name="Phone"
               onChange={handleCheckbox}
-              checked={wizardStepStore.wizardSteps.includes('Phone')}
+              checked={Boolean(wizardStepStore.wizardSteps.find((step) => step.category === 'Phone'))}
             />
-            <label className="a-label" htmlFor="phone">
+            <label className="a-label" htmlFor="Phone">
               <span>Phone</span>
             </label>
           </div>
@@ -182,23 +182,22 @@ function CategorySelectionScreen() {
             <input
               className="a-checkbox"
               type="checkbox"
-              value="childcare"
-              id="childcare"
+              value="Childcare"
+              id="Childcare"
               name="Childcare"
               onChange={handleCheckbox}
-              checked={wizardStepStore.wizardSteps.includes('Childcare')}
+              checked={Boolean(wizardStepStore.wizardSteps.find((step) => step.category === 'Childcare'))}
             />
-            <label className="a-label" htmlFor="childcare">
+            <label className="a-label" htmlFor="Childcare">
               <span>Childcare</span>
             </label>
           </div>
         </fieldset>
-        {/* <input type="submit" value="Submit" /> */}
       </form>
       <div className="c-nav-buttons">
         <div>
           <Link to="/wizard/category-input-screen" className="a-btn a-btn__full-on-xs">
-            Input your {wizardStepStore.wizardSteps[0]}
+            {wizardStepStore.wizardSteps.length ? `Input your ${wizardStepStore.wizardSteps[0].category}` : `mistake`}
           </Link>
         </div>
         <div>

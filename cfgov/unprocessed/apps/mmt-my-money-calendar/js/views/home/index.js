@@ -20,8 +20,8 @@ export default function Home() {
         <div>
           <Link
             to="/wizard/category-selection-screen"
-            icon={arrowRight}
-            iconSide="right"
+            // icon={arrowRight}
+            // iconSide="right"
             className="a-btn a-btn__full-on-xs"
           >
             Let's begin
