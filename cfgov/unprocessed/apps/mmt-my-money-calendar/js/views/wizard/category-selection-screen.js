@@ -5,16 +5,16 @@ import { useStore } from '../../stores';
 
 function CategorySelectionScreen() {
   const store = useStore();
-  const { wizardStepStore } = store;
+  const { InputWizardStore } = store;
 
   const handleCheckbox = useCallback((event) => {
     if (event.target.checked) {
       switch (event.target.name) {
         case 'Housing':
-          var stepDetails = {
+          var inputScreenDetails = {
             step: 'Expense',
             category: 'Housing',
-            pageImage: '../../../img/icon-housing.png',
+            pageImage: '/static/apps/mmt-my-money-calendar/img/icon-housing.png',
             subtitle: 'Tell us about your Housing Costs',
             description: 'This is where any additional description will go.',
             frequencyInputs:
@@ -29,7 +29,7 @@ function CategorySelectionScreen() {
           };
           break;
         case 'Transportation':
-          var stepDetails = {
+          var inputScreenDetails = {
             step: 'Expense',
             category: 'Transportation',
             pageImage: '../../../img/icon-transportation.png',
@@ -45,7 +45,7 @@ function CategorySelectionScreen() {
 
           break;
         case 'Groceries':
-          var stepDetails = {
+          var inputScreenDetails = {
             step: 'Expense',
             category: 'Groceries',
             pageImage: '../../../img/icon-transportation.png',
@@ -61,7 +61,7 @@ function CategorySelectionScreen() {
           };
           break;
         case 'Entertainment':
-          var stepDetails = {
+          var inputScreenDetails = {
             step: 'Expense',
             category: 'Entertainment',
             pageImage: '../../../img/icon-transportation.png',
@@ -77,7 +77,7 @@ function CategorySelectionScreen() {
           };
           break;
         case 'Phone':
-          var stepDetails = {
+          var inputScreenDetails = {
             step: 'Expense',
             category: 'Phone',
             pageImage: '../../../img/icon-transportation.png',
@@ -94,7 +94,7 @@ function CategorySelectionScreen() {
 
           break;
         case 'Childcare':
-          var stepDetails = {
+          var inputScreenDetails = {
             step: 'Expense',
             category: 'Childcare',
             pageImage: '../../../img/icon-transportation.png',
@@ -113,14 +113,14 @@ function CategorySelectionScreen() {
           console.log('inside switch default', event.target.name);
       }
 
-      wizardStepStore.addWizardStep(stepDetails);
+      InputWizardStore.addSelectedInputScreen(inputScreenDetails);
     } else {
-      wizardStepStore.deleteWizardStep(event.target.name);
+      InputWizardStore.deleteSelectedInputScreen(event.target.name);
       console.log(`${event.target.name} category has been deleted`);
     }
   });
 
-  const categoryList = wizardStepStore.wizardSteps.map((selectedCategory) => {
+  const categoryList = InputWizardStore.selectedInputScreens.map((selectedCategory) => {
     return <li key={selectedCategory.category}>{selectedCategory.category}</li>;
   });
 
@@ -152,7 +152,7 @@ function CategorySelectionScreen() {
               id="Housing"
               name="Housing"
               onChange={handleCheckbox}
-              checked={Boolean(wizardStepStore.wizardSteps.find((step) => step.category === 'Housing'))}
+              checked={Boolean(InputWizardStore.selectedInputScreens.find((screen) => screen.category === 'Housing'))}
             />
             <label className="a-label" htmlFor="Housing">
               <span>Housing</span>
@@ -165,7 +165,7 @@ function CategorySelectionScreen() {
               id="Transportation"
               name="Transportation"
               onChange={handleCheckbox}
-              checked={!!wizardStepStore.wizardSteps.find((step) => step.category === 'Transportation')}
+              checked={!!InputWizardStore.selectedInputScreens.find((screen) => screen.category === 'Transportation')}
             />
             <label className="a-label" htmlFor="Transportation">
               <span>Transportation</span>
@@ -179,7 +179,7 @@ function CategorySelectionScreen() {
               id="Groceries"
               name="Groceries"
               onChange={handleCheckbox}
-              checked={!!wizardStepStore.wizardSteps.find((step) => step.category === 'Groceries')}
+              checked={!!InputWizardStore.selectedInputScreens.find((screen) => screen.category === 'Groceries')}
             />
             <label className="a-label" htmlFor="Groceries">
               <span>Groceries</span>
@@ -194,7 +194,9 @@ function CategorySelectionScreen() {
               id="Entertainment"
               name="Entertainment"
               onChange={handleCheckbox}
-              checked={Boolean(wizardStepStore.wizardSteps.find((step) => step.category === 'Entertainment'))}
+              checked={Boolean(
+                InputWizardStore.selectedInputScreens.find((screen) => screen.category === 'Entertainment')
+              )}
             />
             <label className="a-label" htmlFor="Entertainment">
               <span>Entertainment</span>
@@ -209,7 +211,7 @@ function CategorySelectionScreen() {
               id="Phone"
               name="Phone"
               onChange={handleCheckbox}
-              checked={Boolean(wizardStepStore.wizardSteps.find((step) => step.category === 'Phone'))}
+              checked={Boolean(InputWizardStore.selectedInputScreens.find((screen) => screen.category === 'Phone'))}
             />
             <label className="a-label" htmlFor="Phone">
               <span>Phone</span>
@@ -224,7 +226,7 @@ function CategorySelectionScreen() {
               id="Childcare"
               name="Childcare"
               onChange={handleCheckbox}
-              checked={Boolean(wizardStepStore.wizardSteps.find((step) => step.category === 'Childcare'))}
+              checked={Boolean(InputWizardStore.selectedInputScreens.find((screen) => screen.category === 'Childcare'))}
             />
             <label className="a-label" htmlFor="Childcare">
               <span>Childcare</span>
@@ -235,7 +237,9 @@ function CategorySelectionScreen() {
       <div className="c-nav-buttons">
         <div>
           <Link to="/wizard/category-input-screen" className="a-btn a-btn__full-on-xs">
-            {wizardStepStore.wizardSteps.length ? `Input your ${wizardStepStore.wizardSteps[0].category}` : `mistake`}
+            {InputWizardStore.selectedInputScreens.length
+              ? `Input your ${InputWizardStore.selectedInputScreens[0].category}`
+              : `mistake`}
           </Link>
         </div>
         <div>

@@ -1,6 +1,6 @@
 import { observable, action, computed } from 'mobx';
 
-import WizardStepStore from './wizard-step-store';
+import InputWizardStore from './input-wizard-store';
 // import CashFlowStore from './cash-flow-store';
 
 export default class RootStore {
@@ -8,7 +8,7 @@ export default class RootStore {
 
   constructor() {
     // this.eventStore = new CashFlowStore(this);
-    this.wizardStepStore = new WizardStepStore(this);
+    this.InputWizardStore = new InputWizardStore(this);
   }
 
   @computed get isLoading() {
