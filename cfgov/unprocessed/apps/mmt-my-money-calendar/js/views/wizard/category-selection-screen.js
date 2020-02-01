@@ -1,75 +1,113 @@
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useStore } from '../../stores';
 
 function CategorySelectionScreen() {
   const store = useStore();
   const { wizardStepStore } = store;
 
-  const [selectedCategoriesArray, setSelectedCategoriesArray] = useState([]);
-
   const handleCheckbox = useCallback((event) => {
     if (event.target.checked) {
       switch (event.target.name) {
         case 'Housing':
           var stepDetails = {
+            step: 'Expense',
             category: 'Housing',
-            pageTitle: 'Expense: Housing',
             pageImage: '../../../img/icon-housing.png',
             subtitle: 'Tell us about your Housing Costs',
             description: 'This is where any additional description will go.',
+            frequencyInputs:
+              `<div><fieldset class='c-radio-input-fieldset'> ` +
+              `<input type="radio" name="frequency" value="monthly" checked>Monthly<br />` +
+              `<input type="radio" name="frequency" value="weekly">Weekly<br />` +
+              `<input type="radio" name="frequency" value="every-other-week">Every Other Week<br />` +
+              `<input type="radio" name="frequency" value="twice-monthly">Twice Monthly<br />` +
+              `</fieldset></div>`,
+            nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
+            nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
           };
           break;
         case 'Transportation':
           var stepDetails = {
+            step: 'Expense',
             category: 'Transportation',
-            pageTitle: 'Expense: Transportation',
             pageImage: '../../../img/icon-transportation.png',
             subtitle: 'Tell us about your Transportation Costs',
             description: 'This is where any additional description will go.',
+            frequencyInputs:
+              `<div><fieldset class='c-radio-input-fieldset'> ` +
+              `<input type="radio" name="frequency" value="monthly" checked>Monthly<br />` +
+              `</fieldset></div>`,
+            nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
+            nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
           };
 
           break;
         case 'Groceries':
           var stepDetails = {
+            step: 'Expense',
             category: 'Groceries',
-            pageTitle: 'Expense: Groceries',
             pageImage: '../../../img/icon-transportation.png',
             subtitle: 'Tell us about your Groceris Costs',
             description: 'This is where any additional description will go.',
+            frequencyInputs:
+              `<div><fieldset class='c-radio-input-fieldset'> ` +
+              `<input type="radio" name="frequency" value="monthly" checked>Monthly<br />` +
+              `<input type="radio" name="frequency" value="weekly">Weekly<br />` +
+              `</fieldset></div>`,
+            nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
+            nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
           };
-
           break;
         case 'Entertainment':
           var stepDetails = {
+            step: 'Expense',
             category: 'Entertainment',
-            pageTitle: 'Expense: Entertainment',
             pageImage: '../../../img/icon-transportation.png',
             subtitle: 'Tell us about your Entertainment Costs',
             description: 'This is where any additional description will go.',
+            frequencyInputs:
+              `<div><fieldset class='c-radio-input-fieldset'> ` +
+              `<input type="radio" name="frequency" value="monthly" checked>Monthly<br />` +
+              `<input type="radio" name="frequency" value="weekly">Weekly<br />` +
+              `</fieldset></div>`,
+            nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
+            nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
           };
-
           break;
         case 'Phone':
           var stepDetails = {
+            step: 'Expense',
             category: 'Phone',
-            pageTitle: 'Expense: Phone',
             pageImage: '../../../img/icon-transportation.png',
-            subtitle: 'Tell us about your Phone Costs',
+            subtitle: 'Tell us about your phone costs',
             description: 'This is where any additional description will go.',
+            frequencyInputs:
+              `<div><fieldset class='c-radio-input-fieldset'> ` +
+              `<input type="radio" name="frequency" value="monthly" checked>Monthly<br />` +
+              `<input type="radio" name="frequency" value="weekly">Weekly<br />` +
+              `</fieldset></div>`,
+            nextPaymentDueDateLabel: 'What day is your next phone bill due?',
+            nextPaymentAmountLabel: 'How much do you pay each month for your phone(s)?',
           };
 
           break;
         case 'Childcare':
           var stepDetails = {
+            step: 'Expense',
             category: 'Childcare',
-            pageTitle: 'Expense: Childcare',
             pageImage: '../../../img/icon-transportation.png',
-            subtitle: 'Tell us about your Childcare Costs',
+            subtitle: 'Tell us about your childcare costs',
             description: 'This is where any additional description will go.',
+            frequencyInputs:
+              `<div><fieldset class='c-radio-input-fieldset'> ` +
+              `<input type="radio" name="frequency" value="monthly" checked>Monthly<br />` +
+              `<input type="radio" name="frequency" value="weekly">Weekly<br />` +
+              `</fieldset></div>`,
+            nextPaymentDueDateLabel: 'What day is your childcare payment due?',
+            nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
           };
-
           break;
         default:
           console.log('inside switch default', event.target.name);
