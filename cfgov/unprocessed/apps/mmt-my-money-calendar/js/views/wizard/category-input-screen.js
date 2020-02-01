@@ -1,10 +1,30 @@
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
+import { useState, useCallback } from 'react';
 import { useStore } from '../../stores';
 
 function CategoryInputScreen() {
-  const store = useStore();
-  const { InputWizardStore } = store;
+  const { InputWizardStore, CashFlowStore } = useStore();
+
+  const [step, setStep] = useState('Expenses');
+  const [category, setCategory] = useState('Housing');
+  const [frequency, setFrequency] = useState('monthly');
+  const [startDate, setStartDate] = useState('');
+  const [amount, setAmount] = useState(0);
+
+  const addNewCFEvent = useCallback((event) => {
+    event.preventDefault();
+    console.log('made it to addNewCFEvent');
+    var userInputDetails = {
+      step: step,
+      category: category,
+      frequency: frequency,
+      startDate: startDate,
+      amount: amount,
+    };
+
+    CashFlowStore.addNewCashFlowEvent(userInputDetails);
+  });
 
   return (
     <section className="category-input-screen">
@@ -30,44 +50,53 @@ function CategoryInputScreen() {
         <h3 className="c-increment-subtitle">{InputWizardStore.selectedInputScreens[0].subtitle}</h3>
       </div>
       <div>{InputWizardStore.selectedInputScreens[0].description}</div>
-      <div className="c-category-frequency-container">
-        <label className="a-label a-label__heading" htmlFor="payment-frequency">
-          How often do you pay your {InputWizardStore.selectedInputScreens[0].category} bill?
-        </label>
-        <div
-          className="content"
-          dangerouslySetInnerHTML={{ __html: `${InputWizardStore.selectedInputScreens[0].frequencyInputs}` }}
-        ></div>
-      </div>
-      <div className="c-category-input-container">
-        <label className="a-label a-label__heading" for="payment-due-date">
-          {InputWizardStore.selectedInputScreens[0].nextPaymentDueDateLabel}
-        </label>
-        <div className="form-l_col c-input">
-          <input
-            id="next-payment-due-date"
-            className="c-category-input"
-            name="name"
-            type="type"
-            placeholder="02/01/2020"
-          />
+      <form onSubmit={addNewCFEvent}>
+        <div className="c-category-frequency-container">
+          <label className="a-label a-label__heading" htmlFor="payment-frequency">
+            How often do you pay your {InputWizardStore.selectedInputScreens[0].category} bill?
+          </label>
+          <div
+            className="content"
+            dangerouslySetInnerHTML={{ __html: `${InputWizardStore.selectedInputScreens[0].frequencyInputs}` }}
+          ></div>
         </div>
-      </div>
-      <div className="c-category-input-container">
-        <label className="a-label a-label__heading" for="payment-amount">
-          {InputWizardStore.selectedInputScreens[0].nextPaymentAmountLabel}
-        </label>
-        <div className="form-l_col c-input">
-          <input id="next-payment-amount" className="c-category-input" name="name" type="type" placeholder="$850.00" />
+        <div className="c-category-input-container">
+          <label className="a-label a-label__heading" htmlFor="payment-due-date">
+            {InputWizardStore.selectedInputScreens[0].nextPaymentDueDateLabel}
+          </label>
+          <div className="form-l_col c-input">
+            <input
+              id="next-payment-due-date"
+              className="c-category-input"
+              name="dueDate"
+              placeholder="02/01/2020"
+              onChange={(event) => setStartDate(event.target.value)}
+            />
+          </div>
         </div>
-      </div>
+        <div className="c-category-input-container">
+          <label className="a-label a-label__heading" htmlFor="payment-amount">
+            {InputWizardStore.selectedInputScreens[0].nextPaymentAmountLabel}
+          </label>
+          <div className="form-l_col c-input">
+            <input
+              id="next-payment-amount"
+              className="c-category-input"
+              name="amount"
+              placeholder="$850.00"
+              onChange={(event) => setAmount(event.target.value)}
+            />
+          </div>
+        </div>
+        <input type="submit" value="Submit" />
+      </form>
 
       <br />
 
       <div className="c-nav-buttons">
         <div>
-          <Link to="/" className="a-btn a-btn__full-on-xs">
-            Input your Groceries
+          <Link to={InputWizardStore.selectedInputScreens[0].nextRoute} className="a-btn a-btn__full-on-xs">
+            {InputWizardStore.selectedInputScreens[0].nextRouteButtonText}
           </Link>
         </div>
         <div>

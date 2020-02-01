@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './views/home';
+import ExpenseSummaryScreen from './views/wizard/expense-summary-screen';
 import CategorySelectionScreen from './views/wizard/category-selection-screen';
 import CategoryInputScreen from './views/wizard/category-input-screen';
 
@@ -15,6 +16,9 @@ const Routes = () => (
         </Route>
         <Route path="/wizard/category-input-screen">
           <CategoryInputScreen />
+        </Route>
+        <Route path="/wizard/expense-summary">
+          <ExpenseSummaryScreen />
         </Route>
       </Switch>
     </div>

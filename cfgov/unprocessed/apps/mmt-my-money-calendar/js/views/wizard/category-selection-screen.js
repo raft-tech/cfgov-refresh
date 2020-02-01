@@ -26,6 +26,8 @@ function CategorySelectionScreen() {
               `</fieldset></div>`,
             nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
             nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
+            nextRoute: `/wizard/expense-summary`,
+            nextRouteButtonText: `Let's look at your expense summary`,
           };
           break;
         case 'Transportation':
@@ -41,6 +43,8 @@ function CategorySelectionScreen() {
               `</fieldset></div>`,
             nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
             nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
+            nextRoute: `/wizard/expense-summary`,
+            nextRouteButtonText: `Let's look at your expense summary`,
           };
 
           break;
@@ -58,6 +62,8 @@ function CategorySelectionScreen() {
               `</fieldset></div>`,
             nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
             nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
+            nextRoute: `/wizard/expense-summary`,
+            nextRouteButtonText: `Let's look at your expense summary`,
           };
           break;
         case 'Entertainment':
@@ -74,6 +80,8 @@ function CategorySelectionScreen() {
               `</fieldset></div>`,
             nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
             nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
+            nextRoute: `/wizard/expense-summary`,
+            nextRouteButtonText: `Let's look at your expense summary`,
           };
           break;
         case 'Phone':
@@ -90,6 +98,8 @@ function CategorySelectionScreen() {
               `</fieldset></div>`,
             nextPaymentDueDateLabel: 'What day is your next phone bill due?',
             nextPaymentAmountLabel: 'How much do you pay each month for your phone(s)?',
+            nextRoute: `/wizard/expense-summary`,
+            nextRouteButtonText: `Let's look at your expense summary`,
           };
 
           break;
@@ -107,6 +117,8 @@ function CategorySelectionScreen() {
               `</fieldset></div>`,
             nextPaymentDueDateLabel: 'What day is your childcare payment due?',
             nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
+            nextRoute: `/wizard/expense-summary`,
+            nextRouteButtonText: `Let's look at your expense summary`,
           };
           break;
         default:
@@ -114,15 +126,21 @@ function CategorySelectionScreen() {
       }
 
       InputWizardStore.addSelectedInputScreen(inputScreenDetails);
+
+      // find the lengthe of the array
+      // for any new element, the selectedInputScreens.nextRoute will be the summary screen
+      //if there is an array.length -1, then, their selectedInputScreens.nextRoute will be a route to the last element
+      //if there is an array.length -2, then, their selectedInputScreens.nextRoute will be a route to the element at array.length-1
+      //if there is an array.length-3, then, their selectedInputScreens.nextRoute will be a route to the element at array.length-2
     } else {
       InputWizardStore.deleteSelectedInputScreen(event.target.name);
       console.log(`${event.target.name} category has been deleted`);
     }
   });
 
-  const categoryList = InputWizardStore.selectedInputScreens.map((selectedCategory) => {
-    return <li key={selectedCategory.category}>{selectedCategory.category}</li>;
-  });
+  // const categoryList = InputWizardStore.selectedInputScreens.map((selectedCategory) => {
+  //   return <li key={selectedCategory.category}>{selectedCategory.category}</li>;
+  // });
 
   return (
     <section className="expenses-step">
@@ -131,8 +149,8 @@ function CategorySelectionScreen() {
       <div className="c-step-title">
         <h4>Expenses</h4>
       </div>
-      <div>On clicking 'Next' following step input screens will come up in order</div>
-      <ul>{categoryList}</ul>
+      {/* <div>On clicking 'Next' following step input screens will come up in order</div>
+      <ul>{categoryList}</ul> */}
 
       <div className="c-step-container">
         <div className="c-step-img">

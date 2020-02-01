@@ -1,13 +1,13 @@
 import { observable, action, computed } from 'mobx';
-
 import logger from '../lib/logger';
 
 export default class InputWizardStore {
   @observable selectedInputScreens = [];
+  @observable selectedScreensRoutingDetails = [];
 
   constructor(rootStore) {
     this.rootStore = rootStore;
-    this.logger = logger.addGroup('InputWizardStore');
+    this.logger = logger.addGroup('inputWizardStore');
 
     this.logger.debug('Initialize InputWizardStore: %O', this);
   }
