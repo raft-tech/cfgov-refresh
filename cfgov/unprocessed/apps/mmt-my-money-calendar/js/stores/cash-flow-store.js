@@ -1,13 +1,13 @@
 import { observable, computed, action } from 'mobx';
-import logger from '../lib/logger';
+// import logger from '../lib/logger';
 
 export default class CashFlowStore {
   @observable cashFlowEvents = [];
 
   constructor(rootStore) {
     this.rootStore = rootStore;
-    this.logger = logger.addGroup('cashFlowStore');
-    this.logger.debug('Initialize CashFlowStore: %O', this);
+    // this.logger = logger.addGroup('cashFlowStore');
+    // this.logger.debug('Initialize CashFlowStore: %O', this);
   }
 
   @action addNewCashFlowEvent(cashFlowEvent) {

@@ -12,6 +12,14 @@ function CategorySelectionScreen() {
       switch (event.target.name) {
         case 'Housing':
           var inputScreenDetails = {
+            screenNumber: 1,
+            nextScreenNumber: 2,
+            prevScreenNumber: 0,
+            route: `/wizard/expense/input/housing`,
+            nextRoute: `/wizard/expense/summary`,
+            nextRouteButtonText: `Let's look at at summary of your expenses`,
+            prevRoute: ``,
+            prevRouteButtonText: ``,
             step: 'Expense',
             category: 'Housing',
             pageImage: '/static/apps/mmt-my-money-calendar/img/icon-housing.png',
@@ -26,12 +34,18 @@ function CategorySelectionScreen() {
               `</fieldset></div>`,
             nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
             nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
-            nextRoute: `/wizard/expense-summary`,
-            nextRouteButtonText: `Let's look at your expense summary`,
           };
           break;
         case 'Transportation':
           var inputScreenDetails = {
+            screenNumber: 1,
+            nextScreenNumber: 2,
+            prevScreenNumber: 0,
+            route: `/wizard/expense/input/transportation`,
+            nextRoute: `/wizard/expense/summary`,
+            nextRouteButtonText: `Let's look at at summary of your expenses`,
+            prevRoute: ``,
+            prevRouteButtonText: ``,
             step: 'Expense',
             category: 'Transportation',
             pageImage: '../../../img/icon-transportation.png',
@@ -43,13 +57,19 @@ function CategorySelectionScreen() {
               `</fieldset></div>`,
             nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
             nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
-            nextRoute: `/wizard/expense-summary`,
-            nextRouteButtonText: `Let's look at your expense summary`,
           };
 
           break;
         case 'Groceries':
           var inputScreenDetails = {
+            screenNumber: 1,
+            nextScreenNumber: 2,
+            prevScreenNumber: 0,
+            route: `/wizard/expense/input/groceries`,
+            nextRoute: `/wizard/expense/summary`,
+            nextRouteButtonText: `Let's look at at summary of your expenses`,
+            prevRoute: ``,
+            prevRouteButtonText: ``,
             step: 'Expense',
             category: 'Groceries',
             pageImage: '../../../img/icon-transportation.png',
@@ -62,12 +82,19 @@ function CategorySelectionScreen() {
               `</fieldset></div>`,
             nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
             nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
-            nextRoute: `/wizard/expense-summary`,
-            nextRouteButtonText: `Let's look at your expense summary`,
           };
+
           break;
         case 'Entertainment':
           var inputScreenDetails = {
+            screenNumber: 1,
+            nextScreenNumber: 2,
+            prevScreenNumber: 0,
+            route: `/wizard/expense/input/entertainment`,
+            nextRoute: `/wizard/expense/summary`,
+            nextRouteButtonText: `Let's look at at summary of your expenses`,
+            prevRoute: ``,
+            prevRouteButtonText: ``,
             step: 'Expense',
             category: 'Entertainment',
             pageImage: '../../../img/icon-transportation.png',
@@ -86,6 +113,14 @@ function CategorySelectionScreen() {
           break;
         case 'Phone':
           var inputScreenDetails = {
+            screenNumber: 1,
+            nextScreenNumber: 2,
+            prevScreenNumber: 0,
+            route: `/wizard/expense/input/phone`,
+            nextRoute: `/wizard/expense/summary`,
+            nextRouteButtonText: `Let's look at at summary of your expenses`,
+            prevRoute: ``,
+            prevRouteButtonText: ``,
             step: 'Expense',
             category: 'Phone',
             pageImage: '../../../img/icon-transportation.png',
@@ -105,6 +140,14 @@ function CategorySelectionScreen() {
           break;
         case 'Childcare':
           var inputScreenDetails = {
+            screenNumber: 1,
+            nextScreenNumber: 2,
+            prevScreenNumber: 0,
+            route: `/wizard/expense/input/childcare`,
+            nextRoute: `/wizard/expense/summary`,
+            nextRouteButtonText: `Let's look at at summary of your expenses`,
+            prevRoute: ``,
+            prevRouteButtonText: ``,
             step: 'Expense',
             category: 'Childcare',
             pageImage: '../../../img/icon-transportation.png',
@@ -126,6 +169,9 @@ function CategorySelectionScreen() {
       }
 
       InputWizardStore.addSelectedInputScreen(inputScreenDetails);
+      // if (InputWizardStore.screenCounter > 1) {
+      //   InputWizardStore.updateRoutes();
+      // }
 
       // find the lengthe of the array
       // for any new element, the selectedInputScreens.nextRoute will be the summary screen
@@ -255,8 +301,8 @@ function CategorySelectionScreen() {
       <div className="c-nav-buttons">
         <div>
           <Link to="/wizard/category-input-screen" className="a-btn a-btn__full-on-xs">
-            {InputWizardStore.selectedInputScreens.length
-              ? `Input your ${InputWizardStore.selectedInputScreens[0].category}`
+            {InputWizardStore.nextScreen[0] !== undefined
+              ? `Input your ${InputWizardStore.nextScreen[0].category}`
               : `mistake`}
           </Link>
         </div>
