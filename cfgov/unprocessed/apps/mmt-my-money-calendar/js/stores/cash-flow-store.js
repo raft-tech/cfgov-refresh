@@ -16,6 +16,11 @@ export default class CashFlowStore {
 
     this.loadEvents();
 
+    CashFlowEvent.on('recurrencesSaved', (events, originalEvent) => {
+      this.logger.debug('event (%O) just created recurrences of itself: %O', originalEvent, events);
+      this.addEvents(events);
+    });
+
     this.logger.debug('Initialize CashFlowStore: %O', this);
   }
 
@@ -155,7 +160,7 @@ export default class CashFlowStore {
    * @param {String} [recurrence] - The recurrence rule in iCalendar format
    * @returns {undefined}
    */
-  addEvent = flow(function*(params) {
+  createEvent = flow(function*(params) {
     const event = new CashFlowEvent(params);
 
     try {
@@ -165,6 +170,17 @@ export default class CashFlowStore {
       this.rootStore.uiStore.setError(err);
     }
   });
+
+  @action addEvent(event) {
+    if (CashFlowEvent.isCashFlowEvent(event))
+      return this.events.push(event);
+
+    this.events.push(new CashFlowEvent(event));
+  }
+
+  @action addEvents(events) {
+    this.events = [...this.events, ...events];
+  }
 
   /**
    * Deletes an event from the store and the database
