@@ -1,73 +1,69 @@
 import { observable, action, computed, toJS } from 'mobx';
-import logger from '../lib/logger';
 
 export default class InputWizardStore {
   @observable selectedInputScreens = [];
-  @observable screenCounter = 0;
+
+  @observable currentScreen = [
+    {
+      screenNumber: 0,
+      nextScreenNumber: 0,
+      prevScreenNumber: 0,
+      nextButtonText: ``,
+      prevButtonText: ``,
+      step: '',
+      category: '',
+      pageImage: '',
+      subtitle: '',
+      description: '',
+      frequencyInputs: ``,
+      nextPaymentDueDateLabel: '',
+      nextPaymentAmountLabel: '',
+    },
+  ];
   @observable nextScreen = [];
+  @observable prevScreen = [];
+  @observable screenCounter = 0;
+
+  @observable currentScreenNumber = 1;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
-    this.logger = logger.addGroup('inputWizardStore');
-    this.logger.debug('Initialize InputWizardStore: %O', this);
   }
 
-  @action addSelectedInputScreen(selectedScreen) {
-    console.log('current screen count is ', this.screenCounter);
-    //figure out what the current, prev and next screen number will be as well as the total screen count
-    //push new screen onto selectedInputScreens
-    this.selectedInputScreens.push(selectedScreen);
-    //update screenCounter to 1
-    let prevScreenNumber = this.screenCounter;
+  @action addSelectedInputScreen(newScreen) {
     this.screenCounter = this.screenCounter + 1;
-    console.log('new screen count is', this.screenCounter);
-    let nextScreenNumber = this.screenCounter + 1;
-
-    //set the next screen number and the previous screen number
-
-    console.log('selectedScreen', toJS(this.selectedInputScreens));
-    if (this.screenCounter === 1) {
-      this.nextScreen.push(selectedScreen);
-    }
-    console.log('nextScreen is ', toJS(this.nextScreen));
-    selectedScreen.screenNumber = this.screenCounter;
-    selectedScreen.nextScreenNumber = nextScreenNumber;
-    selectedScreen.prevScreenNumber = prevScreenNumber;
-    // console.log('selectedScreen after screen number update', selectedScreen);
+    newScreen.screenNumber = this.screenCounter;
+    newScreen.screenNumber = this.screenCounter;
+    this.selectedInputScreens.push(newScreen);
   }
 
-  @action updateRoutes() {
-    let data = toJS(this.selectedInputScreens);
+  @action setCurrentScreen() {
+    let currScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.currentScreenNumber);
+    this.currentScreen.replace([currScreen]);
+  }
 
-    console.log('current selectedInputScreens', data);
-    //the next route for the newest screen will always be the step summary screen
-    //set the nextRoute for the previous screen to be the route of the current screen
-    //find the selectedInputScreen with the screenNumber that is the screen number of the current screen -1
-    //once you identify the screen with the screenNumber that is the screenNumber of the current screen -1
-    //update the this.selectedInputScreen.nextRoute to be equal to the route of the current screen
-    //get current screencount
-    console.log('currentScreenCount is ', this.screenCounter);
-    let currentScreen = data.find((element) => element.screenNumber === this.screenCounter);
-    console.log('current screen all data is ', toJS(currentScreen));
-    console.log('current Screen Number is ', currentScreen.screenNumber);
-    console.log('current Screen route is ', currentScreen.route);
-    console.log('current Screen next route is ', currentScreen.nextRoute);
+  @action nextScreenNumber() {
+    this.currentScreenNumber = this.currentScreenNumber + 1;
+    // update the screen that will be showing
+    let currScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.currentScreenNumber);
+    this.currentScreen.replace([currScreen]);
 
-    let prevScreen = data.find((element) => element.screenNumber === this.screenCounter - 1);
-    console.log('previous screen all data is ', toJS(prevScreen));
-    console.log('previous Screen Number is ', prevScreen.screenNumber);
-    console.log('previous Screen route is ', prevScreen.route);
-    console.log('previous Screen next route is ', prevScreen.nextRoute);
+    // update the text on the next button
+    let nextScrNumber = this.currentScreenNumber + 1;
+    let nextScr = this.selectedInputScreens.find((screen) => screen.screenNumber === nextScrNumber);
+    this.currentScreen.nextButtonText = nextScr.nextButtonText;
+    console.log('this.currentScreen.nextButtonText', this.currentScreen.nextButtonText);
 
-    prevScreen.nextRoute = currentScreen.route;
-    console.log('prevScreenRoute should change to current screen route', prevScreen.nextRoute);
+    // update the text on the prev button
+    let prevScrNumber = this.currentScreenNumber - 1;
+    let prevScr = this.selectedInputScreens.find((screen) => screen.screenNumber === prevScrNumber);
+    this.currentScreen.prevButtonText = nextScr.prevButtonText;
+  }
 
-    // find screen number 1
-    let next = data.find((element) => element.screenNumber === 1);
-    this.nextScreen.push(next);
-
-    console.log('the first screen should be ', next.screenNumber + ' ' + next.step + ' ' + next.category);
-    console.log('the first screen from observable should be ', toJS(this.nextScreen));
+  @action prevScreenNumber() {
+    this.currentScreenNumber = this.currentScreenNumber - 1;
+    let currScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.currentScreenNumber);
+    this.currentScreen.replace([currScreen]);
   }
 
   @action deleteSelectedInputScreen(category) {

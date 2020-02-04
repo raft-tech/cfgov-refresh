@@ -17,8 +17,9 @@ function Routes() {
             <Home />
           </Route>
           <Route path="/wizard/category-selection-screen">
-            <CategorySelectionScreen />
+            <CategorySelectionScreen screen={InputWizardStore.cat} />
           </Route>
+
           <Route path="/wizard/category-input-screen">
             <CategoryInputScreen />
           </Route>

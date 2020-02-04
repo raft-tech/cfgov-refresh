@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer, toJS } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import { useCallback } from 'react';
 import { useStore } from '../../stores';
@@ -12,14 +12,11 @@ function CategorySelectionScreen() {
       switch (event.target.name) {
         case 'Housing':
           var inputScreenDetails = {
-            screenNumber: 1,
-            nextScreenNumber: 2,
+            screenNumber: 0,
+            nextScreenNumber: 0,
             prevScreenNumber: 0,
-            route: `/wizard/expense/input/housing`,
-            nextRoute: `/wizard/expense/summary`,
-            nextRouteButtonText: `Let's look at at summary of your expenses`,
-            prevRoute: ``,
-            prevRouteButtonText: ``,
+            nextButtonText: `Let's look at at summary of your expenses`,
+            prevButtonText: ``,
             step: 'Expense',
             category: 'Housing',
             pageImage: '/static/apps/mmt-my-money-calendar/img/icon-housing.png',
@@ -38,17 +35,14 @@ function CategorySelectionScreen() {
           break;
         case 'Transportation':
           var inputScreenDetails = {
-            screenNumber: 1,
-            nextScreenNumber: 2,
+            screenNumber: 0,
+            nextScreenNumber: 0,
             prevScreenNumber: 0,
-            route: `/wizard/expense/input/transportation`,
-            nextRoute: `/wizard/expense/summary`,
-            nextRouteButtonText: `Let's look at at summary of your expenses`,
-            prevRoute: ``,
-            prevRouteButtonText: ``,
+            nextButtonText: `Let's look at at summary of your expenses`,
+            prevButtonText: ``,
             step: 'Expense',
             category: 'Transportation',
-            pageImage: '../../../img/icon-transportation.png',
+            pageImage: '/static/apps/mmt-my-money-calendar/img/icon-housing.png',
             subtitle: 'Tell us about your Transportation Costs',
             description: 'This is where any additional description will go.',
             frequencyInputs:
@@ -62,17 +56,14 @@ function CategorySelectionScreen() {
           break;
         case 'Groceries':
           var inputScreenDetails = {
-            screenNumber: 1,
-            nextScreenNumber: 2,
+            screenNumber: 0,
+            nextScreenNumber: 0,
             prevScreenNumber: 0,
-            route: `/wizard/expense/input/groceries`,
-            nextRoute: `/wizard/expense/summary`,
-            nextRouteButtonText: `Let's look at at summary of your expenses`,
-            prevRoute: ``,
-            prevRouteButtonText: ``,
+            nextButtonText: `Let's look at at summary of your expenses`,
+            prevButtonText: ``,
             step: 'Expense',
             category: 'Groceries',
-            pageImage: '../../../img/icon-transportation.png',
+            pageImage: '/static/apps/mmt-my-money-calendar/img/icon-groceries.png',
             subtitle: 'Tell us about your Groceris Costs',
             description: 'This is where any additional description will go.',
             frequencyInputs:
@@ -87,17 +78,14 @@ function CategorySelectionScreen() {
           break;
         case 'Entertainment':
           var inputScreenDetails = {
-            screenNumber: 1,
-            nextScreenNumber: 2,
+            screenNumber: 0,
+            nextScreenNumber: 0,
             prevScreenNumber: 0,
-            route: `/wizard/expense/input/entertainment`,
-            nextRoute: `/wizard/expense/summary`,
-            nextRouteButtonText: `Let's look at at summary of your expenses`,
-            prevRoute: ``,
-            prevRouteButtonText: ``,
+            nextButtonText: `Let's look at at summary of your expenses`,
+            prevButtonText: ``,
             step: 'Expense',
             category: 'Entertainment',
-            pageImage: '../../../img/icon-transportation.png',
+            pageImage: '/static/apps/mmt-my-money-calendar/img/icon-entertainment.png',
             subtitle: 'Tell us about your Entertainment Costs',
             description: 'This is where any additional description will go.',
             frequencyInputs:
@@ -108,22 +96,19 @@ function CategorySelectionScreen() {
             nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
             nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
             nextRoute: `/wizard/expense-summary`,
-            nextRouteButtonText: `Let's look at your expense summary`,
+            nextButtonText: `Let's look at your expense summary`,
           };
           break;
         case 'Phone':
           var inputScreenDetails = {
-            screenNumber: 1,
-            nextScreenNumber: 2,
+            screenNumber: 0,
+            nextScreenNumber: 0,
             prevScreenNumber: 0,
-            route: `/wizard/expense/input/phone`,
-            nextRoute: `/wizard/expense/summary`,
-            nextRouteButtonText: `Let's look at at summary of your expenses`,
-            prevRoute: ``,
-            prevRouteButtonText: ``,
+            nextButtonText: `Let's look at at summary of your expenses`,
+            prevButtonText: ``,
             step: 'Expense',
             category: 'Phone',
-            pageImage: '../../../img/icon-transportation.png',
+            pageImage: '/static/apps/mmt-my-money-calendar/img/icon-phone.png',
             subtitle: 'Tell us about your phone costs',
             description: 'This is where any additional description will go.',
             frequencyInputs:
@@ -134,23 +119,20 @@ function CategorySelectionScreen() {
             nextPaymentDueDateLabel: 'What day is your next phone bill due?',
             nextPaymentAmountLabel: 'How much do you pay each month for your phone(s)?',
             nextRoute: `/wizard/expense-summary`,
-            nextRouteButtonText: `Let's look at your expense summary`,
+            nextButtonText: `Let's look at your expense summary`,
           };
 
           break;
         case 'Childcare':
           var inputScreenDetails = {
-            screenNumber: 1,
-            nextScreenNumber: 2,
+            screenNumber: 0,
+            nextScreenNumber: 0,
             prevScreenNumber: 0,
-            route: `/wizard/expense/input/childcare`,
-            nextRoute: `/wizard/expense/summary`,
-            nextRouteButtonText: `Let's look at at summary of your expenses`,
-            prevRoute: ``,
-            prevRouteButtonText: ``,
+            nextButtonText: `Let's look at at summary of your expenses`,
+            prevButtonText: ``,
             step: 'Expense',
             category: 'Childcare',
-            pageImage: '../../../img/icon-transportation.png',
+            pageImage: '/static/apps/mmt-my-money-calendar/img/icon-childcare.png',
             subtitle: 'Tell us about your childcare costs',
             description: 'This is where any additional description will go.',
             frequencyInputs:
@@ -161,7 +143,7 @@ function CategorySelectionScreen() {
             nextPaymentDueDateLabel: 'What day is your childcare payment due?',
             nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',
             nextRoute: `/wizard/expense-summary`,
-            nextRouteButtonText: `Let's look at your expense summary`,
+            nextButtonText: `Let's look at your expense summary`,
           };
           break;
         default:
@@ -169,23 +151,18 @@ function CategorySelectionScreen() {
       }
 
       InputWizardStore.addSelectedInputScreen(inputScreenDetails);
-      // if (InputWizardStore.screenCounter > 1) {
-      //   InputWizardStore.updateRoutes();
-      // }
-
-      // find the lengthe of the array
-      // for any new element, the selectedInputScreens.nextRoute will be the summary screen
-      //if there is an array.length -1, then, their selectedInputScreens.nextRoute will be a route to the last element
-      //if there is an array.length -2, then, their selectedInputScreens.nextRoute will be a route to the element at array.length-1
-      //if there is an array.length-3, then, their selectedInputScreens.nextRoute will be a route to the element at array.length-2
     } else {
       InputWizardStore.deleteSelectedInputScreen(event.target.name);
       console.log(`${event.target.name} category has been deleted`);
     }
   });
 
-  // const categoryList = InputWizardStore.selectedInputScreens.map((selectedCategory) => {
-  //   return <li key={selectedCategory.category}>{selectedCategory.category}</li>;
+  const setCurrentScreen = () => {
+    InputWizardStore.setCurrentScreen();
+  };
+
+  // const handleNextScreen = useCallback((event) => {
+  //   InputWizardStore.setCurrentScreen();
   // });
 
   return (
@@ -300,10 +277,8 @@ function CategorySelectionScreen() {
       </form>
       <div className="c-nav-buttons">
         <div>
-          <Link to="/wizard/category-input-screen" className="a-btn a-btn__full-on-xs">
-            {InputWizardStore.nextScreen[0] !== undefined
-              ? `Input your ${InputWizardStore.nextScreen[0].category}`
-              : `mistake`}
+          <Link to="/wizard/category-input-screen" onClick={setCurrentScreen} className="a-btn a-btn__full-on-xs">
+            Input your Expenses
           </Link>
         </div>
         <div>

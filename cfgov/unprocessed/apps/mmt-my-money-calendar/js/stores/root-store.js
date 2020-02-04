@@ -6,10 +6,10 @@ export default class RootStore {
   @observable networkStatus = 'idle';
 
   constructor() {
-    this.logger = logger.addGroup('rootStore');
+    // this.logger = logger.addGroup('rootStore');
     this.InputWizardStore = new InputWizardStore(this);
     // this.CashFlowStore = new CashFlowStore(this);
-    this.logger.debug('Initialize RootStore: %O', this);
+    //   this.logger.debug('Initialize RootStore: %O', this);
   }
 
   @computed get isLoading() {
