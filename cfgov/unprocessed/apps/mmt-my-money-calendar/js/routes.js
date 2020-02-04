@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import Home from './views/home';
-import ExpenseSummaryScreen from './views/wizard/expense-summary-screen';
+import StepSummaryScreen from './views/wizard/step-summary-screen';
 import CategorySelectionScreen from './views/wizard/category-selection-screen';
 import CategoryInputScreen from './views/wizard/category-input-screen';
 import { useStore } from './stores';
@@ -23,8 +23,8 @@ function Routes() {
           <Route path="/wizard/category-input-screen">
             <CategoryInputScreen />
           </Route>
-          <Route path="/wizard/expense-summary">
-            <ExpenseSummaryScreen />
+          <Route path="/wizard/step-summary">
+            <StepSummaryScreen />
           </Route>
         </Switch>
       </div>

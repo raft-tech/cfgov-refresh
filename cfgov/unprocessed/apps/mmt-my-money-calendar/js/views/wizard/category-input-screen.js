@@ -12,15 +12,6 @@ function CategoryInputScreen() {
   const [startDate, setStartDate] = useState('');
   const [amount, setAmount] = useState(0);
 
-  // useEffect(() => {
-  //   // InputWizardStore.removeCurrentScreen();
-  //   InputWizardStore.setCurrentScreen();
-  //   // InputWizardStore.nextScreenNumber();
-  //   console.log(InputWizardStore.currentScreenNumber);
-  // }, []);
-
-  // Update the document title using the browser API
-
   const addNewCFEvent = useCallback((event) => {
     event.preventDefault();
     console.log('made it to addNewCFEvent');
@@ -42,6 +33,7 @@ function CategoryInputScreen() {
     InputWizardStore.prevScreenNumber();
   };
 
+  console.log('next button text', InputWizardStore.currentScreen[0].nextButtonText);
   return (
     <section className="category-input-screen">
       <img src="/static/apps/mmt-my-money-calendar/img/pb_3.25.png" alt="" className="u-hide-on-print" />
@@ -108,12 +100,30 @@ function CategoryInputScreen() {
       <div className="c-nav-buttons">
         <div>
           <Link to="/wizard/category-input-screen" onClick={nextScreenNumber} className="a-btn a-btn__full-on-xs">
-            {InputWizardStore.currentScreen[0].nextRouteButtonText}
+            <div className="c-button-wrapper">
+              <div className="c-button-words">Next, add {InputWizardStore.currentScreen[0].nextButtonText}</div>
+              <div className="c-button-icon">
+                <img
+                  src="/static/apps/mmt-my-money-calendar/img/right-arrow.png"
+                  alt=""
+                  className="u-hide-on-print c-arrow-icon"
+                />
+              </div>
+            </div>
           </Link>
         </div>
         <div>
           <Link to="/wizard/category-input-screen" onClick={prevScreenNumber} className="a-btn a-btn__full-on-xs">
-            Back
+            <div className="c-button-wrapper">
+              <div className="c-button-icon">
+                <img
+                  src="/static/apps/mmt-my-money-calendar/img/left-arrow.png"
+                  alt=""
+                  className="u-hide-on-print c-arrow-icon"
+                />
+              </div>
+              <div className="c-button-words">{InputWizardStore.currentScreen[0].prevButtonText}</div>
+            </div>
           </Link>
         </div>
       </div>
