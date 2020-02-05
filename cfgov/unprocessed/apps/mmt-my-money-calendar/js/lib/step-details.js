@@ -1,6 +1,6 @@
 export const CategorySelectionScreenDetails = [
   {
-    screenNumber: 0,
+    screenNumber: 1000,
     nextScreenNumber: 0,
     prevScreenNumber: 0,
     nextButtonText: 'Lets add the inputs for your cash on hand.',
@@ -11,7 +11,7 @@ export const CategorySelectionScreenDetails = [
     description: 'check off those that you currently have',
   },
   {
-    screenNumber: 0,
+    screenNumber: 2000,
     nextScreenNumber: 0,
     prevScreenNumber: 0,
     nextButtonText: 'Lets add the inputs for your income.',
@@ -23,7 +23,7 @@ export const CategorySelectionScreenDetails = [
     categoryOptions: '',
   },
   {
-    screenNumber: 0,
+    screenNumber: 3000,
     nextScreenNumber: 0,
     prevScreenNumber: 0,
     nextButtonText: 'Lets add the inputs for your expenses.',
@@ -35,9 +35,9 @@ export const CategorySelectionScreenDetails = [
   },
 ];
 
-export const stepSummaryDetails = [
+export const StepSummaryDetails = [
   {
-    screenNumber: 0,
+    screenNumber: 1001,
     nextScreenNumber: 0,
     prevScreenNumber: 0,
     nextButtonText: 'Great work!  Now lets add your income.',
@@ -49,7 +49,7 @@ export const stepSummaryDetails = [
     totalsSummary: 'totals summary',
   },
   {
-    screenNumber: 0,
+    screenNumber: 2001,
     nextScreenNumber: 0,
     prevScreenNumber: 0,
     nextButtonText: 'Great work!  Now, lets add your Expenses.',
@@ -80,12 +80,14 @@ export const stepSummaryDetails = [
         </ul>`,
   },
   {
-    screenNumber: 0,
+    step: 'Expenses',
+    screenNumber: 3001,
     nextScreenNumber: 0,
     prevScreenNumber: 0,
     nextButtonText: 'Lets see the payoff!',
     prevButtonText: '',
-    step: 'Expenses',
+    nextRoute: `/wizard/category-input-screen`,
+    prevRoute: `/wizard/category-input-screen`,
     calendarImage: '/static/apps/mmt-my-money-calendar/img/jan-month-beg-balance.png',
     subtitle: 'Yeah!  You added some details on yhour starting balance.',
     description: 'You have added the following',

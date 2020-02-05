@@ -27,8 +27,8 @@ function CategoryInputScreen() {
     CashFlowStore.addNewCashFlowEvent(userInputDetails);
   });
 
-  const nextScreenNumber = () => {
-    InputWizardStore.nextScreenNumber();
+  const setNextScreen = () => {
+    InputWizardStore.setNextScreen();
   };
   const prevScreenNumber = () => {
     InputWizardStore.prevScreenNumber();
@@ -99,7 +99,7 @@ function CategoryInputScreen() {
         <div>
           <Link
             to={InputWizardStore.currentScreen[0].nextRoute}
-            onClick={nextScreenNumber}
+            onClick={setNextScreen}
             className="a-btn a-btn__full-on-xs"
           >
             <div className="c-button-wrapper">
