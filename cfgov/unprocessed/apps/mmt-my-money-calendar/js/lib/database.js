@@ -31,7 +31,7 @@ const dbPromise = idb.openDB('myMoneyCalendar', DB_VERSION, {
       case 1:
         eventStore = transaction.objectStore('events');
         eventStore.createIndex('originalEventID', 'originalEventID', { unique: false });
-        eventStore.createIndex('originalEventID_date', ['originalEventID', 'date'], { unique: false });
+        eventStore.createIndex('originalEventID_date', ['originalEventID', 'date'], { unique: true });
         eventStore.createIndex('createdAt', 'createdAt', { unique: false });
         eventStore.createIndex('updatedAt', 'updatedAt', { unique: false });
         eventStore.createIndex('subcategory', 'subcategory', { unique: false });
