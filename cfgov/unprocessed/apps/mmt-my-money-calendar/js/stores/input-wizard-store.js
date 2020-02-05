@@ -128,23 +128,30 @@ export default class InputWizardStore {
     for (let i = 1; i < this.totalScreensSelected; i++) this.selectedInputScreens[i].screenNumber = i + 1;
 
     // update tne nextButtonText, nextRoutes, prevButtonText and prevRoutes for each of the screens
-
+    console.log('all screens after a delet but before routing updatee', toJS(this.selectedInputScreens));
     // update the first and last screens
     let lastScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.totalScreensSelected);
     lastScreen.nextButtonText = 'Summary of expenses';
     lastScreen.nextRoute = `/wizard/step-summary`;
-    let firstScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === 1);
-    firstScreen.prevButtonText = 'Expense selections';
-    firstScreen.prevRoute = `/wizard/category-selection-screen`;
+    console.log('lastScreen', toJS(lastScreen));
+    console.log(this.totalScreensSelected);
 
-    // update the middle screens
     if (this.totalScreensSelected > 1) {
+      console.log('made it inside if');
+
       for (let i = this.totalScreensSelected - 1; i > 1; i--) {
         let currScreen = this.selectedInputScreens[i];
+        console.log('currScr', toJS(currScreen));
         let prevScreen = this.selectedInputScreens[i - 1];
+        console.log('currScr.category', currScreen.category);
+        console.log('prevScreen.nextButtonText', prevScreen.nextButtonText);
         prevScreen.nextButtonText = currScreen.category;
         prevScreen.nextRoute = `/wizard/category-input-screen`;
       }
+
+      let firstScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === 1);
+      firstScreen.prevButtonText = 'Expense selections';
+      firstScreen.prevRoute = `/wizard/category-selection-screen`;
 
       for (let i = 1; i < this.totalScreensSelected - 1; i++) {
         let currScreen = this.selectedInputScreens[i];
@@ -152,6 +159,7 @@ export default class InputWizardStore {
         nextScreen.prevButtonText = currScreen.category;
         nextScreen.prevRoute = `/wizard/category-input-screen`;
       }
+      console.log('all screens after a delete', toJS(this.selectedInputScreens));
     }
   }
 }
