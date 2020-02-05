@@ -16,6 +16,12 @@ export default class CashFlowStore {
 
     this.loadEvents();
 
+    CashFlowEvent.on('afterSave', (event) => {
+      this.logger.info('Detected event save %O', event);
+
+      if (event.recurs && event.recurrenceRule && !event.isRecurrence) this.createRecurrences(event);
+    });
+
     CashFlowEvent.on('recurrencesSaved', (events, originalEvent) => {
       this.logger.debug('event (%O) just created recurrences of itself: %O', originalEvent, events);
       this.addEvents(events);
@@ -59,6 +65,18 @@ export default class CashFlowStore {
    */
   @computed get eventsById() {
     return toMap(this.events, 'id');
+  }
+
+  /**
+   * A Set of event identifiers computed using their name, date, and originalEventID. Used for preventing duplicate event recurrences.
+   *
+   * @type {Set<String>}
+   */
+  @computed get eventSignatures() {
+    const signatures = this.events
+      .filter(({ originalEventID }) => originalEventID)
+      .map(({ signature }) => signature);
+    return new Set(signatures);
   }
 
   /**
@@ -141,11 +159,18 @@ export default class CashFlowStore {
    * @returns {undefined}
    */
   loadEvents = flow(function*() {
+    //console.profile('loadEvents');
     // Flows are asynchronous actions, structured as generator functions
+    this.rootStore.setLoading();
     const events = yield CashFlowEvent.getAllBy('date');
     this.events = events;
-    this.logger.debug('Load all events from IDB store: %O', events);
+    this.rootStore.setIdle();
+    //console.profileEnd('loadEvents');
   });
+
+  @action setEvents(events) {
+    this.events = events;
+  }
 
   /**
    * Adds a new event to the database and syncs it with the store
@@ -172,8 +197,7 @@ export default class CashFlowStore {
   });
 
   @action addEvent(event) {
-    if (CashFlowEvent.isCashFlowEvent(event))
-      return this.events.push(event);
+    if (CashFlowEvent.isCashFlowEvent(event)) return this.events.push(event);
 
     this.events.push(new CashFlowEvent(event));
   }
@@ -192,5 +216,36 @@ export default class CashFlowStore {
     const event = this.eventsById.get(id);
     yield event.destroy();
     this.events = this.events.filter((e) => e.id !== id);
+  });
+
+  createRecurrences = flow(function*(event) {
+    const copies = event.recurrenceDates.map(
+      (dateTime) =>
+        new CashFlowEvent({
+          ...event.toJS(),
+          dateTime,
+          id: null,
+          originalEventID: event.id,
+          persisted: false,
+        })
+    );
+    const savedEvents = [];
+
+    for (const copy of copies) {
+      if (this.eventSignatures.has(copy.signature)) {
+        this.logger.debug('Skip saving duplicate recurrence: %O', copy);
+        continue;
+      }
+
+      try {
+        yield copy.save();
+        savedEvents.push(copy);
+      } catch (err) {
+        this.logger.warn('Error saving event recurrence: %O', err);
+        continue;
+      }
+    }
+
+    this.addEvents(savedEvents);
   });
 }
