@@ -1,6 +1,4 @@
 function FrequencyInputs(props) {
-  console.log('props', props);
-
   return (
     <div>
       {(() => {
@@ -19,17 +17,25 @@ function FrequencyInputs(props) {
           case 'Other':
             return (
               <fieldset className="c-radio-input-fieldset" onChange={props.onChange}>
-                <input type="radio" name="frequency" value="monthly" defaultChecked />
-                Monthly
+                <div className="c-freq-button">
+                  <input type="radio" name="frequency" value="monthly" defaultChecked />
+                  <span>Monthly</span>
+                </div>
                 <br />
-                <input type="radio" name="frequency" value="weekly" />
-                Weekly
+                <div className="c-freq-button">
+                  <input type="radio" name="frequency" value="weekly" />
+                  <span>Weekly</span>
+                </div>
                 <br />
-                <input type="radio" name="frequency" value="every-other-week" />
-                Every Other Week
+                <div className="c-freq-button">
+                  <input type="radio" name="frequency" value="every-other-week" />
+                  <span>Every Other Week</span>
+                </div>
                 <br />
-                <input type="radio" name="frequency" value="twice-monthly" />
-                Twice Monthly
+                <div className="c-freq-button">
+                  <input type="radio" name="frequency" value="twice-monthly" />
+                  <span>Twice Monthly</span>
+                </div>
                 <br />
               </fieldset>
             );
@@ -37,8 +43,10 @@ function FrequencyInputs(props) {
           case 'Phone':
             return (
               <fieldset className="c-radio-input-fieldset" onChange={props.onChange}>
-                <input type="radio" name="frequency" value="monthly" defaultChecked />
-                Monthly
+                <div className="c-freq-button">
+                  <input type="radio" name="frequency" value="monthly" defaultChecked />
+                  <span>Monthly</span>
+                </div>
                 <br />
               </fieldset>
             );
@@ -48,10 +56,14 @@ function FrequencyInputs(props) {
           case 'Childcare':
             return (
               <fieldset className="c-radio-input-fieldset" onChange={props.onChange}>
-                <input type="radio" name="frequency" value="monthly" defaultChecked />
-                Monthly
-                <input type="radio" name="frequency" value="weekly" />
-                Weekly
+                <div className="c-freq-button">
+                  <input type="radio" name="frequency" value="monthly" defaultChecked />
+                  <span>Monthly</span>
+                </div>
+                <div className="c-freq-button">
+                  <input type="radio" name="frequency" value="weekly" />
+                  <span>Weekly</span>
+                </div>
                 <br />
               </fieldset>
             );

@@ -34,7 +34,6 @@ function CategoryInputScreen() {
     InputWizardStore.prevScreenNumber();
   };
 
-  console.log('next button text', InputWizardStore.currentScreen[0].nextButtonText);
   return (
     <section className="category-input-screen">
       <img src="/static/apps/mmt-my-money-calendar/img/pb_3.25.png" alt="" className="u-hide-on-print" />
@@ -54,13 +53,15 @@ function CategoryInputScreen() {
       <div>
         <h3 className="c-increment-subtitle">{InputWizardStore.currentScreen[0].subtitle}</h3>
       </div>
-      <div>{InputWizardStore.currentScreen[0].description}</div>
+      {/* <div>{InputWizardStore.currentScreen[0].description}</div> */}
       <form onSubmit={addNewCFEvent}>
         <div className="c-category-frequency-container">
           <label className="a-label a-label__heading" htmlFor="payment-frequency">
             How often do you pay your {InputWizardStore.currentScreen[0].category} bill?
           </label>
-          <FrequencyInputs category={InputWizardStore.currentScreen[0].category} onChange={setFrequency} />
+          <div className="c-freq-input-block">
+            <FrequencyInputs category={InputWizardStore.currentScreen[0].category} onChange={setFrequency} />
+          </div>
         </div>
         <div className="c-category-input-container">
           <label className="a-label a-label__heading" htmlFor="payment-due-date">
@@ -103,7 +104,7 @@ function CategoryInputScreen() {
             className="a-btn a-btn__full-on-xs"
           >
             <div className="c-button-wrapper">
-              <div className="c-button-words">Next, add {InputWizardStore.currentScreen[0].nextButtonText}</div>
+              <div className="c-button-words">{InputWizardStore.currentScreen[0].nextButtonText}</div>
               <div className="c-button-icon">
                 <img
                   src="/static/apps/mmt-my-money-calendar/img/right-arrow.png"

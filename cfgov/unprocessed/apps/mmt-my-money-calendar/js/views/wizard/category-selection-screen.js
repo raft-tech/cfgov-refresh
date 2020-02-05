@@ -14,22 +14,17 @@ function CategorySelectionScreen() {
   const { InputWizardStore } = store;
 
   const handleCheckbox = useCallback((event) => {
-    console.log('made it to handleCheckbox');
     if (event.target.checked) {
-      let screenName = event.target.name;
       let inputScreenDetails = categoryDetails.find((screen) => screen.category === event.target.name);
       InputWizardStore.addSelectedInputScreen(inputScreenDetails);
     } else {
       InputWizardStore.deleteSelectedInputScreen(event.target.name);
-      console.log(`${event.target.name} category has been deleted`);
     }
   });
 
   const setCurrentScreen = () => {
     InputWizardStore.setCurrentScreen();
   };
-  // console.log(options);
-  console.log('step', CategorySelectionScreenDetails[2].step);
 
   return (
     <section className="expenses-step">
@@ -54,7 +49,6 @@ function CategorySelectionScreen() {
           case 'Income':
             return <IncomeOptions handleCheckbox={handleCheckbox} />;
           case 'Expenses':
-            console.log('exp');
             return <ExpenseOptions handleCheckbox={handleCheckbox} />;
         }
       })()}

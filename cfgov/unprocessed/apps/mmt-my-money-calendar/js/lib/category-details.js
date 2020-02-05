@@ -222,7 +222,7 @@ export const categoryDetails = [
     nextRoute: `/wizard/category-input-screen`,
     prevRoute: `/wizard/category-input-screen`,
     pageImage: '/static/apps/mmt-my-money-calendar/img/icon-groceries.png',
-    subtitle: 'Tell us about your Groceris Costs',
+    subtitle: 'Tell us how much you spend on Groceries',
     description: 'This is where any additional description will go.',
     nextPaymentDueDateLabel: 'What day is your Next housing payment due?',
     nextPaymentAmountLabel: 'How much do you pay each month for housing (rent or mortgage)?',

@@ -11,21 +11,21 @@ function StepSummaryScreen() {
   //   return (
   //     <li key={cfEvent.category}>
   //       <div className="c-cfevent-list">
-  //          <div>{cfEvent.startDate}</div>
+  //         {/* <div>{cfEvent.startDate}</div> */}
   //         <div>05/20/2020</div>
-  //          <div>{cfEvent.category}</div>
+  //         {/* <div>{cfEvent.category}</div> */}
   //         <div>Housing</div>
-  //          <div>{cfEvent.amount}</div>
+  //         {/* <div>{cfEvent.amount}</div> */}
   //         <div>$750</div>
   //       </div>
   //       </li>
   //       <li>
   //       <div className="c-cfevent-list">
-  //          <div>{cfEvent.startDate}</div>
+  //         {/* <div>{cfEvent.startDate}</div> */}
   //         <div>05/22/2020</div>
-  //          <div>{cfEvent.category}</div>
+  //         {/* <div>{cfEvent.category}</div> */}
   //         <div>Transportation</div>
-  //          <div>{cfEvent.amount}</div>
+  //         {/* <div>{cfEvent.amount}</div> */}
   //         <div>$89</div>
   //       </div>
   //     </li>
@@ -40,7 +40,7 @@ function StepSummaryScreen() {
         <h4>Expenses Step: Summary</h4>
       </div>
 
-      <div className="c-step-container">
+      {/* <div className="c-step-container">
         <div>
           Yeah! You added some details on your <em>expenses.</em>
         </div>
@@ -80,7 +80,7 @@ function StepSummaryScreen() {
         <div>
           <Link to="/" className="a-btn a-btn__full-on-xs">
             Home
-          </Link>
+          </Link> */}
         </div>
       </div>
       <br />

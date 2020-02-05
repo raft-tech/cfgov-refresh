@@ -3,7 +3,6 @@ import { useStore } from '../../stores';
 
 function ExpenseOptions(props) {
   const { InputWizardStore } = useStore();
-  console.log('props', props);
 
   return (
     <div className="expenses-options">

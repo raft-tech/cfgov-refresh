@@ -23,7 +23,7 @@ function Routes() {
           <Route path="/wizard/category-input-screen">
             <CategoryInputScreen />
           </Route>
-          <Route path="/wizard/step-summary">
+          <Route path="/wizard/step-summary-screen">
             <StepSummaryScreen />
           </Route>
         </Switch>
