@@ -2,6 +2,7 @@ import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import { useState, useCallback, useEffect } from 'react';
 import { useStore } from '../../stores';
+import FrequencyInputs from '../../components/frequency-inputs';
 
 function CategoryInputScreen() {
   const { InputWizardStore, CashFlowStore } = useStore();
@@ -59,10 +60,7 @@ function CategoryInputScreen() {
           <label className="a-label a-label__heading" htmlFor="payment-frequency">
             How often do you pay your {InputWizardStore.currentScreen[0].category} bill?
           </label>
-          <div
-            className="content"
-            dangerouslySetInnerHTML={{ __html: `${InputWizardStore.currentScreen[0].frequencyInputs}` }}
-          ></div>
+          <FrequencyInputs category={InputWizardStore.currentScreen[0].category} onChange={setFrequency} />
         </div>
         <div className="c-category-input-container">
           <label className="a-label a-label__heading" htmlFor="payment-due-date">
@@ -99,7 +97,11 @@ function CategoryInputScreen() {
 
       <div className="c-nav-buttons">
         <div>
-          <Link to="/wizard/category-input-screen" onClick={nextScreenNumber} className="a-btn a-btn__full-on-xs">
+          <Link
+            to={InputWizardStore.currentScreen[0].nextRoute}
+            onClick={nextScreenNumber}
+            className="a-btn a-btn__full-on-xs"
+          >
             <div className="c-button-wrapper">
               <div className="c-button-words">Next, add {InputWizardStore.currentScreen[0].nextButtonText}</div>
               <div className="c-button-icon">
@@ -113,7 +115,11 @@ function CategoryInputScreen() {
           </Link>
         </div>
         <div>
-          <Link to="/wizard/category-input-screen" onClick={prevScreenNumber} className="a-btn a-btn__full-on-xs">
+          <Link
+            to={InputWizardStore.currentScreen[0].nextRoute}
+            onClick={prevScreenNumber}
+            className="a-btn a-btn__full-on-xs"
+          >
             <div className="c-button-wrapper">
               <div className="c-button-icon">
                 <img
