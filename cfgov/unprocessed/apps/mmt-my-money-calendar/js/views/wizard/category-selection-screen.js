@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import { useStore } from '../../stores';
 import { categoryDetails } from '../../lib/category-details';
-import { CategorySelectionScreenDetails } from '../../lib/step-details';
+import { StepScreenDetails } from '../../lib/step-details';
 import BeginningBalanceOptions from './beginning-balance-options';
 import IncomeOptions from './income-options';
 import ExpenseOptions from './expense-options';
 
-function CategorySelectionScreen() {
+function StepScreen() {
   const store = useStore();
   const { InputWizardStore } = store;
   const [currStep, setCurrStep] = useState(0);
@@ -27,26 +27,30 @@ function CategorySelectionScreen() {
     InputWizardStore.setCurrentScreen();
   };
 
+  const finishAddingScreens = () => {
+    InputWizardStore.finishAddingScreens();
+  };
+
   console.log('currStep', currStep);
 
   return (
     <section className="expenses-step">
       <img src="/static/apps/mmt-my-money-calendar/img/pb_3.png" alt="" className="u-hide-on-print" />
       <div className="c-step-title">
-        <h4>{CategorySelectionScreenDetails[currStep].step}</h4>
+        <h4>{StepScreenDetails[currStep].step}</h4>
       </div>
 
       <div className="c-step-container">
         <div className="c-step-img">
-          <img src={CategorySelectionScreenDetails[currStep].pageImage} alt="" />
+          <img src={StepScreenDetails[currStep].pageImage} alt="" />
         </div>
-        <div className="c-step-title">{CategorySelectionScreenDetails[currStep].stepTitle}</div>
+        <div className="c-step-title">{StepScreenDetails[currStep].stepTitle}</div>
       </div>
-      <div>{CategorySelectionScreenDetails[currStep].description}</div>
+      <div>{StepScreenDetails[currStep].description}</div>
       <br />
 
       {(() => {
-        switch (CategorySelectionScreenDetails[currStep].step) {
+        switch (StepScreenDetails[currStep].step) {
           case 'Beginning Balance':
             return <BeginningBalanceOptions handleCheckbox={handleCheckbox} />;
           case 'Income':
@@ -55,6 +59,11 @@ function CategorySelectionScreen() {
             return <ExpenseOptions handleCheckbox={handleCheckbox} />;
         }
       })()}
+      <div>
+        <button type="button" onClick={finishAddingScreens} className="a-btn a-btn__full-on-xs">
+          Finish Adding
+        </button>
+      </div>
 
       <div className="c-nav-buttons">
         <div>
@@ -80,4 +89,4 @@ function CategorySelectionScreen() {
   );
 }
 
-export default observer(CategorySelectionScreen);
+export default observer(StepScreen);

@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import Home from './views/home';
 import StepSummaryScreen from './views/wizard/step-summary-screen';
-import CategorySelectionScreen from './views/wizard/category-selection-screen';
+import Step from './views/wizard/category-selection-screen';
 import CategoryInputScreen from './views/wizard/category-input-screen';
 import { useStore } from './stores';
 
@@ -17,7 +17,7 @@ function Routes() {
             <Home />
           </Route>
           <Route path="/wizard/category-selection-screen">
-            <CategorySelectionScreen screen={InputWizardStore.cat} />
+            <Step screen={InputWizardStore.cat} />
           </Route>
 
           <Route path="/wizard/category-input-screen">

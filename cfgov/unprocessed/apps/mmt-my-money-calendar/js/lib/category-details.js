@@ -7,7 +7,6 @@ export const categoryDetails = [
     prevButtonText: ``,
     nextRoute: `/wizard/category-input-screen`,
     prevRoute: `/wizard/category-input-screen`,
-
     pageImage: '/static/apps/mmt-my-money-calendar/img/icon-job.png',
     subtitle: 'Lets look at your checking account',
     description: '',

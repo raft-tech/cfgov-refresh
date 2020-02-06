@@ -33,7 +33,7 @@ function StepSummaryScreen() {
   // });
   const selScreens = InputWizardStore.selectedInputScreens.map((screen) => {
     return (
-      <li key={screen.category}>
+      <li key={screen.screenNumber}>
         <div className="c-cfevent-category">
           <div>{screen.category}</div>
         </div>
@@ -67,8 +67,39 @@ function StepSummaryScreen() {
 
       <div className="c-nav-buttons">
         <div>
-          <Link to="/" className="a-btn a-btn__full-on-xs">
-            Home
+          <Link
+            to={InputWizardStore.currentScreen[0].nextRoute}
+            onClick={InputWizardStore.setCurrentScreen}
+            className="a-btn a-btn__full-on-xs"
+          >
+            <div className="c-button-wrapper">
+              <div className="c-button-words">{InputWizardStore.currentScreen[0].nextButtonText}</div>
+              <div className="c-button-icon">
+                <img
+                  src="/static/apps/mmt-my-money-calendar/img/right-arrow.png"
+                  alt=""
+                  className="u-hide-on-print c-arrow-icon"
+                />
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div>
+          <Link
+            to={InputWizardStore.currentScreen[0].nextRoute}
+            onClick={prevScreenNumber}
+            className="a-btn a-btn__full-on-xs"
+          >
+            <div className="c-button-wrapper">
+              <div className="c-button-icon">
+                <img
+                  src="/static/apps/mmt-my-money-calendar/img/left-arrow.png"
+                  alt=""
+                  className="u-hide-on-print c-arrow-icon"
+                />
+              </div>
+              <div className="c-button-words">{InputWizardStore.currentScreen[0].prevButtonText}</div>
+            </div>
           </Link>
         </div>
       </div>

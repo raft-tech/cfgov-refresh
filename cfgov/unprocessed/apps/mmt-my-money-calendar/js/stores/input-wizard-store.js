@@ -1,12 +1,11 @@
 import { observable, action, computed, toJS } from 'mobx';
-import { CategorySelectionScreenDetails, StepSummaryDetails } from '../lib/step-details';
+import { StepScreenDetails, StepSummaryDetails } from '../lib/step-details';
 
 export default class InputWizardStore {
   // two arrays with details of step screens
-  @observable stepSelectionScreens = CategorySelectionScreenDetails;
+  @observable stepOptionScreens = StepScreenDetails;
   @observable stepSummaryScreens = StepSummaryDetails;
   @observable currentStepCategory = '';
-  @observable currentSummaryStepNumber = 3001;
 
   // an array of all the screens that the user has selected
   @observable selectedInputScreens = [];
@@ -18,7 +17,7 @@ export default class InputWizardStore {
 
   // observables for step screens
   @observable stepCounter = 3;
-  @observable currentStepNumber = 1;
+  @observable currentStepNumber = 1000;
   @observable currentStepScreen = {};
 
   // observables for category screens
@@ -72,9 +71,12 @@ export default class InputWizardStore {
 
   @action setCurrentScreen() {
     // get the last screen and give it a route of /wizard/summary-screen
+    console.log('all screens after add ', toJS(this.selectedInputScreens));
+
     if (this.selectedInputScreens.length) {
       this.currentScreenNumber = this.currentScreenNumber + 1;
-      console.log('what is the currentScreenNumber.  should be 1', this.currentScreenNumber);
+      console.log('current screen number', this.currentScreenNumber);
+
       // let lastScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.selectedInputScreens.length);
 
       // if this is the last screen
@@ -86,13 +88,25 @@ export default class InputWizardStore {
       } else if (this.selectedInputScreens.length > 1) {
         // update the screen that will be showing
         let currScreen = this.selectedInputScreens[this.currentScreenNumber - 1];
+        console.log('current screen number', this.currentScreenNumber);
+        console.log('currScreen', toJS(currScreen));
+        console.log('current screen number', this.currentScreenNumber);
 
         this.currentScreen.replace([currScreen]);
+        console.log('NEW current screen', toJS(this.currentScreen));
+        console.log('current screen number', this.currentScreenNumber);
 
         // update the text on the next button
         let nextScrNumber = this.currentScreenNumber + 1;
-        let nextScr = this.selectedInputScreens.find((screen) => screen.screenNumber === nextScrNumber);
+        console.log('next screen number', nextScrNumber);
+        let nextScr = this.selectedInputScreens[nextScrNumber];
+        console.log('current screen number', this.currentScreenNumber);
+
+        console.log('nextSCreen', toJS(nextScr));
         this.currentScreen.nextButtonText = nextScr.category;
+        console.log('NEW current screen', toJS(this.currentScreen));
+        console.log('next screen number', nextScrNumber);
+        console.log('nextSCreen', toJS(nextScr));
       }
     }
   }
@@ -144,5 +158,16 @@ export default class InputWizardStore {
       }
       console.log('all screens after a delete', toJS(this.selectedInputScreens));
     }
+  }
+
+  @action finishAddingScreens() {
+    console.log('all screens', toJS(this.selectedInputScreens));
+    let summarySc = this.stepSummaryScreens.find((screen) => screen.screenNumber === this.currentStepNumber);
+    console.log('summarySc', toJS(summarySc));
+    this.selectedInputScreens.push(summarySc);
+    let stepSc = this.stepOptionScreens.find((screen) => screen.screenNumber === this.currentStepNumber + 1);
+    console.log('stepSc', toJS(stepSc));
+    this.selectedInputScreens.push(stepSc);
+    console.log('all screens', toJS(this.selectedInputScreens));
   }
 }
