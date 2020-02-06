@@ -8,8 +8,8 @@ import Day from './day';
 import Details from './details';
 import Button from '../../../components/button';
 
-import arrowRight from 'cf-icons/src/icons/arrow-right.svg';
-import arrowLeft from 'cf-icons/src/icons/arrow-left.svg';
+import arrowRight from '@cfpb/cfpb-icons/src/icons/arrow-right.svg';
+import arrowLeft from '@cfpb/cfpb-icons/src/icons/arrow-left.svg';
 
 const ifDevelopment = (fn) => {
   if (process.env.NODE_ENV !== 'development') return null;

@@ -797,6 +797,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@cfpb/cfpb-icons@0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@cfpb/cfpb-icons/-/cfpb-icons-0.0.9.tgz#e687e649af49bac177c8cea3320bf6deec39daa2"
+  integrity sha512-K30Pp4d8f/4KmzSNgw6awh0jsvGU91y9RvlaQRS9zeur77WVQay9m1ye7T1XCeQY5aXugKGLvpvRObE5miulkw==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
