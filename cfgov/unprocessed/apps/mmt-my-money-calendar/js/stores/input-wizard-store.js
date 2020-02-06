@@ -5,15 +5,16 @@ export default class InputWizardStore {
   // two arrays with details of step screens
   @observable stepSelectionScreens = CategorySelectionScreenDetails;
   @observable stepSummaryScreens = StepSummaryDetails;
+  @observable currentStepCategory = '';
   @observable currentSummaryStepNumber = 3001;
 
   // an array of all the screens that the user has selected
   @observable selectedInputScreens = [];
-  @observable totalScreensSelected = 0;
+  // @observable totalScreensSelected = 0;
 
   // a single element array that holds an object of the current screen
   @observable currentScreen = [];
-  @observable currentScreenNumber = 1;
+  @observable currentScreenNumber = 0;
 
   // observables for step screens
   @observable stepCounter = 3;
@@ -28,86 +29,64 @@ export default class InputWizardStore {
     this.rootStore = rootStore;
   }
 
+  @action setCurrentStep(step) {
+    console.log('made it to setCurrentStep');
+    this.currentStepCategory = step;
+    console.log('setCurrentStep', this.currentStepCategory);
+  }
+
   @action addSelectedInputScreen(newScreen) {
     //add the new screen to the selectedInputScreens array
 
-    this.totalScreensSelected = this.totalScreensSelected + 1;
-    newScreen.screenNumber = this.totalScreensSelected;
-    newScreen.screenNumber = this.totalScreensSelected;
+    newScreen.screenNumber = this.selectedInputScreens.length;
     this.selectedInputScreens.push(newScreen);
 
     // update the nextButtonText and nextRoutes for each of the screens
-    let lastScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.totalScreensSelected);
-    lastScreen.nextButtonText = 'Summary of expenses';
+    let lastScreen = this.selectedInputScreens[this.selectedInputScreens.length - 1];
+    lastScreen.nextButtonText = `${this.currentStepCategory} Summary`;
     lastScreen.nextRoute = `/wizard/step-summary-screen`;
-    if (this.totalScreensSelected > 1) {
-      for (let i = this.totalScreensSelected; i > 1; i--) {
-        let currScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === i);
 
-        let prevScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === i - 1);
-
-        prevScreen.nextButtonText = currScreen.category;
+    if (this.selectedInputScreens.length > 1) {
+      for (let i = this.selectedInputScreens.length; i > 1; i--) {
+        let thisScreen = this.selectedInputScreens[this.selectedInputScreens.length - 1];
+        let prevScreen = this.selectedInputScreens[this.selectedInputScreens.length - 2];
+        prevScreen.nextButtonText = thisScreen.category;
         prevScreen.nextRoute = `/wizard/category-input-screen`;
       }
-    }
+      let firstScreen = this.selectedInputScreens[0];
+      firstScreen.prevButtonText = `Select ${this.currentStepCategory} options`;
+      firstScreen.prevRoute = `/wizard/category-selection-screen`;
 
-    // update the prevButtonText and prevRoutes for each of the screens
-    let firstScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === 1);
-    firstScreen.prevButtonText = 'Expense selections';
-    firstScreen.prevRoute = `/wizard/category-selection-screen`;
+      for (let i = 0; i < this.selectedInputScreens.length - 1; i++) {
+        let thisScreen = this.selectedInputScreens[i];
+        let nextScreen = this.selectedInputScreens[i + 1];
 
-    if (this.totalScreensSelected > 1) {
-      for (let i = 1; i < this.totalScreensSelected; i++) {
-        let currScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === i);
-        let nextScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === i + 1);
-        nextScreen.prevButtonText = currScreen.category;
+        nextScreen.prevButtonText = thisScreen.category;
+        nextScreen.prevRoute = `/wizard/category-input-screen`;
       }
+    } else {
+      console.log('the first screen has been added');
     }
+    console.log('all screens after add ', toJS(this.selectedInputScreens));
   }
 
   @action setCurrentScreen() {
-    this.totalScreensSelected = this.totalScreensSelected + 1;
-    let currStepScreen = this.stepSummaryScreens.find(
-      (stepScreen) => stepScreen.screenNumber === this.currentSummaryStepNumber
-    );
-
-    currStepScreen.screenNumber = this.totalScreensSelected;
-    currStepScreen.screenNumber = this.totalScreensSelected;
-    this.selectedInputScreens.push(currStepScreen);
-
-    if (this.totalScreensSelected) {
-      let currScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.currentScreenNumber);
-      this.currentScreen.replace([currScreen]);
-      // set next button text
-
-      if (this.totalScreensSelected > 1) {
-        if (this.currentScreenNumber + 1) {
-          let nextScrNumber = this.currentScreenNumber + 1;
-          let nextScr = this.selectedInputScreens.find((screen) => screen.screenNumber === nextScrNumber);
-          this.currentScreen.nextButtonText = nextScr.category;
-        } else {
-          this.currentScreen.nextButtonText = 'lets go to the summary for expenses';
-        }
-      } else {
-        let nextScrNumber = 1001;
-        let nextScr = this.stepSelectionScreens.find((screen) => screen.screenNumber === nextScrNumber);
-        this.currentScreen.nextButtonText = 'lets go to the summery....asdfasdf';
-      }
-    }
-  }
-
-  @action setNextScreen() {
     // get the last screen and give it a route of /wizard/summary-screen
-    if (this.totalScreensSelected) {
+    if (this.selectedInputScreens.length) {
       this.currentScreenNumber = this.currentScreenNumber + 1;
-      // let lastScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.totalScreensSelected);
+      console.log('what is the currentScreenNumber.  should be 1', this.currentScreenNumber);
+      // let lastScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.selectedInputScreens.length);
 
-      if (this.currentScreenNumber === this.totalScreensSelected) {
-        let currScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.currentScreenNumber);
+      // if this is the last screen
+      if (this.currentScreenNumber === this.selectedInputScreens.length) {
+        let currScreen = this.selectedInputScreens[this.currentScreenNumber - 1];
         this.currentScreen.replace([currScreen]);
-      } else {
+
+        // there is more than 1 screen
+      } else if (this.selectedInputScreens.length > 1) {
         // update the screen that will be showing
-        let currScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.currentScreenNumber);
+        let currScreen = this.selectedInputScreens[this.currentScreenNumber - 1];
+
         this.currentScreen.replace([currScreen]);
 
         // update the text on the next button
@@ -120,26 +99,30 @@ export default class InputWizardStore {
 
   @action deleteSelectedInputScreen(category) {
     // first, complete the deletion
-    this.totalScreensSelected = this.totalScreensSelected - 1;
+    this.selectedInputScreens.length = this.selectedInputScreens.length - 1;
     var screenForDeletion = this.selectedInputScreens.filter((step) => step.category !== category);
     this.selectedInputScreens.replace(screenForDeletion);
+    console.log('this.selectedInputScreens.length', this.selectedInputScreens.length);
+    console.log('this.selectedInputScreens.length', this.selectedInputScreens.length);
 
     // update the order the screens
-    for (let i = 1; i < this.totalScreensSelected; i++) this.selectedInputScreens[i].screenNumber = i + 1;
+    for (let i = 1; i < this.selectedInputScreens.length; i++) this.selectedInputScreens[i].screenNumber = i + 1;
 
     // update tne nextButtonText, nextRoutes, prevButtonText and prevRoutes for each of the screens
     console.log('all screens after a delet but before routing updatee', toJS(this.selectedInputScreens));
     // update the first and last screens
-    let lastScreen = this.selectedInputScreens.find((screen) => screen.screenNumber === this.totalScreensSelected);
+    let lastScreen = this.selectedInputScreens.find(
+      (screen) => screen.screenNumber === this.selectedInputScreens.length
+    );
     lastScreen.nextButtonText = 'Summary of expenses';
     lastScreen.nextRoute = `/wizard/step-summary`;
     console.log('lastScreen', toJS(lastScreen));
-    console.log(this.totalScreensSelected);
+    console.log(this.selectedInputScreens.length);
 
-    if (this.totalScreensSelected > 1) {
+    if (this.selectedInputScreens.length > 1) {
       console.log('made it inside if');
 
-      for (let i = this.totalScreensSelected - 1; i > 1; i--) {
+      for (let i = this.selectedInputScreens.length - 1; i > 1; i--) {
         let currScreen = this.selectedInputScreens[i];
         console.log('currScr', toJS(currScreen));
         let prevScreen = this.selectedInputScreens[i - 1];
@@ -153,7 +136,7 @@ export default class InputWizardStore {
       firstScreen.prevButtonText = 'Expense selections';
       firstScreen.prevRoute = `/wizard/category-selection-screen`;
 
-      for (let i = 1; i < this.totalScreensSelected - 1; i++) {
+      for (let i = 1; i < this.selectedInputScreens.length - 1; i++) {
         let currScreen = this.selectedInputScreens[i];
         let nextScreen = this.selectedInputScreens[i + 1];
         nextScreen.prevButtonText = currScreen.category;

@@ -12,6 +12,7 @@ import ExpenseOptions from './expense-options';
 function CategorySelectionScreen() {
   const store = useStore();
   const { InputWizardStore } = store;
+  const [currStep, setCurrStep] = useState(0);
 
   const handleCheckbox = useCallback((event) => {
     if (event.target.checked) {
@@ -26,24 +27,26 @@ function CategorySelectionScreen() {
     InputWizardStore.setCurrentScreen();
   };
 
+  console.log('currStep', currStep);
+
   return (
     <section className="expenses-step">
       <img src="/static/apps/mmt-my-money-calendar/img/pb_3.png" alt="" className="u-hide-on-print" />
       <div className="c-step-title">
-        <h4>{CategorySelectionScreenDetails[2].step}</h4>
+        <h4>{CategorySelectionScreenDetails[currStep].step}</h4>
       </div>
 
       <div className="c-step-container">
         <div className="c-step-img">
-          <img src={CategorySelectionScreenDetails[2].pageImage} alt="" />
+          <img src={CategorySelectionScreenDetails[currStep].pageImage} alt="" />
         </div>
-        <div className="c-step-title">{CategorySelectionScreenDetails[2].stepTitle}</div>
+        <div className="c-step-title">{CategorySelectionScreenDetails[currStep].stepTitle}</div>
       </div>
-      <div>{CategorySelectionScreenDetails[2].description}</div>
+      <div>{CategorySelectionScreenDetails[currStep].description}</div>
       <br />
 
       {(() => {
-        switch (CategorySelectionScreenDetails[2].step) {
+        switch (CategorySelectionScreenDetails[currStep].step) {
           case 'Beginning Balance':
             return <BeginningBalanceOptions handleCheckbox={handleCheckbox} />;
           case 'Income':
@@ -55,8 +58,9 @@ function CategorySelectionScreen() {
 
       <div className="c-nav-buttons">
         <div>
+          {/* <Link to="/wizard/category-input-screen" onClick={setCurrentScreen} className="a-btn a-btn__full-on-xs"> */}
           <Link to="/wizard/category-input-screen" onClick={setCurrentScreen} className="a-btn a-btn__full-on-xs">
-            Input your Expenses
+            {`Input your ${InputWizardStore.currentStepCategory}`}
           </Link>
         </div>
         <div>

@@ -27,8 +27,8 @@ function CategoryInputScreen() {
     CashFlowStore.addNewCashFlowEvent(userInputDetails);
   });
 
-  const setNextScreen = () => {
-    InputWizardStore.setNextScreen();
+  const setCurrentScreen = () => {
+    InputWizardStore.setCurrentScreen();
   };
   const prevScreenNumber = () => {
     InputWizardStore.prevScreenNumber();
@@ -53,30 +53,40 @@ function CategoryInputScreen() {
       <div>
         <h3 className="c-increment-subtitle">{InputWizardStore.currentScreen[0].subtitle}</h3>
       </div>
-      {/* <div>{InputWizardStore.currentScreen[0].description}</div> */}
       <form onSubmit={addNewCFEvent}>
-        <div className="c-category-frequency-container">
-          <label className="a-label a-label__heading" htmlFor="payment-frequency">
-            How often do you pay your {InputWizardStore.currentScreen[0].category} bill?
-          </label>
-          <div className="c-freq-input-block">
-            <FrequencyInputs category={InputWizardStore.currentScreen[0].category} onChange={setFrequency} />
+        {!InputWizardStore.currentStepCategory === 'Beginning Balance' ? (
+          <div>
+            <div className="c-category-frequency-container">
+              <label className="a-label a-label__heading" htmlFor="payment-frequency">
+                How often do you pay your {InputWizardStore.currentScreen[0].category} bill?
+              </label>
+              <div className="c-freq-input-block">
+                <FrequencyInputs category={InputWizardStore.currentScreen[0].category} onChange={setFrequency} />
+              </div>
+            </div>
+            <div className="c-category-input-container">
+              <label className="a-label a-label__heading" htmlFor="payment-due-date">
+                {InputWizardStore.currentScreen[0].nextPaymentDueDateLabel}
+              </label>
+              <div className="form-l_col c-input">
+                <input
+                  id="next-payment-due-date"
+                  className="c-category-input"
+                  name="dueDate"
+                  placeholder="02/01/2020"
+                  onChange={(event) => setStartDate(event.target.value)}
+                />
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="c-category-input-container">
-          <label className="a-label a-label__heading" htmlFor="payment-due-date">
-            {InputWizardStore.currentScreen[0].nextPaymentDueDateLabel}
-          </label>
-          <div className="form-l_col c-input">
-            <input
-              id="next-payment-due-date"
-              className="c-category-input"
-              name="dueDate"
-              placeholder="02/01/2020"
-              onChange={(event) => setStartDate(event.target.value)}
-            />
+        ) : (
+          <div>
+            <br />
+            <br />
+            <br />
           </div>
-        </div>
+        )}
+
         <div className="c-category-input-container">
           <label className="a-label a-label__heading" htmlFor="payment-amount">
             {InputWizardStore.currentScreen[0].nextPaymentAmountLabel}
@@ -91,7 +101,7 @@ function CategoryInputScreen() {
             />
           </div>
         </div>
-        <input type="submit" value="Submit" />
+        {/* <input type="submit" value="Submit" /> */}
       </form>
 
       <br />
@@ -100,7 +110,7 @@ function CategoryInputScreen() {
         <div>
           <Link
             to={InputWizardStore.currentScreen[0].nextRoute}
-            onClick={setNextScreen}
+            onClick={setCurrentScreen}
             className="a-btn a-btn__full-on-xs"
           >
             <div className="c-button-wrapper">

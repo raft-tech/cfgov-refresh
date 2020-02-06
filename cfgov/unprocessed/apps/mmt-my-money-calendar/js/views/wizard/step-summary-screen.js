@@ -31,45 +31,34 @@ function StepSummaryScreen() {
   //     </li>
   //   );
   // });
+  const selScreens = InputWizardStore.selectedInputScreens.map((screen) => {
+    return (
+      <li key={screen.category}>
+        <div className="c-cfevent-category">
+          <div>{screen.category}</div>
+        </div>
+      </li>
+    );
+  });
 
   return (
     <section className="expenses-summary-step">
       <img src="/static/apps/mmt-my-money-calendar/img/pb_3.png" alt="" className="u-hide-on-print" />
 
       <div className="c-step-title">
-        <h4>Expenses Step: Summary</h4>
+        <h4>{InputWizardStore.currentStepCategory} Step: Summary</h4>
       </div>
 
       <div className="c-step-container">
         <div>
-          Yeah! You added some details on your <em>expenses.</em>
+          Yeah! You added some details on your <em>{InputWizardStore.currentStepCategory}.</em>
         </div>
       </div>
+      <br />
+      <br />
       <h4>You have added the following:</h4>
       <div className="c-cfevent-list-container">
-        {/* <ul>{cfEventList}</ul> */}
-        <ul>
-          <li>
-            <div className="c-cfevent-list">
-              {/* <div>{cfEvent.startDate}</div> */}
-              <div>05/20/2020</div>
-              {/* <div>{cfEvent.category}</div> */}
-              <div>Housing</div>
-              {/* <div>{cfEvent.amount}</div> */}
-              <div>$750</div>
-            </div>
-          </li>
-          <li>
-            <div className="c-cfevent-list">
-              {/* <div>{cfEvent.startDate}</div> */}
-              <div>05/22/2020</div>
-              {/* <div>{cfEvent.category}</div> */}
-              <div>Transportation</div>
-              {/* <div>{cfEvent.amount}</div> */}
-              <div>$89</div>
-            </div>
-          </li>
-        </ul>
+        <ul>{selScreens}</ul>
       </div>
 
       <div className="c-calendar-img">
