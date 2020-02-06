@@ -55,6 +55,7 @@
     "gulp-sourcemaps": "2.6.5",
     "gulp-terser": "1.2.0",
     "highcharts": "7.2.1",
+    "html-react-parser": "0.10.0",
     "less": "3.10.3",
     "lightbox2": "2.11.0",
     "lodash.throttle": "4.1.1",
