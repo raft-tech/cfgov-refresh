@@ -228,6 +228,7 @@ function scriptsApps() {
 function scriptsMoneyTools(done) {
   const apps = [
     `${paths.unprocessed}/apps/mmt-my-money-calendar`,
+    `${paths.unprocessed}/apps/mmt-cost-of-credit-tool`
   ];
   const streams = [];
 

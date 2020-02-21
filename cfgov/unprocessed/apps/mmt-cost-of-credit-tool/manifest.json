@@ -1,0 +1,22 @@
+{
+  "short_name": "Cost of Credit Tool",
+  "name": "CFPB Cost of Credit Tool",
+  "icons": [
+    {
+      "src": "/static/apps/mmt-cost-of-credit-tool/img/cfpb-icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/static/apps/mmt-cost-of-credit-tool/img/cfpb-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/mmt-cost-of-credit-tool?source=pwa",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "scope": "/mmt-cost-of-credit-tool",
+  "theme_color": "#5AB057",
+  "prefer_related_applications": false
+}

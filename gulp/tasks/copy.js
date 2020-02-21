@@ -90,6 +90,14 @@ gulp.task( 'copy:moneytools', () => {
     .pipe(gulp.dest(`./cfgov/jinja2/v1/${app}/`));
 } );
 
+gulp.task( 'copy:moneytoolsCOC', () => {
+  const app = 'mmt-cost-of-credit-tool';
+
+  return gulp
+    .src(path.join(paths.processed, `apps/${app}/js/service-worker.js`))
+    .pipe(gulp.dest(`./cfgov/jinja2/v1/${app}/`));
+} );
+
 gulp.task( 'copy',
   gulp.parallel(
     'copy:icons',
