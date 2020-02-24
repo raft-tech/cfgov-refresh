@@ -3,14 +3,13 @@ import Home from "./views/home";
 import Tool from "./views/tool";
 
 const Routes = () => (
-  <Router>
+  <Router basename="/mmt-cost-of-credit-tool">
     <div className="app">
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <Home />
         </Route>
-
-        <Route exact path="/tool/">
+        <Route path="/tool">
           <Tool />
         </Route>
       </Switch>

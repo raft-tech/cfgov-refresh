@@ -1,4 +1,4 @@
-importScripts("/static/apps/mmt-cost-of-credit-tool/js/precache-manifest.70068a098a18d3baa21697b70b10e086.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/static/apps/mmt-cost-of-credit-tool/js/precache-manifest.d3ec48ed5b0c96c55988575f71f6dc12.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 workbox.setConfig({ debug: true });
 workbox.core.skipWaiting();

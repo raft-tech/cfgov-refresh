@@ -1,7 +1,4 @@
-
 // import { render } from 'react-dom';
-
-
 
 // const App = () => (
 //     <section className="my-money-calendar">
@@ -11,14 +8,12 @@
 
 // render(<App />, document.querySelector('#mmt-cost-of-credit-tool'));
 
+import * as idb from "idb";
+import { render } from "react-dom";
+import { Workbox } from "workbox-window";
+import { DateTime, Info } from "luxon";
 
-import * as idb from 'idb';
-import { render } from 'react-dom';
-import { Workbox } from 'workbox-window';
-import { DateTime, Info } from 'luxon';
-
-import Routes from './routes';
-
+import Routes from "./routes";
 
 // configureMobX({ enforceActions: 'observed' });
 
@@ -64,10 +59,9 @@ import Routes from './routes';
 // }
 
 const App = () => (
-    <section className="mmt-cost-of-credit-tool">
-      <Routes />
-    </section>
-
+  <section className="mmt-cost-of-credit-tool">
+    <Routes />
+  </section>
 );
 
-render(<App />, document.getElementById('mmt-cost-of-credit-tool'));
+render(<App />, document.querySelector("#mmt-cost-of-credit-tool"));
