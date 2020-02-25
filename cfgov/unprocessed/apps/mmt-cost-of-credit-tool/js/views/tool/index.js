@@ -1,26 +1,40 @@
 import { Link } from "react-router-dom";
 
-import { TrueCostChart } from "../../components/true-cost-chart";
-import { TrueCostDetail } from "../../components/true-cost-detail";
-import { ScenarioTable } from "../../components/scenario-table";
-import { NonPaymentConsequences } from "../../components/non-payment-consequences";
-import { Habits } from "../../components/habits";
-import { Decision } from "../../components/decision";
-import { SectionTip } from "../../components/section-tip";
-import { RadioButtonQuestion } from "../../components/controls/radio-button-question";
-import { DollarSliderInput } from "../../components/controls/dollar-slider-input";
-import { PercentSliderInput } from "../../components/controls/percent-slider-input";
-import { MonthSliderInput } from "../../components/controls/month-slider-input";
-import { DollarInput } from "../../components/controls/dollar-input";
-import { PercentForMonthsInput } from "../../components/controls/percent-for-months-input";
+import { TotalPurchaseAmount } from "../../components/total-purchase-amount";
+import { DownPayment } from "../../components/down-payment";
+import { CreditApr } from "../../components/credit-apr";
+import { MonthlyPayment } from "../../components/monthly-payment";
+import { DealsAndPromotions } from "../../components/deals-and-promotions";
+import { TrueCostBreakdown } from "../../components/true-cost-breakdown";
+import { AlternatePayoffScenarios } from "../../components/alternate-payoff-scenarios";
+import { TipsAndResources } from "../../components/tips-and-resources";
+
+// import { NonPaymentConsequences } from "../../components/non-payment-consequences";
+// import { Habits } from "../../components/habits";
+// import { Decision } from "../../components/decision";
+// import { SectionTip } from "../../components/section-tip";
+// import { RadioButtonQuestion } from "../../components/controls/radio-button-question";
+// import { DollarSliderInput } from "../../components/controls/dollar-slider-input";
+// import { PercentSliderInput } from "../../components/controls/percent-slider-input";
+// import { MonthSliderInput } from "../../components/controls/month-slider-input";
+// import { DollarInput } from "../../components/controls/dollar-input";
+// import { PercentForMonthsInput } from "../../components/controls/percent-for-months-input";
 
 export default function Tool() {
   return (
     <section id="tool">
-      <h1>Total Cost Tool</h1>
-      <div>Purchase Details</div>
-      <h2>enter the purchase details</h2>
-      <DollarSliderInput
+      <div className="m-hero_tag">True Cost Tools</div>
+      <h2>Enter the purchase details</h2>
+      <div>It's okay to estimate if you're not sure.</div>
+      <TotalPurchaseAmount />
+      <DownPayment />
+      <CreditApr />
+      <MonthlyPayment />
+      <DealsAndPromotions />
+      <TrueCostBreakdown />
+      <AlternatePayoffScenarios />
+      <TipsAndResources />
+      {/* <DollarSliderInput
         title="Total purchase amount"
         description="This is..."
       />
@@ -36,9 +50,7 @@ export default function Tool() {
         title="Introductory.."
         description="If there's a special..."
       />
-      <h2>True cost breakdown</h2>
-      <TrueCostChart totalPurchaseAmount="$1000" totalFinanceCharge="$100" />
-      <TrueCostDetail totalPurchaseAmount="$1000" totalFinanceCharge="$100" />
+      
       <h2>Alternate payoff scenarios</h2>
       <p className="description">Here are some other...</p>
       <ScenarioTable
@@ -72,7 +84,7 @@ export default function Tool() {
             <Link to="/resource_url">Here's a link to the resource</Link>
           </>
         }
-      />
+      /> */}
     </section>
   );
 }
