@@ -4,7 +4,8 @@ import { TotalPurchaseAmount } from "../../components/total-purchase-amount";
 import { DownPayment } from "../../components/down-payment";
 import { CreditApr } from "../../components/credit-apr";
 import { MonthlyPayment } from "../../components/monthly-payment";
-import { DealsAndPromotions } from "../../components/deals-and-promotions";
+// import { DealsAndPromotions } from "../../components/deals-and-promotions";
+import { DealOrPromo } from "../../components/deal-or-promo";
 import { TrueCostBreakdown } from "../../components/true-cost-breakdown";
 import { AlternatePayoffScenarios } from "../../components/alternate-payoff-scenarios";
 import { TipsAndResources } from "../../components/tips-and-resources";
@@ -23,17 +24,58 @@ import { TipsAndResources } from "../../components/tips-and-resources";
 export default function Tool() {
   return (
     <section id="tool">
-      <div className="m-hero_tag">True Cost Tools</div>
-      <h2>Enter the purchase details</h2>
-      <div>It's okay to estimate if you're not sure.</div>
-      <TotalPurchaseAmount />
-      <DownPayment />
-      <CreditApr />
-      <MonthlyPayment />
-      <DealsAndPromotions />
-      <TrueCostBreakdown />
-      <AlternatePayoffScenarios />
-      <TipsAndResources />
+      <div className="m-tool__tag">True Cost Tool</div>
+      <h1>Enter the purchase details</h1>
+      <div className="m-tool-card__desc">
+        It's okay to estimate if you're not sure.
+      </div>
+      <div className="o-tool-card-group">
+        <div className="m-tool-card">
+          {" "}
+          <TotalPurchaseAmount />
+        </div>
+        <div className="m-tool-card">
+          {" "}
+          <DownPayment />
+        </div>
+        <div className="m-tool-card">
+          {" "}
+          <CreditApr />
+        </div>
+        <div className="m-tool-card">
+          {" "}
+          <MonthlyPayment />
+        </div>
+
+        <div className="o-tool-card-group__gray">
+          <h3>Deals and promotions</h3>
+          <DealOrPromo
+            num="1"
+            title="Rebate or coupon"
+            desc="Is the store offering an amount of money off the purchase price?"
+          />
+          <DealOrPromo
+            num="2"
+            title="Zero or reduced interest promotion"
+            desc="Is there an interest rate promotional period?"
+          />
+          <DealOrPromo
+            num="3"
+            title="Deferred interest promotion"
+            desc="IAre you being offered 0% interest if paid in full within a certain
+        number of months?"
+          />
+        </div>
+        <div className="m-tool-card">
+          <TrueCostBreakdown />
+        </div>
+        <div className="m-tool-card">
+          <AlternatePayoffScenarios />
+        </div>
+        <div className="m-tool-card">
+          <TipsAndResources />
+        </div>
+      </div>
       {/* <DollarSliderInput
         title="Total purchase amount"
         description="This is..."

@@ -36,8 +36,9 @@ export default function Home() {
 
       <br />
       <Link
-        to="/wizard/category-selection-screen"
-        onClick={nextPage}
+        to="/tool"
+        // onClick={nextPage}
+        // onClick="/tool"
         className="a-btn a-btn__full-on-xs"
       >
         Calculate the true cost
