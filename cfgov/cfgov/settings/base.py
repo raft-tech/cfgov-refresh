@@ -726,6 +726,9 @@ FLAGS = {
     # Toggle My Money Calendar tool pages prior to public launch.
     'MMT_MY_MONEY_CALENDAR': [],
 
+    # Toggle Cost of Credit Tool pages prior to public launch.
+    'MMT_COST_OF_CREDIT_TOOL': [],
+
     # During a Salesforce system outage, the following flag should be enabled
     # to alert users that the Collect community is down.
     'COLLECT_OUTAGE': [
