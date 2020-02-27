@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-import { TotalPurchaseAmount } from "../../components/total-purchase-amount";
-import { DownPayment } from "../../components/down-payment";
-import { CreditApr } from "../../components/credit-apr";
-import { MonthlyPayment } from "../../components/monthly-payment";
+import { TotalPurchaseAmount } from "../input/total-purchase-amount";
+import { DownPayment } from "../input/down-payment";
+import { CreditApr } from "../input/credit-apr";
+import { MonthlyPayment } from "../input/monthly-payment";
 // import { DealsAndPromotions } from "../../components/deals-and-promotions";
 import { DealOrPromo } from "../../components/deal-or-promo";
 import { TrueCostBreakdown } from "../../components/true-cost-breakdown";

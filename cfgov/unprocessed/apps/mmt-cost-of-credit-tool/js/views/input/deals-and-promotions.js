@@ -1,4 +1,4 @@
-import { DealOrPromo } from "./deal-or-promo";
+import { DealOrPromo } from "../../components/deal-or-promo";
 
 export const DealsAndPromotions = () => {
   return (
