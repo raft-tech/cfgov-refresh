@@ -1,6 +1,6 @@
 import { DealOrPromo } from "../../components/deal-or-promo";
 
-export const DealsAndPromotions = () => {
+export default function DealsAndPromotions() {
   return (
     <div>
       <h3>Deals and promotions</h3>
@@ -22,4 +22,4 @@ export const DealsAndPromotions = () => {
       />
     </div>
   );
-};
+}

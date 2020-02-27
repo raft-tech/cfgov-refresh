@@ -1,4 +1,4 @@
-export const TotalPurchaseAmount = () => {
+export default function TotalPurchaseAmount() {
   return (
     <div className="m-tool-card__bottom-border">
       <form>
@@ -18,11 +18,51 @@ export const TotalPurchaseAmount = () => {
               className="response-input__long"
             />
           </div>
-          {/* <input className="a-btn a-btn__full-on-xs" type="" value="Add" /> */}
+          <input className="a-btn a-btn__full-on-xs" type="" value="Add" />
         </div>
+        {/*}
+        <div class="o-form-action">
+          <div className="c-nav-buttons">
+            <div>
+              <Link
+                to="/total-purchase-amount"
+                className="a-btn a-btn__full-on-xs"
+              >
+                <div className="c-button-wrapper">
+                  <div className="c-button-words">Change the total cost</div>
+                  <div className="c-button-icon">
+                    <img
+                      src="/static/apps/mmt-cost-of-credit-tool/img/right-arrow.png"
+                      alt=""
+                      className="u-hide-on-print"
+                    />
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div>
+              <Link
+                to="/total-purchase-amount"
+                className="a-btn a-btn__full-on-xs"
+              >
+                <div>
+                  <div>
+                    <img
+                      src="/static/apps/mmt-cost-of-credit-tool/img/left-arrow.png"
+                      alt=""
+                      className="u-hide-on-print"
+                    />
+                  </div>
+                  <div>Add a down payment</div>
+                </div>
+              </Link>
+            </div>
+          </div>
 
-        <div class="o-form-action"></div>
+          <br />
+          <br />
+  </div> */}
       </form>
     </div>
   );
-};
+}

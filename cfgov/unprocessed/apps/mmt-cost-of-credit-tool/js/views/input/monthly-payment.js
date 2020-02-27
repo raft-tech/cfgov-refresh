@@ -1,4 +1,4 @@
-export const MonthlyPayment = () => {
+export default function MonthlyPayment() {
   return (
     <div className="m-tool-card__bottom-border">
       <form>
@@ -37,4 +37,4 @@ export const MonthlyPayment = () => {
       </form>
     </div>
   );
-};
+}

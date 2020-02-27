@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./views/home";
-import Tool from "./views/tool";
 import TotalPurchaseAmount from "./views/input/total-purchase-amount";
 import DownPayment from "./views/input/down-payment";
-import TotalPurchaseAmount from "./views/input/total-purchase-amount";
-import TotalPurchaseAmount from "./views/input/total-purchase-amount";
+import CreditApr from "./views/input/credit-apr";
+import MonthlyPayment from "./views/input/monthly-payment";
+import DealsAndPromotions from "./views/input/deals-and-promotions";
 
 const Routes = () => (
   <Router basename="/mmt-cost-of-credit-tool">
@@ -25,8 +25,8 @@ const Routes = () => (
         <Route path="/monthly-payment">
           <MonthlyPayment />
         </Route>
-        <Route path="/tool">
-          <Tool />
+        <Route path="/deals-and-promotions">
+          <DealsAndPromotions />
         </Route>
       </Switch>
     </div>

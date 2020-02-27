@@ -1,4 +1,4 @@
-export const CreditApr = () => {
+export default function CreditApr() {
   return (
     <div className="m-tool-card__bottom-border">
       <form>
@@ -28,4 +28,4 @@ export const CreditApr = () => {
       </form>
     </div>
   );
-};
+}

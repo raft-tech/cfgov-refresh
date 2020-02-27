@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { useHistory, Link } from "react-router-dom";
 import Hero from "../../components/hero";
 import Button from "../../components/button";
+
 import { useScrollToTop } from "../../components/scroll-to-top";
 
 import heroImg from "img/Hero_2.png";
@@ -15,7 +16,7 @@ export default function Home() {
   const nextPage = useCallback(
     evt => {
       evt.preventDefault();
-      history.push("/tool");
+      history.push("/total-purchase-amount");
     },
     [history]
   );
@@ -32,17 +33,14 @@ export default function Home() {
         image={heroImg}
         alt="True Cost of Credit Tool"
       />
-      <br />
 
       <br />
-      <Link
-        to="/tool"
-        // onClick={nextPage}
-        // onClick="/tool"
-        className="a-btn a-btn__full-on-xs"
-      >
-        Calculate the true cost
-      </Link>
+      <Button icon={arrowRight} iconSide="right" onClick={nextPage}>
+        Get started
+      </Button>
+
+      <br />
+      <br />
 
       <br />
       <br />

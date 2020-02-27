@@ -1,4 +1,4 @@
-export const DownPayment = () => {
+export default function DownPayment() {
   return (
     <div className="m-tool-card__bottom-border">
       <form>
@@ -27,4 +27,4 @@ export const DownPayment = () => {
       </form>
     </div>
   );
-};
+}
