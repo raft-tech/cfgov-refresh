@@ -28,7 +28,7 @@ export default function Home() {
         tag="True Cost Tool"
         title="Should I use credit to buy this?"
         subtitle="Are you considering making a purchase using credit to borrow money?  This tool will help
-        you understand the true cost of this purpchase.  True cost is the cost of the purchase plus the additional cost
+        you understand the true cost of this purchase.  True cost is the cost of the purchase plus the additional cost
         because you're purchasing with credit."
         image={heroImg}
         alt="True Cost of Credit Tool"
@@ -36,7 +36,7 @@ export default function Home() {
 
       <br />
       <Button icon={arrowRight} iconSide="right" onClick={nextPage}>
-        Get started
+        What is the price of your item?
       </Button>
 
       <br />

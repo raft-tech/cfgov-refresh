@@ -1,4 +1,32 @@
+import { useCallback } from "react";
+import { useHistory, Link } from "react-router-dom";
+import Button from "../../components/button";
+
+import { useScrollToTop } from "../../components/scroll-to-top";
+
+import arrowRight from "@cfpb/cfpb-icons/src/icons/arrow-right.svg";
+import arrowLeft from "@cfpb/cfpb-icons/src/icons/arrow-left.svg";
+
 export default function TotalPurchaseAmount() {
+  useScrollToTop();
+
+  const history = useHistory();
+
+  const prevPage = useCallback(
+    evt => {
+      evt.preventDefault();
+      history.push("/");
+    },
+    [history]
+  );
+
+  const nextPage = useCallback(
+    evt => {
+      evt.preventDefault();
+      history.push("/down-payment");
+    },
+    [history]
+  );
   return (
     <div className="m-tool-card__bottom-border">
       <form>
@@ -7,9 +35,8 @@ export default function TotalPurchaseAmount() {
         <div className="one-line-desc">
           Estimate the cost of the item including tax.
         </div>
-
-        <div class="m-form-field-with-button">
-          <div class="form-group">
+        <div className="m-form-field-with-button margin-top-bottom">
+          <div className="form-group">
             <input
               id=""
               type=""
@@ -18,51 +45,24 @@ export default function TotalPurchaseAmount() {
               className="response-input__long"
             />
           </div>
-          <input className="a-btn a-btn__full-on-xs" type="" value="Add" />
         </div>
-        {/*}
-        <div class="o-form-action">
-          <div className="c-nav-buttons">
-            <div>
-              <Link
-                to="/total-purchase-amount"
-                className="a-btn a-btn__full-on-xs"
-              >
-                <div className="c-button-wrapper">
-                  <div className="c-button-words">Change the total cost</div>
-                  <div className="c-button-icon">
-                    <img
-                      src="/static/apps/mmt-cost-of-credit-tool/img/right-arrow.png"
-                      alt=""
-                      className="u-hide-on-print"
-                    />
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div>
-              <Link
-                to="/total-purchase-amount"
-                className="a-btn a-btn__full-on-xs"
-              >
-                <div>
-                  <div>
-                    <img
-                      src="/static/apps/mmt-cost-of-credit-tool/img/left-arrow.png"
-                      alt=""
-                      className="u-hide-on-print"
-                    />
-                  </div>
-                  <div>Add a down payment</div>
-                </div>
-              </Link>
-            </div>
+        <br />
+        <Button type="submit">Add total purchase amount</Button>
+        <div className="display-row margin-top-bottom">
+          <div>
+            <Button icon={arrowLeft} iconSide="left" onClick={prevPage}>
+              Home
+            </Button>
           </div>
-
-          <br />
-          <br />
-  </div> */}
+          <div className="margin-left">
+            <Button icon={arrowRight} iconSide="right" onClick={nextPage}>
+              Down payment
+            </Button>
+          </div>
+        </div>
       </form>
+      <br />
+      <br />
     </div>
   );
 }

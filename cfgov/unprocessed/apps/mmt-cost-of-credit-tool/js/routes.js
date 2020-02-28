@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./views/home";
+import Tool from "./views/tool";
 import TotalPurchaseAmount from "./views/input/total-purchase-amount";
 import DownPayment from "./views/input/down-payment";
 import CreditApr from "./views/input/credit-apr";
@@ -27,6 +28,9 @@ const Routes = () => (
         </Route>
         <Route path="/deals-and-promotions">
           <DealsAndPromotions />
+        </Route>
+        <Route path="/tool">
+          <Tool />
         </Route>
       </Switch>
     </div>

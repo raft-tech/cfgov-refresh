@@ -1,4 +1,32 @@
+import { useCallback } from "react";
+import { useHistory, Link } from "react-router-dom";
+import Button from "../../components/button";
+
+import { useScrollToTop } from "../../components/scroll-to-top";
+
+import arrowRight from "@cfpb/cfpb-icons/src/icons/arrow-right.svg";
+import arrowLeft from "@cfpb/cfpb-icons/src/icons/arrow-left.svg";
+
 export default function CreditApr() {
+  useScrollToTop();
+
+  const history = useHistory();
+
+  const prevPage = useCallback(
+    evt => {
+      evt.preventDefault();
+      history.push("/down-payment");
+    },
+    [history]
+  );
+
+  const nextPage = useCallback(
+    evt => {
+      evt.preventDefault();
+      history.push("/monthly-payment");
+    },
+    [history]
+  );
   return (
     <div className="m-tool-card__bottom-border">
       <form>
@@ -11,7 +39,7 @@ export default function CreditApr() {
           Enter the annual interest rate for the credit card you're paying with.
         </div>
 
-        <div class="m-form-field-with-button">
+        <div class="m-form-field-with-button margin-top-bottom">
           <div class="form-group">
             <input
               id=""
@@ -21,11 +49,24 @@ export default function CreditApr() {
               className="response-input__long"
             />
           </div>
-          {/* <input className="a-btn a-btn__full-on-xs" type="" value="Add" /> */}
         </div>
-
-        <div class="o-form-action"></div>
+        <br />
+        <Button type="submit">Add credit APR</Button>
+        <div className="display-row margin-top-bottom">
+          <div>
+            <Button icon={arrowLeft} iconSide="left" onClick={prevPage}>
+              Down pmt
+            </Button>
+          </div>
+          <div className="margin-left">
+            <Button icon={arrowRight} iconSide="right" onClick={nextPage}>
+              Monthly pmt
+            </Button>
+          </div>
+        </div>
       </form>
+      <br />
+      <br />
     </div>
   );
 }

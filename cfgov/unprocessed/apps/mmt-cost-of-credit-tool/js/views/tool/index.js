@@ -24,30 +24,28 @@ import { TipsAndResources } from "../../components/tips-and-resources";
 export default function Tool() {
   return (
     <section id="tool">
-      <div className="m-tool__tag">True Cost Tool</div>
-      <h1>Enter the purchase details</h1>
-      <div className="m-tool-card__desc">
-        It's okay to estimate if you're not sure.
-      </div>
+      <Link to="/">Home</Link>
       <div className="o-tool-card-group">
-        <div className="m-tool-card">
-          {" "}
-          <TotalPurchaseAmount />
-        </div>
-        <div className="m-tool-card">
-          {" "}
-          <DownPayment />
-        </div>
-        <div className="m-tool-card">
-          {" "}
-          <CreditApr />
-        </div>
-        <div className="m-tool-card">
-          {" "}
-          <MonthlyPayment />
+        <div className="hide-tool">
+          <div className="m-tool-card">
+            {" "}
+            <TotalPurchaseAmount />
+          </div>
+          <div className="m-tool-card">
+            {" "}
+            <DownPayment />
+          </div>
+          <div className="m-tool-card">
+            {" "}
+            <CreditApr />
+          </div>
+          <div className="m-tool-card">
+            {" "}
+            <MonthlyPayment />
+          </div>
         </div>
 
-        <div className="o-tool-card-group__gray">
+        <div className="o-tool-card-group__gray hide-tool">
           <h3>Deals and promotions</h3>
           <DealOrPromo
             num="1"
