@@ -1,11 +1,11 @@
 import { flow, observable, computed, action } from 'mobx';
+import { asyncComputed } from 'computed-async-mobx';
 import { computedFn } from 'mobx-utils';
 import logger from '../lib/logger';
 import { toDateTime, dayOfYear } from '../lib/calendar-helpers';
 import { toMap } from '../lib/array-helpers';
 import CashFlowEvent from './models/cash-flow-event';
 import { DateTime } from 'luxon';
-import { transform } from '@babel/core';
 
 export default class CashFlowStore {
   @observable events = [];
@@ -74,6 +74,11 @@ export default class CashFlowStore {
     return new Set(signatures);
   }
 
+  earliestEventDate = asyncComputed(undefined, 50, async () => {
+    const firstEvent = await CashFlowStore.getFirstBy('date');
+    return firstEvent.date;
+  });
+
   /**
    * Get the user's available balance for the specified date
    *
@@ -135,6 +140,16 @@ export default class CashFlowStore {
     if (!events) return false;
 
     return Boolean(events.find(({ totalCents }) => totalCents < 0));
+  }
+
+  /**
+   * Determines whether or not a given date has any events
+   *
+   * @param {Date|DateTime} date A JS date or Luxon DateTime object
+   * @returns {boolean}
+   */
+  dateHasEvents(date) {
+    return Boolean(this.getEventsForDate(date));
   }
 
   /**
@@ -210,8 +225,21 @@ export default class CashFlowStore {
    */
   deleteEvent = flow(function*(id) {
     const event = this.eventsById.get(id);
+    const recurrences = yield event.getAllRecurrences();
+    const deletedIDs = [event.id];
+
     yield event.destroy();
-    this.events = this.events.filter((e) => e.id !== id);
+    this.logger.debug('Destroy event with ID %d', event.id);
+
+    if (recurrences && recurrences.length) {
+      for (const recurrence of recurrences) {
+        yield recurrence.destroy();
+        deletedIDs.push(recurrence.id);
+        this.logger.debug('Destroy event recurrence with ID %d', recurrence.id);
+      }
+    }
+
+    this.events = this.events.filter((e) => !deletedIDs.includes(e.id));
   });
 
   createRecurrences = flow(function*(event) {

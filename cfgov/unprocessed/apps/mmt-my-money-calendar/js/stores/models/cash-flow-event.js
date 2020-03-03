@@ -1,5 +1,5 @@
 import { observable, computed, action } from 'mobx';
-import { RRule, rrulestr } from 'rrule';
+import { rrulestr } from 'rrule';
 import * as yup from 'yup';
 import { DateTime } from 'luxon';
 import EventEmitter from 'eventemitter3';
@@ -7,180 +7,201 @@ import { asyncComputed } from 'computed-async-mobx';
 import logger from '../../lib/logger';
 import dbPromise from '../../lib/database';
 import { transform } from '../../lib/object-helpers';
-import { compact } from '../../lib/array-helpers';
+import dotProp from 'dot-prop';
 
-export const Categories = {
+class CategoryTree {
+  constructor(categories = {}) {
+    this.categories = categories;
+  }
+
+  get all() {
+    return this.categories;
+  }
+
+  get(path = '') {
+    if (path.length && !(/\./).test(path) && this.categories[path]) return this.categories[path].subcategories;
+    return dotProp.get(this.categories, path.replace(/\./g, '.subcategories.'));
+  }
+}
+
+export const Categories = new CategoryTree({
   income: {
-    salary: {
-      name: 'Job',
-      description: 'Income from employment',
-    },
-    benefits: {
-      name: 'Benefits',
-      subcategories: {
-        va: {
-          name: 'Veterans Benefits',
-        },
-        disability: {
-          name: 'Disability Benefits',
-        },
-        ss: {
-          name: 'Social Security Benefits',
-        },
-        unemployment: {
-          name: 'Unemployment',
-        },
-        tanf: {
-          name: 'TANF',
-        },
-        snap: {
-          name: 'SNAP',
+    name: 'Income',
+    subcategories: {
+      salary: {
+        name: 'Job',
+        description: 'Income from employment',
+      },
+      benefits: {
+        name: 'Benefits',
+        subcategories: {
+          va: {
+            name: 'Veterans Benefits',
+          },
+          disability: {
+            name: 'Disability Benefits',
+          },
+          ss: {
+            name: 'Social Security Benefits',
+          },
+          unemployment: {
+            name: 'Unemployment',
+          },
+          tanf: {
+            name: 'TANF',
+          },
+          snap: {
+            name: 'SNAP',
+          },
         },
       },
-    },
-    other: {
-      name: 'Other',
-      description: 'Includes child support payments, etc.',
+      other: {
+        name: 'Other',
+        description: 'Includes child support payments, etc.',
+      },
     },
   },
   expense: {
-    housing: {
-      name: 'Housing',
-      subcategories: {
-        mortgage: {
-          name: 'Mortgage',
-        },
-        rent: {
-          name: 'Rent',
-        },
-        propertyTaxes: {
-          name: 'Property Taxes',
-        },
-        rentersInsurance: {
-          name: 'Renters Insurance',
-        },
-        homeownersInsurance: {
-          name: 'Homeowners Insurance',
-        },
-      },
-    },
-    utilities: {
-      name: 'Utilities',
-      subcategories: {
-        fuel: {
-          name: 'Natural Gas, Oil, Propane',
-        },
-        waterSewage: {
-          name: 'Water/Sewage',
-        },
-        electricity: {
-          name: 'Electricity',
-        },
-        trash: {
-          name: 'Trash',
-        },
-        cable: {
-          name: 'Cable/Satellite',
-        },
-        internet: {
-          name: 'Internet',
-        },
-        phone: {
-          name: 'Phone/Cell'
-        },
-      }
-    },
-    transportation: {
-      name: 'Transportation',
-      subcategories: {
-        carPayment: {
-          name: 'Car Payment',
-        },
-        carMaintenance: {
-          name: 'Car Maintenance',
-        },
-        carInsurance: {
-          name: 'Car Insurance',
-        },
-        gas: {
-          name: 'Gas',
-        },
-        publicTransportation: {
-          name: 'Public Transportation Fare',
+    name: 'Expense',
+    subcategories: {
+      housing: {
+        name: 'Housing',
+        subcategories: {
+          mortgage: {
+            name: 'Mortgage',
+          },
+          rent: {
+            name: 'Rent',
+          },
+          propertyTaxes: {
+            name: 'Property Taxes',
+          },
+          rentersInsurance: {
+            name: 'Renters Insurance',
+          },
+          homeownersInsurance: {
+            name: 'Homeowners Insurance',
+          },
         },
       },
-    },
-    food: {
-      name: 'Food',
-      subcategories: {
-        eatingOut: {
-          name: 'Eating Out',
-        },
-        groceries: {
-          name: 'Groceries',
-        },
-      },
-    },
-    personal: {
-      name: 'Personal',
-      subcategories: {
-        emergencySavings: {
-          name: 'Emergency Savings',
-        },
-        healthcare: {
-          name: 'Health Care',
-        },
-        subscriptions:  {
-          name: 'Subscriptions',
-        },
-        clothing: {
-          name: 'Clothing',
-        },
-        giving: {
-          name: 'Giving',
-        },
-        education: {
-          name: 'Education',
-        },
-        childCare: {
-          name: 'Child Care',
-        },
-        personalCare: {
-          name: 'Personal Care/Cosmetics',
-        },
-        pets: {
-          name: 'Pets',
-        },
-        householdSupplies: {
-          name: 'Household Supplies',
-        },
-        funMoney: {
-          name: 'Fun Money',
+      utilities: {
+        name: 'Utilities',
+        subcategories: {
+          fuel: {
+            name: 'Natural Gas, Oil, Propane',
+          },
+          waterSewage: {
+            name: 'Water/Sewage',
+          },
+          electricity: {
+            name: 'Electricity',
+          },
+          trash: {
+            name: 'Trash',
+          },
+          cable: {
+            name: 'Cable/Satellite',
+          },
+          internet: {
+            name: 'Internet',
+          },
+          phone: {
+            name: 'Phone/Cell',
+          },
         },
       },
-    },
-    debt: {
-      name: 'Debt',
-      subcategories: {
-        medicalBill: {
-          name: 'Medical Bill',
+      transportation: {
+        name: 'Transportation',
+        subcategories: {
+          carPayment: {
+            name: 'Car Payment',
+          },
+          carMaintenance: {
+            name: 'Car Maintenance',
+          },
+          carInsurance: {
+            name: 'Car Insurance',
+          },
+          gas: {
+            name: 'Gas',
+          },
+          publicTransportation: {
+            name: 'Public Transportation Fare',
+          },
         },
-        courtOrderedExpenses: {
-          name: 'Court-Ordered Expenses',
+      },
+      food: {
+        name: 'Food',
+        subcategories: {
+          eatingOut: {
+            name: 'Eating Out',
+          },
+          groceries: {
+            name: 'Groceries',
+          },
         },
-        personalLoan: {
-          name: 'Personal Loan',
+      },
+      personal: {
+        name: 'Personal',
+        subcategories: {
+          emergencySavings: {
+            name: 'Emergency Savings',
+          },
+          healthcare: {
+            name: 'Health Care',
+          },
+          subscriptions: {
+            name: 'Subscriptions',
+          },
+          clothing: {
+            name: 'Clothing',
+          },
+          giving: {
+            name: 'Giving',
+          },
+          education: {
+            name: 'Education',
+          },
+          childCare: {
+            name: 'Child Care',
+          },
+          personalCare: {
+            name: 'Personal Care/Cosmetics',
+          },
+          pets: {
+            name: 'Pets',
+          },
+          householdSupplies: {
+            name: 'Household Supplies',
+          },
+          funMoney: {
+            name: 'Fun Money',
+          },
         },
-        creditCard: {
-          name: 'Credit Card',
-        },
-        studentLoan: {
-          name: 'Student Loan',
+      },
+      debt: {
+        name: 'Debt',
+        subcategories: {
+          medicalBill: {
+            name: 'Medical Bill',
+          },
+          courtOrderedExpenses: {
+            name: 'Court-Ordered Expenses',
+          },
+          personalLoan: {
+            name: 'Personal Loan',
+          },
+          creditCard: {
+            name: 'Credit Card',
+          },
+          studentLoan: {
+            name: 'Student Loan',
+          },
         },
       },
     },
   },
-};
+});
 
 export default class CashFlowEvent {
   @observable originalEventID;
@@ -232,7 +253,10 @@ export default class CashFlowEvent {
     date: yup.date().required(),
     category: yup.string().required(),
     subcategory: yup.string(),
-    totalCents: yup.number().integer().default(0),
+    totalCents: yup
+      .number()
+      .integer()
+      .default(0),
     recurs: yup.boolean().default(false),
     rruleStr: yup.string(),
     createdAt: yup.date().default(() => new Date()),
@@ -267,13 +291,20 @@ export default class CashFlowEvent {
    * @returns {Promise<CashFlowEvent[]>} A promise resolving to an array of CashFlowEvent instances
    */
   static async getAllBy(indexName, direction = 'next') {
-    //console.profile('getAllBy');
-    const { store } = await this.transaction();
-    const index = store.index(indexName);
-    let cursor = await index.openCursor(null, direction);
-    const results = await this.getAllFromCursor(cursor);
-    //console.profileEnd('getAllBy');
-    return results;
+    const cursor = await this.openCursor(indexName, direction);
+    return this.getAllFromCursor(cursor);
+  }
+
+  /**
+   * Get the first object in an index
+   *
+   * @param {string} indexName - The index to use for sorting
+   * @param {string} [direction="next"] - The direction in which to sort
+   * @returns {Promise<CashFlowEvent>}
+   */
+  static async getFirstBy(indexName, direction = 'next') {
+    const cursor = await this.openCursor(indexName, direction);
+    return cursor.value;
   }
 
   /**
@@ -297,7 +328,7 @@ export default class CashFlowEvent {
   static async getByDateRange(start, end = new Date()) {
     const fromDate = new Date(start);
     const range = IDBKeyRange.lowerBound(fromDate);
-    const cursor = await this.rangeQuery('date', range);
+    const cursor = await this.openCursor('date', this.directions.ASC, range);
     return this.getAllFromCursor(cursor);
   }
 
@@ -312,10 +343,17 @@ export default class CashFlowEvent {
     return results;
   }
 
-  static async rangeQuery(indexName, keyRange, direction = this.directions.ASC) {
+  /**
+   * Opens a cursor into an index for iteration
+   *
+   * @param {string} indexName The index to use for querying
+   * @param {string} [direction="next"] The sort direction
+   * @param {string|null} [range=null] The key range to query
+   */
+  static async openCursor(indexName, direction = this.directions.ASC, range = null) {
     const { store } = await this.transaction();
-    const index = store.index(indexName, direction);
-    return index.openCursor(keyRange);
+    const index = store.index(indexName);
+    return index.openCursor(range, direction);
   }
 
   /**
@@ -385,10 +423,15 @@ export default class CashFlowEvent {
   @computed get recurrenceDates() {
     const now = DateTime.local();
 
-    return this.recurrenceRule.between(
-      this.dateTime.startOf('day').toJSDate(),
-      now.plus({ months: this.constructor.recurrenceMonths }).endOf('day').toJSDate()
-    ).map(DateTime.fromJSDate);
+    return this.recurrenceRule
+      .between(
+        this.dateTime.startOf('day').toJSDate(),
+        now
+          .plus({ months: this.constructor.recurrenceMonths })
+          .endOf('day')
+          .toJSDate()
+      )
+      .map(DateTime.fromJSDate);
   }
 
   @computed get dateTime() {
@@ -468,7 +511,6 @@ export default class CashFlowEvent {
     const key = await store.put(this.toJS());
     await tx.complete;
 
-
     if (!this.id && !this.persisted) this.markPersisted(key);
     /*
     if (this.recurs && this.recurrenceRule && !this.isRecurrence)
@@ -488,8 +530,11 @@ export default class CashFlowEvent {
   async destroy() {
     if (!this.persisted) return false;
     const { tx, store } = await this.transaction('readwrite');
+
     await store.delete(this.id);
     await tx.complete;
+
+    this.constructor.emit('destroy', this);
     return this;
   }
 
@@ -536,7 +581,12 @@ export default class CashFlowEvent {
     const { store } = await this.transaction();
     const index = store.index('originalEventID_date');
     const lowerBound = [id, this.constructor.MIN_DATE.toJSDate()];
-    const upperBound = [id, DateTime.local().plus({ months: 3 }).toJSDate()];
+    const upperBound = [
+      id,
+      DateTime.local()
+        .plus({ months: 3 })
+        .toJSDate(),
+    ];
     const range = IDBKeyRange.bound(lowerBound, upperBound);
     let cursor = await index.openCursor(range, 'next');
 
