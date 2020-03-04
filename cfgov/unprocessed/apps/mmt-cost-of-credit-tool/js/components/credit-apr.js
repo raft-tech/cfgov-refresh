@@ -11,8 +11,8 @@ export const CreditApr = () => {
           Enter the annual interest rate for the credit card you're paying with.
         </div>
 
-        <div class="m-form-field-with-button">
-          <div class="form-group">
+        <div className="m-form-field-with-button">
+          <div className="form-group">
             <input
               id=""
               type=""

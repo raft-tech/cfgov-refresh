@@ -8,7 +8,7 @@ export const TrueCostSlider = props => (
       <h3>See how adjusting the credit APR affects the true cost</h3>
       <div className="m-tool__image-full">
         {" "}
-        <img src={trueCostSliderImg} />
+        <img src={trueCostSliderImg} alt="True Cost Slider" />
       </div>
     </div>
     <div>

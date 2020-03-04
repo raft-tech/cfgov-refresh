@@ -8,8 +8,8 @@ export const TotalPurchaseAmount = () => {
           Estimate the cost of the item including tax.
         </div>
 
-        <div class="m-form-field-with-button">
-          <div class="form-group">
+        <div className="m-form-field-with-button">
+          <div className="form-group">
             <input
               id=""
               type=""
@@ -21,7 +21,7 @@ export const TotalPurchaseAmount = () => {
           {/* <input className="a-btn a-btn__full-on-xs" type="" value="Add" /> */}
         </div>
 
-        <div class="o-form-action"></div>
+        <div className="o-form-action"></div>
       </form>
     </div>
   );
