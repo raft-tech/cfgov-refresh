@@ -25,13 +25,14 @@ export default function Tool() {
   return (
     <section id="tool">
       <Link
-        to="/home"
+        to="/"
         // onClick={nextPage}
         // onClick="/tool"
         className="a-btn a-btn__full-on-xs"
       >
         Home
       </Link>
+      <br />
       <div className="m-tool__tag">True Cost Tool</div>
       <h1>Enter the purchase details</h1>
       <div className="m-tool-card__desc">
