@@ -30,7 +30,7 @@ export default function Tool() {
         // onClick="/tool"
         className="a-btn a-btn__full-on-xs"
       >
-        Calculate the true cost
+        Home
       </Link>
       <div className="m-tool__tag">True Cost Tool</div>
       <h1>Enter the purchase details</h1>
