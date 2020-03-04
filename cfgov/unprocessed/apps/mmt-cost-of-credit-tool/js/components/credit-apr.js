@@ -4,7 +4,6 @@ export const CreditApr = () => {
       <form>
         <div className=" m-tool__tag">step 3/4</div>
         <h2>
-          {" "}
           Credit APR <em>?</em>
         </h2>
         <div className="one-line-desc">

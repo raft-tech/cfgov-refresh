@@ -5,7 +5,6 @@ import { useScrollToTop } from "../../components/scroll-to-top";
 
 import heroImg from "img/Hero_2.png";
 import arrowRight from "@cfpb/cfpb-icons/src/icons/arrow-right.svg";
-import { PropTypes } from "mobx-react";
 
 export default function Home() {
   useScrollToTop();
@@ -18,12 +17,13 @@ export default function Home() {
       <Hero
         tag="True Cost Tool"
         title="Should I use credit to buy this?"
-        subtitle={props.children}
+        subtitle="Are you considering making a purchase using credit to borrow money?  This tool will help
+        you understand the true cost of this purchase.  True cost is the cost of the purchase plus the additional cost
+        because you're purchasing with credit."
         image={heroImg}
         alt="True Cost of Credit Tool"
       />
       <br />
-
       <br />
       <Link
         to="/tool"

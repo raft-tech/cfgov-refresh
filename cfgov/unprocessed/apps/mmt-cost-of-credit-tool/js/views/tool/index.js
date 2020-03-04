@@ -40,19 +40,15 @@ export default function Tool() {
       </div>
       <div className="o-tool-card-group">
         <div className="m-tool-card">
-          {" "}
           <TotalPurchaseAmount />
         </div>
         <div className="m-tool-card">
-          {" "}
           <DownPayment />
         </div>
         <div className="m-tool-card">
-          {" "}
           <CreditApr />
         </div>
         <div className="m-tool-card">
-          {" "}
           <MonthlyPayment />
         </div>
 
@@ -130,10 +126,8 @@ export default function Tool() {
       <SectionTip
         label="Resource"
         text={
-          <>
             You are charged interest...
             <Link to="/resource_url">Here's a link to the resource</Link>
-          </>
         }
       /> */}
     </section>

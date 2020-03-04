@@ -5,9 +5,6 @@ import { render } from "react-dom";
 
 import Routes from "./routes";
 
-
-
-
 const App = () => (
   <section className="mmt-cost-of-credit-tool">
     <Routes />

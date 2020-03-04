@@ -12,7 +12,7 @@ const Hero = ({ tag, title, subtitle, image, alt = "" }) => {
         <div>
           <div className="m-tool__tag">{tag}</div>
           <h1>{title}</h1>
-          <h2>{subtitle}</h2>
+          <h3>{subtitle}</h3>
         </div>
         <div className="m-tool__image-full">{imageTag}</div>
       </div>
