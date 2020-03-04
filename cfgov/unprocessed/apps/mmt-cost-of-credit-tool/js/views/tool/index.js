@@ -24,6 +24,14 @@ import { TipsAndResources } from "../../components/tips-and-resources";
 export default function Tool() {
   return (
     <section id="tool">
+      <Link
+        to="/home"
+        // onClick={nextPage}
+        // onClick="/tool"
+        className="a-btn a-btn__full-on-xs"
+      >
+        Calculate the true cost
+      </Link>
       <div className="m-tool__tag">True Cost Tool</div>
       <h1>Enter the purchase details</h1>
       <div className="m-tool-card__desc">
