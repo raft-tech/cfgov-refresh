@@ -1,14 +1,14 @@
-// import * as idb from "idb";
-import { render } from "react-dom";
-// import { Workbox } from "workbox-window";
-// import { DateTime, Info } from "luxon";
 
-import Routes from "./routes";
 
-const App = () => (
-  <section className="mmt-cost-of-credit-tool">
-    <Routes />
-  </section>
-);
+import store from "./store";
 
-render(<App />, document.querySelector("#mmt-cost-of-credit-tool"));
+const render = () => {
+    ReactDOM.render(
+      <Tool todos={store.getState().todos} />,
+      document.querySelector("#mmt-cost-of-credit-tool")
+    );
+}
+
+store.subscribe(render);
+render();
+

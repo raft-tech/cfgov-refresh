@@ -10,10 +10,10 @@ export const DownPayment = () => {
           How much can you pay upfront in cash?
         </div>
 
-        <div class="m-form-field-with-button">
-          <div class="form-group">
+        <div className="m-form-field-with-button">
+          <div className="form-group">
             <input
-              id=""
+              id="down-payment"
               type=""
               name=""
               placeholder=""
@@ -23,7 +23,7 @@ export const DownPayment = () => {
           {/* <input className="a-btn a-btn__full-on-xs" type="" value="Add" /> */}
         </div>
 
-        <div class="o-form-action"></div>
+        <div className="o-form-action"></div>
       </form>
     </div>
   );

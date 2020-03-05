@@ -13,7 +13,7 @@ export const CreditApr = () => {
         <div className="m-form-field-with-button">
           <div className="form-group">
             <input
-              id=""
+              id="credit-apr"
               type=""
               name=""
               placeholder=""
@@ -23,7 +23,7 @@ export const CreditApr = () => {
           {/* <input className="a-btn a-btn__full-on-xs" type="" value="Add" /> */}
         </div>
 
-        <div class="o-form-action"></div>
+        <div className="o-form-action"></div>
       </form>
     </div>
   );

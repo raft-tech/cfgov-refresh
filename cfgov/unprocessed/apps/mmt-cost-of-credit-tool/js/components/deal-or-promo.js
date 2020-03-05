@@ -6,7 +6,7 @@ export const DealOrPromo = props => {
         {props.title} <em>?</em>
       </h3>
       <div className="m-tool-card__desc">{props.desc}</div>
-      <input type="input" className="response-input__long"></input>
+      <input id="deal" type="input" className="response-input__long"></input>
     </div>
   );
 };

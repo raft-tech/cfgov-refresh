@@ -5,13 +5,13 @@ export const MonthlyPayment = () => {
         <div className=" m-tool__tag">step 4/4</div>
         <h2>Monthly payment</h2>
 
-        <div class="m-form-field-with-button">
+        <div className="m-form-field-with-button">
           <div className="one-line-desc">
             How much can you comfortably pay each month?
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <input
-              id=""
+              id="monthly-payment"
               type=""
               name=""
               placeholder=""
@@ -20,10 +20,10 @@ export const MonthlyPayment = () => {
             <div className="m-tool__tag"> - or - </div>
             <h2>Months to pay off</h2>
             <div className="m-tool-card__desc">
-              How much can you comfortably pay each month?
+              How many months would you like to take to pay this expense off?
             </div>
             <input
-              id=""
+              id="how-many-months"
               type=""
               name=""
               placeholder=""
@@ -33,7 +33,7 @@ export const MonthlyPayment = () => {
           {/* <input className="a-btn a-btn__full-on-xs" type="" value="Add" /> */}
         </div>
 
-        <div class="o-form-action"></div>
+        <div className="o-form-action"></div>
       </form>
     </div>
   );
