@@ -1,14 +1,17 @@
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 
+import Routes from './routes';
 
-import store from "./store";
+render(
+  <Provider store={store}>
+    <section className="mmt-cost-of-credit-tool">
+      <Routes />
+    </section>
+  </Provider>,
+  document.querySelector('#mmt-cost-of-credit-tool')
+);
 
-const render = () => {
-    ReactDOM.render(
-      <Tool todos={store.getState().todos} />,
-      document.querySelector("#mmt-cost-of-credit-tool")
-    );
-}
-
-store.subscribe(render);
-render();
-
+// store.subscribe(render);
+// render();

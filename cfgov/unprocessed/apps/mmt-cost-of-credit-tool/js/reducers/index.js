@@ -1,4 +1,4 @@
-import * as actions from "../actions";
+import { SET_TOTAL_PURCHASE_AMOUNT, SET_DOWN_PAYMENT, SET_CREDIT_APR_PCT } from '../actions';
 
 const initialState = {
   // Initial inputs
@@ -16,25 +16,22 @@ const initialState = {
   // Special financing
 
   promoDealPct: null,
-  promoDealMonths: null
+  promoDealMonths: null,
 };
 
-export const cocReducer = (state = initialState, action) => {
-  if (action.type = actions.SET_TOTAL_PURCHASE_AMOUNT) {
+export default (state = initialState, action) => {
+  if (action.type === SET_TOTAL_PURCHASE_AMOUNT) {
     return Object.assign({}, state, {
-      totalPurchaseAmount: action.amount
+      totalPurchaseAmount: action.amount,
     });
-  } else if (action.type = actions.SET_DOWN_PAYMENT) {
+  } else if (action.type === SET_DOWN_PAYMENT) {
     return Object.assign({}, state, {
-      downPayment: action.amount
+      downPayment: action.amount,
     });
-  } else if (action.type = actions.ADD_TODO) {
-    return [
-      ...state,
-      todo(undefined, action)
-    ];
-  } else if (action.type = actions.TOGGLE_TODO) {
-    return state.monthlyPayment(t => todo(t, action));
+  } else if (action.type === SET_CREDIT_APR_PCT) {
+    return Object.assign({}, state, {
+      creditAprPct: action.apr,
+    });
   }
   return state;
 };

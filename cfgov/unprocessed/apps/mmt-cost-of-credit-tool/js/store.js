@@ -1,5 +1,5 @@
-import { createStore } from "redux";
+import { createStore } from 'redux';
 
-import { cocReducer } from "./reducers";
+import reducer from './reducers';
 
-export default createStore(cocReducer);
+export default createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
