@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { setDownPayment } from '../actions';
 import { formatCurrency } from '../services/currencyServices';
 
-function DownPayment(props) {
+export const DownPayment = (props) => {
   return (
     <div className="m-tool-card__bottom-border">
       <form onSubmit={(e) => e.preventDefault()}>
@@ -24,7 +24,7 @@ function DownPayment(props) {
       </form>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {

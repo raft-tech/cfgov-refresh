@@ -1,4 +1,10 @@
-import { SET_TOTAL_PURCHASE_AMOUNT, SET_DOWN_PAYMENT, SET_CREDIT_APR_PCT } from '../actions';
+import {
+  SET_TOTAL_PURCHASE_AMOUNT,
+  SET_DOWN_PAYMENT,
+  SET_CREDIT_APR_PCT,
+  SET_MONTHLY_PAYMENT,
+  SET_MONTHS_TO_PAY_OFF,
+} from '../actions';
 
 const initialState = {
   // Initial inputs
@@ -31,6 +37,14 @@ export default (state = initialState, action) => {
   } else if (action.type === SET_CREDIT_APR_PCT) {
     return Object.assign({}, state, {
       creditAprPct: action.apr,
+    });
+  } else if (action.type === SET_MONTHLY_PAYMENT) {
+    return Object.assign({}, state, {
+      monthlyPayment: action.amount,
+    });
+  } else if (action.type === SET_MONTHS_TO_PAY_OFF) {
+    return Object.assign({}, state, {
+      monthsToPayOff: action.months,
     });
   }
   return state;
