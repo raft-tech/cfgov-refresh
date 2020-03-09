@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { setTotalPurchaseAmount } from '../actions';
-import { formatCurrency } from '../services/currencyServices';
+import { formatCurrency } from '../lib/currency-helpers';
 
 const TotalPurchaseAmount = (props) => {
   return (
@@ -11,7 +11,7 @@ const TotalPurchaseAmount = (props) => {
         <div className="one-line-desc">Estimate the cost of the item including tax.</div>
         <div className="form-group">
           <input
-            className="div-style"
+            className="response-input__long"
             onChange={(e) => props.setTotalPurchaseAmount(e.target.value)}
             defaultValue={formatCurrency(props.totalPurchaseAmount)}
           />

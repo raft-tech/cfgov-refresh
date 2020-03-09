@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { setMonthlyPayment } from '../actions';
 import { setMonthsToPayOff } from '../actions';
-import { formatCurrency } from '../services/currencyServices';
+import { formatCurrency } from '../lib/currency-helpers';
 
 export const MonthlyPayment = (props) => {
   return (
@@ -12,7 +12,7 @@ export const MonthlyPayment = (props) => {
         <div className="one-line-desc">How much can you comfortably pay each month?</div>
         <div className="form-group">
           <input
-            className="div-style"
+            className="response-input__long"
             onChange={(e) => props.setMonthlyPayment(e.target.value)}
             defaultValue={formatCurrency(props.monthlyPayment)}
           />
@@ -24,7 +24,7 @@ export const MonthlyPayment = (props) => {
         <div className="m-tool-card__desc">How many months would you like to take to pay this expense off?</div>
         <div className="form-group">
           <input
-            className="div-style"
+            className="response-input__long"
             onChange={(e) => props.setMonthsToPayOff(e.target.value)}
             defaultValue={props.monthsToPayOff}
           />

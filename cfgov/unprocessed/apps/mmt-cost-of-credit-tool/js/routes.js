@@ -7,7 +7,7 @@ const Routes = () => (
     <div className="app">
       <Switch>
         <Route exact path="/">
-          <Tool />
+          <Home />
         </Route>
         <Route path="/tool">
           <Tool />

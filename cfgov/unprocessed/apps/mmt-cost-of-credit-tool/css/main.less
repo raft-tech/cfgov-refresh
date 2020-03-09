@@ -1,7 +1,8 @@
 @import (reference) '../../../css/main.less';
 
 @action_link_active_bg: #e6e8e9;
-@text: orange;
+@text: #0072ce;
+@tipicon: #5674a3;
 
 .div-style {
   border: 1px solid blue;
@@ -151,6 +152,7 @@
   box-sizing: border-box;
   width: 80%;
   margin: 6px auto;
+  padding: 3px;
   border: 1px solid @gray;
   line-height: 1.8em;
 }
@@ -225,14 +227,18 @@
   }
 
   &__item {
-    // flex-basis: 25%;
+    flex-basis: 18%;
 
     .cf-icon-svg {
       width: 100%;
       max-width: 30px;
-      height: auto;
+      // height: auto;
       fill: @text;
     }
+  }
+
+  &__label {
+    flex-basis: 78%;
   }
 
   &__link-icon {
@@ -240,8 +246,8 @@
     // flex-direction: column;
     // align-items: center;
     text-align: center;
-    padding-right: 4px;
-    // height: 30px;
+    margin-right: 4px;
+    width: 1rem;
   }
 
   &__link {
@@ -266,7 +272,13 @@
   &__link-label {
     color: @text;
     font-size: 12px;
+    align-self: center;
   }
+}
+
+.tip-card-icon {
+  float: left;
+  color: @tipicon;
 }
 
 // .m-tip {

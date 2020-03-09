@@ -14,7 +14,7 @@ export const CreditAprPct = (props) => {
         <div className="m-form-field-with-button">
           <div className="form-group">
             <input
-              className="div-style"
+              className="response-input__long"
               onChange={(e) => props.setCreditAprPct(e.target.value)}
               defaultValue={props.creditAprPct}
             />

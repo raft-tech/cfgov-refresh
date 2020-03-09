@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { formatCurrency } from '../services/currencyServices';
+import { formatCurrency } from '../lib/currency-helpers';
 
 export const TrueCostDetail = (props) => (
   <div className="m-tool-card display-row">

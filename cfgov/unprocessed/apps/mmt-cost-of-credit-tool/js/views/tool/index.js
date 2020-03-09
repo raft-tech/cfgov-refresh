@@ -8,7 +8,7 @@ import MonthlyPayment from '../../components/monthly-payment';
 import Deals from '../../components/deals';
 import { TrueCostBreakdown } from '../../components/true-cost-breakdown';
 import { AlternatePayoffScenarios } from '../../components/alternate-payoff-scenarios';
-import { TipsAndResources } from '../../components/tips-and-resources';
+import TipsAndResources from '../../components/tips-and-resources';
 
 export default function Tool() {
   const [dealsVisible, setDealsVisible] = useState(false);

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { setDownPayment } from '../actions';
-import { formatCurrency } from '../services/currencyServices';
+import { formatCurrency } from '../lib/currency-helpers';
 
 export const DownPayment = (props) => {
   return (
@@ -15,7 +15,7 @@ export const DownPayment = (props) => {
         <div className="m-form-field-with-button">
           <div className="form-group">
             <input
-              className="div-style"
+              className="response-input__long"
               onChange={(e) => props.setDownPayment(e.target.value)}
               defaultValue={formatCurrency(props.downPaymentAmount)}
             />

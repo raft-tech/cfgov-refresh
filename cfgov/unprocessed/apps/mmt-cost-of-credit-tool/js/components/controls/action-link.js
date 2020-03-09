@@ -1,5 +1,3 @@
-import add from '@cfpb/cfpb-icons/src/icons/add.svg';
-
 export const NavItem = ({ icon, label }) => {
   return (
     <li className="action__link">
@@ -9,10 +7,10 @@ export const NavItem = ({ icon, label }) => {
   );
 };
 
-export const ActionLink = ({ icon, label }) => {
+export const ActionLink = ({ icon, text }) => {
   return (
     <ul>
-      <NavItem icon={add} label="Show" />
+      <NavItem icon={icon} label={text} />
     </ul>
   );
 };
