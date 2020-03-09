@@ -1,13 +1,13 @@
 import { flow, observable, computed, action } from 'mobx';
+import { asyncComputed } from 'computed-async-mobx';
 import { computedFn } from 'mobx-utils';
 import logger from '../lib/logger';
-import { toDateTime, dayOfYear } from '../lib/calendar-helpers';
+import { toDayJS } from '../lib/calendar-helpers';
 import { toMap } from '../lib/array-helpers';
 import CashFlowEvent from './models/cash-flow-event';
-import { DateTime } from 'luxon';
-import { transform } from '@babel/core';
 
 export default class CashFlowStore {
+  @observable eventsLoaded = false;
   @observable events = [];
 
   constructor(rootStore) {
@@ -74,14 +74,19 @@ export default class CashFlowStore {
     return new Set(signatures);
   }
 
+  earliestEventDate = asyncComputed(undefined, 50, async () => {
+    const firstEvent = await CashFlowStore.getFirstBy('date');
+    return firstEvent.date;
+  });
+
   /**
    * Get the user's available balance for the specified date
    *
-   * @param {Date|DateTime} stopDate - The date to check the balance for
+   * @param {Date|dayjs} stopDate - The date to check the balance for
    * @returns {Number} the balance in dollars
    */
   getBalanceForDate = computedFn(function getBalanceForDate(stopDate) {
-    stopDate = toDateTime(stopDate).endOf('day');
+    stopDate = toDayJS(stopDate).endOf('day');
     const stopTimestamp = stopDate.valueOf();
 
     if (!this.events.length) return totalInCents;
@@ -100,7 +105,7 @@ export default class CashFlowStore {
   /**
    * Get the total amount of money received or spent for a particular day
    *
-   * @param {Date|DateTime} date - The date
+   * @param {Date|dayjs} date - The date
    * @returns {Number} The amount of money for that day received or spent
    */
   getTotalForDate = computedFn(function getTotalForDate(date) {
@@ -112,7 +117,7 @@ export default class CashFlowStore {
   /**
    * Determines whether or not the given date has any income events
    *
-   * @param {Date|DateTime} date - The date to check
+   * @param {Date|dayjs} date - The date to check
    * @returns {Boolean}
    */
   dateHasIncome(date) {
@@ -126,7 +131,7 @@ export default class CashFlowStore {
   /**
    * Determines whether or not the given date has any expense events
    *
-   * @param {Date|DateTime} date - The date to check
+   * @param {Date|dayjs} date - The date to check
    * @returns {Boolean}
    */
   dateHasExpenses(date) {
@@ -138,13 +143,23 @@ export default class CashFlowStore {
   }
 
   /**
+   * Determines whether or not a given date has any events
+   *
+   * @param {Date|dayjs} date A JS date or dayjs object
+   * @returns {boolean}
+   */
+  dateHasEvents(date) {
+    return Boolean(this.getEventsForDate(date));
+  }
+
+  /**
    * Returns all cash flow events for the given date
    *
-   * @param {Date|DateTime} date - The date to check
+   * @param {Date|dayjs} date - The date to check
    * @returns {CashFlowEvent[]|undefined}
    */
   getEventsForDate(date) {
-    date = toDateTime(date);
+    date = toDayJS(date);
     return this.eventsByDate.get(date.startOf('day').valueOf());
   }
 
@@ -159,9 +174,14 @@ export default class CashFlowStore {
     this.rootStore.setLoading();
     const events = yield CashFlowEvent.getAllBy('date');
     this.events = events;
+    this.eventsLoaded = true;
     this.rootStore.setIdle();
     //console.profileEnd('loadEvents');
   });
+
+  getEvent(id) {
+    return this.eventsById.get(Number(id));
+  }
 
   @action setEvents(events) {
     this.events = events;
@@ -172,7 +192,7 @@ export default class CashFlowStore {
    *
    * @param {Object} params - Event properties
    * @param {String} params.name - The event name
-   * @param {Date|DateTime} params.date - The event date
+   * @param {Date|dayjs} params.date - The event date
    * @param {String} params.category - The category name
    * @param {String} [params.subcategory] - The subcategory name
    * @param {Number} totalCents - The transaction amount, in cents
@@ -208,10 +228,26 @@ export default class CashFlowStore {
    * @param {Number} id - The event's ID property
    * @returns {undefined}
    */
-  deleteEvent = flow(function*(id) {
+  deleteEvent = flow(function*(id, andRecurrences) {
     const event = this.eventsById.get(id);
+    const recurrences = yield event.getAllRecurrences();
+    const deletedIDs = [event.id];
+
     yield event.destroy();
-    this.events = this.events.filter((e) => e.id !== id);
+    this.logger.debug('Destroy event with ID %d', event.id);
+
+    if (andRecurrences && recurrences && recurrences.length) {
+      for (const recurrence of recurrences) {
+        // only delete future recurrences:
+        if (event.dateTime.diff(recurrence.dateTime, 'days').toObject().days > 0) continue;
+
+        yield recurrence.destroy();
+        deletedIDs.push(recurrence.id);
+        this.logger.debug('Destroy event recurrence with ID %d', recurrence.id);
+      }
+    }
+
+    this.events = this.events.filter((e) => !deletedIDs.includes(e.id));
   });
 
   createRecurrences = flow(function*(event) {
