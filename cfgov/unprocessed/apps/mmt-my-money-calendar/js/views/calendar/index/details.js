@@ -11,7 +11,7 @@ import deleteRound from '@cfpb/cfpb-icons/src/icons/delete-round.svg';
 import arrowRight from '@cfpb/cfpb-icons/src/icons/arrow-right.svg';
 import arrowLeft from '@cfpb/cfpb-icons/src/icons/arrow-left.svg';
 
-const Icon = (svg, className) => <span className={className} dangerouslySetInnerHTML={{__html: svg}} />;
+const Icon = (svg, className) => <span className={className} dangerouslySetInnerHTML={{ __html: svg }} />;
 
 function Details() {
   const { uiStore, eventStore } = useStore();
@@ -51,7 +51,9 @@ function Details() {
 
   useLockBodyScroll(modalOpen);
 
-  const title = uiStore.selectedDate ? uiStore.selectedDate.format('MMMM D, YYYY') : uiStore.currentMonth.format('MMMM YYYY');
+  const title = uiStore.selectedDate
+    ? uiStore.selectedDate.format('MMMM D, YYYY')
+    : uiStore.currentMonth.format('MMMM YYYY');
   const events = uiStore.selectedDate
     ? eventStore.eventsByDate.get(uiStore.selectedDate.startOf('day').valueOf())
     : eventStore.eventsByMonth.get(uiStore.currentMonth.startOf('month').valueOf());
@@ -62,13 +64,33 @@ function Details() {
   return (
     <section className="calendar-details">
       <header className="calendar-details__header">
-        <button className="calendar-details__nav-button" aria-label="Previous Week" onClick={() => uiStore.prevWeek()} dangerouslySetInnerHTML={{__html: arrowLeft }} />
+        <button
+          className="calendar-details__nav-button"
+          aria-label="Previous Week"
+          onClick={() => uiStore.prevWeek()}
+          dangerouslySetInnerHTML={{ __html: arrowLeft }}
+        />
 
         <div className="calendar-details__header-text">
           <h3>{uiStore.weekRangeText}</h3>
+          <div className="calendar-details__starting-balance">
+            Week starting balance:
+            {' '}
+            {uiStore.weekStartingBalanceText}
+          </div>
+          <div className="calendar-details__ending-balance">
+            Week ending balance:
+            {' '}
+            {uiStore.weekEndingBalanceText}
+          </div>
         </div>
 
-        <button className="calendar-details__nav-button" aria-label="Next Week" onClick={() => uiStore.nextWeek()} dangerouslySetInnerHTML={{__html: arrowRight}} />
+        <button
+          className="calendar-details__nav-button"
+          aria-label="Next Week"
+          onClick={() => uiStore.nextWeek()}
+          dangerouslySetInnerHTML={{ __html: arrowRight }}
+        />
       </header>
 
       <ul className="calendar-details__events">
