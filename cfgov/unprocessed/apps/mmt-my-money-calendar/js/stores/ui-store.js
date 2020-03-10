@@ -104,6 +104,8 @@ export default class UIStore {
     this.currentWeek = date.startOf('week');
 
     if (!date.isSame(this.currentMonth, 'month')) this.currentMonth = date.startOf('month');
+
+    this.selectedDate = null;
   }
 
   nextWeek() {
