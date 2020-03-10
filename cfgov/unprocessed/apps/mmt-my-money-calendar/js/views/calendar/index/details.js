@@ -7,6 +7,7 @@ import { useToggle } from 'react-use';
 import Modal from 'react-modal';
 import { useStore } from '../../../stores';
 import { formatCurrency } from '../../../lib/currency-helpers';
+import { Notification } from '../../../components/notification';
 
 import deleteRound from '@cfpb/cfpb-icons/src/icons/delete-round.svg';
 import arrowRight from '@cfpb/cfpb-icons/src/icons/arrow-right.svg';
@@ -53,6 +54,10 @@ function Details() {
   useLockBodyScroll(modalOpen);
 
   const events = eventStore.eventsByWeek.get(uiStore.currentWeek.startOf('week').valueOf());
+  const negativeBalance = uiStore.weekEndingBalance < 1;
+  const endBalanceClasses = clsx('calendar-details__ending-balance', negativeBalance && 'negative');
+
+  // TODO: Add m-notification component with negative balance message when user goes into negative moneys
 
   return (
     <section className="calendar-details">
@@ -67,14 +72,16 @@ function Details() {
         <div className="calendar-details__header-text">
           <h3>{uiStore.weekRangeText}</h3>
           <div className="calendar-details__starting-balance">
-            Week starting balance:
-            {' '}
-            {uiStore.weekStartingBalanceText}
+            Week starting balance: {uiStore.weekStartingBalanceText}
           </div>
-          <div className="calendar-details__ending-balance">
-            Week ending balance:
-            {' '}
-            {uiStore.weekEndingBalanceText}
+          <div className={endBalanceClasses}>
+            {negativeBalance ? (
+              <Notification message="You're in the red!" variant="error">
+                Week ending balance: {uiStore.weekEndingBalanceText}
+              </Notification>
+            ) : (
+              <div>Weekly ending balance: {uiStore.weekEndingBalanceText}</div>
+            )}
           </div>
         </div>
 
