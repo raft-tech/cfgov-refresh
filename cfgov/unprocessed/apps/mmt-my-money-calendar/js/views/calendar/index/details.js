@@ -62,17 +62,13 @@ function Details() {
   return (
     <section className="calendar-details">
       <header className="calendar-details__header">
-        <button className="calendar-details__nav-button" aria-label="Previous Week" onClick={() => uiStore.prevWeek()}>
-          Prev
-        </button>
+        <button className="calendar-details__nav-button" aria-label="Previous Week" onClick={() => uiStore.prevWeek()} dangerouslySetInnerHTML={{__html: arrowLeft }} />
 
         <div className="calendar-details__header-text">
           <h3>{uiStore.weekRangeText}</h3>
         </div>
 
-        <button className="calendar-details__nav-button" aria-label="Next Week" onClick={() => uiStore.nextWeek()}>
-          Next
-        </button>
+        <button className="calendar-details__nav-button" aria-label="Next Week" onClick={() => uiStore.nextWeek()} dangerouslySetInnerHTML={{__html: arrowRight}} />
       </header>
 
       <ul className="calendar-details__events">
