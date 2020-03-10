@@ -13,6 +13,7 @@ export default class UIStore {
   @observable error;
   @observable currentMonth = dayjs().startOf('month');
   @observable selectedDate;
+  @observable currentWeek = dayjs().startOf('week');
   @observable selectedCategory = '';
   @observable showBottomNav = true;
 
@@ -69,7 +70,25 @@ export default class UIStore {
   }
 
   @action setSelectedDate(date) {
-    this.selectedDate = toDayJS(date).startOf('day');
+    date = toDayJS(date);
+    this.selectedDate = date.startOf('day');
+    this.currentWeek = date.startOf('week');
+  }
+
+  @action setCurrentWeek(date) {
+    date = toDayJS(date);
+    this.currentWeek = date.startOf('week');
+
+    if (!date.isSame(this.currentMonth, 'month'))
+      this.currentMonth = date.startOf('month');
+  }
+
+  nextWeek() {
+    this.setCurrentWeek(this.currentWeek.add(1, 'week'));
+  }
+
+  prevWeek() {
+    this.setCurrentWeek(this.currentWeek.subtract(1, 'week'));
   }
 
   @action clearSelectedDate() {
