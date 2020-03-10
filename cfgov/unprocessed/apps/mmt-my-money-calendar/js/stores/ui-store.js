@@ -28,6 +28,13 @@ export default class UIStore {
     return getWeekRows(this.currentMonth);
   }
 
+  @computed get weekRangeText() {
+    const start = this.currentWeek.startOf('week');
+    const end = this.currentWeek.endOf('week');
+
+    return `${start.format('MMMM D')} - ${end.format('MMMM D')}`;
+  }
+
   @action setNavOpen(val) {
     this.navOpen = Boolean(val);
   }
