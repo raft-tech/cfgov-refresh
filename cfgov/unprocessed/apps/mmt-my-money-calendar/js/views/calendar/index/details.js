@@ -8,6 +8,10 @@ import { useStore } from '../../../stores';
 import { formatCurrency } from '../../../lib/currency-helpers';
 
 import deleteRound from '@cfpb/cfpb-icons/src/icons/delete-round.svg';
+import arrowRight from '@cfpb/cfpb-icons/src/icons/arrow-right.svg';
+import arrowLeft from '@cfpb/cfpb-icons/src/icons/arrow-left.svg';
+
+const Icon = (svg, className) => <span className={className} dangerouslySetInnerHTML={{__html: svg}} />;
 
 function Details() {
   const { uiStore, eventStore } = useStore();
@@ -56,8 +60,20 @@ function Details() {
     : eventStore.getBalanceForDate(uiStore.currentMonth.endOf('month'));
 
   return (
-    <div className="calendar-details">
-      <h2>Transactions for {title}</h2>
+    <section className="calendar-details">
+      <header className="calendar-details__header">
+        <button className="calendar-details__nav-button" aria-label="Previous Week" onClick={() => uiStore.prevWeek()}>
+          Prev
+        </button>
+
+        <div className="calendar-details__header-text">
+          <h3>{uiStore.weekRangeText}</h3>
+        </div>
+
+        <button className="calendar-details__nav-button" aria-label="Next Week" onClick={() => uiStore.nextWeek()}>
+          Next
+        </button>
+      </header>
 
       <ul className="calendar-details__events">
         {events &&
@@ -113,7 +129,7 @@ function Details() {
           </li>
         </ul>
       </Modal>
-    </div>
+    </section>
   );
 }
 
