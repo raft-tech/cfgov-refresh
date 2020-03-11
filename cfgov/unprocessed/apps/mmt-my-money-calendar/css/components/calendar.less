@@ -125,6 +125,20 @@
 
   .m-notification {
     text-align: left;
+
+    &_explanation {
+      font-size: 14px;
+    }
+
+    &_button {
+      background-color: @red;
+      color: #fff;
+      display: block;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 12px;
+      padding: 5px;
+    }
   }
 
   .notification-icon {
@@ -150,6 +164,12 @@
   &__header-text {
     h3 {
       margin-bottom: 0;
+    }
+  }
+
+  &__ending-balance {
+    &.negative {
+      margin: 12px auto;
     }
   }
 

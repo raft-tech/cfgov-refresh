@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useCallback, useState } from 'react';
 import { useLockBodyScroll, useKeyPressEvent, useKeyPress } from 'react-use';
 import { observer } from 'mobx-react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { useToggle } from 'react-use';
 import Modal from 'react-modal';
 import { useStore } from '../../../stores';
@@ -13,7 +13,16 @@ import deleteRound from '@cfpb/cfpb-icons/src/icons/delete-round.svg';
 import arrowRight from '@cfpb/cfpb-icons/src/icons/arrow-right.svg';
 import arrowLeft from '@cfpb/cfpb-icons/src/icons/arrow-left.svg';
 
-const IconButton = ({ icon, ...props }) => <button dangerouslySetInnerHTML={{__html: icon}} {...props} />;
+const IconButton = ({ icon, ...props }) => <button dangerouslySetInnerHTML={{ __html: icon }} {...props} />;
+
+const DetailRow = ({ event, onRequestEdit, onRequestDelete, ...props }) => (
+  <li className="calendar-details__event" role="button" onClick={onRequestEdit} {...props}>
+    <div className="calendar-details__event-date">{event.dateTime.format('M/D/YYYY')}</div>
+    <div className="calendar-details__event-name">{event.name}</div>
+    <div className="calendar-details__event-total">{formatCurrency(event.total)}</div>
+    <IconButton className="calendar-details__event-delete" onClick={onRequestDelete} icon={deleteRound} />
+  </li>
+);
 
 function Details() {
   const { uiStore, eventStore } = useStore();
@@ -77,15 +86,7 @@ function Details() {
           <div className="calendar-details__starting-balance">
             Week starting balance: {uiStore.weekStartingBalanceText}
           </div>
-          <div className={endBalanceClasses}>
-            {negativeBalance ? (
-              <Notification message="You're in the red!" variant="error">
-                Week ending balance: {uiStore.weekEndingBalanceText}
-              </Notification>
-            ) : (
-              <div>Weekly ending balance: {uiStore.weekEndingBalanceText}</div>
-            )}
-          </div>
+          {!negativeBalance && <div className={endBalanceClasses}>Week ending balance: {uiStore.weekEndingBalanceText}</div>}
         </div>
 
         <IconButton
@@ -96,17 +97,20 @@ function Details() {
         />
       </header>
 
+      {negativeBalance && (
+        <div className={endBalanceClasses}>
+          <Notification message="You're in the red!" variant="error" actionLink={<Link to="/strategies" className="m-notification_button">Fix it</Link>}>
+            <p className="m-notification_explanation">
+              Week ending balance: {uiStore.weekEndingBalanceText}
+            </p>
+          </Notification>
+        </div>
+      )}
+
       <ul className="calendar-details__events">
         {events &&
           events.map((e) => (
-            <li className="calendar-details__event" key={e.id} role="button" onClick={editEvent(e.id)}>
-              <div className="calendar-details__event-date">{e.dateTime.format('M/D/YYYY')}</div>
-              <div className="calendar-details__event-name">{e.name}</div>
-              <div className="calendar-details__event-total">{formatCurrency(e.total)}</div>
-              <button className="calendar-details__event-delete" onClick={confirmDelete(e)}>
-                <span dangerouslySetInnerHTML={{ __html: deleteRound }} />
-              </button>
-            </li>
+            <DetailRow event={e} onRequestEdit={editEvent(e.id)} onRequestDelete={confirmDelete(e)} key={e.id} />
           ))}
       </ul>
 
