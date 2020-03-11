@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useCallback, useState, useRef } from 'react';
+import { useCallback, useState } from 'react';
 import { useLockBodyScroll, useKeyPressEvent } from 'react-use';
 import { observer } from 'mobx-react';
 import { useHistory, Link } from 'react-router-dom';
@@ -17,56 +17,30 @@ import arrowLeft from '@cfpb/cfpb-icons/src/icons/arrow-left.svg';
 
 const IconButton = ({ icon, ...props }) => <button dangerouslySetInnerHTML={{ __html: icon }} {...props} />;
 
-function DetailRow({ event, onRequestEdit, onRequestDelete, ...props }) {
-  const listItem = useRef(null);
-  const background = useRef(null);
-  const foreground = useRef(null);
-
-  /*
-  return (
-      <li className="swipeable-item calendar-details__event" role="button" {...props} ref={listItem}>
-        <div className="swipeable-item__background" ref={background}>
-          <button className="swipeable-item__button swipeable-item__button--edit" onClick={onRequestEdit}>
-            Edit
-          </button>
-          <button className="swipeable-item__button swipeable-item__button--delete" onClick={onRequestDelete}>
-            Delete
-          </button>
-        </div>
-        <div className="swipeable-item__foreground" ref={foreground}>
-          <div className="calendar-details__event-date">{event.dateTime.format('M/D/YYYY')}</div>
-          <div className="calendar-details__event-name">{event.name}</div>
-          <div className="calendar-details__event-total">{formatCurrency(event.total)}</div>
-          <IconButton className="calendar-details__event-delete" onClick={onRequestDelete} icon={deleteRound} />
-        </div>
-      </li>
-    );
-    */
-  return (
-    <SwipeableListItem
-      className="calendar-details__event"
-      actions={[
-        {
-          label: 'Edit',
-          icon: pencil,
-          className: 'swipeable-item__button--edit',
-          onClick: onRequestEdit,
-        },
-        {
-          label: 'Delete',
-          icon: deleteIcon,
-          className: 'swipeable-item__button--delete',
-          onClick: onRequestDelete,
-        },
-      ]}
-      {...props}
-    >
-      <div className="calendar-details__event-date">{event.dateTime.format('M/D/YYYY')}</div>
-      <div className="calendar-details__event-name">{event.name}</div>
-      <div className="calendar-details__event-total">{formatCurrency(event.total)}</div>
-    </SwipeableListItem>
-  );
-}
+const DetailRow = ({ event, onRequestEdit, onRequestDelete, ...props }) => (
+  <SwipeableListItem
+    className="calendar-details__event"
+    actions={[
+      {
+        label: 'Edit',
+        icon: pencil,
+        className: 'swipeable-item__button--edit',
+        onClick: onRequestEdit,
+      },
+      {
+        label: 'Delete',
+        icon: deleteIcon,
+        className: 'swipeable-item__button--delete',
+        onClick: onRequestDelete,
+      },
+    ]}
+    {...props}
+  >
+    <div className="calendar-details__event-date">{event.dateTime.format('M/D/YYYY')}</div>
+    <div className="calendar-details__event-name">{event.name}</div>
+    <div className="calendar-details__event-total">{formatCurrency(event.total)}</div>
+  </SwipeableListItem>
+);
 
 function Details() {
   const { uiStore, eventStore } = useStore();
