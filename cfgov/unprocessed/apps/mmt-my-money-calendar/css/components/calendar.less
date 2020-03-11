@@ -151,6 +151,8 @@
 
   &__nav-button {
     font-size: 24px;
+    background: none;
+    border: 0;
 
     &:first-of-type {
       margin-right: 10px;
@@ -188,14 +190,18 @@
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: center;
-    //padding: 10px 0;
-    border-bottom: 1px solid @inactiveMonthColor;
     max-width: unset !important;
+
+    .swipeable-item__foreground {
+      border-bottom: 1px solid @inactiveMonthColor;
+    }
   }
 
   &__event {
     &:first-of-type {
-      border-top: 1px solid @inactiveMonthColor;
+      .swipeable-item__foreground {
+        border-top: 1px solid @inactiveMonthColor;
+      }
     }
   }
 

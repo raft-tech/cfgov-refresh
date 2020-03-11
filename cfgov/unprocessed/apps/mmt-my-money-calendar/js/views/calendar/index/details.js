@@ -10,7 +10,8 @@ import { formatCurrency } from '../../../lib/currency-helpers';
 import { Notification } from '../../../components/notification';
 import { SwipeableListItem } from '../../../components/swipeable-list';
 
-import deleteRound from '@cfpb/cfpb-icons/src/icons/delete-round.svg';
+import pencil from '@cfpb/cfpb-icons/src/icons/pencil.svg';
+import deleteIcon from '@cfpb/cfpb-icons/src/icons/delete.svg';
 import arrowRight from '@cfpb/cfpb-icons/src/icons/arrow-right.svg';
 import arrowLeft from '@cfpb/cfpb-icons/src/icons/arrow-left.svg';
 
@@ -47,11 +48,13 @@ function DetailRow({ event, onRequestEdit, onRequestDelete, ...props }) {
       actions={[
         {
           label: 'Edit',
+          icon: pencil,
           className: 'swipeable-item__button--edit',
           onClick: onRequestEdit,
         },
         {
           label: 'Delete',
+          icon: deleteIcon,
           className: 'swipeable-item__button--delete',
           onClick: onRequestDelete,
         },

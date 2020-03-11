@@ -23,7 +23,6 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
 
     const setActionsWidth = () => {
       actionsWidth.current = Array.from(background.current.childNodes).reduce((width, node) => width + node.offsetWidth, 0);
-      console.debug('Actions width: %d', actionsWidth.current);
     };
 
     window.addEventListener('resize', setActionsWidth);
@@ -37,7 +36,6 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
       const now = Date.now();
       const elapsed = now - startTime.current;
 
-      console.debug(left.current);
       foreground.current.style.transform = `translateX(${left.current}px)`;
 
       const opacity = (Math.abs(left.current) / actionsWidth.current).toFixed(2);
@@ -51,20 +49,17 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
       }
 
       startTime.current = Date.now();
-      console.debug('updatePosition');
     };
 
     const onMouseMove = (event) => {
       const pos = event.clientX - dragStartX.current;
       left.current = minMax(pos, -actionsWidth.current, 0);
-      console.log('mousemove pos: %d, actionsWidth: %d, current: %d', pos, actionsWidth.current, left.current);
     };
 
     const onTouchMove = (event) => {
       const touch = event.targetTouches[0];
       const pos = touch.clientX - dragStartX.current;
       left.current = minMax(pos, -actionsWidth.current, 0);
-      console.log('touchmove pos: %d, actionsWidth: %d, current: %d', pos, actionsWidth.current, left.current);
     };
 
     const onDragStart = (clientX) => {
@@ -72,8 +67,6 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
       dragStartX.current = clientX;
       frame.current = requestAnimationFrame(updatePosition);
       foreground.current.classList.remove('-has-transition');
-
-      console.log('dragstart - dragStartX: %d, isSliding: %s', dragStartX.current, isSliding.current);
     };
 
     const onDragEnd = () => {
@@ -84,8 +77,10 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
       if (left.current < actionsWidth.current * threshold * -1) {
         left.current = -actionsWidth.current;
         if (onSwipe && typeof onSwipe === 'function') onSwipe();
+        listItem.current.classList.add('-swiped');
       } else {
         left.current = 0;
+        listItem.current.classList.remove('-swiped');
       }
 
       cancelAnimationFrame(frame.current);
@@ -93,30 +88,25 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
 
       foreground.current.classList.add('-has-transition');
       foreground.current.style.transform = `translateX(${left.current}px)`;
-      console.log('dragend');
     };
 
     const onMouseDown = (event) => {
       onDragStart(event.clientX);
       window.addEventListener('mousemove', onMouseMove);
-      console.log('mousedown');
     };
 
     const onTouchStart = (event) => {
       const touch = event.targetTouches[0];
       onDragStart(touch.clientX);
       window.addEventListener('touchmove', onTouchMove);
-      console.log('touchstart');
     };
 
     const onMouseUp = (event) => {
-      console.log('mouseup');
       window.removeEventListener('mousemove', onMouseMove);
       onDragEnd();
     };
 
     const onTouchEnd = (event) => {
-      console.log('touchend');
       window.removeEventListener('touchmove', onTouchMove);
       onDragEnd();
     };
@@ -137,9 +127,9 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
   return (
     <li className={rootClasses} {...props} ref={listItem}>
       <div className={bem('background')} ref={background}>
-        {actions.map(({ label, className, onClick }, idx) => (
-          <button key={`btn-${idx}`} className={clsx(bem('button'), className)} onClick={onClick}>
-            {label}
+        {actions.map(({ label, icon, className, onClick }, idx) => (
+          <button key={`btn-${idx}`} className={clsx(bem('button'), className)} onClick={onClick} aria-label={label}>
+            {icon ? <span dangerouslySetInnerHTML={{__html: icon}} /> : label}
           </button>
         ))}
       </div>
