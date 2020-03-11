@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useCallback, useState } from 'react';
-import { useLockBodyScroll } from 'react-use';
+import { useLockBodyScroll, useKeyPressEvent, useKeyPress } from 'react-use';
 import { observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 import { useToggle } from 'react-use';
@@ -13,7 +13,7 @@ import deleteRound from '@cfpb/cfpb-icons/src/icons/delete-round.svg';
 import arrowRight from '@cfpb/cfpb-icons/src/icons/arrow-right.svg';
 import arrowLeft from '@cfpb/cfpb-icons/src/icons/arrow-left.svg';
 
-const Icon = (svg, className) => <span className={className} dangerouslySetInnerHTML={{ __html: svg }} />;
+const IconButton = ({ icon, ...props }) => <button dangerouslySetInnerHTML={{__html: icon}} {...props} />;
 
 function Details() {
   const { uiStore, eventStore } = useStore();
@@ -51,6 +51,9 @@ function Details() {
     []
   );
 
+  useKeyPressEvent('ArrowRight', uiStore.nextWeek.bind(uiStore));
+  useKeyPressEvent('ArrowLeft', uiStore.prevWeek.bind(uiStore));
+
   useLockBodyScroll(modalOpen);
 
   const events = eventStore.eventsByWeek.get(uiStore.currentWeek.startOf('week').valueOf());
@@ -62,11 +65,11 @@ function Details() {
   return (
     <section className="calendar-details">
       <header className="calendar-details__header">
-        <button
+        <IconButton
           className="calendar-details__nav-button"
           aria-label="Previous Week"
           onClick={() => uiStore.prevWeek()}
-          dangerouslySetInnerHTML={{ __html: arrowLeft }}
+          icon={arrowLeft}
         />
 
         <div className="calendar-details__header-text">
@@ -85,11 +88,11 @@ function Details() {
           </div>
         </div>
 
-        <button
+        <IconButton
           className="calendar-details__nav-button"
           aria-label="Next Week"
           onClick={() => uiStore.nextWeek()}
-          dangerouslySetInnerHTML={{ __html: arrowRight }}
+          icon={arrowRight}
         />
       </header>
 
