@@ -16,11 +16,21 @@ import arrowLeft from '@cfpb/cfpb-icons/src/icons/arrow-left.svg';
 const IconButton = ({ icon, ...props }) => <button dangerouslySetInnerHTML={{ __html: icon }} {...props} />;
 
 const DetailRow = ({ event, onRequestEdit, onRequestDelete, ...props }) => (
-  <li className="calendar-details__event" role="button" onClick={onRequestEdit} {...props}>
-    <div className="calendar-details__event-date">{event.dateTime.format('M/D/YYYY')}</div>
-    <div className="calendar-details__event-name">{event.name}</div>
-    <div className="calendar-details__event-total">{formatCurrency(event.total)}</div>
-    <IconButton className="calendar-details__event-delete" onClick={onRequestDelete} icon={deleteRound} />
+  <li className="swipeable-item calendar-details__event" role="button" {...props}>
+    <div className="swipeable-item__background">
+      <button className="swipeable-item__button swipeable-item__button--edit" onClick={onRequestEdit}>
+        Edit
+      </button>
+      <button className="swipeable-item__button swipeable-item__button--delete" onClick={onRequestDelete}>
+        Delete
+      </button>
+    </div>
+    <div className="swipeable-item__foreground">
+      <div className="calendar-details__event-date">{event.dateTime.format('M/D/YYYY')}</div>
+      <div className="calendar-details__event-name">{event.name}</div>
+      <div className="calendar-details__event-total">{formatCurrency(event.total)}</div>
+      <IconButton className="calendar-details__event-delete" onClick={onRequestDelete} icon={deleteRound} />
+    </div>
   </li>
 );
 
