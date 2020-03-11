@@ -173,7 +173,11 @@
     }
   }
 
-  &__events {
+  &__events-section {
+    margin-bottom: 1rem;
+  }
+
+  &__events-list {
     list-style: none;
     padding-left: 0;
   }
@@ -187,6 +191,12 @@
     padding: 10px 0;
     border-bottom: 1px solid @inactiveMonthColor;
     max-width: unset !important;
+  }
+
+  &__event {
+    &:first-of-type {
+      border-top: 1px solid @inactiveMonthColor;
+    }
   }
 
   &__total {
@@ -213,6 +223,9 @@
 
   &__event-delete {
     background: transparent;
+    color: @red;
     border: 0;
+    margin-left: 1rem;
+    font-size: 20px;
   }
 }

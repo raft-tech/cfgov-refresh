@@ -53,9 +53,9 @@ function Details() {
   const eventRecurs = selectedEvent && selectedEvent.recurs;
 
   const editEvent = useCallback(
-    (id) => (evt) => {
+    (e) => (evt) => {
       evt.preventDefault();
-      history.push(`/calendar/add/${id}/edit`);
+      history.push(`/calendar/add/${e.id}/edit`);
     },
     []
   );
@@ -66,6 +66,8 @@ function Details() {
   useLockBodyScroll(modalOpen);
 
   const events = eventStore.eventsByWeek.get(uiStore.currentWeek.startOf('week').valueOf());
+  const income = events ? events.filter(({ totalCents }) => totalCents > 0) : [];
+  const expenses = events ? events.filter(({ totalCents }) => totalCents < 0) : [];
   const negativeBalance = uiStore.weekEndingBalance < 1;
   const endBalanceClasses = clsx('calendar-details__ending-balance', negativeBalance && 'negative');
 
@@ -107,12 +109,21 @@ function Details() {
         </div>
       )}
 
-      <ul className="calendar-details__events">
-        {events &&
-          events.map((e) => (
-            <DetailRow event={e} onRequestEdit={editEvent(e.id)} onRequestDelete={confirmDelete(e)} key={e.id} />
-          ))}
-      </ul>
+      <div className="calendar-details__events-section">
+        <h3 className="calendar-details__events-section-title">Income</h3>
+
+        <ul className="calendar-details__events-list">
+          {income.map((e) => <DetailRow event={e} onRequestEdit={editEvent(e)} onRequestDelete={confirmDelete(e)} key={e.id} />)}
+        </ul>
+      </div>
+
+      <div className="calendar-details__events-section">
+        <h3 className="calendar-details__events-section-title">Expenses</h3>
+
+        <ul className="calendar-details__events-list">
+          {expenses.map((e) => <DetailRow event={e} onRequestEdit={editEvent(e)} onRequestDelete={confirmDelete(e)} key={e.id} />)}
+        </ul>
+      </div>
 
       <Modal
         className="modal-dialog"
