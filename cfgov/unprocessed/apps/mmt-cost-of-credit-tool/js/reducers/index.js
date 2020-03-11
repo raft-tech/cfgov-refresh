@@ -15,8 +15,8 @@ const initialState = {
   monthsToPayOff: 24,
 
   // True cost breakdown
-  trueCostAmount: 0,
-  totalFinanceCharge: 0,
+  trueCostAmount: 100,
+  totalFinanceCharge: 100,
   addedCreditCostPct: 0,
 
   // Special financing
