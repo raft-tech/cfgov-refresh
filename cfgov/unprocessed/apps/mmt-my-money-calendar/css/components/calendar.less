@@ -82,10 +82,13 @@
   &__day-label {
     font-weight: bold;
     color: @text;
+    border: 0;
+    border-bottom: 1px solid @text;
   }
 
   &__day-number {
     font-size: 1rem;
+    margin-bottom: 4px;
 
     @media screen and (min-width: @breakpointMed) {
       font-size: 1.25rem;
