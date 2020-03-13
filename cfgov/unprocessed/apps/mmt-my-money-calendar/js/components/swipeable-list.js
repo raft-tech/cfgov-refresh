@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useRef, useLayoutEffect } from 'react';
+import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
 import { useBEM } from '../lib/hooks';
 
 const minMax = (num, min, max) => Math.min(Math.max(num, min), max);
@@ -54,6 +55,8 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
     };
 
     const onDragStart = (clientX) => {
+      disableBodyScroll();
+
       isSliding.current = true;
       dragStartX.current = clientX;
 
@@ -69,6 +72,8 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
     };
 
     const onDragEnd = () => {
+      enableBodyScroll();
+
       if (!isSliding.current) return;
 
       isSliding.current = false;
