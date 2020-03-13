@@ -1,7 +1,6 @@
 import clsx from 'clsx';
-import { useCallback, useRef, useEffect, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import { useBEM } from '../lib/hooks';
-import { action } from 'mobx';
 
 const minMax = (num, min, max) => Math.min(Math.max(num, min), max);
 
@@ -13,6 +12,7 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
   const foreground = useRef(null);
   const frame = useRef(null);
   const isSliding = useRef(false);
+  const hasSlid = useRef(false);
   const dragStartX = useRef(0);
   const left = useRef(0);
   const startTime = useRef(0);
@@ -28,25 +28,16 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
     window.addEventListener('resize', setActionsWidth);
     setActionsWidth();
 
-    const updatePosition = () => {
+    const updatePosition = (loop = true) => {
       if (!isSliding.current) return;
 
-      frame.current = requestAnimationFrame(updatePosition);
+      if (loop) {
+        frame.current = requestAnimationFrame(updatePosition);
+      }
 
       const now = Date.now();
-      const elapsed = now - startTime.current;
 
       foreground.current.style.transform = `translateX(${left.current}px)`;
-
-      const opacity = (Math.abs(left.current) / actionsWidth.current).toFixed(2);
-
-      if (opacity < 1 && opacity.toString() !== background.current.style.opacity) {
-        background.current.style.opacity = opacity.toString();
-      }
-
-      if (opacity >= 1) {
-        background.current.style.opacity = '1';
-      }
 
       startTime.current = Date.now();
     };
@@ -65,6 +56,14 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
     const onDragStart = (clientX) => {
       isSliding.current = true;
       dragStartX.current = clientX;
+
+      if (hasSlid.current) {
+        left.current = 0;
+        foreground.current.style.transform = `translateX(${left.current}px)`;
+        hasSlid.current = false;
+        return;
+      }
+
       frame.current = requestAnimationFrame(updatePosition);
       foreground.current.classList.remove('-has-transition');
     };
@@ -76,15 +75,16 @@ export function SwipeableListItem({ className, children, actions = [], onSwipe, 
 
       if (left.current < actionsWidth.current * threshold * -1) {
         left.current = -actionsWidth.current;
-        if (onSwipe && typeof onSwipe === 'function') onSwipe();
+        hasSlid.current = true;
         listItem.current.classList.add('-swiped');
+        if (onSwipe && typeof onSwipe === 'function') onSwipe();
       } else {
         left.current = 0;
+        hasSlid.current = false;
         listItem.current.classList.remove('-swiped');
       }
 
       cancelAnimationFrame(frame.current);
-      updatePosition();
 
       foreground.current.classList.add('-has-transition');
       foreground.current.style.transform = `translateX(${left.current}px)`;
