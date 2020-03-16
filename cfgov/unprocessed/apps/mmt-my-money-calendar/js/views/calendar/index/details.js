@@ -8,7 +8,6 @@ import Modal from 'react-modal';
 import { useStore } from '../../../stores';
 import { formatCurrency } from '../../../lib/currency-helpers';
 import { Notification } from '../../../components/notification';
-import { SwipeableListItem } from '../../../components/swipeable-list';
 import { SlideListItem } from '../../../components/slide-list';
 
 import pencil from '@cfpb/cfpb-icons/src/icons/pencil.svg';
