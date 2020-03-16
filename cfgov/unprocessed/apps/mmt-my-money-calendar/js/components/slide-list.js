@@ -18,15 +18,25 @@ export function SlideListItem({
   const background = useRef(null);
   const foreground = useRef(null);
   const isDragging = useRef(false);
+  const isOpen = useRef(false);
   const slideWidth = useRef(0);
-  const [{ x }, set] = useSpring(() => ({ x: 0 }));
+  const [{ x }, set] = useSpring(() => ({ x: 0 }), { immediate: false });
+  const transform = interpolate([x], (x) => `translateX(${x}px)`);
+  const bgStyle = {
+    opacity: x.interpolate({ range: [0, slideWidth.current], output: [40, 100], extrapolate: 'clamp'})
+  };
+  const fgStyle = {
+    transform
+  };
 
   const open = ({ canceled }) => {
-    set({ x: -slideWidth.current, config: canceled ? config.wobbly : config.stiff });
+    set({ x: -slideWidth.current, config: config.stiff });
+    isOpen.current = true;
   };
 
   const close = (velocity = 0) => {
     set({ x: 0, config: { ...config.stiff, velocity } });
+    isOpen.current = false;
   };
 
   const bind = useDrag(
@@ -35,27 +45,18 @@ export function SlideListItem({
       if (first) isDragging.current = true;
       else if (last) isDragging.current = false;
 
-      console.debug('drag event(first: %s, last: %s, vx: %d, mx: %d)', first, last, vx, mx);
-      set({ x: mx, immediate: true, config: config.stiff });
-      return;
-
       // If user drags past slideWidth multiplied by props.threshold, cancel animation and set state to open
-      if (mx < -(slideWidth.current * (1 + threshold))) cancel();
+      if (!isOpen.current && mx < -(slideWidth.current * (1 + threshold))) cancel();
+      else if (isOpen.current && mx > 0) cancel();
 
       // If user has dragged past a certain threshold, snap actions open. Otherwise return to closed
-      if (last) mx > slideWidth.current * (1 - threshold) || vx > 0.5 ? close(vx) : open({ canceled });
+      if (last && !isOpen.current) mx > -(slideWidth.current * (1 - threshold)) || vx > 0.5 ? close(vx) : open({ canceled });
+      else if (last && isOpen.current) mx > -(slideWidth.current - (slideWidth.current * (1 - threshold))) ? close(vx) : open({ canceled });
       // when user keeps dragging, move according to touch or cursor position:
       else set({ x: mx, immediate: false, config: config.stiff });
     }
   );
 
-  const bgStyle = {
-    opacity: x.interpolate({ map: Math.abs, range: [0, slideWidth.current], output: [0.4, 1], extrapolate: 'clamp'})
-  };
-
-  const fgStyle = {
-    transform: interpolate([x], (x) => `translateX(${x}px)`),
-  };
 
   useLayoutEffect(() => {
     if (!background.current) return;
