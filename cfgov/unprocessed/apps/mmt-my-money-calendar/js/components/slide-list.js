@@ -23,10 +23,10 @@ export function SlideListItem({
   const [{ x }, set] = useSpring(() => ({ x: 0 }), { immediate: false });
   const transform = interpolate([x], (x) => `translateX(${x}px)`);
   const bgStyle = {
-    opacity: x.interpolate({ range: [0, slideWidth.current], output: [40, 100], extrapolate: 'clamp'})
+    opacity: x.interpolate({ range: [0, slideWidth.current], output: [40, 100], extrapolate: 'clamp' }),
   };
   const fgStyle = {
-    transform
+    transform,
   };
 
   const open = ({ canceled }) => {
@@ -39,24 +39,22 @@ export function SlideListItem({
     isOpen.current = false;
   };
 
-  const bind = useDrag(
-    ({ first, last, vxvy: [vx], movement: [mx], cancel, canceled }) => {
+  const bind = useDrag(({ first, last, vxvy: [vx], movement: [mx], cancel, canceled }) => {
+    if (first) isDragging.current = true;
+    else if (last) isDragging.current = false;
 
-      if (first) isDragging.current = true;
-      else if (last) isDragging.current = false;
+    // If user drags past slideWidth multiplied by props.threshold, cancel animation and set state to open
+    if (!isOpen.current && mx < -(slideWidth.current * (1 + threshold))) cancel();
+    else if (isOpen.current && mx > 0) cancel();
 
-      // If user drags past slideWidth multiplied by props.threshold, cancel animation and set state to open
-      if (!isOpen.current && mx < -(slideWidth.current * (1 + threshold))) cancel();
-      else if (isOpen.current && mx > 0) cancel();
-
-      // If user has dragged past a certain threshold, snap actions open. Otherwise return to closed
-      if (last && !isOpen.current) mx > -(slideWidth.current * (1 - threshold)) || vx > 0.5 ? close(vx) : open({ canceled });
-      else if (last && isOpen.current) mx > -(slideWidth.current - (slideWidth.current * (1 - threshold))) ? close(vx) : open({ canceled });
-      // when user keeps dragging, move according to touch or cursor position:
-      else set({ x: mx, immediate: false, config: config.gentle });
-    }
-  );
-
+    // If user has dragged past a certain threshold, snap actions open. Otherwise return to closed
+    if (last && !isOpen.current)
+      mx > -(slideWidth.current * (1 - threshold)) || vx > 0.5 ? close(vx) : open({ canceled });
+    else if (last && isOpen.current)
+      mx > -(slideWidth.current - slideWidth.current * (1 - threshold)) ? close(vx) : open({ canceled });
+    // when user keeps dragging, move according to touch or cursor position:
+    else set({ x: mx, immediate: false, config: config.gentle });
+  });
 
   useLayoutEffect(() => {
     if (!background.current) return;
@@ -66,7 +64,6 @@ export function SlideListItem({
         (width, node) => width + node.offsetWidth,
         0
       );
-      console.log('Update slide width to %d', slideWidth.current);
     };
 
     window.addEventListener('resize', setSlideWidth);
