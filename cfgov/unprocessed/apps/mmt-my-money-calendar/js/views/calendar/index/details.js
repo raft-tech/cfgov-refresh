@@ -9,6 +9,7 @@ import { useStore } from '../../../stores';
 import { formatCurrency } from '../../../lib/currency-helpers';
 import { Notification } from '../../../components/notification';
 import { SwipeableListItem } from '../../../components/swipeable-list';
+import { SlideListItem } from '../../../components/slide-list';
 
 import pencil from '@cfpb/cfpb-icons/src/icons/pencil.svg';
 import deleteIcon from '@cfpb/cfpb-icons/src/icons/delete.svg';
@@ -18,7 +19,7 @@ import arrowLeft from '@cfpb/cfpb-icons/src/icons/arrow-left.svg';
 const IconButton = ({ icon, ...props }) => <button dangerouslySetInnerHTML={{ __html: icon }} {...props} />;
 
 const DetailRow = ({ event, onRequestEdit, onRequestDelete, ...props }) => (
-  <SwipeableListItem
+  <SlideListItem
     className="calendar-details__event"
     actions={[
       {
@@ -39,7 +40,7 @@ const DetailRow = ({ event, onRequestEdit, onRequestDelete, ...props }) => (
     <div className="calendar-details__event-date">{event.dateTime.format('M/D/YYYY')}</div>
     <div className="calendar-details__event-name">{event.name}</div>
     <div className="calendar-details__event-total">{formatCurrency(event.total)}</div>
-  </SwipeableListItem>
+  </SlideListItem>
 );
 
 function Details() {
