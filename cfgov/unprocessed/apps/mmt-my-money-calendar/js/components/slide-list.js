@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useRef, useEffect, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import { useDrag } from 'react-use-gesture';
 import { useSpring, config, animated, interpolate } from 'react-spring';
 import { useBEM } from '../lib/hooks';
