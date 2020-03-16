@@ -30,12 +30,12 @@ export function SlideListItem({
   };
 
   const open = ({ canceled }) => {
-    set({ x: -slideWidth.current, config: config.stiff });
+    set({ x: -slideWidth.current, config: canceled ? config.wobbly : config.gentle });
     isOpen.current = true;
   };
 
   const close = (velocity = 0) => {
-    set({ x: 0, config: { ...config.stiff, velocity } });
+    set({ x: 0, config: { ...config.gentle, velocity } });
     isOpen.current = false;
   };
 
@@ -53,7 +53,7 @@ export function SlideListItem({
       if (last && !isOpen.current) mx > -(slideWidth.current * (1 - threshold)) || vx > 0.5 ? close(vx) : open({ canceled });
       else if (last && isOpen.current) mx > -(slideWidth.current - (slideWidth.current * (1 - threshold))) ? close(vx) : open({ canceled });
       // when user keeps dragging, move according to touch or cursor position:
-      else set({ x: mx, immediate: false, config: config.stiff });
+      else set({ x: mx, immediate: false, config: config.gentle });
     }
   );
 

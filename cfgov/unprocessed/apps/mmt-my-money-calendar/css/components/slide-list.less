@@ -1,7 +1,14 @@
 .slide-list-item {
+  border-top: 1px solid @text;
+  border-bottom: 1px solid @text;
   position: relative;
   overflow: hidden;
   width: 100%;
+  touch-action: pan-x;
+
+  & + .slide-list-item {
+    border-top: 0;
+  }
 
   &__background {
     position: absolute;

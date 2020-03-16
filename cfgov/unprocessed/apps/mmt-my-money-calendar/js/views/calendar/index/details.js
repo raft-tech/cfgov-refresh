@@ -24,13 +24,13 @@ const DetailRow = ({ event, onRequestEdit, onRequestDelete, ...props }) => (
       {
         label: 'Edit',
         icon: pencil,
-        className: 'swipeable-item__button--edit',
+        className: 'slide-list-item__button--edit',
         onClick: onRequestEdit,
       },
       {
         label: 'Delete',
         icon: deleteIcon,
-        className: 'swipeable-item__button--delete',
+        className: 'slide-list-item__button--delete',
         onClick: onRequestDelete,
       },
     ]}
