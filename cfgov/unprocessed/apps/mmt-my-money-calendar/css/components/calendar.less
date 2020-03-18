@@ -5,6 +5,7 @@
 @negativeColor: #f0b6b6;
 @breakpointMed: 500px;
 @symbolSize: 24px;
+@currentWeekBorder: 2px solid @inactiveMonthColor;
 
 .calendar {
   display: flex;
@@ -32,9 +33,21 @@
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+    margin-bottom: .4rem;
 
     &.selected {
-      border: 1px solid @text;
+      .calendar__day {
+        border-top: @currentWeekBorder;
+        border-bottom: @currentWeekBorder;
+
+        &:first-of-type {
+          border-left: @currentWeekBorder;
+        }
+
+        &:last-of-type {
+          border-right: @currentWeekBorder;
+        }
+      }
     }
   }
 
@@ -51,7 +64,8 @@
     padding-right: @gap / 2;
     padding-left: @gap / 2;
     text-align: center;
-    border: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
     position: relative;
 
     @media screen and (min-width: @breakpointMed) {
@@ -80,6 +94,18 @@
 
     &:last-of-type {
       margin-right: 0;
+    }
+  }
+
+  &__day {
+    &:first-of-type {
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+    }
+
+    &:last-of-type {
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
     }
   }
 
@@ -198,18 +224,8 @@
     justify-content: flex-start;
     align-items: center;
     max-width: unset !important;
-
-    .swipeable-item__foreground {
-      border-bottom: 1px solid @inactiveMonthColor;
-    }
-  }
-
-  &__event {
-    &:first-of-type {
-      .swipeable-item__foreground {
-        border-top: 1px solid @inactiveMonthColor;
-      }
-    }
+    border: 1px solid @inactiveMonthColor;
+    margin-bottom: .5rem;
   }
 
   &__total {
@@ -240,5 +256,15 @@
     border: 0;
     margin-left: 1rem;
     font-size: 20px;
+  }
+
+  &__drag-handle {
+    font-size: 22px;
+    margin-left: 20px;
+
+    .cf-icon-svg {
+      transform: rotate(90deg);
+      fill: @inactiveMonthColor;
+    }
   }
 }
