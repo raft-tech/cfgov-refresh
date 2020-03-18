@@ -117,17 +117,6 @@
     {% block css %}
     <!--[if lt IE 10]><link rel="stylesheet" href="{{ static('css/main.ie.css') }}"><![endif]-->
     <!--[if gt IE 9]><!--><link rel="stylesheet" href="{{ static('css/main.css') }}"><!--<![endif]-->
-
-    {# TODO: Remove when 2020 Mega Menu modifications are finalized. #}
-    {% if not flag_enabled('MEGA_MENU_VAR_1', request) and not flag_enabled('MEGA_MENU_VAR_2', request) %}
-      <style>
-        .o-header {
-          /* Force header bottom border to CFPB green. */
-          border-bottom: 5px solid #20aa3f !important;
-        }
-      </style>
-    {% endif %}
-
     {% endblock css %}
 
 {#
@@ -250,7 +239,11 @@
 
     {% block header %}
         {% import 'organisms/header.html' as o_header with context %}
-        {{ o_header.render( true, language ) }}
+        {{ o_header.render(
+            show_banner=true,
+            show_mega_menu=true,
+            language=language
+        ) }}
     {% endblock header %}
 
     {# WAGTAILUSERBAR IN-PAGE VIEW CONTROLS #}
@@ -284,20 +277,6 @@
 #}
 
     {% block javascript scoped %}
-
-    {# TODO: Remove when 2020 Mega Menu modifications are finalized. #}
-    {% if flag_enabled('MEGA_MENU_VAR_1', request) %}
-      <script>
-        window.cfpb = window.cfpb || {};
-        window.cfpb.megaMenuVar1 = true;
-      </script>
-
-    {% elif flag_enabled('MEGA_MENU_VAR_2', request) %}
-      <script>
-        window.cfpb = window.cfpb || {};
-        window.cfpb.megaMenuVar2 = true;
-      </script>
-    {% endif %}
 
     {#
       Modernizr adds a no-js class the HTML element if ECMAScript 5 features aren't

@@ -1,21 +1,28 @@
-from django.core.cache import caches
+import unittest
+
 from django.test import (
     RequestFactory, SimpleTestCase, TestCase, override_settings
 )
 
+import wagtail
 from wagtail.tests.testapp.models import SimplePage
 from wagtail.tests.utils import WagtailTestUtils
-from wagtail.wagtailcore.models import Site
-from wagtail.wagtailcore.rich_text import DbWhitelister
 
 import mock
 
 from v1.models.base import CFGOVPage
-from v1.models.menu_item import MenuItem
 from v1.models.resources import Resource
 from v1.wagtail_hooks import (
     form_module_handlers, get_resource_tags, set_served_by_wagtail_sharing
 )
+
+
+try:
+    from wagtail.core.models import Site
+    from wagtail.core.whitelist import Whitelister
+except ImportError:  # pragma: no cover; fallback for Wagtail < 2.0
+    from wagtail.wagtailcore.models import Site
+    from wagtail.wagtailcore.rich_text import DbWhitelister
 
 
 class TestFormModuleHandlers(TestCase):
@@ -47,7 +54,8 @@ class TestFormModuleHandlers(TestCase):
 
     @mock.patch('builtins.hasattr')
     @mock.patch('v1.wagtail_hooks.util.get_streamfields')
-    def test_checks_child_block_if_set_form_context_exists(self, mock_getstreamfields, mock_hasattr):
+    def test_checks_child_block_if_set_form_context_exists(
+            self, mock_getstreamfields, mock_hasattr):
         child = mock.Mock()
         streamfields = {'name': [child]}
         mock_getstreamfields.return_value = streamfields
@@ -56,7 +64,8 @@ class TestFormModuleHandlers(TestCase):
 
     @mock.patch('builtins.hasattr')
     @mock.patch('v1.wagtail_hooks.util.get_streamfields')
-    def test_sets_context_fieldname_if_not_set(self, mock_getstreamfields, mock_hasattr):
+    def test_sets_context_fieldname_if_not_set(
+            self, mock_getstreamfields, mock_hasattr):
         child = mock.Mock()
         streamfields = {'name': [child]}
         mock_getstreamfields.return_value = streamfields
@@ -67,7 +76,8 @@ class TestFormModuleHandlers(TestCase):
 
     @mock.patch('builtins.hasattr')
     @mock.patch('v1.wagtail_hooks.util.get_streamfields')
-    def test_calls_child_block_get_result(self, mock_getstreamfields, mock_hasattr):
+    def test_calls_child_block_get_result(
+            self, mock_getstreamfields, mock_hasattr):
         child = mock.Mock()
         streamfields = {'name': [child]}
         mock_getstreamfields.return_value = streamfields
@@ -82,7 +92,8 @@ class TestFormModuleHandlers(TestCase):
 
     @mock.patch('builtins.hasattr')
     @mock.patch('v1.wagtail_hooks.util.get_streamfields')
-    def test_calls_child_block_is_submitted(self, mock_getstreamfields, mock_hasattr):
+    def test_calls_child_block_is_submitted(
+            self, mock_getstreamfields, mock_hasattr):
         child = mock.Mock()
         streamfields = {'name': [child]}
         mock_getstreamfields.return_value = streamfields
@@ -110,26 +121,6 @@ class TestServeLatestDraftPage(TestCase):
             response = self.client.get('/test/')
             self.assertContains(response, 'draft')
             self.assertEqual(response['Serving-Wagtail-Draft'], '1')
-
-class TestMenuItemSave(TestCase):
-    @override_settings(
-        CACHES = {
-            'default_fragment_cache': {
-                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-            }
-        })
-    def test_mega_menu_cache_cleared(self):
-        caches['default_fragment_cache'].set('mega_menu', 'menu_content')
-        self.assertEqual(
-            caches['default_fragment_cache'].get('mega_menu'),
-            'menu_content'
-        )
-        menu_item = MenuItem()
-        menu_item.save()
-        self.assertEqual(
-            caches['default_fragment_cache'].get('mega_menu'),
-            None
-        )
 
 
 class TestGetResourceTags(TestCase):
@@ -216,16 +207,37 @@ class TestResourceTagsFilter(TestCase, WagtailTestUtils):
         )
 
 
+@unittest.skipIf(wagtail.VERSION < (2, 0), "No need to test in Wagtail 1+")
 class TestWhitelistOverride(SimpleTestCase):
-    # Borrowed from https://github.com/wagtail/wagtail/blob/v1.13.4/wagtail
-    # /wagtailcore/tests/test_dbwhitelister.py
+    # Borrowed from https://github.com/wagtail/wagtail/blob/master/wagtail
+    # /core/tests/test_whitelist.py
 
     def test_whitelist_hooks(self):
-        """Test that DbWhitelister does not strip new elements and attributes.
+        """Test that Whitelister does not strip span element and attributes.
+
+        The allowed element <span> and attributes are added in v1.wagtail_hooks.
+        """
+        input_html = '''
+<span class="schema-container">
+    <span class="schema-container">
+    </span>
+    <span id="schema-identity">
+    </span>
+</span>
+        '''
+        output_html = Whitelister.clean(input_html)
+        self.assertHTMLEqual(input_html, output_html)
+
+@unittest.skipIf(wagtail.VERSION >= (2, 0), "No need to test in Wagtail 2+")
+class TestWhitelistOverride(SimpleTestCase):
+    # Borrowed from https://github.com/wagtail/wagtail/blob/master/wagtail
+    # /core/tests/test_whitelist.py
+
+    def test_whitelist_hooks(self):
+        """Test that Whitelister does not strip new elements and attributes.
 
         The new allowed elements and attributes are added in v1.wagtail_hooks.
         """
-
         input_html = '''
 <span class="schema-container"
       itemprop="step"

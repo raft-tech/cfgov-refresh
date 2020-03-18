@@ -1,13 +1,13 @@
 import { flow, observable, computed, action } from 'mobx';
+import { asyncComputed } from 'computed-async-mobx';
 import { computedFn } from 'mobx-utils';
 import logger from '../lib/logger';
-import { toDateTime, dayOfYear } from '../lib/calendar-helpers';
+import { toDayJS } from '../lib/calendar-helpers';
 import { toMap } from '../lib/array-helpers';
 import CashFlowEvent from './models/cash-flow-event';
-import { DateTime } from 'luxon';
-import { transform } from '@babel/core';
 
 export default class CashFlowStore {
+  @observable eventsLoaded = false;
   @observable events = [];
 
   constructor(rootStore) {
@@ -54,6 +54,20 @@ export default class CashFlowStore {
   }
 
   /**
+   * All events in the store as a map, keyed by the epoch timestamp of the beginning of the week in which the event occurs, in milliseconds.
+   *
+   * @type {Map<number, CashFlowEvent>}
+   */
+  @computed get eventsByWeek() {
+    return this.events.reduce((output, event) => {
+      const key = event.dateTime.startOf('week').valueOf();
+      const list = output.get(key) || [];
+      output.set(key, [...list, event]);
+      return output;
+    }, new Map());
+  }
+
+  /**
    * All events in the store as a map, keyed by ID
    *
    * @type {Map}
@@ -74,14 +88,19 @@ export default class CashFlowStore {
     return new Set(signatures);
   }
 
+  earliestEventDate = asyncComputed(undefined, 50, async () => {
+    const firstEvent = await CashFlowStore.getFirstBy('date');
+    return firstEvent.date;
+  });
+
   /**
    * Get the user's available balance for the specified date
    *
-   * @param {Date|DateTime} stopDate - The date to check the balance for
+   * @param {Date|dayjs} stopDate - The date to check the balance for
    * @returns {Number} the balance in dollars
    */
   getBalanceForDate = computedFn(function getBalanceForDate(stopDate) {
-    stopDate = toDateTime(stopDate).endOf('day');
+    stopDate = toDayJS(stopDate).endOf('day');
     const stopTimestamp = stopDate.valueOf();
 
     if (!this.events.length) return totalInCents;
@@ -100,7 +119,7 @@ export default class CashFlowStore {
   /**
    * Get the total amount of money received or spent for a particular day
    *
-   * @param {Date|DateTime} date - The date
+   * @param {Date|dayjs} date - The date
    * @returns {Number} The amount of money for that day received or spent
    */
   getTotalForDate = computedFn(function getTotalForDate(date) {
@@ -112,7 +131,7 @@ export default class CashFlowStore {
   /**
    * Determines whether or not the given date has any income events
    *
-   * @param {Date|DateTime} date - The date to check
+   * @param {Date|dayjs} date - The date to check
    * @returns {Boolean}
    */
   dateHasIncome(date) {
@@ -126,7 +145,7 @@ export default class CashFlowStore {
   /**
    * Determines whether or not the given date has any expense events
    *
-   * @param {Date|DateTime} date - The date to check
+   * @param {Date|dayjs} date - The date to check
    * @returns {Boolean}
    */
   dateHasExpenses(date) {
@@ -138,13 +157,23 @@ export default class CashFlowStore {
   }
 
   /**
+   * Determines whether or not a given date has any events
+   *
+   * @param {Date|dayjs} date A JS date or dayjs object
+   * @returns {boolean}
+   */
+  dateHasEvents(date) {
+    return Boolean(this.getEventsForDate(date));
+  }
+
+  /**
    * Returns all cash flow events for the given date
    *
-   * @param {Date|DateTime} date - The date to check
+   * @param {Date|dayjs} date - The date to check
    * @returns {CashFlowEvent[]|undefined}
    */
   getEventsForDate(date) {
-    date = toDateTime(date);
+    date = toDayJS(date);
     return this.eventsByDate.get(date.startOf('day').valueOf());
   }
 
@@ -159,33 +188,63 @@ export default class CashFlowStore {
     this.rootStore.setLoading();
     const events = yield CashFlowEvent.getAllBy('date');
     this.events = events;
+    this.eventsLoaded = true;
     this.rootStore.setIdle();
     //console.profileEnd('loadEvents');
   });
+
+  getEvent(id) {
+    return this.eventsById.get(Number(id));
+  }
 
   @action setEvents(events) {
     this.events = events;
   }
 
   /**
-   * Adds a new event to the database and syncs it with the store
+   * Adds or updates an event in the database and syncs it with the store
    *
    * @param {Object} params - Event properties
    * @param {String} params.name - The event name
-   * @param {Date|DateTime} params.date - The event date
+   * @param {Date|dayjs} params.date - The event date
    * @param {String} params.category - The category name
    * @param {String} [params.subcategory] - The subcategory name
    * @param {Number} totalCents - The transaction amount, in cents
    * @param {Boolean} [recurs=false] - Whether or not the event recurs
    * @param {String} [recurrence] - The recurrence rule in iCalendar format
+   * @param {boolean} [updateRecurrences=false] - If event has recurrences, update their totals to match
    * @returns {undefined}
    */
-  createEvent = flow(function*(params) {
-    const event = new CashFlowEvent(params);
+  saveEvent = flow(function*(params, updateRecurrences = false) {
+    let event;
+
+    if (params.id) {
+      this.logger.debug('updating existing event %O', params);
+      event = this.getEvent(params.id);
+      event.update(params);
+    } else {
+      this.logger.debug('creating new event %O', params);
+      event = new CashFlowEvent(params);
+    }
 
     try {
       yield event.save();
-      this.events.push(event);
+
+      if (!params.id)
+        this.events.push(event);
+
+      if (updateRecurrences) {
+        const recurrences = yield event.getAllRecurrences();
+
+        for (const recurrence of recurrences) {
+          if (recurrence.dateTime.isBefore(event.dateTime)) continue;
+
+          const stateEvent = this.getEvent(recurrence.id);
+          stateEvent.update({ totalCents: event.totalCents });
+          yield stateEvent.save();
+          this.logger.debug('Update recurrence total (id: %d, total: %d)', recurrence.id, recurrence.total);
+        }
+      }
     } catch (err) {
       this.logger.error('Event save error: %O', err);
       throw err;
@@ -208,10 +267,26 @@ export default class CashFlowStore {
    * @param {Number} id - The event's ID property
    * @returns {undefined}
    */
-  deleteEvent = flow(function*(id) {
+  deleteEvent = flow(function*(id, andRecurrences) {
     const event = this.eventsById.get(id);
+    const recurrences = yield event.getAllRecurrences();
+    const deletedIDs = [event.id];
+
     yield event.destroy();
-    this.events = this.events.filter((e) => e.id !== id);
+    this.logger.debug('Destroy event with ID %d', event.id);
+
+    if (andRecurrences && recurrences && recurrences.length) {
+      for (const recurrence of recurrences) {
+        // only delete future recurrences:
+        if (recurrence.dateTime.isBefore(event.dateTime)) continue;
+
+        yield recurrence.destroy();
+        deletedIDs.push(recurrence.id);
+        this.logger.debug('Destroy event recurrence with ID %d', recurrence.id);
+      }
+    }
+
+    this.events = this.events.filter((e) => !deletedIDs.includes(e.id));
   });
 
   createRecurrences = flow(function*(event) {

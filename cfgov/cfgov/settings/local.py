@@ -1,6 +1,8 @@
 import sys
 import warnings
 
+import wagtail
+
 from unipath import DIRS
 
 from .base import *
@@ -17,10 +19,19 @@ if sys.version_info[0] < 3:
 
 DEBUG = True
 SECRET_KEY = 'not-secret-key-for-testing'
+
 INSTALLED_APPS += (
     'sslserver',
-    'wagtail.contrib.wagtailstyleguide',
 )
+
+if wagtail.VERSION >= (2, 0):
+    INSTALLED_APPS += (
+        'wagtail.contrib.styleguide',
+    )
+else:
+    INSTALLED_APPS += (
+        'wagtail.contrib.wagtailstyleguide',
+    )
 
 STATIC_ROOT = REPOSITORY_ROOT.child('collectstatic')
 
@@ -85,14 +96,14 @@ if os.environ.get('ENABLE_DEBUG_TOOLBAR'):
 MIDDLEWARE_CLASSES += CSP_MIDDLEWARE_CLASSES
 
 # Disable caching when working locally.
-CACHES.update({
+CACHES = {
     k: {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         'TIMEOUT': 0,
     } for k in (
         'default', 'post_preview'
     )
-})
+}
 
 # Optionally enable cache for post_preview
 if os.environ.get('ENABLE_POST_PREVIEW_CACHE'):
