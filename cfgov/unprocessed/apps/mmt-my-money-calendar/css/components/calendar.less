@@ -26,6 +26,9 @@
 
   &__rows {
     margin-bottom: 1rem;
+    border: 1px solid @inactiveMonthColor;
+    border-radius: .5rem;
+    padding: 10px;
   }
 
   &__row {
@@ -112,8 +115,6 @@
   &__day-label {
     font-weight: bold;
     color: @text;
-    border: 0;
-    border-bottom: 1px solid @text;
   }
 
   &__day-number {
@@ -145,7 +146,9 @@
 }
 
 .calendar-details {
-  margin-top: 1.5rem;
+  border: 1px solid @inactiveMonthColor;
+  border-radius: .5rem;
+  padding: 10px;
 
   &__header {
     display: flex;
