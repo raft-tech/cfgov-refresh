@@ -1,11 +1,12 @@
 import { observer } from 'mobx-react';
+import { Link, Redirect } from 'react-router-dom';
 import { useStore } from '../../stores';
 import { CardGroup, Card } from '../../components/card';
 
-import idea from '@cfpb/cfpb-icons/src/icons/idea-round.svg';
+import { ideaRound } from '../../lib/icons';
 
 function FixItStrategies() {
-  const { strategyStore } = useStore();
+  const { strategiesStore: strategies } = useStore();
 
   return (
     <section className="strategies">
@@ -19,7 +20,7 @@ function FixItStrategies() {
 
       <main className="strategies-cards">
         <CardGroup columns={2}>
-          <Card title="Foo" icon={idea}>
+          <Card title="Foo" icon={ideaRound}>
             Blah Blah
           </Card>
         </CardGroup>
