@@ -5,11 +5,28 @@ import { CardGroup, Card } from '../../components/card';
 import { useScrollToTop } from '../../components/scroll-to-top';
 
 import { ideaRound } from '../../lib/icons';
+import { useEffect } from 'react';
 
 function FixItStrategies() {
-  const { strategiesStore: strategies } = useStore();
+  const { uiStore, strategiesStore: strategies } = useStore();
+
+  useEffect(() => {
+    if (uiStore.currentWeek) return;
+    uiStore.setCurrentWeek(new Date());
+  }, []);
 
   useScrollToTop();
+
+  if (!strategies.strategyResults.length) {
+    return (
+      <section className="strategies">
+        <p>
+          <em>There are no strategy recommendations for this week</em>
+        </p>
+        <Link to="/calendar">Back to Calendar</Link>
+      </section>
+    );
+  }
 
   return (
     <section className="strategies">
@@ -23,9 +40,11 @@ function FixItStrategies() {
 
       <main className="strategies-cards">
         <CardGroup columns={2}>
-          <Card title="Foo" icon={ideaRound}>
-            Blah Blah
-          </Card>
+          {strategies.strategyResults.map((result, index) => (
+            <Card title={result.title} icon={ideaRound} key={`strategy-${index}`}>
+              {result.text}
+            </Card>
+          ))}
         </CardGroup>
       </main>
     </section>

@@ -2,6 +2,8 @@ import { computed, action, observable } from 'mobx';
 import { compact } from '../lib/array-helpers';
 import logger from '../lib/logger';
 
+const isPlural = (word) => word.endsWith('s');
+
 class StrategiesStore {
   strategies = {
     largestHousingExpense: [
@@ -60,7 +62,7 @@ class StrategiesStore {
         ],
         title: 'Adjust Spending this Week',
         text: (categoryName) =>
-          `${categoryName} was your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
+          `${categoryName} ${isPlural(categoryName) ? 'were' : 'was'} your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
       },
     ],
   };
@@ -75,7 +77,7 @@ class StrategiesStore {
   }
 
   @computed get eventsForWeek() {
-    return this.eventStore.getEventsForWeek(this.uiStore.currentWeek);
+    return this.eventStore.getEventsForWeek(this.uiStore.currentWeek) || [];
   }
 
   @computed get weekAnalysis() {
