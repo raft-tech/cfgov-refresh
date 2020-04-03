@@ -2,11 +2,14 @@ import { observer } from 'mobx-react';
 import { Link, Redirect } from 'react-router-dom';
 import { useStore } from '../../stores';
 import { CardGroup, Card } from '../../components/card';
+import { useScrollToTop } from '../../components/scroll-to-top';
 
 import { ideaRound } from '../../lib/icons';
 
 function FixItStrategies() {
   const { strategiesStore: strategies } = useStore();
+
+  useScrollToTop();
 
   return (
     <section className="strategies">
