@@ -80,13 +80,14 @@ class StrategiesStore {
     return this.eventStore.getEventsForWeek(this.uiStore.currentWeek) || [];
   }
 
-  @computed get weekAnalysis() {
+  @computed get fixItWeekAnalysis() {
+    if (this.eventStore.getBalanceForDate(this.uiStore.currentWeek.endOf('week')) > 0) return {};
     return this.analyzeEvents(this.eventsForWeek);
   }
 
-  @computed get strategyResults() {
+  @computed get fixItResults() {
     return compact(
-      Object.entries(this.weekAnalysis).map(([type, event]) => {
+      Object.entries(this.fixItWeekAnalysis).map(([type, event]) => {
         if (!event) return;
 
         const strategy = this.strategies[type].find((sgy) => sgy.categories.includes(event.category));
