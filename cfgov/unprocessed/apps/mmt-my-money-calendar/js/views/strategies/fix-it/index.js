@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { Link, Redirect, useParams } from 'react-router-dom';
-import { useStore } from '../../stores';
-import { CardGroup, Card } from '../../components/card';
-import { useScrollToTop } from '../../components/scroll-to-top';
-import { dayjs } from '../../lib/calendar-helpers';
-import { ButtonLink } from '../../components/button';
+import { useStore } from '../../../stores';
+import { CardGroup, Card } from '../../../components/card';
+import { useScrollToTop } from '../../../components/scroll-to-top';
+import { dayjs } from '../../../lib/calendar-helpers';
+import { ButtonLink } from '../../../components/button';
 
-import { arrowLeft, ideaRound } from '../../lib/icons';
+import { arrowLeft, ideaRound } from '../../../lib/icons';
 
 function FixItStrategies() {
   const { uiStore, strategiesStore: strategies } = useStore();
