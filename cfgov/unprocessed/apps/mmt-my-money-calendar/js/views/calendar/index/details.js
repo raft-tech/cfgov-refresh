@@ -127,7 +127,7 @@ function Details() {
             message="You are going to be in the red!"
             variant="error"
             actionLink={
-              <Link to="/fix-it-strategies" className="m-notification_button">
+              <Link to={`/fix-it-strategies/${uiStore.currentWeek.valueOf()}`} className="m-notification_button">
                 Fix it
               </Link>
             }

@@ -21,6 +21,10 @@ const Routes = () => (
           <AddEvent />
         </Route>
 
+        <Route path="/fix-it-strategies/:week">
+          <FixItStrategies />
+        </Route>
+
         <Route path="/fix-it-strategies">
           <FixItStrategies />
         </Route>

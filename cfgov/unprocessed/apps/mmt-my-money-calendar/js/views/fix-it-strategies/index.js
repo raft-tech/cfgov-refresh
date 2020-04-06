@@ -1,18 +1,28 @@
+import { useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useParams } from 'react-router-dom';
 import { useStore } from '../../stores';
 import { CardGroup, Card } from '../../components/card';
 import { useScrollToTop } from '../../components/scroll-to-top';
+import { dayjs } from '../../lib/calendar-helpers';
+import { ButtonLink } from '../../components/button';
 
-import { ideaRound } from '../../lib/icons';
-import { useEffect } from 'react';
+import { arrowLeft, ideaRound } from '../../lib/icons';
 
 function FixItStrategies() {
   const { uiStore, strategiesStore: strategies } = useStore();
+  const { week } = useParams();
 
   useEffect(() => {
-    if (uiStore.currentWeek) return;
-    uiStore.setCurrentWeek(new Date());
+    if (!uiStore.currentWeek && !week) {
+      uiStore.setCurrentWeek(dayjs());
+      return;
+    }
+
+    const weekInt = Number(week);
+
+    if (weekInt && weekInt !== uiStore.currentWeek.valueOf())
+    uiStore.setCurrentWeek(dayjs(weekInt));
   }, []);
 
   useScrollToTop();
@@ -20,10 +30,19 @@ function FixItStrategies() {
   if (!strategies.strategyResults.length) {
     return (
       <section className="strategies">
+        <header className="strategies-header">
+          <h2 className="strategies-header__title">
+            Fix-It Strategies
+          </h2>
+        </header>
+
         <p>
           <em>There are no strategy recommendations for this week</em>
         </p>
-        <Link to="/calendar">Back to Calendar</Link>
+
+        <footer className="strategies-footer">
+          <ButtonLink iconSide="left" icon={arrowLeft} to="/calendar">Back to Calendar</ButtonLink>
+        </footer>
       </section>
     );
   }
@@ -42,11 +61,23 @@ function FixItStrategies() {
         <CardGroup columns={2}>
           {strategies.strategyResults.map((result, index) => (
             <Card title={result.title} icon={ideaRound} key={`strategy-${index}`}>
-              {result.text}
+              <p>
+                {result.text}
+              </p>
+
+              <div className="m-card_footer">
+                <ButtonLink to={`/calendar/add/${result.event.id}/edit`} variant="secondary">
+                  Edit {result.event.categoryDetails.name}
+                </ButtonLink>
+              </div>
             </Card>
           ))}
         </CardGroup>
       </main>
+
+      <footer className="strategies-footer">
+        <ButtonLink iconSide="left" icon={arrowLeft} to="/calendar">Back to Calendar</ButtonLink>
+      </footer>
     </section>
   );
 }
