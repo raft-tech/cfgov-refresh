@@ -4,6 +4,7 @@ import { isEmpty, filterProps } from '../../lib/object-helpers';
 export class CategoryTree {
   static internalProps = [
     'name',
+    'description',
     'restricted',
     'recurrenceTypes',
     'strategy',
@@ -32,7 +33,8 @@ export class CategoryTree {
   }
 
   childrenOf(path = '') {
-    const children = filterProps(this.get(path), this.constructor.internalProps);
+    const category = typeof path === 'string' ? this.get(path) : path;
+    const children = filterProps(category, this.constructor.internalProps);
     return isEmpty(children) ? null : children;
   }
 
@@ -45,13 +47,12 @@ export class CategoryTree {
 
   isChildOf(childName, parentName) {
     let result = false;
-    // const child = this.get(childName);
     const childKey = childName.match(/\.([^\.]+)$/)[1];
     const parent = this.get(parentName);
 
-    if (!parent.subcategories) return false;
+    if (!this.hasSubcategories(parent)) return false;
 
-    this.recurseSubcategories(parent, (key, subcategory) => {
+    this.recurseSubcategories(parentName, (key) => {
       if (key === childKey) {
         result = true;
         return false;
@@ -62,12 +63,14 @@ export class CategoryTree {
   }
 
   recurseSubcategories(category, cb) {
-    if (!category.subcategories) return;
+    const children = this.childrenOf(category);
 
-    for (const [key, subcategory] of Object.entries(category.subcategories)) {
-      const retVal = cb(key, subcategory);
+    if (!children) return;
+
+    for (const [key, child] of Object.entries(children)) {
+      const retVal = cb(key, child);
       if (retVal === false) return;
-      if (subcategory.subcategories) this.recurseSubcategories(subcategory, cb);
+      if (this.hasSubcategories(child)) this.recurseSubcategories(child, cb);
     }
   }
 }
