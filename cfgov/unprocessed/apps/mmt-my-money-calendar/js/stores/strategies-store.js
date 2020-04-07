@@ -1,6 +1,7 @@
 import { computed, action, observable } from 'mobx';
 import { compact } from '../lib/array-helpers';
 import logger from '../lib/logger';
+import { Categories } from './models/categories';
 
 const isPlural = (word) => word.endsWith('s');
 
@@ -106,7 +107,12 @@ class StrategiesStore {
   }
 
   @computed get strategyResults() {
-    return this.analyzeStrategyEvents(this.eventStore.events);
+    return compact(
+      this.eventStore.eventCategories.map((catPath) => {
+        const { strategy } = Categories.get(catPath) || {};
+        return strategy;
+      })
+    );
   }
 
   analyzeFixItEvents(events) {
@@ -136,10 +142,6 @@ class StrategiesStore {
         largestAdHocExpense: undefined,
       }
     );
-  }
-
-  analyzeStrategyEvents(events) {
-    return [];
   }
 }
 
