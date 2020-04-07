@@ -22,14 +22,7 @@ export class CategoryTree {
 
   get(path = '') {
     const normalizedPath = path.replace(/\//g, '.');
-
-    /*
-    if (normalizedPath.length && !/\./.test(normalizedPath) && this.categories[normalizedPath])
-      return dotProp.get(this.categories[normalizedPath], 'subcategories', this.categories[normalizedPath]);
-    */
     return dotProp.get(this.categories, normalizedPath);
-
-    //return dotProp.get(this.categories, normalizedPath.replace(/\./g, '.subcategories.'));
   }
 
   childrenOf(path = '') {
