@@ -6,6 +6,19 @@ import { Categories } from './models/categories';
 const isPlural = (word) => word.endsWith('s');
 
 class StrategiesStore {
+  negativeStrategies = {
+    'expense.personal.emergencySavings': {
+      title: 'Save for Emergencies',
+      body: 'Saving helps reduce stress when the unexpected happens.',
+      link: 'https://www.consumerfinance.gov/about-us/blog/how-save-emergencies-and-future/',
+    },
+    'expense.personal.healthcare': {
+      title: 'Choose a Health Care Plan That Fits Your Budget',
+      body: 'Health insurance can drastically reduce the costs of unforeseen medical bills.',
+      link: 'https://www.healthcare.gov/',
+    },
+  };
+
   fixItStrategies = {
     largestHousingExpense: [
       {
@@ -107,12 +120,18 @@ class StrategiesStore {
   }
 
   @computed get strategyResults() {
-    return compact(
-      this.eventStore.eventCategories.map((catPath) => {
-        const { strategy } = Categories.get(catPath) || {};
-        return strategy;
-      })
-    );
+    const results = this.eventStore.eventCategories.map((catPath) => {
+      const { strategy } = Categories.get(catPath) || {};
+      return strategy;
+    });
+
+    for (const [catPath, strategy] of Object.entries(this.negativeStrategies)) {
+      if (!this.eventStore.eventCategories.includes(catPath)) {
+        results.push(strategy);
+      }
+    }
+
+    return compact(results);
   }
 
   analyzeFixItEvents(events) {

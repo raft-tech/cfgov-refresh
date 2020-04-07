@@ -8,7 +8,6 @@ export class CategoryTree {
     'restricted',
     'recurrenceTypes',
     'strategy',
-    'negativeStrategy',
     'hasBill',
   ];
 
@@ -21,6 +20,7 @@ export class CategoryTree {
   }
 
   get(path = '') {
+    if (!path) return this.all;
     const normalizedPath = path.replace(/\//g, '.');
     return dotProp.get(this.categories, normalizedPath);
   }
@@ -33,9 +33,6 @@ export class CategoryTree {
 
   hasSubcategories(category = {}) {
     return Object.keys(category).filter((key) => !this.constructor.internalProps.includes(key)).length > 0;
-  }
-
-  getDescendants(path = '') {
   }
 
   isChildOf(childName, parentName) {
@@ -301,21 +298,11 @@ export const Categories = new CategoryTree({
         name: 'Emergency Savings',
         recurrenceTypes: ['weekly', 'monthly'],
         hasBill: false,
-        negativeStrategy: {
-          title: 'Save for Emergencies',
-          body: 'Saving helps reduce stress when the unexpected happens.',
-          link: 'https://www.consumerfinance.gov/about-us/blog/how-save-emergencies-and-future/',
-        }
       },
       healthcare: {
         name: 'Health Care',
         recurrenceTypes: ['weekly', 'monthly'],
         hasBill: false,
-        negativeStrategy: {
-          title: 'Choose a Health Care Plan That Fits Your Budget',
-          body: 'Health insurance can drastically reduce the costs of unforeseen medical bills.',
-          link: 'https://www.healthcare.gov/',
-        },
       },
       subscriptions: {
         name: 'Subscriptions',
