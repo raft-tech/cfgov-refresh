@@ -10,12 +10,18 @@ class StrategiesStore {
     'expense.personal.emergencySavings': {
       title: 'Save for Emergencies',
       body: 'Saving helps reduce stress when the unexpected happens.',
-      link: 'https://www.consumerfinance.gov/about-us/blog/how-save-emergencies-and-future/',
+      link: {
+        href: 'https://www.consumerfinance.gov/about-us/blog/how-save-emergencies-and-future/',
+        text: 'How to save for emergencies and the future',
+      },
     },
     'expense.personal.healthcare': {
       title: 'Choose a Health Care Plan That Fits Your Budget',
       body: 'Health insurance can drastically reduce the costs of unforeseen medical bills.',
-      link: 'https://www.healthcare.gov/',
+      link: {
+        href: 'https://www.healthcare.gov/',
+        text: 'HealthCare.gov',
+      },
     },
   };
 
