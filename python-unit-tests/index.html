@@ -100,10 +100,6 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../mega-menu/">Editing the Mega Menu</a>
-                </li>
-                <li class="">
-                    
     <a class="" href="../forms-in-wagtail/">Forms in Wagtail Page Context</a>
                 </li>
                 <li class="">
@@ -158,6 +154,8 @@
         
             <li><a class="toctree-l4" href="#writing-tests">Writing tests</a></li>
         
+            <li><a class="toctree-l4" href="#prerequisites">Prerequisites</a></li>
+        
             <li><a class="toctree-l4" href="#running-tests">Running tests</a></li>
         
             <li><a class="toctree-l4" href="#test-output">Test output</a></li>
@@ -195,6 +193,10 @@
                 <li class="">
                     
     <a class="" href="../travis/">How We Use Travis CI</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../github-actions/">How We Use GitHub Actions</a>
                 </li>
     </ul>
 	    </li>
@@ -265,34 +267,70 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="backend-testing">Backend testing<a class="headerlink" href="#backend-testing" title="Permanent link">¶</a></h1>
+                <h1 id="python-testing">Python testing<a class="headerlink" href="#python-testing" title="Permanent link">¶</a></h1>
 <h2 id="writing-tests">Writing tests<a class="headerlink" href="#writing-tests" title="Permanent link">¶</a></h2>
 <p>We have multiple resources for writing new unit tests for Django, Wagtial, and Python code:</p>
 <ul>
 <li><a href="https://github.com/cfpb/development/blob/master/guides/unittesting-django-wagtail.md">CFPB Django and Wagtail unit testing documentation</a></li>
 <li><a href="https://docs.djangoproject.com/en/1.11/topics/testing/overview/">The Django testing documentation</a></li>
-<li><a href="http://docs.wagtail.io/en/v1.13.4/advanced_topics/testing.html">The Wagtail testing documentation</a></li>
+<li><a href="http://docs.wagtail.io/en/stable/advanced_topics/testing.html">The Wagtail testing documentation</a></li>
 <li><a href="https://realpython.com/testing-in-django-part-1-best-practices-and-examples/">Real Python's "Testing in Django"</a></li>
 </ul>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">¶</a></h2>
+<p>If you have set up 
+<a href="/installation/#install-system-level-requirements">a standalone installation of cfgov-refresh</a>, 
+you'll need to 
+<a href="/running-virtualenv/#3-launch-site">activate your virtual environment</a> 
+before running the tests:</p>
+<pre class="highlight"><code class="language-sh">workon cfgov-refresh</code></pre>
+
+<p>If have not set up the standalone installation of cfgov-refresh,
+it's not necessary to run the tests. 
+You can install Tox in your 
+<a href="https://github.com/cfpb/development/blob/master/guides/installing-python.md">local installation of Python</a>:</p>
+<pre class="highlight"><code>pip install tox</code></pre>
+
+<p>If you have set up 
+<a href="/installation/#docker-based-installation">a Docker-based installation of cfgov-refresh</a>,
+you'll need to 
+<a href="http://localhost:8888/running-docker/#access-a-containers-shell">access the Python container's shell</a> 
+before running the tests:</p>
+<pre class="highlight"><code class="language-sh">docker-compose exec python3 bash</code></pre>
+
 <h2 id="running-tests">Running tests<a class="headerlink" href="#running-tests" title="Permanent link">¶</a></h2>
+<p>Our test suite can either be run in a local virtualenv or in Docker. 
+Please note, the tests run quite slow in Docker.</p>
 <p>To run the the full suite of Python tests using Tox, 
 make sure you are in the cfgov-refresh root and then run:</p>
 <pre class="highlight"><code class="language-sh">tox</code></pre>
 
-<p>This will run linting tests and unit tests with migrations in Python. 
-This is the same as running:</p>
-<pre class="highlight"><code class="language-sh">tox -e lint -e unittest-py36-dj111-wag113-slow</code></pre>
+<p>Tox runs different isolated Python environments with different versions of dependencies.
+We use it to lint our Python files, check out import sorting, and run unit tests
+in both Python 3.6 and Python 3.8.
+You can select specific environments using <code>-e</code>.</p>
+<p>Running <code>tox</code> by itself is the same as running:</p>
+<pre class="highlight"><code class="language-sh">tox -e lint -e unittest</code></pre>
 
+<p>These default environments are:</p>
+<ul>
+<li><code>lint</code>, which runs our <a href="#linting">linting</a> tools. We require this 
+  environment to pass in CI.</li>
+<li><code>unittest</code>, which runs unit tests against the current production 
+  versions of Python, Django, and Wagtail. We require this environment to 
+  pass in CI.</li>
+</ul>
+<p>In addition, we also have this environment:</p>
+<ul>
+<li><code>unittest-future</code>, which runs unit tests against upcoming versions of 
+  Python, Django, and Wagtail. We do not require this environment to pass in 
+  CI.</li>
+</ul>
 <p>By default this uses a local SQLite database for tests. To override this, you
 can set the <code>TEST_DATABASE_URL</code> environment variable to a database connection
 string as supported by <a href="https://github.com/kennethreitz/dj-database-url">dj-database-url</a>.</p>
-<p>If you haven't changed any Python dependencies and you don't need to test 
-all migrations, you can run a much faster Python code test using:</p>
-<pre class="highlight"><code class="language-sh">tox -e unittest-py36-dj111-wag113-fast</code></pre>
-
 <p>If you would like to run only a specific test, or the tests for a specific app, 
 you can provide a dotted path to the test as the final argument to any of the above calls to <code>tox</code>:</p>
-<pre class="highlight"><code class="language-sh">tox -e unittest-py36-dj111-wag113-fast regulations3k.tests.test_regdown</code></pre>
+<pre class="highlight"><code class="language-sh">tox -e unittest regulations3k.tests.test_regdown</code></pre>
 
 <h3 id="linting">Linting<a class="headerlink" href="#linting" title="Permanent link">¶</a></h3>
 <p>We use the <code>flake8</code> and <code>isort</code> tools to ensure compliance with 
@@ -322,7 +360,7 @@ To enforce this convention, the tests can be run using a custom Django test
 runner that fails if anything is written to stdout. This test runner is at
 <code>cfgov.test.StdoutCapturingTestRunner</code> and can be enabled with the <code>TEST_RUNNER</code>
 environment variable:</p>
-<pre class="highlight"><code class="language-sh">TEST_RUNNER=cfgov.test.StdoutCapturingTestRunner tox -e fast</code></pre>
+<pre class="highlight"><code class="language-sh">TEST_RUNNER=cfgov.test.StdoutCapturingTestRunner tox -e unittest</code></pre>
 
 <p>This test runner is enabled when tests are run automatically on <a href="https://travis-ci.org/">Travis CI</a>,
 but is not used by default when running tests locally.</p>

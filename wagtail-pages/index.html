@@ -100,10 +100,6 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../mega-menu/">Editing the Mega Menu</a>
-                </li>
-                <li class="">
-                    
     <a class="" href="../forms-in-wagtail/">Forms in Wagtail Page Context</a>
                 </li>
                 <li class=" current">
@@ -198,6 +194,10 @@
                     
     <a class="" href="../travis/">How We Use Travis CI</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../github-actions/">How We Use GitHub Actions</a>
+                </li>
     </ul>
 	    </li>
           
@@ -268,7 +268,7 @@
             <div class="section">
               
                 <h1 id="wagtail-pages">Wagtail pages<a class="headerlink" href="#wagtail-pages" title="Permanent link">¶</a></h1>
-<p><a href="http://docs.wagtail.io/en/v1.13.4/topics/pages.html">Wagtail pages</a> are 
+<p><a href="http://docs.wagtail.io/en/stable/topics/pages.html">Wagtail pages</a> are 
 <a href="https://docs.djangoproject.com/en/1.11/topics/db/models/">Django models</a> 
 that are constructed of 
 <a href="#fields">fields</a>, <a href="#streamfields">StreamFields</a>, and <a href="#panels">panels</a> 
@@ -304,7 +304,7 @@ class BrowsePage(CFGOVPage):
 
 <h2 id="streamfields">StreamFields<a class="headerlink" href="#streamfields" title="Permanent link">¶</a></h2>
 <p>StreamFields are special Django model fields provided by Wagtail for 
-<a href="https://docs.wagtail.io/en/v1.13.4/topics/streamfield.html">freeform page content</a>. 
+<a href="https://docs.wagtail.io/en/stable/topics/streamfield.html">freeform page content</a>. 
 They allow a content editor to pick any number number of optional components
 and place them in any order within their StreamField. 
 In practice, this provides the flexibility of
@@ -312,7 +312,7 @@ In practice, this provides the flexibility of
 <p>For example, our <code>LandingPage</code> page model 
 <a href="https://github.com/cfpb/cfgov-refresh/blob/master/cfgov/v1/models/landing_page.py">includes a <code>header</code> StreamField</a> 
 that can have a hero and/or a text introduction:</p>
-<pre class="highlight"><code class="language-python">from wagtail.wagtailcore.fields import StreamField
+<pre class="highlight"><code class="language-python">from wagtail.core.fields import StreamField
 
 from v1.atomic_elements import molecules
 from v1.models import CFGOVPage
@@ -345,12 +345,12 @@ define specific sets of panels to which all fields should be added:</p>
 </ul>
 <p>Most fields will simply require a <code>FieldPanel</code> to be added to one of the sets of panels above. 
 StreamFields will require a <code>StreamFieldPanel</code>. 
-See the <a href="https://docs.wagtail.io/en/v1.13.4/topics/pages.html#editor-panels">Wagtail documentation for additional, more complex panel options</a>.</p>
+See the <a href="https://docs.wagtail.io/en/stable/topics/pages.html#editor-panels">Wagtail documentation for additional, more complex panel options</a>.</p>
 <p>For example, in our <code>BrowsePage</code> (used in the <a href="#fields">database fields example above</a>),
 the <code>secondary_nav_exclude_sibling_pages</code> <code>BooleanField</code> 
 <a href="https://github.com/cfpb/cfgov-refresh/blob/master/cfgov/v1/models/browse_page.py">is added to the <code>sidefoot_panels</code> as a <code>FieldPanel</code></a>:</p>
 <pre class="highlight"><code class="language-python">from django.db import models
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel
 
 from v1.models.base import CFGOVPage
 
@@ -370,8 +370,8 @@ Checking or unchecking that checkbox will set the value of <code>secondary_nav_e
 <p>In our <code>LandingPage</code> (used in the <a href="#streamfields">StreamFields example above</a>), 
 the <code>header</code> StreamField 
 <a href="https://github.com/cfpb/cfgov-refresh/blob/master/cfgov/v1/models/landing_page.py#L31">is added to the <code>content_panels</code> as a <code>StreamFieldPanel</code></a>:</p>
-<pre class="highlight"><code class="language-python">from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
-from wagtail.wagtailcore.fields import StreamField
+<pre class="highlight"><code class="language-python">from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.core.fields import StreamField
 
 from v1.atomic_elements import molecules
 from v1.models import CFGOVPage
@@ -392,7 +392,7 @@ class LandingPage(CFGOVPage):
 
 <h2 id="parent-child-page-relationships">Parent / child page relationships<a class="headerlink" href="#parent-child-page-relationships" title="Permanent link">¶</a></h2>
 <p>Wagtail provides two attributes to page models that enable 
-<a href="https://docs.wagtail.io/en/v1.13.4/topics/pages.html#parent-page-subpage-type-rules">restricting the types of subpages or parent pages</a> 
+<a href="https://docs.wagtail.io/en/stable/topics/pages.html#parent-page-subpage-type-rules">restricting the types of subpages or parent pages</a> 
 a particular page model can have. On any page model:</p>
 <ul>
 <li><code>parent_page_types</code> limits which page types this type can be created under.</li>
@@ -428,7 +428,7 @@ by setting <code>subpage_types</code> to an empty list.</p>
 </div>
 <h2 id="template-rendering">Template rendering<a class="headerlink" href="#template-rendering" title="Permanent link">¶</a></h2>
 <p>New Wagtail page types will usually need to make customizations to their base template 
-<a href="https://docs.wagtail.io/en/v1.13.4/topics/pages.html#template-rendering">when rendering the page</a>.
+<a href="https://docs.wagtail.io/en/stable/topics/pages.html#template-rendering">when rendering the page</a>.
 This is done by overriding the <code>template</code> attribute on the page model.</p>
 <p>For example, the <a href="https://github.com/cfpb/cfgov-refresh/blob/master/cfgov/regulations3k/models/pages.py">interactive regulations landing page</a> 
 includes a customized list of recently issued notices that gets loaded dynamically from the Federal Register. 

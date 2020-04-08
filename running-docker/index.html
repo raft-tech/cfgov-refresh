@@ -77,9 +77,9 @@
         
             <li><a class="toctree-l4" href="#environment-variables">Environment variables</a></li>
         
-            <li><a class="toctree-l4" href="#access-a-containers-shell">Access a container's shell</a></li>
+            <li><a class="toctree-l4" href="#commands-that-must-be-run-from-within-the-python-container">Commands that must be run from within the Python container</a></li>
         
-            <li><a class="toctree-l4" href="#run-django-management-commands">Run Django management commands</a></li>
+            <li><a class="toctree-l4" href="#access-a-containers-shell">Access a container’s shell</a></li>
         
             <li><a class="toctree-l4" href="#update-python-dependencies">Update Python dependencies</a></li>
         
@@ -122,10 +122,6 @@
                 <li class="">
                     
     <a class="" href="../migrations/">Django and Wagtail Migrations</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../mega-menu/">Editing the Mega Menu</a>
                 </li>
                 <li class="">
                     
@@ -203,6 +199,10 @@
                 <li class="">
                     
     <a class="" href="../travis/">How We Use Travis CI</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../github-actions/">How We Use GitHub Actions</a>
                 </li>
     </ul>
 	    </li>
@@ -297,39 +297,38 @@ for more about the format and use of this file.</p>
 <h2 id="environment-variables">Environment variables<a class="headerlink" href="#environment-variables" title="Permanent link">¶</a></h2>
 <p>Environment variables from your <code>.env</code> file are sourced 
 when the Python container starts
-and when you access the running Python container. 
+and when you <a href="#access-a-containers-shell">access the running Python container</a>. 
 Your local shell environment variables, however, 
 are not visible to applications running in Docker.
 To add new environment variables, simply add them to the <code>.env</code> file, 
 stop docker-compose with Ctrl+C, 
 and start it again with <code>docker-compose up</code>.</p>
-<h2 id="access-a-containers-shell">Access a container's shell<a class="headerlink" href="#access-a-containers-shell" title="Permanent link">¶</a></h2>
+<h2 id="commands-that-must-be-run-from-within-the-python-container">Commands that must be run from within the Python container<a class="headerlink" href="#commands-that-must-be-run-from-within-the-python-container" title="Permanent link">¶</a></h2>
+<p>Django <code>manage.py</code> commands can only be run after you've 
+<a href="#access-a-containers-shell">opened up a shell in the Python container</a>. 
+From there, commands like <code>cfgov/manage.py migrate</code> should run as expected.</p>
+<p>The same goes for scripts like <code>./refresh-data.sh</code> and <code>./initial-data.sh</code> —
+they will work as expected once you’re inside the Python container.</p>
+<h2 id="access-a-containers-shell">Access a container’s shell<a class="headerlink" href="#access-a-containers-shell" title="Permanent link">¶</a></h2>
 <ul>
 <li>Python: <code>docker-compose exec python bash</code></li>
 <li>Elasticsearch: <code>docker-compose exec elasticsearch bash</code></li>
 <li>PostgreSQL: <code>docker-compose exec postgres bash</code></li>
 </ul>
-<h2 id="run-django-management-commands">Run Django management commands<a class="headerlink" href="#run-django-management-commands" title="Permanent link">¶</a></h2>
-<p>Django <code>manage.py</code> commands can only be run after you've 
-opened up a shell in the Python container. 
-From there commands like <code>cfgov/manage.py migrate</code> should run as expected.</p>
-<p>The same goes for scripts like <code>./refresh-data.sh</code> and <code>./initial-data.sh</code> —
-they will work as expected once you're inside the container.</p>
 <h2 id="update-python-dependencies">Update Python dependencies<a class="headerlink" href="#update-python-dependencies" title="Permanent link">¶</a></h2>
 <p>If the Python package requirements files have changed, 
 you will need to stop <code>docker-compose</code> (if it is running) 
 and rebuild the Python container using:</p>
-<pre class="highlight"><code>docker-compose up --build python</code></pre>
+<pre class="highlight"><code class="language-bash">docker-compose up --build python</code></pre>
 
 <h2 id="work-on-satellite-apps">Work on satellite apps<a class="headerlink" href="#work-on-satellite-apps" title="Permanent link">¶</a></h2>
-<p>See <a href="../related-projects/#using-docker">Related Projects#Using Docker</a>.</p>
+<p>See <a href="../related-projects/#using-docker">“Using Docker” on the Related Projects page</a>.</p>
 <h2 id="attach-for-debugging">Attach for debugging<a class="headerlink" href="#attach-for-debugging" title="Permanent link">¶</a></h2>
 <p>If you have inserted a <a href="https://docs.python.org/3/library/pdb.html">PDB breakpoint</a> in your code 
 and need to interact with the running Django process when the breakpoint is reached 
 you can run <a href="https://docs.docker.com/engine/reference/commandline/attach/"><code>docker attach</code></a>:</p>
-<ul>
-<li><code>docker attach cfgov-refresh_python_1</code></li>
-</ul>
+<pre class="highlight"><code class="language-bash">docker attach cfgov-refresh_python_1</code></pre>
+
 <p>When you're done, you can detach with <code>Ctrl+P Ctrl+Q</code>.</p>
 <h2 id="useful-docker-commands">Useful Docker commands<a class="headerlink" href="#useful-docker-commands" title="Permanent link">¶</a></h2>
 <p>For <code>docker-compose</code> commands, 
@@ -407,6 +406,13 @@ docker-compose up --build python</code></pre>
 
 </li>
 </ol>
+<h4 id="jenkins-ci-docker-swarm">Jenkins CI + Docker Swarm<a class="headerlink" href="#jenkins-ci-docker-swarm" title="Permanent link">¶</a></h4>
+<p>This repo also includes a Docker Swarm compatible Compose file
+<a href="../docker-stack.yml"><code>docker-stack.yml</code></a>.  This file is intended
+for use with the project's <a href="../Jenkinsfile"><code>Jenkinsfile</code></a> <a href="https://jenkins.io/doc/tutorials/build-a-multibranch-pipeline-project/">multibranch build
+pipeline</a>.
+It follows a standard Docker build/scan/push workflow, optionally
+deploying to our Docker Swarm cluster.</p>
 <h3 id="how-does-it-work">How does it work?<a class="headerlink" href="#how-does-it-work" title="Permanent link">¶</a></h3>
 <p>The production image extends the development image. If you look at the <code>Dockerfile</code>, this is spelled out by the line:</p>
 <pre class="highlight"><code>FROM cfgov-dev as cfgov-prod</code></pre>

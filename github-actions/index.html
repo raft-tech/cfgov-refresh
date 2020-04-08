@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Translation - cfgov-refresh</title>
+  <title>How We Use GitHub Actions - cfgov-refresh</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Translation";
-    var mkdocs_page_input_path = "translation.md";
+    var mkdocs_page_name = "How We Use GitHub Actions";
+    var mkdocs_page_input_path = "github-actions.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -125,24 +125,9 @@
                     
     <a class="" href="../split-testing/">Split Testing</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Translation</a>
-    <ul class="subnav">
-            
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#overview">Overview</a></li>
-        
-            <li><a class="toctree-l4" href="#how-to-translate-text-in-cfgov-refresh">How to translate text in cfgov-refresh</a></li>
-        
-            <li><a class="toctree-l4" href="#wagtail-considerations">Wagtail Considerations</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../translation/">Translation</a>
                 </li>
     </ul>
 	    </li>
@@ -190,9 +175,24 @@
                     
     <a class="" href="../travis/">How We Use Travis CI</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../github-actions/">How We Use GitHub Actions</a>
+    <a class="current" href="./">How We Use GitHub Actions</a>
+    <ul class="subnav">
+            
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#what-github-actions-do">What GitHub Actions do</a></li>
+        
+            <li><a class="toctree-l4" href="#how-github-actions-are-configured">How GitHub Actions are configured</a></li>
+        
+            <li><a class="toctree-l4" href="#an-extra-task-for-satellite-repositories">An extra task for satellite repositories</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -246,14 +246,14 @@
     
       
         
-          <li>Supporting Features &raquo;</li>
+          <li>Contributing &raquo;</li>
         
       
     
-    <li>Translation</li>
+    <li>How We Use GitHub Actions</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/cfpb/cfgov-refresh/edit/master/docs/translation.md"
+        <a href="https://github.com/cfpb/cfgov-refresh/edit/master/docs/github-actions.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -263,56 +263,33 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="translation">Translation<a class="headerlink" href="#translation" title="Permanent link">¶</a></h1>
-<p>As cfgov-refresh is a Django project, the <a href="https://docs.djangoproject.com/en/1.11/topics/i18n/translation/">Django translation documentation is a good place to start</a>. What follows is a brief introduction to translations with the particular tools cfgov-refresh uses (like Jinja2 templates) and the conventions we use.</p>
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h2>
-<p>Django translations use <a href="https://en.wikipedia.org/wiki/Gettext">GNU gettext</a> (see
-<a href="../installation/#install-gnu-gettext-for-django-translation-support">the installation instructions</a>).</p>
-<p>By convention, translations are usually performed in code by wrapping a string to be translated in a function that is either named or aliased with an underscore. For example:</p>
-<pre class="highlight"><code class="language-python">_(&quot;This is a translatable string.&quot;)</code></pre>
-
-<p>These strings are collected into portable object (<code>.po</code>) files for each supported language. These files map the original string (<code>msgid</code>) to a matching translated string (<code>msgstr</code>). For example:</p>
-<pre class="highlight"><code class="language-po">msgid &quot;This is a translatable string.&quot;
-msgstr &quot;Esta es una cadena traducible.&quot;</code></pre>
-
-<p>These portable object files are compiled into machine object files (<code>.mo</code>) that the translation system uses when looking up the original string.</p>
-<p>By convention the <code>.po</code> and <code>.mo</code> files live inside a <code>locale/[LANGUAGE]/LC_MESSAGES/</code> folder structure, for example, <code>cfgov/locale/es/LC_MESSAGES/django.po</code> for the Spanish language portable object file for all of our cfgov-refresh messages.</p>
-<h2 id="how-to-translate-text-in-cfgov-refresh">How to translate text in cfgov-refresh<a class="headerlink" href="#how-to-translate-text-in-cfgov-refresh" title="Permanent link">¶</a></h2>
-<p>This brief howto will guide you through adding translatable text to cfgov-refresh.</p>
-<h4 id="1-add-the-translation-function-around-the-string">1. Add the translation function around the string<a class="headerlink" href="#1-add-the-translation-function-around-the-string" title="Permanent link">¶</a></h4>
-<p>In Jinja2 templates:</p>
-<pre class="highlight"><code class="language-jinja">{{ _('Hello World!') }}</code></pre>
-
-<p>In Django templates:</p>
-<pre class="highlight"><code class="language-django">{% load i18n %}
-
-{% trans &quot;Hello World!&quot; %}</code></pre>
-
-<p>In Python code:</p>
-<pre class="highlight"><code class="language-python">from django.utils.translation import ugettext as _
-
-mystring = _('Hello World!')</code></pre>
-
-<p>The string in the call to the translation function will be the <code>msgid</code> in the portable object file below.</p>
-<h4 id="2-run-the-makemessages-management-command-to-add-the-string-to-the-portable-object-file">2. Run the <code>makemessages</code> management command to add the string to the portable object file<a class="headerlink" href="#2-run-the-makemessages-management-command-to-add-the-string-to-the-portable-object-file" title="Permanent link">¶</a></h4>
-<p>The <code>makemessages</code> management command will look through all Python, Django, and Jinja2 template files to find strings that are wrapped in a translation function call and add them to the portable object file for a particular language. The language is specified with <code>-l</code>. The command also must be called from the root of the Django app tree, <em>not</em> the project root.</p>
-<p>To generate or update the portable object file for Spanish:</p>
-<pre class="highlight"><code class="language-shell">cd cfgov
-django-admin.py makemessages -l es</code></pre>
-
-<h4 id="3-edit-the-portable-object-file-to-add-a-translation-for-the-string">3. Edit the portable object file to add a translation for the string<a class="headerlink" href="#3-edit-the-portable-object-file-to-add-a-translation-for-the-string" title="Permanent link">¶</a></h4>
-<p>The portable object files are stored in <code>cfgov/locale/[LANGUAGE]/LC_MESSAGES/</code>. For the Spanish portable object file, edit <code>cfgov/locale/es/LC_MESSAGES/django.po</code> and add the Spanish translation as the <code>msgstr</code> for your new <code>msgid</code></p>
-<pre class="highlight"><code class="language-po">msgid &quot;Hello World!&quot;
-msgstr &quot;Hola Mundo!&quot;</code></pre>
-
-<h4 id="4-run-the-compilemessages-management-command-to-compile-the-machine-object-file">4. Run the <code>compilemessages</code> management command to compile the machine object file<a class="headerlink" href="#4-run-the-compilemessages-management-command-to-compile-the-machine-object-file" title="Permanent link">¶</a></h4>
-<pre class="highlight"><code class="language-shell">cd cfgov
-django-admin.py compilemessages</code></pre>
-
-<h2 id="wagtail-considerations">Wagtail Considerations<a class="headerlink" href="#wagtail-considerations" title="Permanent link">¶</a></h2>
-<p>All of our Wagtail pages include a language-selection dropdown under its Configuration tab:</p>
-<p><img alt="Wagtail page language selection" src="../img/wagtail-language.png" /></p>
-<p>The selected language will force translation of all translatable strings in templates and code for that page.</p>
+                <h1 id="how-we-use-github-actions-for-continuous-integration-and-automation">How we use GitHub Actions for continuous integration and automation<a class="headerlink" href="#how-we-use-github-actions-for-continuous-integration-and-automation" title="Permanent link">¶</a></h1>
+<h2 id="what-github-actions-do">What GitHub Actions do<a class="headerlink" href="#what-github-actions-do" title="Permanent link">¶</a></h2>
+<p>We use <a href="https://help.github.com/en/articles/about-github-actions">GitHub Actions</a> on cfgov-refresh to perform the following tasks:</p>
+<ul>
+<li>Run automated lint checkers</li>
+<li>Run automated unit tests</li>
+<li>Measure unit test coverage</li>
+<li>Build and deploy this documentation to GitHub on the <a href="https://github.com/cfpb/cfgov-refresh/tree/gh-pages"><code>gh-pages</code> branch</a>.</li>
+<li>Clean up stored artifacts</li>
+</ul>
+<h2 id="how-github-actions-are-configured">How GitHub Actions are configured<a class="headerlink" href="#how-github-actions-are-configured" title="Permanent link">¶</a></h2>
+<p>We use the following constraints to optimize our CI builds for speed and utility:</p>
+<ul>
+<li>Our linting and unit tests run on pull requests only, including subsequent pushes to a pull request's branch. Tests are not run on the <code>master</code> branch.</li>
+<li>Our documentation is deployed on merges and pushes to the <code>master</code> branch only, and not on pull requests.</li>
+<li>We do not run builds of any kind on any other branches that are not <code>master</code>, and that are not pull request branches.</li>
+<li>We store coverage artifacts in between the unit test jobs and the coverage jobs. This requires us to run an action every hour using <a href="https://github.com/marketplace/actions/purge-artifacts">the purge-artifacts action</a> to clean up these stored artifacts.</li>
+</ul>
+<p>We use a combination of:</p>
+<ul>
+<li><a href="https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix">Build matrices</a> to run the same tests on different versions of our dependnecies</li>
+<li><a href="https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idservices">Additional services</a> to provide, for example, PostgreSQL for our tests</li>
+</ul>
+<p>Our workflows are defined in our <a href="https://github.com/cfpb/cfgov-refresh/tree/master/.github/workflows"><code>.github/workflows</code></a> directory.</p>
+<h2 id="an-extra-task-for-satellite-repositories">An extra task for satellite repositories<a class="headerlink" href="#an-extra-task-for-satellite-repositories" title="Permanent link">¶</a></h2>
+<p>For our <a href="../related-projects/#satellite-apps">satellite apps</a>, We use Travis to build and attach a deployment wheel file to every release.</p>
+<p>An example is the <code>.whl</code> file on <a href="https://github.com/cfpb/retirement/releases/tag/0.7.6">this release of the retirement app</a>.</p>
               
             </div>
           </div>
@@ -320,10 +297,10 @@ django-admin.py compilemessages</code></pre>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../browser-acceptance-tests/" class="btn btn-neutral float-right" title="Browser/Acceptance Testing">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../ask-cfpb/" class="btn btn-neutral float-right" title="Ask CFPB">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../split-testing/" class="btn btn-neutral" title="Split Testing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../travis/" class="btn btn-neutral" title="How We Use Travis CI"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -351,10 +328,10 @@ django-admin.py compilemessages</code></pre>
           <a href="https://github.com/cfpb/cfgov-refresh/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../split-testing/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../travis/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../browser-acceptance-tests/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../ask-cfpb/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

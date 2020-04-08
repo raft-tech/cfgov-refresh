@@ -100,10 +100,6 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../mega-menu/">Editing the Mega Menu</a>
-                </li>
-                <li class="">
-                    
     <a class="" href="../forms-in-wagtail/">Forms in Wagtail Page Context</a>
                 </li>
                 <li class="">
@@ -197,6 +193,10 @@
                 <li class="">
                     
     <a class="" href="../travis/">How We Use Travis CI</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../github-actions/">How We Use GitHub Actions</a>
                 </li>
     </ul>
 	    </li>
@@ -392,7 +392,7 @@ urlpatterns += ask_patterns</code></pre>
 <p>Wagtail views in <code>flagged_url</code> with a Django view as fallback (or vice-versa) can be a bit awkward. Django views are typically called with <code>request</code> as the first argument, and Wagtail's <code>serve</code> view takes both the request and the path. To get around this, in <code>flagged_url</code> we typically use a <code>lambda</code> for the view:</p>
 <pre class="highlight"><code class="language-python">lambda req: ServeView.as_view()(req, req.path)</code></pre>
 
-<p>This lambda takes the request and calls the <a href="https://github.com/cfpb/wagtail-sharing">Wagtail-Sharing</a> <code>ServeView</code> (which we're using in place of <code>wagtail.wagtailcore.views.serve</code>).</p>
+<p>This lambda takes the request and calls the <a href="https://github.com/cfpb/wagtail-sharing">Wagtail-Sharing</a> <code>ServeView</code> (which we're using in place of <code>wagtail.core.views.serve</code>).</p>
 <h2 id="enabling-a-flag">Enabling a flag<a class="headerlink" href="#enabling-a-flag" title="Permanent link">¶</a></h2>
 <p>Feature flags are enabled based on a set of conditions that are given either in the Django settings files (in <code>cfgov/cfgov/settings/</code>) or in the Django or Wagtail admin. Multiple conditions can be given, both in settings and in the admin, and if any condition is satisfied a flag is enabled.</p>
 <p><a href="https://cfpb.github.io/django-flags/conditions/">A list of available conditions and how to use them is available in the Django-Flags documentation</a>.</p>
@@ -406,7 +406,7 @@ urlpatterns += ask_patterns</code></pre>
     # &quot;This beta site is a work in progress.&quot;
     'BETA_NOTICE': [
         {
-            'condition': 'boolean', 
+            'condition': 'boolean',
             'value': True,
         },
     ],
