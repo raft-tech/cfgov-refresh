@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import json
 from urllib.parse import urljoin
 
@@ -8,7 +6,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template.defaultfilters import slugify
 from haystack.query import SearchQuerySet
 
-from wagtail.wagtailcore.models import Site
+from wagtail.core.models import Site
 from wagtailsharing.models import SharingSite
 from wagtailsharing.views import ServeView
 

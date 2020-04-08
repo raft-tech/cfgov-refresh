@@ -1,26 +1,14 @@
-import * as idb from 'idb';
 import { render } from 'react-dom';
 import { configure as configureMobX } from 'mobx';
 import { Workbox } from 'workbox-window';
-import { DateTime, Info } from 'luxon';
-import { RRule } from 'rrule';
 import { StoreProvider } from './stores';
 import Routes from './routes';
-import CashFlowEvent from './stores/models/cash-flow-event';
+import { dayjs } from './lib/calendar-helpers';
+import { Categories } from './stores/models/categories';
 
 configureMobX({ enforceActions: 'observed' });
 
-const App = () => (
-  <StoreProvider>
-    <section className="my-money-calendar">
-      <Routes />
-    </section>
-  </StoreProvider>
-);
-
-render(<App />, document.querySelector('#mmt-my-money-calendar'));
-
-if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+if (process.env.SERVICE_WORKER_ENABLED && 'serviceWorker' in navigator) {
   const wb = new Workbox('/mmt-my-money-calendar/service-worker.js', { scope: '/mmt-my-money-calendar' });
 
   wb.addEventListener('activated', (evt) => {
@@ -34,16 +22,14 @@ if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
   wb.register();
 }
 
+// In development mode, expose global functions to seed and clear the local IDB database:
 if (process.env.NODE_ENV === 'development') {
-  window.idb = idb;
-  window.CashFlowEvent = CashFlowEvent;
-  window.DateTime = DateTime;
-  window.Info = Info;
-  window.RRule = RRule;
+  window.dayjs = dayjs;
+  window.Categories = Categories;
 
   async function loadSeeders() {
     window.seed = await import(/* webpackChunkName: "seeds.js" */ './seed-data.js');
-  };
+  }
 
   window.seedTestData = async function seedTestData() {
     if (!window.seed) await loadSeeders();
@@ -58,5 +44,15 @@ if (process.env.NODE_ENV === 'development') {
 
     await window.seed.clearData();
     console.info('Cleared all data');
-  }
+  };
 }
+
+const App = () => (
+  <StoreProvider>
+    <section className="my-money-calendar">
+      <Routes />
+    </section>
+  </StoreProvider>
+);
+
+render(<App />, document.querySelector('#mmt-my-money-calendar'));

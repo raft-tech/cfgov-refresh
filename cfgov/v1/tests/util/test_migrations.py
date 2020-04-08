@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.apps import apps
 from django.test import TestCase
 
+from wagtail.core.models import Page
 from wagtail.tests.testapp.models import StreamPage
-from wagtail.wagtailcore.models import Page, PageRevision
 
 import mock
 

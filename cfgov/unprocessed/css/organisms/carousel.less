@@ -10,7 +10,7 @@
     border: 1px solid @gray-40;
     border-bottom: none;
 
-    .respond-to-max( @bp-xs-max, {
+    .respond-to-max( @bp-sm-max, {
       display: none;
     } );
   }
@@ -147,10 +147,6 @@
 
     // Change stacking behavior of thumbnails.
     .respond-to-max( @bp-sm-max, {
-      width: 50%;
-    } );
-
-    .respond-to-max( @bp-xs-max, {
       width: 100%;
     } );
 
@@ -191,7 +187,7 @@
   }
 
   // Mobile view.
-  .respond-to-max( @bp-xs-max, {
+  .respond-to-max( @bp-sm-max, {
     &_thumbnails {
       display: none;
     }
@@ -208,14 +204,15 @@
   } );
 
   // Desktop view.
-  .respond-to-min( @bp-sm-min, {
+  .respond-to-min( @bp-med-min, {
     &_thumbnails__mobile {
       display: none;
     }
 
-    // Hide "featured" heading at desktop size.
-    & h5 {
-      display: none;
+    // Hide "featured content" heading at desktop size but keep it available
+    // to screen readers.
+    & .h5 {
+      .u-visually-hidden;
     }
 
     // We can't do a straight top border because it gets included in the

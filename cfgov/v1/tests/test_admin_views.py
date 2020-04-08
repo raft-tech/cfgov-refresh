@@ -37,6 +37,9 @@ def create_admin_access_permissions():
         group.permissions.add(admin_permission)
 
 
+cache_path = 'wagtail.contrib.frontend_cache.backends.CloudfrontBackend'
+
+
 @override_settings(WAGTAILFRONTENDCACHE={
     'akamai': {
         'BACKEND': 'v1.models.caching.AkamaiBackend',
@@ -45,7 +48,7 @@ def create_admin_access_permissions():
         'ACCESS_TOKEN': 'fake'
     },
     'files': {
-        'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.CloudfrontBackend',  # noqa: E501
+        'BACKEND': cache_path,
         'DISTRIBUTION_ID': {
             'files.fake.gov': 'fake'
         }
@@ -108,7 +111,7 @@ class TestCDNManagementView(TestCase):
         )
         mock_purge.assert_called_with('http://www.fake.gov')
 
-    @mock.patch('wagtail.contrib.wagtailfrontendcache.backends.CloudfrontBackend.purge_batch')  # noqa: E501
+    @mock.patch(f'{cache_path}.purge_batch')
     def test_submission_with_url_cloudfront(self, mock_purge_batch):
         self.client.login(username='cdn', password='password')
         self.client.post(

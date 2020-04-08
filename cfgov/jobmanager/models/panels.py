@@ -1,10 +1,8 @@
-from __future__ import absolute_import
-
 from django.db import models
 from django.utils.http import urlquote
 
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
-from wagtail.wagtailcore.models import Orderable
+from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.core.models import Orderable
 
 from modelcluster.fields import ParentalKey
 

@@ -1,19 +1,32 @@
-from __future__ import absolute_import
-
 from django.db import models
+from django.utils import timezone
 
-from wagtail.wagtailadmin.edit_handlers import (
+from wagtail.admin.edit_handlers import (
     FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, ObjectList,
     TabbedInterface
 )
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import PageManager
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import PageManager, PageQuerySet
 
 from jobmanager.models.django import (
     JobCategory, JobLength, JobLocation, ServiceType
 )
 from v1.models import CFGOVPage
 from v1.models.snippets import ReusableText
+
+
+class JobListingPageQuerySet(PageQuerySet):
+    def open(self):
+        today = timezone.now().date()
+
+        return self \
+            .filter(live=True) \
+            .filter(open_date__lte=today) \
+            .filter(close_date__gte=today) \
+            .order_by('close_date', 'title')
+
+
+JobListingPageManager = PageManager.from_queryset(JobListingPageQuerySet)
 
 
 class JobListingPage(CFGOVPage):
@@ -91,7 +104,7 @@ class JobListingPage(CFGOVPage):
     )
     content_panels = CFGOVPage.content_panels + [
         MultiFieldPanel([
-            FieldPanel('division', classname='full'),
+            FieldPanel('division'),
             InlinePanel('grades', label='Grades'),
             FieldRowPanel([
                 FieldPanel('open_date', classname='col6'),
@@ -107,16 +120,16 @@ class JobListingPage(CFGOVPage):
             ]),
         ], heading='Details'),
         MultiFieldPanel([
-            FieldPanel('location', classname='full'),
-            FieldPanel('allow_remote', classname='full'),
+            FieldPanel('location'),
+            FieldPanel('allow_remote'),
         ], heading='Location'),
         MultiFieldPanel([
-            FieldPanel('description', classname='full'),
-            FieldPanel('responsibilities', classname='full'),
-            FieldPanel('travel_required', classname='full'),
-            FieldPanel('travel_details', classname='full'),
-            FieldPanel('additional_section_title', classname='full'),
-            FieldPanel('additional_section_content', classname='full'),
+            FieldPanel('description'),
+            FieldPanel('responsibilities'),
+            FieldPanel('travel_required'),
+            FieldPanel('travel_details'),
+            FieldPanel('additional_section_title'),
+            FieldPanel('additional_section_content'),
         ], heading='Description'),
         InlinePanel(
             'usajobs_application_links',
@@ -135,7 +148,7 @@ class JobListingPage(CFGOVPage):
 
     template = 'job-description-page/index.html'
 
-    objects = PageManager()
+    objects = JobListingPageManager()
 
     def get_context(self, request, *args, **kwargs):
         context = super(JobListingPage, self).get_context(request)

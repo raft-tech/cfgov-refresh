@@ -17,9 +17,10 @@ if sys.version_info[0] < 3:
 
 DEBUG = True
 SECRET_KEY = 'not-secret-key-for-testing'
+
 INSTALLED_APPS += (
     'sslserver',
-    'wagtail.contrib.wagtailstyleguide',
+    'wagtail.contrib.styleguide',
 )
 
 STATIC_ROOT = REPOSITORY_ROOT.child('collectstatic')
@@ -85,14 +86,14 @@ if os.environ.get('ENABLE_DEBUG_TOOLBAR'):
 MIDDLEWARE_CLASSES += CSP_MIDDLEWARE_CLASSES
 
 # Disable caching when working locally.
-CACHES.update({
+CACHES = {
     k: {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         'TIMEOUT': 0,
     } for k in (
         'default', 'post_preview'
     )
-})
+}
 
 # Optionally enable cache for post_preview
 if os.environ.get('ENABLE_POST_PREVIEW_CACHE'):
@@ -106,7 +107,3 @@ if os.environ.get('ENABLE_POST_PREVIEW_CACHE'):
 # unless the GOVDELIVERY_BASE_URL environment variable is set.
 if not os.environ.get('GOVDELIVERY_BASE_URL'):
     GOVDELIVERY_API = 'core.govdelivery.LoggingMockGovDelivery'
-
-# Used in legacy.views.complaint.ComplaintLandingView
-# This is a localhost debug environment for Docker
-COMPLAINT_LANDING_STATS_SOURCE = "http://0.0.0.0:8000/data-research/consumer-complaints/search/api/v1/?field=all&size=1&no_aggs=true"    

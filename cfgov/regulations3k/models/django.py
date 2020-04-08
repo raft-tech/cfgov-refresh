@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
 
 import re
 from datetime import date
@@ -11,8 +10,8 @@ from django.dispatch import receiver
 from django.utils.functional import cached_property
 from django.utils.html import strip_tags
 
-from wagtail.contrib.wagtailfrontendcache.utils import PurgeBatch
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.contrib.frontend_cache.utils import PurgeBatch
 
 import regdown
 
@@ -202,7 +201,7 @@ class Section(models.Model):
         FieldPanel('label'),
         FieldPanel('subpart'),
         FieldPanel('title'),
-        FieldPanel('contents', classname="full"),
+        FieldPanel('contents'),
     ]
 
     def __str__(self):

@@ -29,7 +29,7 @@ INSTALLED_APPS += (
 
 WAGTAILADMIN_RICH_TEXT_EDITORS = {
     'default': {
-        'WIDGET': 'wagtail.wagtailadmin.rich_text.HalloRichTextArea',
+        'WIDGET': 'wagtail.admin.rich_text.HalloRichTextArea',
     },
     'custom': {
         'WIDGET': 'wagtail.tests.testapp.rich_text.CustomRichTextArea',

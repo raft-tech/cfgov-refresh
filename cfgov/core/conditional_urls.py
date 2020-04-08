@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls import include
 
-from wagtail.wagtailcore.views import serve as wagtail_serve
+from wagtail.core.views import serve as wagtail_serve
 
 
 def wagtail_fail_through(request):

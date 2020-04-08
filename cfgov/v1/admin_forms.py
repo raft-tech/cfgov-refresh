@@ -4,7 +4,7 @@ from io import BytesIO, StringIO
 from django import forms
 from django.core.management import call_command
 
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
 
 class CacheInvalidationForm(forms.Form):

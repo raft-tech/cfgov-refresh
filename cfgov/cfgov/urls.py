@@ -9,8 +9,8 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import render
 from django.views.generic.base import RedirectView, TemplateView
 
-from wagtail.contrib.wagtailsitemaps.views import sitemap
-from wagtail.wagtailadmin import urls as wagtailadmin_urls
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.contrib.sitemaps.views import sitemap
 from wagtailsharing import urls as wagtailsharing_urls
 from wagtailsharing.views import ServeView
 
@@ -325,8 +325,8 @@ urlpatterns = [
                 url='/consumer-tools/money-as-you-grow/%(path)s',
                 permanent=True)),
     url(r'^practitioner-resources/resources-youth-employment-programs/transportation-tool/$',  # noqa: E501
-        TemplateView.as_view(
-
+        FlaggedTemplateView.as_view(
+            flag_name='YOUTH_EMPLOYMENT_SUCCESS',
             template_name='youth_employment_success/index.html'
         ),
         name='youth_employment_success'

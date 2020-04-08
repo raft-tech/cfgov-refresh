@@ -1,5 +1,3 @@
-from __future__ import absolute_import, unicode_literals
-
 import logging
 import re
 import urllib
@@ -16,12 +14,12 @@ from django.template.loader import get_template
 from django.template.response import TemplateResponse
 from haystack.query import SearchQuerySet
 
-from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
-from wagtail.wagtailadmin.edit_handlers import (
+from wagtail.admin.edit_handlers import (
     FieldPanel, ObjectList, StreamFieldPanel, TabbedInterface
 )
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import PageManager
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.core.fields import StreamField
+from wagtail.core.models import PageManager
 
 import requests
 from jinja2 import Markup

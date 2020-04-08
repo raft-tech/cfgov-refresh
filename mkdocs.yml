@@ -14,7 +14,6 @@ nav:
     - Atomic Structure and Design: atomic-structure.md
     - Creating and Editing Components: editing-components.md
     - Django and Wagtail Migrations: migrations.md
-    - Editing the Mega Menu: mega-menu.md
     - Forms in Wagtail Page Context: forms-in-wagtail.md
     - Wagtail Pages: wagtail-pages.md
 - Supporting Features:
@@ -32,6 +31,7 @@ nav:
     - Related Projects: related-projects.md
     - Development Tips: development-tips.md
     - How We Use Travis CI: travis.md
+    - How We Use GitHub Actions: github_actions.md
 - APIs and Data:
     - Ask CFPB: ask-cfpb.md
     - Consumer Complaints: consumer-complaint-database.md

@@ -2,9 +2,9 @@ from django.conf.urls import include, url
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from wagtail.wagtailadmin.menu import MenuItem
-from wagtail.wagtailcore import hooks
-from wagtail.wagtailusers.widgets import UserListingButton
+from wagtail.admin.menu import MenuItem
+from wagtail.core import hooks
+from wagtail.users.widgets import UserListingButton
 
 
 @hooks.register('register_admin_urls')

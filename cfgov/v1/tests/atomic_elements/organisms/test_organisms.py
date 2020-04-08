@@ -1,8 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
 
-from wagtail.wagtailcore.blocks import StreamValue
-from wagtail.wagtailimages.tests.utils import get_test_image_file
+from wagtail.core.blocks import StreamValue
+from wagtail.images.tests.utils import get_test_image_file
 
 from scripts import _atomic_helpers as atomic
 

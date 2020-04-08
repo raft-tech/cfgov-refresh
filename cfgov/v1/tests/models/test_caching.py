@@ -1,8 +1,8 @@
 from django.core.files.base import ContentFile
 from django.test import TestCase, override_settings
 
-from wagtail.wagtaildocs.models import Document
-from wagtail.wagtailimages.tests.utils import get_test_image_file
+from wagtail.documents.models import Document
+from wagtail.images.tests.utils import get_test_image_file
 
 import boto3
 import moto

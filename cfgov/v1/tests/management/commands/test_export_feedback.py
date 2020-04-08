@@ -9,8 +9,8 @@ from django.core.management import call_command
 from django.test import SimpleTestCase, TestCase
 from django.utils.timezone import make_aware
 
+from wagtail.core.models import Site
 from wagtail.tests.testapp.models import SimplePage
-from wagtail.wagtailcore.models import Site
 
 from v1.management.commands.export_feedback import (
     lookup_page_slug, make_aware_datetime, parse_date

@@ -3,7 +3,7 @@ import re
 from django.conf import settings
 from django.utils.encoding import force_text
 
-from wagtail.wagtailcore.rich_text import expand_db_html
+from wagtail.core.rich_text import expand_db_html
 
 from core.utils import add_link_markup, get_link_tags
 

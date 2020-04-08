@@ -3,8 +3,8 @@ from django.core.validators import RegexValidator
 from django.forms.utils import ErrorList
 from django.utils.safestring import mark_safe
 
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.core import blocks
+from wagtail.images.blocks import ImageChooserBlock
 
 from v1.atomic_elements import atoms
 from v1.blocks import AnchorLink, HeadingBlock
