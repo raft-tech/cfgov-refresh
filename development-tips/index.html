@@ -179,6 +179,8 @@
         
             <li><a class="toctree-l4" href="#tip-working-with-the-templates">TIP: Working with the templates</a></li>
         
+            <li><a class="toctree-l4" href="#tip-installing-new-frontend-dependencies">TIP: Installing new frontend dependencies</a></li>
+        
         </ul>
     
 
@@ -318,6 +320,16 @@ template's <code>{% block css %}</code> or <code>{% block javascript scoped %}</
 <p>After running <code>gulp build</code> the site's assets are copied over to <code>cfgov\static_built</code>,
 ready to be served by Django.</p>
 </div>
+<h3 id="tip-installing-new-frontend-dependencies">TIP: Installing new frontend dependencies<a class="headerlink" href="#tip-installing-new-frontend-dependencies" title="Permanent link">¶</a></h3>
+<ul>
+<li>Use <code>yarn add new_dep@se.m.ver</code> to install new dependencies.</li>
+<li>If you can't do this for some reason or are looking to freshen all dependencies,
+  you will need to edit <code>.yarnrc</code>, temporarily commenting out the <code>--install.pure-lockfile true</code>
+  and <code>--install.offline true</code> flags before proceeding with your installation or update.</li>
+<li>In the rare but observed case that <code>yarn add new_dep@se.m.ver</code> doesn't add
+  every needed package to the offline cache, you likely need to first run
+  <code>yarn cache clean</code>.</li>
+</ul>
               
             </div>
           </div>

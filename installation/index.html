@@ -368,16 +368,12 @@ you start a new session of work on the project.</p>
 
 <p>Then create the database, associated user, and schema for that user:</p>
 <pre class="highlight"><code class="language-bash">dropdb --if-exists cfgov &amp;&amp; dropuser --if-exists cfpb
-createuser cfpb &amp;&amp; createdb -O cfpb cfgov
+createuser --createdb cfpb &amp;&amp; createdb -O cfpb cfgov
 psql postgres://cfpb@localhost/cfgov -c 'CREATE SCHEMA cfpb'</code></pre>
 
-<p>If you absolutely need to use SQLite, you'll need to update your <code>.env</code> file
-to comment out the line that specifies Postgres as the db:</p>
-<pre class="highlight"><code class="language-bash"># export DATABASE_URL=postgres://cfpb@localhost/cfgov</code></pre>
-
-<p>And then uncomment the line that tells Django to use SQLite:</p>
-<pre class="highlight"><code class="language-bash">export DATABASE_URL=sqlite:///db.sqlite3</code></pre>
-
+<p>We don't support using an SQLite database, because we use database fields 
+that are specific to Postgres. The <code>--createdb</code> flag above allows Django to 
+create temporary Postgres databases when running unit tests.</p>
 <h4 id="run-the-setup-script">Run the setup script<a class="headerlink" href="#run-the-setup-script" title="Permanent link">¶</a></h4>
 <p>At this point, your machine should have everything it needs to automate the
 rest of the setup process.</p>

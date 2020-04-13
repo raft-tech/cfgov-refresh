@@ -284,18 +284,16 @@ you'll need to
 before running the tests:</p>
 <pre class="highlight"><code class="language-sh">workon cfgov-refresh</code></pre>
 
-<p>If have not set up the standalone installation of cfgov-refresh,
-it's not necessary to run the tests. 
-You can install Tox in your 
+<p>If you have not set up the standalone installation of cfgov-refresh,
+you can still run the tests if you install Tox in your 
 <a href="https://github.com/cfpb/development/blob/master/guides/installing-python.md">local installation of Python</a>:</p>
 <pre class="highlight"><code>pip install tox</code></pre>
 
 <p>If you have set up 
 <a href="/installation/#docker-based-installation">a Docker-based installation of cfgov-refresh</a>,
-you'll need to 
-<a href="http://localhost:8888/running-docker/#access-a-containers-shell">access the Python container's shell</a> 
-before running the tests:</p>
-<pre class="highlight"><code class="language-sh">docker-compose exec python3 bash</code></pre>
+you can run the tests there by<br />
+<a href="http://localhost:8888/running-docker/#access-a-containers-shell">accessing the Python container's shell</a>: </p>
+<pre class="highlight"><code class="language-sh">docker-compose exec python bash</code></pre>
 
 <h2 id="running-tests">Running tests<a class="headerlink" href="#running-tests" title="Permanent link">¶</a></h2>
 <p>Our test suite can either be run in a local virtualenv or in Docker. 
