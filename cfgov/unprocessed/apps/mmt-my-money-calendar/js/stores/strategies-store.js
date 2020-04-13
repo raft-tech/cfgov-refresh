@@ -8,6 +8,7 @@ const isPlural = (word) => word.endsWith('s');
 class StrategiesStore {
   negativeStrategies = {
     'expense.personal.emergencySavings': {
+      id: 'saveForEmergencies',
       title: 'Save for Emergencies',
       body: 'Saving helps reduce stress when the unexpected happens.',
       link: {
@@ -16,6 +17,7 @@ class StrategiesStore {
       },
     },
     'expense.personal.healthcare': {
+      id: 'chooseHealthPlan',
       title: 'Choose a Health Care Plan That Fits Your Budget',
       body: 'Health insurance can drastically reduce the costs of unforeseen medical bills.',
       link: {
@@ -81,7 +83,7 @@ class StrategiesStore {
           'expense.personal.funMoney',
         ],
         title: 'Adjust Spending this Week',
-        text: (categoryName) =>
+        template: (categoryName) =>
           `${categoryName} ${isPlural(categoryName) ? 'were' : 'was'} your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
       },
     ],
@@ -116,8 +118,8 @@ class StrategiesStore {
 
         strategy.event = event;
 
-        if (typeof strategy.text === 'function') {
-          strategy.text = strategy.text(event.categoryDetails.name);
+        if (strategy.template && typeof strategy.template === 'function') {
+          strategy.text = strategy.template(event.categoryDetails.name);
         }
 
         return strategy;
@@ -126,6 +128,7 @@ class StrategiesStore {
   }
 
   @computed get strategyResults() {
+    const strategyIDs = new Set();
     const results = this.eventStore.eventCategories.map((catPath) => {
       const { strategy } = Categories.get(catPath) || {};
       return strategy;
@@ -137,7 +140,12 @@ class StrategiesStore {
       }
     }
 
-    return compact(results);
+    return compact(results).filter((result) => {
+      if (strategyIDs.has(result.id)) return false;
+      strategyIDs.add(result.id);
+      this.logger.debug('Strategy IDs set: %O', strategyIDs);
+      return true;
+    });
   }
 
   analyzeFixItEvents(events) {
