@@ -111,6 +111,10 @@ export default class CashFlowStore {
     );
   }
 
+  @computed get hasStartingBalance() {
+    return this.eventsLoaded && this.eventCategories.includes('income.startingBalance');
+  }
+
   /**
    * Get the user's available balance for the specified date
    *
@@ -340,5 +344,10 @@ export default class CashFlowStore {
     }
 
     this.addEvents(savedEvents);
+  });
+
+  clearAllData = flow(function* () {
+    yield CashFlowEvent.destroyAll();
+    this.setEvents([]);
   });
 }
