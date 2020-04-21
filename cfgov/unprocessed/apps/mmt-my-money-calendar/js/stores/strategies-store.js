@@ -140,8 +140,8 @@ class StrategiesStore {
 
     return [
       {
-        title: 'No Fix-It Strategies Found',
-        text: "There are no recommendations specific to this week's transactions.",
+        title: 'Explore Your General Strategies',
+        text: 'While you have gone into the red, we could not recommend any "Fix It" Strategies based upon your budget. However, there are plenty of solutions you can implement to balance your budget from the general strategies tab.',
         link: {
           href: '/strategies',
           text: 'View General Strategies',
@@ -151,8 +151,6 @@ class StrategiesStore {
   }
 
   @computed get strategyResults() {
-    if (!this.eventStore.hasStartingBalance) return [];
-
     const strategyIDs = new Set();
     const results = this.eventStore.eventCategories.map((catPath) => {
       const { strategy } = Categories.get(catPath) || {};
