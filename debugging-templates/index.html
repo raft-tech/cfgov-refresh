@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Artifacts and Deployment - cfgov-refresh</title>
+  <title>Debugging Templates - cfgov-refresh</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Artifacts and Deployment";
-    var mkdocs_page_input_path = "deployment.md";
+    var mkdocs_page_name = "Debugging Templates";
+    var mkdocs_page_input_path = "debugging-templates.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -75,18 +75,9 @@
                     
     <a class="" href="../debugging-monitoring/">Debugging and Monitoring</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Artifacts and Deployment</a>
-    <ul class="subnav">
-            
-    
-
-    
-
-    
-
-    </ul>
+    <a class="" href="../deployment/">Artifacts and Deployment</a>
                 </li>
     </ul>
 	    </li>
@@ -103,9 +94,22 @@
                     
     <a class="" href="../editing-components/">Creating and Editing Components</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../debugging-templates/">Debugging Templates</a>
+    <a class="current" href="./">Debugging Templates</a>
+    <ul class="subnav">
+            
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#defining-template-test-cases">Defining template test cases</a></li>
+        
+            <li><a class="toctree-l4" href="#registering-the-template-debug-view">Registering the template debug view</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
@@ -244,14 +248,14 @@
     
       
         
-          <li>Running this Project &raquo;</li>
+          <li>Pages and Components &raquo;</li>
         
       
     
-    <li>Artifacts and Deployment</li>
+    <li>Debugging Templates</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/cfpb/cfgov-refresh/edit/master/docs/deployment.md"
+        <a href="https://github.com/cfpb/cfgov-refresh/edit/master/docs/debugging-templates.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -261,60 +265,51 @@
           <div role="main">
             <div class="section">
               
-                <p>This repository includes code for generating a self-extracting zip archive
-of the code and all of its Python dependencies. We use these
-archives to deploy the site to a Linux server.</p>
-<h1 id="generating-a-deployment-artifact">Generating a deployment artifact<a class="headerlink" href="#generating-a-deployment-artifact" title="Permanent link">¶</a></h1>
-<p>Running the script at <code>./docker/deployable-zipfile/build.sh</code> will start a CentOS 6
-container, generate the artifact (via
-<a href="https://github.com/cfpb/cfgov-refresh/blob/master/docker/deployable-zipfile/_build.sh">this script</a>),
-and save it to <code>./cfgov_current_build.zip</code>.</p>
-<p>We use CentOS 6 here, so that the Python modules that include compiled code, will
-be compiled for the same environment they will be run in.</p>
-<h1 id="whats-in-an-artifact">What's in an artifact?<a class="headerlink" href="#whats-in-an-artifact" title="Permanent link">¶</a></h1>
-<p>Here's a (very abbreviated) peek into what's <em>in</em> the zip file:</p>
-<pre class="highlight"><code>__main__.py
-cfgov.pth
-install_wheels.py
-loadenv.py
-loadenv-init.pth
-wheels/botocore-1.10.84-py2.py3-none-any.whl
-wheels/tqdm-4.15.0-py2.py3-none-any.whl
-...
-static.in/0/
-static.in/0/fonts/
-static.in/0/fonts/8344e877-560d-44d4-82eb-9822766676f9.woff
-...
-bootstrap_wheels/setuptools-41.2.0-py2.py3-none-any.whl
-bootstrap_wheels/pip-19.2.3-py2.py3-none-any.whl
-cfgov/...</code></pre>
+                <h1 id="debugging-templates">Debugging Templates<a class="headerlink" href="#debugging-templates" title="Permanent link">¶</a></h1>
+<p>Module templates can be debugged visually through use of a <code>TemplateDebugView</code>
+that renders a single module with a series of test cases.</p>
+<p>Consider an example module that renders a simple hyperlink. This module
+requires a target URL and also accepts optional link text. A simple Jinja
+template for this module might look like this:</p>
+<pre class="highlight"><code class="language-html">&lt;a href=&quot;{{ value.url }}&quot;&gt;
+    {{ value.text | default( value.url, true ) }}
+&lt;/a&gt;</code></pre>
 
-<p>The <code>__main__.py</code> file contains <a href="https://github.com/cfpb/cfgov-refresh/blob/master/cfgov/deployable_zipfile/extract.py">the code that runs when the zip file is invoked
-as a Python module</a>.</p>
-<p>The <code>wheels/</code> directory contains all of our python dependencies, while
-<code>bootstrap_wheels/</code> contains modules needed at deployment time, to install
-everything.</p>
-<p><code>loadenv.py</code> and <code>loadenv-init.pth</code> are used to load environment variables from
-a <code>environment.json</code> file, deployed seperately.</p>
-<p>Before the final version of the zip file is saved, we prepend a python "shebang" line,
-<code>#!/usr/bin/env python</code>. This, combined with <code>__main__.py</code> described above, is what makes
-the file executable and self-extracting.</p>
-<h1 id="deploying-an-artifact">Deploying an artifact<a class="headerlink" href="#deploying-an-artifact" title="Permanent link">¶</a></h1>
-<p>We currently use Ansible to prepare servers to run an artifact, and to do the actual deployment.
-If we ignore some specifics and quirks of our environment, the basic steps look something like this:</p>
-<ol>
-<li>copy the artifact to the system</li>
-<li>execute the artifact, with the -d (destination) argument, <code>./artifact.zip -d destination-dir</code>. This
-   will unpack the files, create a new virtualenv, and install all of the wheels in <code>wheels/</code> into that
-   virtualenv. <strong>Important Note:</strong> This should be done with the same Python interpreter that will run the
-   application. For example, on our servers this means using <a href="https://linux.die.net/man/1/scl"><code>scl enable</code></a>
-   to specify a particular Python version from 
-   <a href="https://www.softwarecollections.org/en/scls/?search=python">Software Collections</a>.</li>
-<li>put an <code>environment.json</code> file in place, in your <code>destination-dir</code></li>
-<li>run Django utilities like 'collectstatic' and 'migrate'</li>
-<li>update a symlink to point to the latest release</li>
-<li>restart your WSGI server.</li>
-</ol>
+<h2 id="defining-template-test-cases">Defining template test cases<a class="headerlink" href="#defining-template-test-cases" title="Permanent link">¶</a></h2>
+<p>Next, define test cases for the module that cover all supported input
+configurations. For this simple link module, there are only a few useful
+test cases, but more complicated modules might have many more.</p>
+<p>Test cases should be defined as a Python dict, where the key is a string name
+of the test case and the value is a dict that will be passed to the module
+template.</p>
+<pre class="highlight"><code class="language-py"># myapp/template_debug.py
+link_test_cases = {
+    'Link without text': {
+        'url': 'https://www.consumerfinance.gov',
+    },
+
+    'Link with empty text': {
+        'url': 'https://www.consumerfinance.gov',
+        'text': '',
+    },
+
+    'Link with text': {
+        'url': 'https://www.consumerfinance.gov',
+        'text': 'Visit our website',
+    },
+}</code></pre>
+
+<h2 id="registering-the-template-debug-view">Registering the template debug view<a class="headerlink" href="#registering-the-template-debug-view" title="Permanent link">¶</a></h2>
+<p>The next step is to register the template debug view with Django so that it can
+be loaded in a browser.</p>
+<pre class="highlight"><code class="language-py"># in myapp/wagtail_hooks.py
+from myapp.template_debug import link_test_cases
+from v1.template_debug import register_template_debug
+
+register_template_debug('myapp', 'link', 'myapp/link.html', link_test_cases)</code></pre>
+
+<p>Once logged into the Wagtail admin, the template debug view for this module
+will now be available at the <code>/admin/template_debug/myapp/link/</code> URL.</p>
               
             </div>
           </div>
@@ -322,10 +317,10 @@ If we ignore some specifics and quirks of our environment, the basic steps look 
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../atomic-structure/" class="btn btn-neutral float-right" title="Atomic Structure and Design">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../migrations/" class="btn btn-neutral float-right" title="Django and Wagtail Migrations">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../debugging-monitoring/" class="btn btn-neutral" title="Debugging and Monitoring"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../editing-components/" class="btn btn-neutral" title="Creating and Editing Components"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -353,10 +348,10 @@ If we ignore some specifics and quirks of our environment, the basic steps look 
           <a href="https://github.com/cfpb/cfgov-refresh/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../debugging-monitoring/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../editing-components/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../atomic-structure/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../migrations/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
