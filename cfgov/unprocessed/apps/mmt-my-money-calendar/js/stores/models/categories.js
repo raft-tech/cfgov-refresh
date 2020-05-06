@@ -80,15 +80,6 @@ export const Categories = new CategoryTree({
       icon: icons.job,
       description: 'Income from employment',
       recurrenceTypes: ['weekly', 'biweekly', 'monthly', 'semimonthly'],
-      strategy: {
-        id: 'directDeposit',
-        title: 'Sign Up for Direct Deposit',
-        body: 'Direct deposit may help you to avoid fees and interest associated with Check Cashing.',
-        link:  {
-          href: 'https://www.consumerfinance.gov/ask-cfpb/should-i-enroll-in-direct-deposit-en-1027/',
-          text: 'Should I enroll in direct deposit?',
-        },
-      },
     },
     benefits: {
       name: 'Benefits',
@@ -253,10 +244,6 @@ export const Categories = new CategoryTree({
           id: 'cablePlans',
           title: 'Consider Entertainment Alternatives',
           body: 'Many cable providers offer multiple options for new and existing customers. Contact your provider and ask about lower-cost plans or consider a cheaper streaming service.',
-          link: {
-            href: 'https://www.consumerfinance.gov/practitioner-resources/your-money-your-goals/toolkit/',
-            text: 'Cutting Expenses (Your Money Your Goals)',
-          },
         },
       },
       internet: {
@@ -342,7 +329,7 @@ export const Categories = new CategoryTree({
       },
       publicTransportation: {
         name: 'Public Transportation Fare',
-        icon: icons.publicTransportation,
+        icon: icons.publicTransportationFare,
         recurrenceTypes: ['weekly', 'monthly'],
         hasBill: false,
         strategy: {
