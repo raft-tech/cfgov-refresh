@@ -8,12 +8,15 @@ import { calendar, add, idea, menu } from '../lib/icons';
 
 const NavItem = ({ href, icon, label, badge, disabled = false, ...params }) => {
   const classes = clsx('bottom-nav__link', disabled && 'disabled');
-  const clickHandler = useCallback((event) => {
-    if (!disabled) return true;
+  const clickHandler = useCallback(
+    (event) => {
+      if (!disabled) return true;
 
-    event.preventDefault();
-    event.stopPropagation();
-  }, [disabled]);
+      event.preventDefault();
+      event.stopPropagation();
+    },
+    [disabled]
+  );
 
   return (
     <li className="bottom-nav__item">
@@ -26,8 +29,14 @@ const NavItem = ({ href, icon, label, badge, disabled = false, ...params }) => {
   );
 };
 
+// This is Missy's test
+
 function BottomNav() {
-  const { uiStore, strategiesStore, eventStore: { hasStartingBalance } } = useStore();
+  const {
+    uiStore,
+    strategiesStore,
+    eventStore: { hasStartingBalance },
+  } = useStore();
   const classes = clsx('bottom-nav', uiStore.showBottomNav && 'bottom-nav--visible');
 
   if (!hasStartingBalance) return null;
@@ -38,7 +47,13 @@ function BottomNav() {
         <ul className="bottom-nav__items">
           <NavItem href="/calendar" icon={calendar} exact label="Calendar" disabled={!hasStartingBalance} />
           <NavItem href="/calendar/add/income" icon={add} label="Income / Expense" disabled={!hasStartingBalance} />
-          <NavItem href="/strategies" icon={idea} label="Strategies" badge={strategiesStore.strategyResults.length} disabled={!hasStartingBalance || !strategiesStore.strategyResults.length} />
+          <NavItem
+            href="/strategies"
+            icon={idea}
+            label="Strategies"
+            badge={strategiesStore.strategyResults.length}
+            disabled={!hasStartingBalance || !strategiesStore.strategyResults.length}
+          />
           <NavItem href="/more" icon={menu} label="More" disabled={!hasStartingBalance} />
         </ul>
       </nav>
