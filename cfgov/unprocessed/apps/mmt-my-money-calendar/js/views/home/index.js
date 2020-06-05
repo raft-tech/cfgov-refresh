@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import { useHistory, Link, Redirect } from "react-router-dom";
+import { useHistory, Link, Redirect } from 'react-router-dom';
 import { useStore } from '../../stores';
 
 function Home() {
@@ -12,6 +12,7 @@ function Home() {
   // Display loading message until data is loaded:
   return (
     <main className="mmt-view home">
+      <h1>MISSY TESTER IN HOME INDEX.JS</h1>
       <em>Loading...</em>
     </main>
   );
