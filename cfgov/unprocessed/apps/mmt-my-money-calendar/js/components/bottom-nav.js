@@ -29,8 +29,6 @@ const NavItem = ({ href, icon, label, badge, disabled = false, ...params }) => {
   );
 };
 
-// This is Missy's test
-
 function BottomNav() {
   const {
     uiStore,
@@ -43,7 +41,6 @@ function BottomNav() {
 
   return (
     <footer className={classes}>
-      <p>MISSY MISSY MISSYQ</p>
       <nav className="bottom-nav__nav">
         <ul className="bottom-nav__items">
           <NavItem href="/calendar" icon={calendar} exact label="Calendar" disabled={!hasStartingBalance} />

@@ -12,7 +12,6 @@ function Home() {
   // Display loading message until data is loaded:
   return (
     <main className="mmt-view home">
-      <h1>MISSY TESTER IN HOME INDEX.JS</h1>
       <em>Loading...</em>
     </main>
   );
