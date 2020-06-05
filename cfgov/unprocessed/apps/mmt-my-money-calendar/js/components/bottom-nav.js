@@ -43,6 +43,7 @@ function BottomNav() {
 
   return (
     <footer className={classes}>
+      <p>MISSY</p>
       <nav className="bottom-nav__nav">
         <ul className="bottom-nav__items">
           <NavItem href="/calendar" icon={calendar} exact label="Calendar" disabled={!hasStartingBalance} />
