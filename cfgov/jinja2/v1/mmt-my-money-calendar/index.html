@@ -1,4 +1,4 @@
-{% extends 'layout-2-1-bleedbar.html' %}
+{% extends 'layout-full.html' %}
 
 {% import 'form_block.html' as form_block with context %}
 {% import 'templates/render_block.html' as render_block with context %}
@@ -45,9 +45,5 @@
 
 {% block javascript %}
   {{ super() }}
-  <!--
-  <script src="{{ static('apps/mmt-my-money-calendar/js/runtime~index.js') }}"></script>
-  <script src="{{ static('apps/mmt-my-money-calendar/js/vendor~index.js') }}"></script>
-  -->
   <script src="{{ static('apps/mmt-my-money-calendar/js/index.js') }}"></script>
 {% endblock %}

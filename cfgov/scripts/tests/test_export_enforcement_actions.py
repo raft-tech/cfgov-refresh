@@ -2,7 +2,7 @@ import datetime
 
 from django.test import TestCase
 
-from wagtail.wagtailcore.models import Page, Site
+from wagtail.core.models import Page, Site
 
 from scripts.export_enforcement_actions import assemble_output
 
