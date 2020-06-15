@@ -1,11 +1,12 @@
 import CashFlowEvent from './stores/models/cash-flow-event';
-import { DateTime } from 'luxon';
+import { dayjs } from './lib/calendar-helpers';
 import { RRule } from 'rrule';
 
 let currentDate;
-const now = DateTime.local().startOf('day');
+const now = dayjs().startOf('day');
+
 const randDay = (max = 30) => {
-  const date = now.plus({ days: Math.floor(Math.random() * max) + 1 }).toJSDate();
+  const date = now.add(Math.floor(Math.random() * max) + 1, 'days').toDate();
   currentDate = date;
   return date;
 };
@@ -28,16 +29,17 @@ function seedCashFlowEvents() {
   const events = [
     {
       name: 'Starting Balance',
-      date: now.toJSDate(),
+      date: now.toDate(),
       totalCents: 50000,
-      category: 'startingBalance',
+      category: 'income.startingBalance',
     },
     {
       name: 'Paycheck',
       date: randDay(),
-      category: 'Job',
-      totalCents: 30000,
+      category: 'income.salary',
+      totalCents: 50000,
       recurs: true,
+      recurrenceType: 'weekly',
       recurrenceRule: new RRule({
         freq: RRule.WEEKLY,
         dtstart: currentDate,
@@ -47,10 +49,11 @@ function seedCashFlowEvents() {
     {
       name: 'Rent',
       date: randDay(),
-      category: 'Housing',
+      category: 'expense.housing.rent',
       subcategory: 'Rent',
       totalCents: -80000,
       recurs: true,
+      recurrenceType: 'monthly',
       recurrenceRule: new RRule({
         freq: RRule.MONTHLY,
         count: 3,
@@ -60,13 +63,53 @@ function seedCashFlowEvents() {
     {
       name: 'Groceries',
       date: randDay(),
-      category: 'Groceries',
+      category: 'expense.food.groceries',
       totalCents: -20000,
       recurs: true,
+      recurrenceType: 'weekly',
       recurrenceRule: new RRule({
         freq: RRule.WEEKLY,
         dtstart: currentDate,
         count: 12,
+      }),
+    },
+    {
+      name: 'Electricity',
+      date: randDay(),
+      category: 'expense.utilities.electricity',
+      totalCents: -10000,
+      recurs: true,
+      recurrenceType: 'monthly',
+      recurrenceRule: new RRule({
+        freq: RRule.MONTHLY,
+        dtstart: currentDate,
+        count: 3,
+      }),
+    },
+    {
+      name: 'Water Bill',
+      date: randDay(),
+      category: 'expense.utilities.waterSewage',
+      totalCents: -5000,
+      recurs: true,
+      recurrenceType: 'monthly',
+      recurrenceRule: new RRule({
+        freq: RRule.MONTHLY,
+        dtstart: currentDate,
+        count: 3,
+      }),
+    },
+    {
+      name: 'Student Loan',
+      date: randDay(),
+      category: 'expense.debt.studentLoan',
+      totalCents: -30000,
+      recurs: true,
+      recurrenceType: 'monthly',
+      recurrenceRule: new RRule({
+        freq: RRule.MONTHLY,
+        dtstart: currentDate,
+        count: 3,
       }),
     },
   ];

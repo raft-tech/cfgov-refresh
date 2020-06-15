@@ -1,9 +1,9 @@
 from django.db import models
 from django.db.models import Q
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import localdate
 
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
 from backports import csv
 
@@ -54,7 +54,7 @@ class FeedbackQuerySet(models.QuerySet):
                 localdate(feedback.submitted_on).strftime('%Y-%m-%d')
 
             writer.writerow([
-                force_text(getattr(feedback, heading), strings_only=True)
+                force_str(getattr(feedback, heading), strings_only=True)
                 for heading in headings
             ])
 

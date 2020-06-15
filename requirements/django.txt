@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 gunicorn
 whitenoise==3.3.1
 django==1.11.28
+=======
+django==2.2.12
+>>>>>>> mm/landing-page-and-fix-it

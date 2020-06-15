@@ -1,97 +1,93 @@
-import { useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { DateTime } from 'luxon';
+import clsx from 'clsx';
+import { useEffect, useMemo } from 'react';
+import { useLocation, useParams, Redirect } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import { useStore } from '../../../stores';
-import { useClickHandler } from '../../../lib/hooks';
+import { useClickHandler, useClickConfirm } from '../../../lib/hooks';
 import Day from './day';
 import Details from './details';
-import Button, { ButtonLink } from '../../../components/button';
 import { useScrollToTop } from '../../../components/scroll-to-top';
+import { DAY_LABELS, dayjs } from '../../../lib/calendar-helpers';
 
-import arrowRight from '@cfpb/cfpb-icons/src/icons/arrow-right.svg';
-import arrowLeft from '@cfpb/cfpb-icons/src/icons/arrow-left.svg';
-import addRound from '@cfpb/cfpb-icons/src/icons/add-round.svg';
+import { arrowLeft, arrowRight } from '../../../lib/icons';
 
-const ifDevelopment = (fn) => {
-  if (process.env.NODE_ENV !== 'development') return null;
-  return fn();
+const IconButton = ({ icon, ...props }) => <button dangerouslySetInnerHTML={{ __html: icon }} {...props} />;
+
+const CalendarWeekRow = ({ days, selected }) => {
+  const classes = clsx('calendar__row', selected && 'selected');
+
+  return (
+    <div className={classes}>
+      {days.map((day) => (
+        <Day day={day} key={`day-${day.dayOfYear()}`} />
+      ))}
+    </div>
+  );
 };
-
-const CalendarWeekRow = ({ days }) => (
-  <div className="calendar__row">
-    {days.map((day) => (
-      <Day day={day} key={`day-${day.toFormat('ooo')}`} />
-    ))}
-  </div>
-);
 
 function Calendar() {
   const { uiStore, eventStore } = useStore();
   const location = useLocation();
   const params = useParams();
 
-  const nextMonth = useClickHandler(() => uiStore.nextMonth(), []);
-  const prevMonth = useClickHandler(() => uiStore.prevMonth(), []);
-  const gotoToday = useClickHandler(() => uiStore.gotoDate(DateTime.local()), []);
-
-  const loadSeedData = useClickHandler(async () => {
-    await window.seedTestData();
-    await eventStore.loadEvents();
-    alert('Seed data loaded');
-  }, []);
-
-  const clearDatabase = useClickHandler(async () => {
-    await window.clearTestData();
-    await eventStore.loadEvents();
-    alert('Database cleared');
-  }, []);
-
   useEffect(() => {
     uiStore.setPageTitle('myMoney Calendar');
-    uiStore.setSubtitle(uiStore.currentMonth.toFormat('MMMM, y'));
+    uiStore.setSubtitle(uiStore.currentMonth.format('MMMM YYYY'));
   }, [location, params, uiStore.currentMonth]);
 
-  const seedButton = ifDevelopment(() => (
-    <Button onClick={loadSeedData} variant="secondary" style={{ margin: '.5rem 0' }}>
-      Seed Database
-    </Button>
-  ));
-  const clearButton = ifDevelopment(() => (
-    <Button onClick={clearDatabase} variant="secondary">
-      Clear Database
-    </Button>
-  ));
+  const dayLabels = useMemo(
+    () => (
+      <div className="calendar__row" key="dayLabels">
+        {DAY_LABELS.map((label, idx) => (
+          <div key={`label-${idx}`} className="calendar__day-label">
+            {label}
+          </div>
+        ))}
+      </div>
+    ),
+    []
+  );
 
   useScrollToTop();
 
+  if (eventStore.eventsLoaded && !eventStore.hasStartingBalance) return <Redirect to="/money-on-hand" />;
+
   return (
     <section className="calendar">
-      <h1>{uiStore.pageTitle}</h1>
-      <h2>{uiStore.subtitle}</h2>
+      <header className="calendar__header">
+        <IconButton
+          className="calendar__nav-button"
+          aria-label="Previous Month"
+          onClick={() => uiStore.prevMonth()}
+          icon={arrowLeft}
+        />
 
-      <nav className="calendar__nav">
-        <Button icon={arrowLeft} iconSide="left" onClick={prevMonth}>
-          Previous
-        </Button>
-        <Button onClick={gotoToday}>Today</Button>
-        <Button icon={arrowRight} iconSide="right" onClick={nextMonth}>
-          Next
-        </Button>
-      </nav>
+        <h2 className="calendar__subtitle">{uiStore.subtitle}</h2>
 
-      <div className="calendar__rows">
-        {uiStore.monthCalendarRows.map(({ days, weekNumber }) => (
-          <CalendarWeekRow days={days} key={`week-${weekNumber}`} />
-        ))}
+        <IconButton
+          className="calendar__nav-button"
+          aria-label="Next Month"
+          onClick={() => uiStore.nextMonth()}
+          icon={arrowRight}
+        />
+      </header>
+
+      <div className="calendar__cols">
+        <div className="calendar__rows">
+          {[
+            dayLabels,
+            ...uiStore.monthCalendarRows.map(({ days, weekNumber }) => (
+              <CalendarWeekRow
+                days={days}
+                key={`week-${weekNumber}`}
+                selected={uiStore.currentWeek.week() === weekNumber}
+              />
+            )),
+          ]}
+        </div>
+
+        <Details />
       </div>
-
-      <ButtonLink to="/calendar/add" icon={addRound} iconSide="left">Add Income/Expense</ButtonLink>
-
-      <Details />
-
-      {seedButton}
-      {clearButton}
     </section>
   );
 }

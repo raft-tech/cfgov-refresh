@@ -1,191 +1,17 @@
 import { observable, computed, action } from 'mobx';
-import { RRule, rrulestr } from 'rrule';
+import { rrulestr } from 'rrule';
 import * as yup from 'yup';
-import { DateTime } from 'luxon';
+import { dayjs } from '../../lib/calendar-helpers';
 import EventEmitter from 'eventemitter3';
 import { asyncComputed } from 'computed-async-mobx';
 import logger from '../../lib/logger';
 import dbPromise from '../../lib/database';
-import { transform } from '../../lib/object-helpers';
-import { compact } from '../../lib/array-helpers';
-
-export const Categories = {
-  income: {
-    salary: {
-      name: 'Job',
-      description: 'Income from employment',
-    },
-    benefits: {
-      name: 'Benefits',
-      subcategories: {
-        va: {
-          name: 'Veterans Benefits',
-        },
-        disability: {
-          name: 'Disability Benefits',
-        },
-        ss: {
-          name: 'Social Security Benefits',
-        },
-        unemployment: {
-          name: 'Unemployment',
-        },
-        tanf: {
-          name: 'TANF',
-        },
-        snap: {
-          name: 'SNAP',
-        },
-      },
-    },
-    other: {
-      name: 'Other',
-      description: 'Includes child support payments, etc.',
-    },
-  },
-  expense: {
-    housing: {
-      name: 'Housing',
-      subcategories: {
-        mortgage: {
-          name: 'Mortgage',
-        },
-        rent: {
-          name: 'Rent',
-        },
-        propertyTaxes: {
-          name: 'Property Taxes',
-        },
-        rentersInsurance: {
-          name: 'Renters Insurance',
-        },
-        homeownersInsurance: {
-          name: 'Homeowners Insurance',
-        },
-      },
-    },
-    utilities: {
-      name: 'Utilities',
-      subcategories: {
-        fuel: {
-          name: 'Natural Gas, Oil, Propane',
-        },
-        waterSewage: {
-          name: 'Water/Sewage',
-        },
-        electricity: {
-          name: 'Electricity',
-        },
-        trash: {
-          name: 'Trash',
-        },
-        cable: {
-          name: 'Cable/Satellite',
-        },
-        internet: {
-          name: 'Internet',
-        },
-        phone: {
-          name: 'Phone/Cell'
-        },
-      }
-    },
-    transportation: {
-      name: 'Transportation',
-      subcategories: {
-        carPayment: {
-          name: 'Car Payment',
-        },
-        carMaintenance: {
-          name: 'Car Maintenance',
-        },
-        carInsurance: {
-          name: 'Car Insurance',
-        },
-        gas: {
-          name: 'Gas',
-        },
-        publicTransportation: {
-          name: 'Public Transportation Fare',
-        },
-      },
-    },
-    food: {
-      name: 'Food',
-      subcategories: {
-        eatingOut: {
-          name: 'Eating Out',
-        },
-        groceries: {
-          name: 'Groceries',
-        },
-      },
-    },
-    personal: {
-      name: 'Personal',
-      subcategories: {
-        emergencySavings: {
-          name: 'Emergency Savings',
-        },
-        healthcare: {
-          name: 'Health Care',
-        },
-        subscriptions:  {
-          name: 'Subscriptions',
-        },
-        clothing: {
-          name: 'Clothing',
-        },
-        giving: {
-          name: 'Giving',
-        },
-        education: {
-          name: 'Education',
-        },
-        childCare: {
-          name: 'Child Care',
-        },
-        personalCare: {
-          name: 'Personal Care/Cosmetics',
-        },
-        pets: {
-          name: 'Pets',
-        },
-        householdSupplies: {
-          name: 'Household Supplies',
-        },
-        funMoney: {
-          name: 'Fun Money',
-        },
-      },
-    },
-    debt: {
-      name: 'Debt',
-      subcategories: {
-        medicalBill: {
-          name: 'Medical Bill',
-        },
-        courtOrderedExpenses: {
-          name: 'Court-Ordered Expenses',
-        },
-        personalLoan: {
-          name: 'Personal Loan',
-        },
-        creditCard: {
-          name: 'Credit Card',
-        },
-        studentLoan: {
-          name: 'Student Loan',
-        },
-      },
-    },
-  },
-};
+import { Categories } from '../models/categories';
 
 export default class CashFlowEvent {
   @observable originalEventID;
   @observable id;
-  @observable name;
+  @observable name = '';
   @observable date;
   @observable category;
   @observable totalCents = 0;
@@ -195,8 +21,12 @@ export default class CashFlowEvent {
   @observable persisted = false;
   @observable updatedAt;
   @observable createdAt;
+  @observable recurrenceType;
+  @observable payday1 = 15;
+  @observable payday2 = 30;
+  @observable hideFixItStrategy = false;
 
-  static MIN_DATE = DateTime.fromFormat('1970-01-01', 'y-MM-dd');
+  static MIN_DATE = dayjs(0);
 
   static eventEmitter = new EventEmitter();
 
@@ -228,16 +58,31 @@ export default class CashFlowEvent {
   static schema = {
     id: yup.number().integer(),
     originalEventID: yup.number().integer(),
-    name: yup.string().required(),
-    date: yup.date().required(),
+    name: yup.string(),
+    dateTime: yup.date().required(),
     category: yup.string().required(),
-    subcategory: yup.string(),
-    totalCents: yup.number().integer().default(0),
-    recurs: yup.boolean().default(false),
-    rruleStr: yup.string(),
+    totalCents: yup
+      .number()
+      .integer()
+      .default(0),
     createdAt: yup.date().default(() => new Date()),
     updatedAt: yup.date().default(() => new Date()),
   };
+
+  static dbFields = [
+    'id',
+    'originalEventID',
+    'name',
+    'date',
+    'category',
+    'totalCents',
+    'recurs',
+    'rruleStr',
+    'recurrenceType',
+    'createdAt',
+    'updatedAt',
+    'hideFixItStrategy',
+  ];
 
   /**
    * Indicates whether or not the object is an instance of CashFlowEvent
@@ -267,13 +112,20 @@ export default class CashFlowEvent {
    * @returns {Promise<CashFlowEvent[]>} A promise resolving to an array of CashFlowEvent instances
    */
   static async getAllBy(indexName, direction = 'next') {
-    //console.profile('getAllBy');
-    const { store } = await this.transaction();
-    const index = store.index(indexName);
-    let cursor = await index.openCursor(null, direction);
-    const results = await this.getAllFromCursor(cursor);
-    //console.profileEnd('getAllBy');
-    return results;
+    const cursor = await this.openCursor(indexName, direction);
+    return this.getAllFromCursor(cursor);
+  }
+
+  /**
+   * Get the first object in an index
+   *
+   * @param {string} indexName - The index to use for sorting
+   * @param {string} [direction="next"] - The direction in which to sort
+   * @returns {Promise<CashFlowEvent>}
+   */
+  static async getFirstBy(indexName, direction = 'next') {
+    const cursor = await this.openCursor(indexName, direction);
+    return cursor.value;
   }
 
   /**
@@ -297,8 +149,13 @@ export default class CashFlowEvent {
   static async getByDateRange(start, end = new Date()) {
     const fromDate = new Date(start);
     const range = IDBKeyRange.lowerBound(fromDate);
-    const cursor = await this.rangeQuery('date', range);
+    const cursor = await this.openCursor('date', this.directions.ASC, range);
     return this.getAllFromCursor(cursor);
+  }
+
+  static async destroyAll() {
+    const { store } = await this.transaction('readwrite');
+    return store.clear();
   }
 
   static async getAllFromCursor(cursor) {
@@ -312,10 +169,17 @@ export default class CashFlowEvent {
     return results;
   }
 
-  static async rangeQuery(indexName, keyRange, direction = this.directions.ASC) {
+  /**
+   * Opens a cursor into an index for iteration
+   *
+   * @param {string} indexName The index to use for querying
+   * @param {string} [direction="next"] The sort direction
+   * @param {string|null} [range=null] The key range to query
+   */
+  static async openCursor(indexName, direction = this.directions.ASC, range = null) {
     const { store } = await this.transaction();
-    const index = store.index(indexName, direction);
-    return index.openCursor(keyRange);
+    const index = store.index(indexName);
+    return index.openCursor(range, direction);
   }
 
   /**
@@ -378,41 +242,63 @@ export default class CashFlowEvent {
     return rrulestr(this.rruleStr);
   }
 
+  @computed get categoryDetails() {
+    return Categories.get(this.category);
+  }
+
+  @computed get absoluteCents() {
+    return Math.abs(this.totalCents);
+  }
+
   set recurrenceRule(rule) {
+    if (!rule || typeof rule.toString !== 'function') {
+      this.rruleStr = '';
+      return;
+    }
+
     this.rruleStr = rule.toString();
   }
 
   @computed get recurrenceDates() {
-    const now = DateTime.local();
+    const now = dayjs();
 
-    return this.recurrenceRule.between(
-      this.dateTime.startOf('day').toJSDate(),
-      now.plus({ months: this.constructor.recurrenceMonths }).endOf('day').toJSDate()
-    ).map(DateTime.fromJSDate);
+    return this.recurrenceRule
+      .between(
+        this.dateTime.startOf('day').toDate(),
+        now
+          .add(this.constructor.recurrenceMonths, 'months')
+          .endOf('day')
+          .toDate()
+      )
+      .map((date) => dayjs(date));
   }
 
   @computed get dateTime() {
-    return DateTime.fromJSDate(this.date).startOf('day');
+    return dayjs(this.date).startOf('day');
   }
 
   set dateTime(dateTime) {
-    this.date = dateTime.startOf('day').toJSDate();
+    if (!dateTime) {
+      return;
+    }
+
+    this.date = dateTime.startOf('day').toDate();
   }
 
   @computed get createdAtDateTime() {
-    return DateTime.fromJSDate(this.createdAt);
+    return dayjs(this.createdAt);
   }
 
   set createdAtDateTime(value) {
-    this.createdAt = value.toJSDate();
+    this.createdAt = value.toDate();
   }
 
   @computed get updatedAtDateTime() {
-    return DateTime.fromJSDate(this.updatedAt);
+    return dayjs(this.updatedAt);
   }
 
   set updatedAtDateTime(value) {
-    this.updatedAt = value.toJSDate();
+    this.updatedAt = value.toDate();
   }
 
   @computed get total() {
@@ -454,6 +340,10 @@ export default class CashFlowEvent {
     this.updatedAt = now;
   }
 
+  @action setHideFixItStrategy(value = true) {
+    this.hideFixItStrategy = Boolean(value);
+  }
+
   /**
    * Save the cash flow event to IndexedDB store, or raise a validation error if it doesn't conform to schema
    *
@@ -461,19 +351,13 @@ export default class CashFlowEvent {
    * @returns {Number} The key of the added or updated record
    */
   async save() {
-    await this.validate();
     this.setTimestamps();
 
     const { tx, store } = await this.transaction('readwrite');
     const key = await store.put(this.toJS());
     await tx.complete;
 
-
     if (!this.id && !this.persisted) this.markPersisted(key);
-    /*
-    if (this.recurs && this.recurrenceRule && !this.isRecurrence)
-      await this._createRecurrences();
-    */
 
     this.constructor.emit('afterSave', this);
 
@@ -488,8 +372,11 @@ export default class CashFlowEvent {
   async destroy() {
     if (!this.persisted) return false;
     const { tx, store } = await this.transaction('readwrite');
+
     await store.delete(this.id);
     await tx.complete;
+
+    this.constructor.emit('destroy', this);
     return this;
   }
 
@@ -523,23 +410,47 @@ export default class CashFlowEvent {
   }
 
   toJS() {
-    return transform(this.constructor.schema, (result, [key]) => {
-      if (key === 'id' && !this[key]) return result;
+    return this.constructor.dbFields.reduce((output, field) => {
+      if (field === 'id' && !this[field]) return output;
+      output[field] = this[field];
+      return output;
+    }, {});
+  }
 
-      result[key] = this[key];
-      return result;
-    });
+  toFormValues() {
+    return {
+      id: this.id,
+      name: this.name,
+      totalCents: Math.abs(this.totalCents),
+      category: this.category,
+      dateTime: this.dateTime && this.dateTime.isValid() ? this.dateTime.format('YYYY-MM-DD') : null,
+      recurs: this.recurs,
+      recurrenceType: this.recurrenceType,
+      payday1: this.payday1,
+      payday2: this.payday2,
+    };
   }
 
   async getAllRecurrences() {
     const id = this.isRecurrence ? this.originalEventID : this.id;
     const { store } = await this.transaction();
     const index = store.index('originalEventID_date');
-    const lowerBound = [id, this.constructor.MIN_DATE.toJSDate()];
-    const upperBound = [id, DateTime.local().plus({ months: 3 }).toJSDate()];
+    const lowerBound = [id, this.constructor.MIN_DATE.toDate()];
+    const upperBound = [
+      id,
+      dayjs().add(3, 'months').toDate(),
+    ];
     const range = IDBKeyRange.bound(lowerBound, upperBound);
     let cursor = await index.openCursor(range, 'next');
 
     return this.constructor.getAllFromCursor(cursor);
+  }
+
+  isGreaterThan(otherEvent) {
+    return this.absoluteCents > otherEvent.absoluteCents;
+  }
+
+  isLessThan(otherEvent) {
+    return this.absoluteCents < otherEvent.absoluteCents;
   }
 }

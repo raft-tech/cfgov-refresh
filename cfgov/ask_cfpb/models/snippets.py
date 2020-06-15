@@ -1,10 +1,8 @@
-from __future__ import absolute_import, unicode_literals
-
 from django.db import models
 
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.core.fields import RichTextField
+from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 from modelcluster.fields import ParentalKey
 
@@ -28,6 +26,7 @@ class GlossaryTerm(index.Indexed, models.Model):
     )
     answer_page_en = models.ForeignKey(
         'ask_cfpb.AnswerPage',
+        on_delete=models.CASCADE,
         related_name='glossary_terms',
         null=True,
         blank=True,
@@ -52,6 +51,7 @@ class GlossaryTerm(index.Indexed, models.Model):
     )
     answer_page_es = models.ForeignKey(
         'ask_cfpb.AnswerPage',
+        on_delete=models.CASCADE,
         related_name='glossary_terms_es',
         null=True,
         blank=True,

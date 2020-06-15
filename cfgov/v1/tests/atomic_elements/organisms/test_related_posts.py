@@ -1,11 +1,9 @@
-from __future__ import unicode_literals
-
 import datetime as dt
 import re
 
 from django.test import RequestFactory, TestCase
 
-from wagtail.wagtailcore.models import Page, Site
+from wagtail.core.models import Page, Site
 
 from pytz import timezone
 
