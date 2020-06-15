@@ -7,6 +7,7 @@ import { dayjs } from './lib/calendar-helpers';
 import { Categories } from './stores/models/categories';
 
 configureMobX({ enforceActions: 'observed' });
+// MissyM2 test message
 
 if (process.env.SERVICE_WORKER_ENABLED && 'serviceWorker' in navigator) {
   const wb = new Workbox('/mmt-my-money-calendar/service-worker.js', { scope: '/mmt-my-money-calendar' });
