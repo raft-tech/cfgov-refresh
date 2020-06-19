@@ -104,11 +104,8 @@
     "postinstall": "yarn run enforce && node scripts/yarn/apps-install && ./scripts/check-npm-cache.sh",
     "test": "snyk test",
     "gulp": "gulp",
-<<<<<<< HEAD
     "build": "gulp"
-=======
     "watch": "gulp watch"
->>>>>>> my-money-calendar
   },
   "snyk": true
 }
