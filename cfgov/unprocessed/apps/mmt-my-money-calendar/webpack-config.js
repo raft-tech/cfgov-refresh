@@ -11,22 +11,11 @@ const { InjectManifest } = WorkboxPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-<<<<<<< HEAD
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-
-// Used for toggling debug output. Inherit Django debug value to cut down on redundant environment variables:
-const {
-  DJANGO_DEBUG: DEBUG = false,
-  NODE_ENV = 'development',
-  ANALYZE = false,
-  SERVICE_WORKER_URL = `${APP_NAME}/service-worker.js`,
-=======
 let {
   DJANGO_DEBUG: DEBUG = false,
   NODE_ENV = 'development',
   ANALYZE = false,
   SERVICE_WORKER_ENABLED = process.env.NODE_ENV === 'production',
->>>>>>> my-money-calendar
 } = process.env;
 
 const COMMON_BUNDLE_NAME = 'common.js';
@@ -39,11 +28,7 @@ const AUTOLOAD_REACT = new webpack.ProvidePlugin({
 const ENVIRONMENT_VARIABLES = new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
   'process.env.DEBUG': JSON.stringify(DEBUG),
-<<<<<<< HEAD
-  'process.env.SERVICE_WORKER_URL': JSON.stringify(SERVICE_WORKER_URL),
-=======
   'process.env.SERVICE_WORKER_ENABLED': JSON.stringify(Boolean(SERVICE_WORKER_ENABLED)),
->>>>>>> my-money-calendar
 });
 
 const COPY_PWA_MANIFEST = new CopyPlugin([

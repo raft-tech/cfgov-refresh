@@ -48,18 +48,20 @@ def parse_links(html, request_path=None, encoding=None):
 
 
 class ParseLinksMiddleware(object):
-<<<<<<< HEAD
-    def process_response(self, request, response):
-        if 'content-type' in response and self.should_parse_links(request.path, response['content-type']):
-=======
 
-    def __init__(self, get_response):
-        self.get_response = get_response
-
+    # Line 55
     def __call__(self, request):
         response = self.get_response(request)
-        if self.should_parse_links(request.path, response['content-type']):
->>>>>>> my-money-calendar
+        if 'content-type' in response and self.should_parse_links(request.path, response['content-type']):
+            response.content = parse_links(
+                response.content,
+                request.path,
+                encoding=response.charset
+            )
+        return response
+
+    def process_response(self, request, response):
+        if 'content-type' in response and self.should_parse_links(request.path, response['content-type']):
             response.content = parse_links(
                 response.content,
                 request.path,
