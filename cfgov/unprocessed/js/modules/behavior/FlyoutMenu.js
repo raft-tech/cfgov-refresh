@@ -1,5 +1,4 @@
 // Required modules.
-import * as breakpointState from '../../modules/util/breakpoint-state';
 import {
   BEHAVIOR_PREFIX,
   JS_HOOK,
@@ -86,13 +85,6 @@ function FlyoutMenu( element ) { // eslint-disable-line max-statements, no-inlin
    * @returns {FlyoutMenu} An instance.
    */
   function init() {
-
-    /* Ignore Google Analytics on the trigger if it is a link,
-       since we're preventing the default link behavior. */
-    if ( _triggerDom.tagName === 'A' && _isInMobile() ) {
-      _triggerDom.setAttribute( 'data-gtm_ignore', 'true' );
-    }
-
     const handleTriggerClickedBinded = _handleTriggerClicked.bind( this );
     const handleTriggerOverBinded = _handleTriggerOver.bind( this );
     const handleTriggerOutBinded = _handleTriggerOut.bind( this );
@@ -115,14 +107,6 @@ function FlyoutMenu( element ) { // eslint-disable-line max-statements, no-inlin
       if ( subMenu && subMenu.contains( _altTriggerDom ) ) {
         _altTriggerDom = null;
       } else {
-
-        /* TODO: Investigate just having multiple triggers,
-           instead of a primary and alternative.
-           Ignore Google Analytics on the trigger if it is a link,
-           since we're preventing the default link behavior. */
-        if ( _altTriggerDom.tagName === 'A' && _isInMobile() ) {
-          _altTriggerDom.setAttribute( 'data-gtm_ignore', 'true' );
-        }
 
         // Set initial aria attributes to false.
         _setAriaAttr( 'expanded', _altTriggerDom, 'false' );
@@ -203,20 +187,6 @@ function FlyoutMenu( element ) { // eslint-disable-line max-statements, no-inlin
         this.expand();
       }
     }
-  }
-
-  // TODO: Move this to breakpoint-state.js.
-  /**
-   * Whether currently in the desktop view.
-   * @returns {boolean} True if in the desktop view, otherwise false.
-   */
-  function _isInMobile() {
-    let isInMobile = false;
-    const currentBreakpoint = breakpointState.get();
-    if ( currentBreakpoint.isBpXS ) {
-      isInMobile = true;
-    }
-    return isInMobile;
   }
 
   /**

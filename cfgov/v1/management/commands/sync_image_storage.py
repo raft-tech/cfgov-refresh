@@ -2,7 +2,7 @@ import os
 
 from django.core.management.base import BaseCommand
 
-from wagtail.wagtailimages import get_image_model
+from wagtail.images import get_image_model
 
 import requests
 import requests.exceptions

@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import json
 from urllib.parse import urljoin
 
@@ -8,7 +6,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template.defaultfilters import slugify
 from haystack.query import SearchQuerySet
 
-from wagtail.wagtailcore.models import Site
+from wagtail.core.models import Site
 from wagtailsharing.models import SharingSite
 from wagtailsharing.views import ServeView
 
@@ -173,7 +171,7 @@ def redirect_ask_search(request, language='en'):
             return redirect('/ask-cfpb/search/', permanent=True)
         return redirect(
             '/ask-cfpb/search/?q={query}'.format(
-                query=querystring, permanent=True))
+                query=querystring), permanent=True)
     else:
         facets = request.GET.getlist('selected_facets')
         if not facets or not facets[0]:
