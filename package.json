@@ -104,7 +104,7 @@
     "postinstall": "yarn run enforce && node scripts/yarn/apps-install && ./scripts/check-npm-cache.sh",
     "test": "snyk test",
     "gulp": "gulp",
-    "watch": "gulp watch"
+    "build": "gulp"
   },
   "snyk": true
 }
