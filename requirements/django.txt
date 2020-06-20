@@ -1,3 +1,5 @@
 gunicorn
 whitenoise==3.3.1
 django==2.2.13
+gunicorn
+whitenoise==3.3.1

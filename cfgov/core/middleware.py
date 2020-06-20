@@ -69,6 +69,8 @@ class ParseLinksMiddleware(object):
             )
         return response
 
+
+
     @classmethod
     def should_parse_links(cls, request_path, response_content_type):
         """Determine if links should be parsed for a given request/response.
