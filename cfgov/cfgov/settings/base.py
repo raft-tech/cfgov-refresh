@@ -105,7 +105,6 @@ INSTALLED_APPS = (
     "teachers_digital_platform",
 )
 
-<<<<<<< HEAD
 OPTIONAL_APPS = [
     {'import': 'comparisontool', 'apps': ('comparisontool', 'haystack',)},
     {'import': 'retirement_api', 'apps': ('retirement_api',)},
@@ -140,20 +139,6 @@ MIDDLEWARE_CLASSES = (
     'core.middleware.ParseLinksMiddleware',
     'core.middleware.DownstreamCacheControlMiddleware',
     'flags.middleware.FlagConditionsMiddleware',
-=======
-MIDDLEWARE = (
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.http.ConditionalGetMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "core.middleware.ParseLinksMiddleware",
-    "core.middleware.DownstreamCacheControlMiddleware",
-    "flags.middleware.FlagConditionsMiddleware",
-    "wagtail.core.middleware.SiteMiddleware",
-    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
->>>>>>> my-money-calendar
 )
 
 CSP_MIDDLEWARE = ("csp.middleware.CSPMiddleware",)
