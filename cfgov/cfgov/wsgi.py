@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/stable/howto/deployment/wsgi/
 
 import os
 
-
 def initialize_new_relic():
     if os.getenv('NEW_RELIC_LICENSE_KEY'):
         new_relic_config_file = os.path.abspath(

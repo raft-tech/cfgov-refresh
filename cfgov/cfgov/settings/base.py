@@ -105,20 +105,40 @@ INSTALLED_APPS = (
     "teachers_digital_platform",
 )
 
+OPTIONAL_APPS = [
+    {'import': 'comparisontool', 'apps': ('comparisontool', 'haystack',)},
+    {'import': 'retirement_api', 'apps': ('retirement_api',)},
+    {'import': 'ratechecker', 'apps': ('ratechecker', 'rest_framework')},
+    {'import': 'countylimits', 'apps': ('countylimits', 'rest_framework')},
+    {
+        'import': 'complaint_search',
+        'apps': ('complaint_search', 'rest_framework')
+    },
+    {'import': 'ccdb5_ui', 'apps': ('ccdb5_ui', )},
+    {
+        'import': 'teachers_digital_platform',
+        'apps': ('teachers_digital_platform', 'mptt', 'haystack')
+    },
+]
+
+POSTGRES_APPS = []
+
 MIDDLEWARE = (
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.locale.LocaleMiddleware",
-    "django.middleware.http.ConditionalGetMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "core.middleware.ParseLinksMiddleware",
-    "core.middleware.DownstreamCacheControlMiddleware",
-    "flags.middleware.FlagConditionsMiddleware",
-    "wagtail.core.middleware.SiteMiddleware",
-    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.http.ConditionalGetMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+
+    'wagtail.wagtailcore.middleware.SiteMiddleware',
+    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+
+    'core.middleware.ParseLinksMiddleware',
+    'core.middleware.DownstreamCacheControlMiddleware',
+    'flags.middleware.FlagConditionsMiddleware',
 )
 
 CSP_MIDDLEWARE = ("csp.middleware.CSPMiddleware",)
