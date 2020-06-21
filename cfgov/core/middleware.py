@@ -52,6 +52,9 @@ def parse_links(html, request_path=None, encoding=None):
 
 class ParseLinksMiddleware(object):
 
+    def __init__(self, get_response):
+        self.get_response = get_response
+
     # Line 55
     def __call__(self, request):
         response = self.get_response(request)

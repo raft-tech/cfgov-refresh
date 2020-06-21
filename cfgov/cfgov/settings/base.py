@@ -125,20 +125,18 @@ POSTGRES_APPS = []
 
 MIDDLEWARE = (
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.http.ConditionalGetMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-
-    'wagtail.wagtailcore.middleware.SiteMiddleware',
-    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
-
-    'core.middleware.ParseLinksMiddleware',
-    'core.middleware.DownstreamCacheControlMiddleware',
-    'flags.middleware.FlagConditionsMiddleware',
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.http.ConditionalGetMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "core.middleware.ParseLinksMiddleware",
+    "core.middleware.DownstreamCacheControlMiddleware",
+    "flags.middleware.FlagConditionsMiddleware",
+    "wagtail.core.middleware.SiteMiddleware",
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 )
 
 CSP_MIDDLEWARE = ("csp.middleware.CSPMiddleware",)
