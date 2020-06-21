@@ -15,12 +15,9 @@ class DownstreamCacheControlMiddleware(object):
 
     def __call__(self, request):
         response = self.get_response(request)
-        if 'content-type' in response and self.should_parse_links(request.path, response['content-type']):
-            response.content = parse_links(
-                response.content,
-                request.path,
-                encoding=response.charset
-            )
+
+        if 'CSRF_COOKIE_USED' in request.META:
+            response['Edge-Control'] = 'no-store'
         return response
 
 
