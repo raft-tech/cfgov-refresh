@@ -2,9 +2,17 @@
   "name": "CFPB Refresh",
   "description": "CFPB Wagtail/Django website",
   "image": "heroku/python",
-  "repository": "https://github.com/MissyM2/cfgov-refresh",
+  "repository": "https://github.com/raft-tech/cfgov-refresh",
   "keywords": ["python", "django", "wagtail" ],
   "addons": [ "heroku-postgresql" ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-python"
+    }
+  ],
   "env": {
     "SECRET_KEY": {
       "description": "The secret key for the Django application.",
