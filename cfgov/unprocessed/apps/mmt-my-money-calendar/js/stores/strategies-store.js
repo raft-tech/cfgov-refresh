@@ -42,11 +42,7 @@ class StrategiesStore {
     ],
     largestBillableExpense: [
       {
-        categories: [
-          'expense.utilities.fuel',
-          'expense.utilities.waterSewage',
-          'expense.utilities.electricity',
-        ],
+        categories: ['expense.utilities.fuel', 'expense.utilities.waterSewage', 'expense.utilities.electricity'],
         title: 'Budget Utility Billing',
         text: 'Contact your utility company to find out about budget billing',
       },
@@ -137,7 +133,8 @@ class StrategiesStore {
     return [
       {
         title: 'Explore Your General Strategies',
-        text: 'While you have gone into the red, we could not recommend any "Fix It" Strategies based upon your budget. However, there are plenty of solutions you can implement to balance your budget from the general strategies tab.',
+        text:
+          'While you have gone into the red, we could not recommend any "Fix It" Strategies based upon your budget. However, there are plenty of solutions you can implement to balance your budget from the general strategies tab.',
         link: {
           href: '/strategies',
           text: 'View General Strategies',
@@ -177,17 +174,22 @@ class StrategiesStore {
         }
 
         if (event.categoryDetails.hasBill) {
-          if (!results.largestBillableExpense || results.largestBillableExpense.isLessThan(event)) {
-            results.largestBillableExpense = event;
+          if (!event.category.includes('expense.housing')) {
+            if (this.fixItStrategies['largestBillableExpense'].find((sgy) => sgy.categories.includes(event.category))) {
+              if (!results.largestBillableExpense || results.largestBillableExpense.isLessThan(event)) {
+                results.largestBillableExpense = event;
+              }
+            }
           }
         }
 
         if (event.totalCents < 0 && !event.categoryDetails.hasBill) {
-          if (!results.largestAdHocExpense || results.largestAdHocExpense.isLessThan(event)) {
-            results.largestAdHocExpense = event;
+          if (this.fixItStrategies['largestAdHocExpense'].find((sgy) => sgy.categories.includes(event.category))) {
+            if (!results.largestAdHocExpense || results.largestAdHocExpense.isLessThan(event)) {
+              results.largestAdHocExpense = event;
+            }
           }
         }
-
         return results;
       },
       {
