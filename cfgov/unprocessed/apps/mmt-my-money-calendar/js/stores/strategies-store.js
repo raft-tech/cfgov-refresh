@@ -150,13 +150,13 @@ class StrategiesStore {
       const { strategy } = Categories.get(catPath) || {};
       return strategy;
     });
-
     for (const [catPath, strategy] of Object.entries(this.negativeStrategies)) {
+      console.log('this is catPath and strategy', catPath, strategy);
       if (!this.eventStore.eventCategories.includes(catPath)) {
         results.push(strategy);
       }
     }
-
+    results.reverse();
     return compact(results).filter((result) => {
       if (strategyIDs.has(result.id)) return false;
       strategyIDs.add(result.id);
