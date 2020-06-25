@@ -151,7 +151,6 @@ class StrategiesStore {
       return strategy;
     });
     for (const [catPath, strategy] of Object.entries(this.negativeStrategies)) {
-      console.log('this is catPath and strategy', catPath, strategy);
       if (!this.eventStore.eventCategories.includes(catPath)) {
         results.push(strategy);
       }
