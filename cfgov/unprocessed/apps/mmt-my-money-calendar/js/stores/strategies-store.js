@@ -146,7 +146,6 @@ class StrategiesStore {
 
   @computed get strategyResults() {
     const strategyIDs = new Set();
-    //const results = this.eventStore.eventCategories.map((catPath) => {
     const list = this.eventStore.eventCategories.map((catPath) => {
       const { strategy } = Categories.get(catPath) || {};
       return strategy;
@@ -156,10 +155,9 @@ class StrategiesStore {
         list.push(strategy);
       }
     }
-    console.log('list is ', list);
+
     let reversedList = [...list].reverse();
-    console.log('reversedList is ', reversedList);
-    //results.reverse();
+
     return compact(reversedList).filter((item) => {
       if (strategyIDs.has(item.id)) return false;
       strategyIDs.add(item.id);
