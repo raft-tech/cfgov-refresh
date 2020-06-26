@@ -3,7 +3,7 @@ import { compact } from '../lib/array-helpers';
 import logger from '../lib/logger';
 import { Categories } from './models/categories';
 
-const isPlural = (word) => word.endsWith('s');
+// const isPlural = (word) => word.endsWith('s');
 
 class StrategiesStore {
   negativeStrategies = {
@@ -84,10 +84,7 @@ class StrategiesStore {
           'expense.personal.funMoney',
         ],
         title: 'Adjust Spending this Week',
-        template: (categoryName) =>
-          `${categoryName} ${
-            isPlural(categoryName) ? 'were' : 'was'
-          } your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
+        template: (categoryName) => `Your ${categoryName.toLowerCase()} expense was your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
       },
     ],
   };
@@ -146,7 +143,6 @@ class StrategiesStore {
 
   @computed get strategyResults() {
     const strategyIDs = new Set();
-    //const results = this.eventStore.eventCategories.map((catPath) => {
     const list = this.eventStore.eventCategories.map((catPath) => {
       const { strategy } = Categories.get(catPath) || {};
       return strategy;
@@ -156,10 +152,9 @@ class StrategiesStore {
         list.push(strategy);
       }
     }
-    console.log('list is ', list);
+
     let reversedList = [...list].reverse();
-    console.log('reversedList is ', reversedList);
-    //results.reverse();
+
     return compact(reversedList).filter((item) => {
       if (strategyIDs.has(item.id)) return false;
       strategyIDs.add(item.id);
