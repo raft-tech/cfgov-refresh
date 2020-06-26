@@ -146,20 +146,23 @@ class StrategiesStore {
 
   @computed get strategyResults() {
     const strategyIDs = new Set();
-    const results = this.eventStore.eventCategories.map((catPath) => {
+    //const results = this.eventStore.eventCategories.map((catPath) => {
+    const list = this.eventStore.eventCategories.map((catPath) => {
       const { strategy } = Categories.get(catPath) || {};
       return strategy;
     });
-
     for (const [catPath, strategy] of Object.entries(this.negativeStrategies)) {
       if (!this.eventStore.eventCategories.includes(catPath)) {
-        results.push(strategy);
+        list.push(strategy);
       }
     }
-
-    return compact(results).filter((result) => {
-      if (strategyIDs.has(result.id)) return false;
-      strategyIDs.add(result.id);
+    console.log('list is ', list);
+    let reversedList = [...list].reverse();
+    console.log('reversedList is ', reversedList);
+    //results.reverse();
+    return compact(reversedList).filter((item) => {
+      if (strategyIDs.has(item.id)) return false;
+      strategyIDs.add(item.id);
       this.logger.debug('Strategy IDs set: %O', strategyIDs);
       return true;
     });
