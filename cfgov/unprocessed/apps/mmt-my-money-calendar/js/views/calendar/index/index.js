@@ -77,7 +77,6 @@ function Calendar() {
       localStorage.setItem('removeSpotlight', true)
       eventStore.closeNarrativeModal()
     }
-
     setShowModal(!showModal);
   };
 
