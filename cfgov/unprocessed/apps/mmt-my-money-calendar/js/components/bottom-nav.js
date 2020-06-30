@@ -53,7 +53,8 @@ function BottomNav() {
           <NavItem 
             id='add'
             href="/calendar/add/income" 
-            icon={add} label="Add" 
+            icon={add} 
+            label="Income/Expense" 
             disabled={!hasStartingBalance || uiStore.hasSpotlight} 
             canSpotlight={uiStore.hasSpotlight} 
             spotlight={addSpotlight}
