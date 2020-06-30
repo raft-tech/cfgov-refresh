@@ -82,7 +82,8 @@ class StrategiesStore {
           'expense.personal.funMoney',
         ],
         title: 'Adjust Spending this Week',
-        template: (categoryName) => `Your ${categoryName.toLowerCase()} expense was your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
+        template: (categoryName) =>
+          `Your ${categoryName.toLowerCase()} expense was your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
       },
     ],
   };
@@ -166,12 +167,20 @@ class StrategiesStore {
           }
         }
 
-        if (event.categoryDetails.hasBill) {
+        /*  if (event.categoryDetails.hasBill) {
           if (!event.category.includes('expense.housing')) {
             if (this.fixItStrategies['largestBillableExpense'].find((sgy) => sgy.categories.includes(event.category))) {
               if (!results.largestBillableExpense || results.largestBillableExpense.isLessThan(event)) {
                 results.largestBillableExpense = event;
               }
+            }
+          }
+        } */
+
+        if (event.categoryDetails.hasBill && !event.category.includes('expense.housing')) {
+          if (this.fixItStrategies['largestBillableExpense'].find((sgy) => sgy.categories.includes(event.category))) {
+            if (!results.largestBillableExpense || results.largestBillableExpense.isLessThan(event)) {
+              results.largestBillableExpense = event;
             }
           }
         }
