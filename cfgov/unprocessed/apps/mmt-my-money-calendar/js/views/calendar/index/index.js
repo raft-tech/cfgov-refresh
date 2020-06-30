@@ -80,6 +80,20 @@ function Calendar() {
     setShowModal(!showModal);
   };
 
+  const handleToggleModal = (event) => {
+    event.preventDefault();
+    localStorage.setItem('visitedPage', true);
+    if (localStorage.getItem('enteredData') === 'initial') {
+      localStorage.setItem('enteredData', 'subsequent');
+    }
+    if (!localStorage.getItem('removeSpotlight')) {
+      localStorage.setItem('removeSpotlight', true)
+      eventStore.closeNarrativeModal()
+    }
+
+    setShowModal(!showModal);
+  };
+
   useScrollToTop();
 
   if (eventStore.eventsLoaded && !eventStore.hasStartingBalance) return <Redirect to="/money-on-hand" />;
@@ -90,12 +104,14 @@ function Calendar() {
         <NarrativeModal showModal={showModal}
                         handleOkClick={handleToggleModal}
                         copy={narrativeCopy.step1}
+                        step={narrativeStep}
         />
       }
       { showModal && narrativeStep === 'step2' &&
         <NarrativeModal showModal={showModal}
                         handleOkClick={handleToggleModal}
                         copy={narrativeCopy.step2}
+                        step={narrativeStep}
         />
       }
       <header className="calendar__header">
