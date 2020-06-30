@@ -161,30 +161,6 @@ class StrategiesStore {
   analyzeFixItEvents(events) {
     return events.reduce(
       (results, event) => {
-        if (/^expense\.housing/.test(event.category)) {
-          if (!results.largestHousingExpense || results.largestHousingExpense.isLessThan(event)) {
-            results.largestHousingExpense = event;
-          }
-        }
-
-        /*  if (event.categoryDetails.hasBill) {
-          if (!event.category.includes('expense.housing')) {
-            if (this.fixItStrategies['largestBillableExpense'].find((sgy) => sgy.categories.includes(event.category))) {
-              if (!results.largestBillableExpense || results.largestBillableExpense.isLessThan(event)) {
-                results.largestBillableExpense = event;
-              }
-            }
-          }
-        } */
-
-        if (event.categoryDetails.hasBill && !event.category.includes('expense.housing')) {
-          if (this.fixItStrategies['largestBillableExpense'].find((sgy) => sgy.categories.includes(event.category))) {
-            if (!results.largestBillableExpense || results.largestBillableExpense.isLessThan(event)) {
-              results.largestBillableExpense = event;
-            }
-          }
-        }
-
         if (event.totalCents < 0 && !event.categoryDetails.hasBill) {
           if (this.fixItStrategies['largestAdHocExpense'].find((sgy) => sgy.categories.includes(event.category))) {
             if (!results.largestAdHocExpense || results.largestAdHocExpense.isLessThan(event)) {
@@ -192,12 +168,29 @@ class StrategiesStore {
             }
           }
         }
+
+        if (event.categoryDetails.hasBill) {
+          if (!event.category.includes('expense.housing')) {
+            if (this.fixItStrategies['largestBillableExpense'].find((sgy) => sgy.categories.includes(event.category))) {
+              if (!results.largestBillableExpense || results.largestBillableExpense.isLessThan(event)) {
+                results.largestBillableExpense = event;
+              }
+            }
+          }
+        }
+
+        if (/^expense\.housing/.test(event.category)) {
+          if (!results.largestHousingExpense || results.largestHousingExpense.isLessThan(event)) {
+            results.largestHousingExpense = event;
+          }
+        }
+
         return results;
       },
       {
-        largestHousingExpense: undefined,
-        largestBillableExpense: undefined,
         largestAdHocExpense: undefined,
+        largestBillableExpense: undefined,
+        largestHousingExpense: undefined,
       }
     );
   }
