@@ -12,6 +12,7 @@ export default class CashFlowStore {
 
   @observable eventsLoaded = false;
   @observable events = [];
+  @observable modalOpen = localStorage.getItem('removeSpotlight') ? false : true;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -292,7 +293,7 @@ export default class CashFlowStore {
   }
 
   /**
-   * Missy added:  Gets all positive events occurring in the same week as the specified date
+   * Gets all positive events occurring in the same week as the specified date
    *
    * @param {Date|dayjs} date - A date in the week to check
    * @returns {CashFlowEvent[]|undefined}
@@ -515,4 +516,8 @@ export default class CashFlowStore {
     yield CashFlowEvent.destroyAll();
     this.setEvents([]);
   });
+
+  @action closeNarrativeModal() {
+    this.modalOpen = !this.modalOpen;
+  } 
 }

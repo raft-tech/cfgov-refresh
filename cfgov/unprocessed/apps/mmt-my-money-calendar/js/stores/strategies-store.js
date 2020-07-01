@@ -3,8 +3,6 @@ import { compact } from '../lib/array-helpers';
 import logger from '../lib/logger';
 import { Categories } from './models/categories';
 
-const isPlural = (word) => word.endsWith('s');
-
 class StrategiesStore {
   negativeStrategies = {
     'expense.personal.coronavirus': {
@@ -85,9 +83,7 @@ class StrategiesStore {
         ],
         title: 'Adjust Spending this Week',
         template: (categoryName) =>
-          `${categoryName} ${
-            isPlural(categoryName) ? 'were' : 'was'
-          } your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
+          `Your ${categoryName.toLowerCase()} expense was your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
       },
     ],
   };
@@ -135,11 +131,7 @@ class StrategiesStore {
       {
         title: 'Explore Your General Strategies',
         text:
-          'While you have gone into the red, we could not recommend any "Fix It" Strategies based upon your budget. However, there are plenty of solutions you can implement to balance your budget from the general strategies tab.',
-        link: {
-          href: '/strategies',
-          text: 'View General Strategies',
-        },
+          "Based upon your weekly transactions we can't recommend any Fix-It Strategies. Make sure that you've entered in all of your expenses and income for the week then check back here later.  Otherwise, review the generic strategies below.",
       },
     ];
   }
@@ -169,9 +161,11 @@ class StrategiesStore {
   analyzeFixItEvents(events) {
     return events.reduce(
       (results, event) => {
-        if (/^expense\.housing/.test(event.category)) {
-          if (!results.largestHousingExpense || results.largestHousingExpense.isLessThan(event)) {
-            results.largestHousingExpense = event;
+        if (event.totalCents < 0 && !event.categoryDetails.hasBill) {
+          if (this.fixItStrategies['largestAdHocExpense'].find((sgy) => sgy.categories.includes(event.category))) {
+            if (!results.largestAdHocExpense || results.largestAdHocExpense.isLessThan(event)) {
+              results.largestAdHocExpense = event;
+            }
           }
         }
 
@@ -185,19 +179,18 @@ class StrategiesStore {
           }
         }
 
-        if (event.totalCents < 0 && !event.categoryDetails.hasBill) {
-          if (this.fixItStrategies['largestAdHocExpense'].find((sgy) => sgy.categories.includes(event.category))) {
-            if (!results.largestAdHocExpense || results.largestAdHocExpense.isLessThan(event)) {
-              results.largestAdHocExpense = event;
-            }
+        if (/^expense\.housing/.test(event.category)) {
+          if (!results.largestHousingExpense || results.largestHousingExpense.isLessThan(event)) {
+            results.largestHousingExpense = event;
           }
         }
+
         return results;
       },
       {
-        largestHousingExpense: undefined,
-        largestBillableExpense: undefined,
         largestAdHocExpense: undefined,
+        largestBillableExpense: undefined,
+        largestHousingExpense: undefined,
       }
     );
   }
