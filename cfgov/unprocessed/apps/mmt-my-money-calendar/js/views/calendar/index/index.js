@@ -41,16 +41,21 @@ function Calendar() {
     if (visited && enteredData === 'subsequent') {
       setShowModal(false);
     } else {
+<<<<<<< HEAD
       let currentStep = (visited && enteredData === 'initial') ? 'step2' : 'step1';
+=======
+      let currentStep = visited && enteredData === 'initial' ? 'step2' : 'step1';
+
+>>>>>>> 655a87903... weeks are changing colors correctly
       setNarrativeStep(currentStep);
       setShowModal(true);
     }
-  }
+  };
 
   useEffect(() => {
     uiStore.setPageTitle('myMoney Calendar');
     uiStore.setSubtitle(uiStore.currentMonth.format('MMMM YYYY'));
-    handleModalSession()
+    handleModalSession();
   }, [location, params, uiStore.currentMonth]);
 
   const dayLabels = useMemo(
@@ -99,7 +104,7 @@ function Calendar() {
                         copy={narrativeCopy.step2}
                         step={narrativeStep}
         />
-      }
+      )}
       <header className="calendar__header">
         <IconButton
           className="calendar__nav-button"
