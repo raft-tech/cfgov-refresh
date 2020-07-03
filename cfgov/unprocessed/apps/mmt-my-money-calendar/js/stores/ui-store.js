@@ -221,7 +221,7 @@ export default class UIStore {
 
   @action toggleSpotlight = (bool) => {
     this.hasSpotlight = bool;
-  }
+  };
 
   async showInstallPrompt() {
     if (!this.installPromptEvent) return false;
