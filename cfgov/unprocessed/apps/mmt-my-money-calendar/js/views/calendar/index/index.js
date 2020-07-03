@@ -45,12 +45,12 @@ function Calendar() {
       setNarrativeStep(currentStep);
       setShowModal(true);
     }
-  }
+  };
 
   useEffect(() => {
     uiStore.setPageTitle('myMoney Calendar');
     uiStore.setSubtitle(uiStore.currentMonth.format('MMMM YYYY'));
-    handleModalSession()
+    handleModalSession();
   }, [location, params, uiStore.currentMonth]);
 
   const dayLabels = useMemo(
@@ -85,14 +85,14 @@ function Calendar() {
 
   return (
     <section className="calendar">
-      {showModal && narrativeStep === 'step1' && (
+      {showModal && narrativeStep === 'step1' &&
         <NarrativeModal
           showModal={showModal}
           handleOkClick={handleToggleModal}
           copy={narrativeCopy.step1}
           step={narrativeStep}
         />
-      )}
+      }
       {showModal && narrativeStep === 'step2' && 
         <NarrativeModal showModal={showModal}
                         handleOkClick={handleToggleModal}

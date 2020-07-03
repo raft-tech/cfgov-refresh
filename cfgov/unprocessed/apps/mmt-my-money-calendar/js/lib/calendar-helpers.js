@@ -161,6 +161,7 @@ export const recurrenceRules = {
     label: 'Weekly',
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     handler: (dtstart, options = {}) => 
       new RRule({ freq: RRule.WEEKLY, dtstart, ...options }),
 =======
@@ -170,6 +171,9 @@ export const recurrenceRules = {
     handler: (dtstart, options = {}) => 
       new RRule({ freq: RRule.WEEKLY, dtstart, ...options }),
 >>>>>>> 8cc646fbf... corrected formatting issues
+=======
+    handler: (dtstart, options = {}) => new RRule({ freq: RRule.WEEKLY, dtstart, ...options }),
+>>>>>>> 655a87903... weeks are changing colors correctly
   },
   biweekly: {
     label: 'Every 2 weeks',
