@@ -85,6 +85,10 @@ function Details() {
   useLockBodyScroll(modalOpen);
 
   const events = eventStore.getEventsForWeek(uiStore.currentWeek) || [];
+  const startBal = events
+    .filter((x) => x.category === 'income.startingBalance')
+    .map((e) => formatCurrency(e.totalCents / 100));
+
   const endBalanceClasses = clsx('calendar-details__ending-balance', uiStore.weekHasNegativeBalance && 'negative');
 
   return (
@@ -100,7 +104,10 @@ function Details() {
         <div className="calendar-details__header-text">
           <h3>Week of {uiStore.weekRangeText}</h3>
           <div className="calendar-details__starting-balance">
-            Starting Balance: <span className="balance-amount">{uiStore.weekStartingBalanceText}</span>
+            Starting Balance:{' '}
+            <span className="balance-amount">
+              {events.find((x) => x.category === 'income.startingBalance') ? startBal : uiStore.weekStartingBalanceText}
+            </span>
           </div>
           {!uiStore.weekHasNegativeBalance && !eventStore.hasSnapEvents && (
             <div className={endBalanceClasses}>
