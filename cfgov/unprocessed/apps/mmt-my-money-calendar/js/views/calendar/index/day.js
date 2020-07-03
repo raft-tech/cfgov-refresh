@@ -37,29 +37,12 @@ function Day({ day, dateFormat = 'D' }) {
 
   if (!eventStore.events.length) return emptyTile(classes);
 
-  const balance = eventStore.getBalanceForDate(day);
-  const weekEndBal = uiStore.weekEndingBalance;
+  const weekEndBal = eventStore.getBalanceForDate(dayjs(day).endOf('week'));
+  console.log('what is the startOf(week)', dayjs(day).startOf('week'));
 
   classes.push({
-    //'pos-balance': balance >= 0 && day.isSameOrAfter(eventStore.earliestEventDate),
-    //'pos-balance': weekEndBal >= 0 && day.isSameOrAfter(uiStore.startOfWeek),
-    'pos-balance':
-      (weekEndBal >= 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.format('YYYY-MM-DD')) ||
-      (weekEndBal >= 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(1, 'day').format('YYYY-MM-DD')) ||
-      (weekEndBal >= 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(2, 'day').format('YYYY-MM-DD')) ||
-      (weekEndBal >= 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(3, 'day').format('YYYY-MM-DD')) ||
-      (weekEndBal >= 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(4, 'day').format('YYYY-MM-DD')) ||
-      (weekEndBal >= 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(5, 'day').format('YYYY-MM-DD')) ||
-      (weekEndBal >= 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(6, 'day').format('YYYY-MM-DD')),
-
-    'neg-balance':
-      (weekEndBal < 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.format('YYYY-MM-DD')) ||
-      (weekEndBal < 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(1, 'day').format('YYYY-MM-DD')) ||
-      (weekEndBal < 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(2, 'day').format('YYYY-MM-DD')) ||
-      (weekEndBal < 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(3, 'day').format('YYYY-MM-DD')) ||
-      (weekEndBal < 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(4, 'day').format('YYYY-MM-DD')) ||
-      (weekEndBal < 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(5, 'day').format('YYYY-MM-DD')) ||
-      (weekEndBal < 0 && day.format('YYYY-MM-DD') === uiStore.currentWeek.add(6, 'day').format('YYYY-MM-DD')),
+    'pos-balance': weekEndBal >= 0 && dayjs(day).isBetween(dayjs(day).startOf('week'), dayjs(day).endOf('week')),
+    'neg-balance': weekEndBal < 0 && dayjs(day).isBetween(dayjs(day).startOf('week'), dayjs(day).endOf('week')),
   });
 
   const symbol = eventStore.dateHasEvents(day) ? <div className="calendar__day-symbols">&bull;</div> : null;

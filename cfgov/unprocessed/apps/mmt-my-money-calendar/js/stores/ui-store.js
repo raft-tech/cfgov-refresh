@@ -46,7 +46,6 @@ export default class UIStore {
   @computed get weekRangeText() {
     const start = this.currentWeek.startOf('week');
     const end = this.currentWeek.endOf('week');
-
     return `${start.format('MMMM D')} - ${end.format('MMMM D')}`;
   }
 
