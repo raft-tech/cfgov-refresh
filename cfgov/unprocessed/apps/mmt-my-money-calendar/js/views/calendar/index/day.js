@@ -37,12 +37,15 @@ function Day({ day, dateFormat = 'D' }) {
 
   if (!eventStore.events.length) return emptyTile(classes);
 
-  const weekEndBal = eventStore.getBalanceForDate(dayjs(day).endOf('week'));
-  console.log('what is the startOf(week)', dayjs(day).startOf('week'));
+  const weekEndBal = eventStore.getDay(day.endOf('week')).nonSnapBalance;
 
   classes.push({
-    'pos-balance': weekEndBal >= 0 && dayjs(day).isBetween(dayjs(day).startOf('week'), dayjs(day).endOf('week')),
-    'neg-balance': weekEndBal < 0 && dayjs(day).isBetween(dayjs(day).startOf('week'), dayjs(day).endOf('week')),
+    'pos-balance':
+      weekEndBal >= 0 &&
+      (dayjs(day).startOf('week') || dayjs(day).isBetween(dayjs(day).startOf('week'), dayjs(day).endOf('week'))),
+    'neg-balance':
+      weekEndBal < 0 &&
+      (dayjs(day).startOf('week') || dayjs(day).isBetween(dayjs(day).startOf('week'), dayjs(day).endOf('week'))),
   });
 
   const symbol = eventStore.dateHasEvents(day) ? <div className="calendar__day-symbols">&bull;</div> : null;
