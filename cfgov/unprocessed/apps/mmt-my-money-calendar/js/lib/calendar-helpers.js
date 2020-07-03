@@ -159,8 +159,12 @@ export const DAY_OPTIONS = {
 export const recurrenceRules = {
   weekly: {
     label: 'Weekly',
+<<<<<<< HEAD
     handler: (dtstart, options = {}) => 
       new RRule({ freq: RRule.WEEKLY, dtstart, ...options }),
+=======
+    handler: (dtstart, options = {}) => new RRule({ freq: RRule.WEEKLY, dtstart, ...options }),
+>>>>>>> 3fb2684bd... weeks are changing colors correctly
   },
   biweekly: {
     label: 'Every 2 weeks',
