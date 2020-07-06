@@ -14,14 +14,11 @@ function More() {
   const history = useHistory();
   const [clearDataModalOpen, toggleClearDataModal] = useToggle(false);
 
-  const clearAllData = useCallback(
-    async (evt) => {
-      evt.preventDefault();
-      await eventStore.clearAllData();
-      history.push('/');
-    },
-    [eventStore, history]
-  );
+  const clearAllData = useCallback(async (evt) => {
+    evt.preventDefault();
+    await eventStore.clearAllData();
+    history.push('/');
+  }, [eventStore, history]);
 
   useScrollToTop();
 
