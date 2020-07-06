@@ -38,7 +38,6 @@ function Day({ day, dateFormat = 'D' }) {
   if (!eventStore.events.length) return emptyTile(classes);
 
   const balance = eventStore.getBalanceForDate(day);
-  console.log('week ending balance', uiStore.weekEndingBalanceText);
 
   classes.push({
     'pos-balance': balance >= 0 && day.isSameOrAfter(eventStore.earliestEventDate),
