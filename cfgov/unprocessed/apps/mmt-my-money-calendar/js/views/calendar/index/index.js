@@ -41,17 +41,16 @@ function Calendar() {
     if (visited && enteredData === 'subsequent') {
       setShowModal(false);
     } else {
-      let currentStep = visited && enteredData === 'initial' ? 'step2' : 'step1';
-
+      let currentStep = (visited && enteredData === 'initial') ? 'step2' : 'step1';
       setNarrativeStep(currentStep);
       setShowModal(true);
     }
-  };
+  }
 
   useEffect(() => {
     uiStore.setPageTitle('myMoney Calendar');
     uiStore.setSubtitle(uiStore.currentMonth.format('MMMM YYYY'));
-    handleModalSession();
+    handleModalSession()
   }, [location, params, uiStore.currentMonth]);
 
   const dayLabels = useMemo(
@@ -74,7 +73,7 @@ function Calendar() {
       localStorage.setItem('enteredData', 'subsequent');
     }
     if (!localStorage.getItem('removeSpotlight')) {
-      localStorage.setItem('removeSpotlight', true);
+      localStorage.setItem('removeSpotlight', true)
       eventStore.closeNarrativeModal();
     }
     setShowModal(!showModal);
@@ -94,14 +93,13 @@ function Calendar() {
           step={narrativeStep}
         />
       )}
-      {showModal && narrativeStep === 'step2' && (
-        <NarrativeModal
-          showModal={showModal}
-          handleOkClick={handleToggleModal}
-          copy={narrativeCopy.step2}
-          step={narrativeStep}
+      {showModal && narrativeStep === 'step2' && 
+        <NarrativeModal showModal={showModal}
+                        handleOkClick={handleToggleModal}
+                        copy={narrativeCopy.step2}
+                        step={narrativeStep}
         />
-      )}
+      }
       <header className="calendar__header">
         <IconButton
           className="calendar__nav-button"
