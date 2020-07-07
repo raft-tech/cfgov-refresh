@@ -41,12 +41,7 @@ function Calendar() {
     if (visited && enteredData === 'subsequent') {
       setShowModal(false);
     } else {
-<<<<<<< HEAD
       let currentStep = (visited && enteredData === 'initial') ? 'step2' : 'step1';
-=======
-      let currentStep = visited && enteredData === 'initial' ? 'step2' : 'step1';
-
->>>>>>> 655a87903... weeks are changing colors correctly
       setNarrativeStep(currentStep);
       setShowModal(true);
     }
@@ -98,7 +93,7 @@ function Calendar() {
           step={narrativeStep}
         />
       )}
-      {showModal && narrativeStep === 'step2' && 
+      {showModal && narrativeStep === 'step2' && (
         <NarrativeModal showModal={showModal}
                         handleOkClick={handleToggleModal}
                         copy={narrativeCopy.step2}

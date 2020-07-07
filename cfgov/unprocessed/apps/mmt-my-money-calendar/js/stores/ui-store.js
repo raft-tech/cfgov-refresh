@@ -109,7 +109,8 @@ export default class UIStore {
   }
 
   @computed get weekHasNegativeBalance() {
-    return this.weekHasEvents && this.weekEndingBalance < 0;
+    //return this.weekHasEvents && this.weekEndingBalance < 0;
+    return this.weekEndingBalance < 0;
   }
 
   @computed get isRunningAsApp() {
