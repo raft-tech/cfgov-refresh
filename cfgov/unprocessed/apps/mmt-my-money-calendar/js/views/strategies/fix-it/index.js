@@ -98,7 +98,9 @@ function FixItStrategies() {
   return (
     <section className="strategies">
       {showModal && (
-        <NarrativeModal showModal={showModal} handleOkClick={handleToggleModal} copy={narrativeCopy.step3} />
+        <NarrativeModal showModal={showModal}
+                        handleOkClick={handleToggleModal}
+                        copy={narrativeCopy.step3} />
       )}
       <header className="strategies-header">
         <h2 className="strategies-header__title">Fix-It Strategies</h2>
@@ -138,10 +140,10 @@ function FixItStrategies() {
             </CardGroup>
           </div>
         ) : (
-          <p>
-            <em>There are no strategy recommendations for this week</em>
-          </p>
-        )}
+            <p>
+              <em>There are no strategy recommendations for this week</em>
+            </p>
+          )}
       </header>
       <div>{strategies.fixItResults.length > 0 && <StrategyCards results={strategies.fixItResults} />}</div>
       <div>

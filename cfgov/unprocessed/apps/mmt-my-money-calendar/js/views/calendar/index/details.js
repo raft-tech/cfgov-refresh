@@ -104,7 +104,7 @@ function Details() {
         <div className="calendar-details__header-text">
           <h3>Week of {uiStore.weekRangeText}</h3>
           <div className="calendar-details__starting-balance">
-            Starting Balance:{' '}
+            Starting Balance:
             <span className="balance-amount">
               {events.find((x) => x.category === 'income.startingBalance') ? startBal : uiStore.weekStartingBalanceText}
             </span>
