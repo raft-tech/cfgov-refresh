@@ -11,6 +11,7 @@ import { SlideListItem } from '../../../components/slide-list';
 import ModalDialog from '../../../components/modal-dialog';
 
 import { delete as deleteIcon, hamburger as dragHandle, arrowRight, arrowLeft, pencil } from '../../../lib/icons';
+import { addMethod } from 'yup';
 
 const IconButton = ({ icon, ...props }) => <button dangerouslySetInnerHTML={{ __html: icon }} {...props} />;
 
@@ -90,6 +91,7 @@ function Details() {
     .map((e) => formatCurrency(e.totalCents / 100));
 
   const endBalanceClasses = clsx('calendar-details__ending-balance', uiStore.weekHasNegativeBalance && 'negative');
+  const endBalanceClassesPositive = clsx('calendar-details__ending-balance', uiStore.weekHasPositiveBalance && 'positive');
 
   return (
     <section className="calendar-details">
@@ -152,6 +154,24 @@ function Details() {
         </div>
       )}
 
+     {/*  missy added */}
+      {uiStore.weekHasPositiveBalance && (
+        <div className={endBalanceClassesPositive}>
+          <Notification
+            message="You are going to be in the Green!"
+            variant="savings"
+            actionLink={
+              <Link to={`/fix-it-strategies/${uiStore.currentWeek.valueOf()}`} className="m-notification_button-pos">
+                Save it
+              </Link>
+            }
+          >
+            <p className="m-notification_explanation">
+              Ending Balance: <span className="neg-ending-balance">{uiStore.weekEndingBalanceText}</span>
+            </p>
+          </Notification>
+        </div>
+      )}
       <div className="calendar-details__events-section">
         <h3 className="calendar-details__events-section-title">Transactions</h3>
 
