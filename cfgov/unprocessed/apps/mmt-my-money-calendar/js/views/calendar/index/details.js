@@ -167,7 +167,7 @@ function Details() {
             }
           >
             <p className="m-notification_explanation">
-              Ending Balance: <span className="neg-ending-balance">{uiStore.weekEndingBalanceText}</span>
+              Ending Balance: <span className="pos-ending-balance">{uiStore.weekEndingBalanceText}</span>
             </p>
           </Notification>
         </div>

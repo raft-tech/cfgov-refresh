@@ -122,7 +122,7 @@
     }
 
     &.pos-balance {
-      background-color: @positiveColor;
+      background-color: lighten(@positiveColor, 25%);
       border-color: @positiveColor;
     }
 
@@ -231,6 +231,11 @@
       margin-top: 12px;
       padding: 5px;
     }
+
+    &__savings {
+      background-color: @positiveColor;
+      border-color: @green;
+    }
   }
 
   .notification-icon {
@@ -266,8 +271,17 @@
       margin: 12px auto;
     }
 
+    &.positive {
+      margin: 12px auto;
+    }
+
     .neg-ending-balance {
       color: darken(@gold, 10%);
+      font-weight: bold;
+    }
+
+    .pos-ending-balance {
+      color: darken(@green, 10%);
       font-weight: bold;
     }
 
