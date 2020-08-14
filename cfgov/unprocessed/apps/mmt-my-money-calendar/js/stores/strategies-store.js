@@ -3,8 +3,6 @@ import { compact } from '../lib/array-helpers';
 import logger from '../lib/logger';
 import { Categories } from './models/categories';
 
-const isPlural = (word) => word.endsWith('s');
-
 class StrategiesStore {
   negativeStrategies = {
     'expense.personal.coronavirus': {
@@ -84,10 +82,7 @@ class StrategiesStore {
           'expense.personal.funMoney',
         ],
         title: 'Adjust Spending this Week',
-        template: (categoryName) =>
-          `${categoryName} ${
-            isPlural(categoryName) ? 'were' : 'was'
-          } your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
+        template: (categoryName) => `Your ${categoryName.toLowerCase()} expense was your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
       },
     ],
   };
@@ -135,18 +130,13 @@ class StrategiesStore {
       {
         title: 'Explore Your General Strategies',
         text:
-          'While you have gone into the red, we could not recommend any "Fix It" Strategies based upon your budget. However, there are plenty of solutions you can implement to balance your budget from the general strategies tab.',
-        link: {
-          href: '/strategies',
-          text: 'View General Strategies',
-        },
+          "Based upon your weekly transactions we can't recommend any Fix-It Strategies. Make sure that you've entered in all of your expenses and income for the week then check back here later.  Otherwise, review the generic strategies below.",
       },
     ];
   }
 
   @computed get strategyResults() {
     const strategyIDs = new Set();
-    //const results = this.eventStore.eventCategories.map((catPath) => {
     const list = this.eventStore.eventCategories.map((catPath) => {
       const { strategy } = Categories.get(catPath) || {};
       return strategy;
@@ -156,10 +146,9 @@ class StrategiesStore {
         list.push(strategy);
       }
     }
-    console.log('list is ', list);
+
     let reversedList = [...list].reverse();
-    console.log('reversedList is ', reversedList);
-    //results.reverse();
+
     return compact(reversedList).filter((item) => {
       if (strategyIDs.has(item.id)) return false;
       strategyIDs.add(item.id);
