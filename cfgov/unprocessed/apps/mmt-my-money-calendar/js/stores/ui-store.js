@@ -21,6 +21,7 @@ export default class UIStore {
   @observable isTouchDevice = false;
   @observable installPromptEvent;
   @observable days = [];
+  @observable hasSpotlight;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -38,7 +39,6 @@ export default class UIStore {
     window.addEventListener('beforeinstallprompt', this.setInstallPromptEvent);
   }
 
-
   @computed get monthCalendarRows() {
     return getWeekRows(this.currentMonth);
   }
@@ -46,7 +46,6 @@ export default class UIStore {
   @computed get weekRangeText() {
     const start = this.currentWeek.startOf('week');
     const end = this.currentWeek.endOf('week');
-
     return `${start.format('MMMM D')} - ${end.format('MMMM D')}`;
   }
 
@@ -110,7 +109,7 @@ export default class UIStore {
   }
 
   @computed get weekHasNegativeBalance() {
-    return this.weekHasEvents && this.weekEndingBalance < 0;
+    return this.weekEndingBalance < 0;
   }
 
   @computed get isRunningAsApp() {
@@ -219,14 +218,14 @@ export default class UIStore {
     window.removeEventListener('beforeinstallprompt', this.setInstallPromptEvent);
   };
 
+  @action toggleSpotlight = (bool) => {
+    this.hasSpotlight = bool;
+  };
+
   async showInstallPrompt() {
     if (!this.installPromptEvent) return false;
     this.installPromptEvent.prompt();
     const { outcome } = await this.installPromptEvent.userChoice;
     return outcome;
-  }
-
-  toggleNav() {
-    this.setNavOpen(!this.navOpen);
   }
 }
