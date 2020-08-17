@@ -83,7 +83,6 @@ export const Categories = new CategoryTree({
     salary: {
       name: 'Job',
       icon: icons.job,
-      description: 'Income from employment.',
       recurrenceTypes: ['weekly', 'biweekly', 'monthly', 'semimonthly'],
       strategy: {
         id: 'directDeposit',
@@ -393,16 +392,16 @@ export const Categories = new CategoryTree({
         icon: icons.groceries,
         recurrenceTypes: ['weekly', 'monthly'],
         hasBill: false,
-        /* strategy: {
+        strategy: {
           id: 'reduceGroceryExpenses',
           title: 'Reduce your Grocery Expenses',
           body:
             'Using coupons and buying groceries and supplies in bulk with other family or friends can help reduce your grocery costs and put more money in your budget.',
-        }, */
+        },
       },
     },
     emergencySavings: {
-      name: 'Emergency Savings',
+      name: 'Savings',
       icon: icons.emergencySavings,
       recurrenceTypes: ['weekly', 'monthly'],
       hasBill: false,
@@ -410,12 +409,6 @@ export const Categories = new CategoryTree({
     personal: {
       name: 'Personal',
       icon: icons.personal,
-      //emergencySavings: {
-      //  name: 'Emergency Savings',
-      //  icon: icons.emergencySavings,
-      //  recurrenceTypes: ['weekly', 'monthly'],
-      //  hasBill: false,
-      //},
       healthcare: {
         name: 'Health Care',
         icon: icons.healthcare,
