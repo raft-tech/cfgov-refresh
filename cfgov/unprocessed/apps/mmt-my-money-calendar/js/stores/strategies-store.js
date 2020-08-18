@@ -2,14 +2,16 @@ import { computed, action, observable } from 'mobx';
 import { compact } from '../lib/array-helpers';
 import logger from '../lib/logger';
 import { Categories } from './models/categories';
+import icons from '../lib/category-icons';
 
 class StrategiesStore {
   negativeStrategies = {
     'expense.personal.coronavirus': {
       id: 'coronaVirus',
-      title: 'Protect Your Finances During the Coronavirus Pandemic',
+      icon1: icons.coronaVirus1,
+      title: 'Protect Your Finances from COVID-19',
       body:
-        'The CFPB is committed to providing consumers with up-to-date information and resources to protect and manage their finances during this difficult time.',
+        'Get information about protecting your financial health.',
       link: {
         href: ' https://www.consumerfinance.gov/coronavirus/',
         text: 'Tools and Resources',
@@ -18,10 +20,21 @@ class StrategiesStore {
     'expense.personal.emergencySavings': {
       id: 'saveForEmergencies',
       title: 'Save for Emergencies',
+      icon1: icons.savings1,
       body: 'Saving helps reduce stress when the unexpected happens.',
       link: {
         href: 'https://www.consumerfinance.gov/about-us/blog/how-save-emergencies-and-future/',
         text: 'How to save for emergencies and the future',
+      },
+    },
+    'expense.personal.tightWeek': {
+      id: 'tightWeek',
+      title: 'Tips for a tight week',
+      icon1: icons.paycheck1,
+      body: 'See how to add more money to your cash flow.',
+      link: {
+        href: '',
+        text: 'Increase Income and Benefits',
       },
     },
   };
@@ -30,44 +43,51 @@ class StrategiesStore {
     largestHousingExpense: [
       {
         categories: ['expense.housing.mortgage'],
-        title: 'Split Mortgage Payments',
-        text: 'Contact your mortgage company to find out if you could split your payment into two payments per month',
+        title: 'Split Mortgage',
+        text: 'Ask your mortgage company to find out if you could split your payment into smaller amounts.',
       },
       {
         categories: ['expense.housing.rent'],
-        title: 'Split Rent Payment',
-        text: 'Contact your landlord to find out if you could split your payment into two payments per month',
+        title: 'Rent',
+        text: 'If possible, ask your landlord to let you make multiple payments toward rent.  If not, contact a local organization that helps with rental assistance.',
       },
     ],
     largestBillableExpense: [
       {
-        categories: ['expense.utilities.fuel', 'expense.utilities.waterSewage', 'expense.utilities.electricity'],
-        title: 'Budget Utility Billing',
-        text: 'Contact your utility company to find out about budget billing',
+        categories: ['expense.transportation.carPayment'],
+        title: 'Car Payment Date',
+        text:
+          'Ask car loan company if you could move the due date to a week with more money.',
       },
       {
-        categories: ['expense.transportation.carPayment', 'expense.transportation.carInsurance'],
-        title: 'Move Due Date',
+        categories: ['expense.transportation.carInsurance'],
+        title: 'Car Insurance Date',
         text:
-          'Contact your car loan company to find out if you could move the due date of this bill to a week where you have more income or fewer expenses.',
+          'Ask your insurance company if you could move the due date to a week with more money.',
       },
       {
-        categories: ['expense.debt.medicalBill', 'expense.debt.personalLoan'],
-        title: 'Move Due Date',
+        categories: ['expense.debt.medicalBill'],
+        title: 'Medical Bill',
         text:
-          'Contact your creditor to find out if you could move the due date of this bill to a week where you have more income or fewer expenses.',
+          'Ask your creditor if you could move the due date to a week with more money.',
+      },
+      {
+        categories: ['expense.debt.personalLoan'],
+        title: 'Loan Due Date',
+        text:
+          'Ask your lender if you could move the due date to a week with more money.',
       },
       {
         categories: ['expense.debt.creditCard'],
-        title: 'Move Due Date',
+        title: 'Credit Card Due Date',
         text:
-          'Contact your credit card company to find out if you could move the due date of this bill to a week where you have more income or fewer expenses.',
+          'Contact your credit card company to find out if you could move the due date to a week where you have more money.',
       },
       {
         categories: ['expense.debt.studentLoan'],
-        title: 'Move Due Date',
+        title: 'Student Loan Due Date',
         text:
-          'Contact your student loan company to find out if you could move the due date of this bill to a week where you have more income or fewer expenses.',
+          'Contact your student loan company to find out if you could move the due date of this bill to a week where you have more money.',
       },
     ],
     largestAdHocExpense: [
@@ -76,14 +96,13 @@ class StrategiesStore {
           'expense.transportation.publicTransportation',
           'expense.transportation.gas',
           'expense.food.eatingOut',
-          /* 'expense.food.groceries', */
           'expense.personal.clothing',
           'expense.personal.personalCare',
           'expense.personal.funMoney',
         ],
-        title: 'Adjust Spending this Week',
+        title: (categoryName) =>`Adjust ${categoryName.toLowerCase()} Spending`,
         template: (categoryName) =>
-          `Your ${categoryName.toLowerCase()} expense was your largest expense this week not tied to a bill you are obligated to pay. Consider spending a little less this week and a little more in weeks where you have fewer expenses or more income.`,
+          `You control how much you spend on ${categoryName.toLowerCase()}.  Consider buying less this week until you have more money.`,
       },
     ],
   };
@@ -184,7 +203,7 @@ class StrategiesStore {
             results.largestHousingExpense = event;
           }
         }
-
+        console.log('results of analyzeFixitEvents is ', results);
         return results;
       },
       {
