@@ -8,12 +8,12 @@ const StrategyCards = ({ results }) => (
   <main className="strategy-cards">
     <CardGroup columns={2}>
       {results.map((result, index) => (
-        <Card title={result.title} type="general" icon={result.icon1} key={`strategy-${index}`}>
+        <Card title={result.title} icon={result.icon1} key={`strategy-${index}`}>
           <p>{result.body}</p>
 
           {!!result.link && (
             <div className="m-card_footer">
-              <a href={result.link.href} className="a-btn a-btn__secondary a-btn__full-on-xs" target="_blank">
+              <a href={result.link.href} className="a-btn a-btn__full-on-xs" target="_blank">
                 {result.link.text}
               </a>
             </div>
@@ -31,6 +31,7 @@ function Strategies() {
 
   return (
     <section className="strategies">
+<<<<<<< HEAD
       {/* <header className="strategies-header">
         <h2 className="strategies-header__title">General Strategies to Improve Cash Flow</h2>
 
@@ -39,6 +40,8 @@ function Strategies() {
           one or two of them for the coming month and see if your cash flow improves.
         </p>
       </header> */}
+=======
+>>>>>>> d77bd1c845947edbde58751ac7620f19ca8353a4
       {strategiesStore.strategyResults.length > 0 && <StrategyCards results={strategiesStore.strategyResults} />}
     </section>
   );
