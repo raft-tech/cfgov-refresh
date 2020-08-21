@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Development Tips - consumerfinance.gov</title>
+  <title>Functional Testing - consumerfinance.gov</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Development Tips";
-    var mkdocs_page_input_path = "development-tips.md";
+    var mkdocs_page_name = "Functional Testing";
+    var mkdocs_page_input_path = "functional-testing.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -152,9 +152,24 @@
                     
     <a class="" href="../python-unit-tests/">Python Unit Testing</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../functional-testing/">Functional Testing</a>
+    <a class="current" href="./">Functional Testing</a>
+    <ul class="subnav">
+            
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#installing-cypress">Installing Cypress</a></li>
+        
+            <li><a class="toctree-l4" href="#running-cypress">Running Cypress</a></li>
+        
+            <li><a class="toctree-l4" href="#writing-cypress-tests">Writing Cypress Tests</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -175,24 +190,9 @@
                     
     <a class="" href="../related-projects/">Related Projects</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Development Tips</a>
-    <ul class="subnav">
-            
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#main-front-end-templateasset-locations">Main front-end template/asset locations</a></li>
-        
-            <li><a class="toctree-l4" href="#installing-new-front-end-dependencies">Installing new front-end dependencies</a></li>
-        
-            <li><a class="toctree-l4" href="#developing-on-nested-satellite-apps">Developing on nested satellite apps</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../development-tips/">Development Tips</a>
                 </li>
                 <li class="">
                     
@@ -250,14 +250,14 @@
     
       
         
-          <li>Contributing &raquo;</li>
+          <li>Testing &raquo;</li>
         
       
     
-    <li>Development Tips</li>
+    <li>Functional Testing</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/cfpb/consumerfinance.gov/edit/master/docs/development-tips.md"
+        <a href="https://github.com/cfpb/consumerfinance.gov/edit/master/docs/functional-testing.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -267,71 +267,65 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="development-tips">Development tips<a class="headerlink" href="#development-tips" title="Permanent link">¶</a></h1>
-<h2 id="main-front-end-templateasset-locations">Main front-end template/asset locations<a class="headerlink" href="#main-front-end-templateasset-locations" title="Permanent link">¶</a></h2>
-<p><strong>Templates</strong> that are served by the Django server: <code>cfgov/jinja2/v1</code></p>
-<p><strong>Static assets</strong> prior to processing (combilation, minification, etc.):
-<code>cfgov/unprocessed</code>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>After running <code>gulp build</code> the site's assets are copied over to <code>cfgov/static_built</code>,
-ready to be served by Django.</p>
-</div>
-<h2 id="installing-new-front-end-dependencies">Installing new front-end dependencies<a class="headerlink" href="#installing-new-front-end-dependencies" title="Permanent link">¶</a></h2>
+                <h1 id="functional-testing-with-cypress">Functional Testing with Cypress<a class="headerlink" href="#functional-testing-with-cypress" title="Permanent link">¶</a></h1>
+<p>In order to ensure that as we upgrade our wagtail/django dependencies our backend python code is still functional from a frontend perspective we are integrating a new browser testing tool <a href="https://www.cypress.io">Cypress</a>. The goal is to implement and maintain a testing suite that enables confidence in dependency upgrades. </p>
+<h2 id="installing-cypress">Installing Cypress<a class="headerlink" href="#installing-cypress" title="Permanent link">¶</a></h2>
+<p>We have included Cypress as a dependency of this project, and so the only steps that need to be taken are doing a fresh <code>yarn</code> if you haven't already.</p>
+<h2 id="running-cypress">Running Cypress<a class="headerlink" href="#running-cypress" title="Permanent link">¶</a></h2>
+<p>We support both a headless docker container to execute our cypress tests as well as the already installed desktop application that comes packaged with cypress. The test files are located in the <code>test/cypress/integration/</code> directory.</p>
 <ul>
-<li>Use <code>yarn add new_dep@se.m.ver</code> to install new dependencies
-  or update existing dependencies.</li>
-<li>If you can't do this for some reason or are looking to freshen all dependencies,
-  you will need to edit <code>.yarnrc</code>, temporarily commenting out the <code>--install.pure-lockfile true</code>
-  and <code>--install.offline true</code> flags before proceeding with your installation or update.</li>
-<li>In the rare but observed case that <code>yarn add new_dep@se.m.ver</code> doesn't add
-  every needed package to the offline cache, you likely need to first run
-  <code>yarn cache clean</code>.</li>
+<li>To run the docker container execute <code>docker-compose -f docker-compose.e2e.yml run e2e</code></li>
+<li>
+<p>If you have not previously set up a local Docker network, you will need to stop any running consumerfinance.gov Docker containers, run <code>docker network create cfgov</code>, start the containers again, and then run the above command.</p>
+</li>
+<li>
+<p>To run the desktop cypress aplication execute <code>yarn run cypress open</code> and select your test file to execute.</p>
+</li>
+<li>
+<p>To run the tests from the commandline you can also invoke them via <code>yarn run cypress run</code>. You can read more about different command line arguments in the <a href="https://docs.cypress.io/guides/guides/command-line.html#Options">Command-Line Documentation</a> provided by Cypress.</p>
+</li>
 </ul>
-<h2 id="developing-on-nested-satellite-apps">Developing on nested satellite apps<a class="headerlink" href="#developing-on-nested-satellite-apps" title="Permanent link">¶</a></h2>
-<p>Some projects can sit inside consumerfinance.gov, but manage their own asset
-dependencies. These projects have their own <code>package.json</code> and base templates.</p>
-<p>The structure looks like this:</p>
-<h3 id="npm-modules">npm modules<a class="headerlink" href="#npm-modules" title="Permanent link">¶</a></h3>
-<ul>
-<li>List an app's own dependencies in
-  <code>cfgov/unprocessed/apps/[project namespace]/package.json</code>.</li>
-</ul>
-<h3 id="webpack">Webpack<a class="headerlink" href="#webpack" title="Permanent link">¶</a></h3>
-<ul>
-<li>Apps may include their own <code>webpack-config.js</code> configuration that adjusts how
-  their app-specific assets should be built. This configuration appears in
-  <code>cfgov/unprocessed/apps/[project namespace]/webpack-config.js</code>.</li>
-</ul>
-<h3 id="browserslist">Browserslist<a class="headerlink" href="#browserslist" title="Permanent link">¶</a></h3>
-<ul>
-<li>Apps may include a
-  <a href="https://github.com/browserslist/browserslist#config-file">browserslist config</a>
-  file, which is automatically picked up by <code>@babel/preset-env</code> inside the
-  webpack config, if no <code>browsers</code> option is supplied.</li>
-</ul>
-<h3 id="adding-images">Adding Images<a class="headerlink" href="#adding-images" title="Permanent link">¶</a></h3>
-<ul>
-<li>Images should be compressed and optimized before being committed to the repo</li>
-<li>In order to keep builds fast and reduce dependencies, the front-end build does not contain an image optimization step</li>
-<li>A suggested workflow for those with Adobe Creative Suite is as follows:</li>
-<li>Export a full-quality PNG from Adobe Illustrator</li>
-<li>Reexport that PNG from Adobe Fireworks as an 8-bit PNG</li>
-<li>Run the 8-bit PNG through <a href="https://imageoptim.com">ImageOptim</a></li>
-</ul>
-<h3 id="templates">Templates<a class="headerlink" href="#templates" title="Permanent link">¶</a></h3>
-<ul>
-<li>Apps use a Jinja template that extends the <code>base.html</code>
-  template used by the rest of the site.
-  This template would reside in <code>cfgov/jinja2/v1/[project namespace]/index.html</code>
-  or similar (for example, <a href="https://github.com/cfpb/consumerfinance.gov/blob/master/cfgov/jinja2/v1/owning-a-home/explore-rates/index.html">owning-a-home</a>).</li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>A template may support a non-standard browser, like an older IE version,
-by including the required dependencies, polyfills, etc. in its
-template's <code>{% block css %}</code> or <code>{% block javascript scoped %}</code> blocks.</p>
-</div>
+<h2 id="writing-cypress-tests">Writing Cypress Tests<a class="headerlink" href="#writing-cypress-tests" title="Permanent link">¶</a></h2>
+<p>When developing new tests for Cypress it is important to consider what the test is trying to accomplish. We want to ensure that we are not polluting our cypress tests with things that can be tested at another level, we are seeking to only test the integration aspect of our UI hosted via Wagtail/Django and custom python code within our backend.</p>
+<p>When adding a test it is often helpful to separate the arrange/act code from the actual assertions in order to improve the readability of our testing code. To do this we have adopted the page model of testing, where we define a page within the application and the methods of interacting with the page separate from the test file itself where we define the assertions. </p>
+<p>For example consider the ConsumerTools Page:</p>
+<pre class="highlight"><code class="language-javascript">export default class ConsumerTools {
+
+    constructor() {}
+
+    open() {
+        cy.visit('/consumer-tools/');
+    }
+
+    signUp(email) {
+        cy.get('.o-form__email-signup').within(() =&gt; {
+            cy.get('input:first').type(email);
+            cy.get('button:first').click();
+        });
+    }
+    successNotification() {
+        return cy.get('.m-notification_message');
+    }
+}</code></pre>
+
+<p>Notice how this class defines functions to retrieve and modify elements on the page but in a more human readable manner. This allows our test file for consumer tools to look like:</p>
+<pre class="highlight"><code class="language-javascript">import ConsumerTools from '../pages/consumer_tools';
+
+let page = new ConsumerTools();
+
+describe('Consumer Tools', () =&gt; {
+    it('Should have an email sign up', () =&gt; {
+        // Arrange
+        page.open();
+        // Act
+        page.signUp('testing@cfpb.gov');
+        // Assert
+        page.successNotification().should('exist');
+        page.successNotification().contains('Your submission was successfully received.')
+    });
+});</code></pre>
+
+<p>Overall it lets our tests show what is intended to be happening on a page without showing the more technical side of how we reference and interact with elements.</p>
               
             </div>
           </div>
@@ -339,10 +333,10 @@ template's <code>{% block css %}</code> or <code>{% block javascript scoped %}</
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../github-actions/" class="btn btn-neutral float-right" title="How We Use GitHub Actions">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../branching-merging/" class="btn btn-neutral float-right" title="Branching and Merging">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../related-projects/" class="btn btn-neutral" title="Related Projects"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../python-unit-tests/" class="btn btn-neutral" title="Python Unit Testing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -370,10 +364,10 @@ template's <code>{% block css %}</code> or <code>{% block javascript scoped %}</
           <a href="https://github.com/cfpb/consumerfinance.gov/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../related-projects/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../python-unit-tests/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../github-actions/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../branching-merging/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
