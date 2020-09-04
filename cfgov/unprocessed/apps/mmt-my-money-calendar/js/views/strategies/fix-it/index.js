@@ -23,15 +23,6 @@ const FixItButton = ({ result }) => {
 
       evt.preventDefault();
 
-      // Hide "Split Payment" fix-it strategies for this event once the user clicks Fix It once
-      // missy commented this out
-      //if (result.event && result.event.category.includes('housing')) {
-       /*  result.event.setHideFixItStrategy(true);
-        await eventStore.saveEvent(result.event, true); */
-      //}
-
-      //console.log('Index.js: FixItButton', result.event);
-
       history.push(href);
     },
     [result.event, href]
@@ -109,8 +100,7 @@ function FixItStrategies() {
                         copy={narrativeCopy.step3} />
       )}
       <header className="strategies-header">
-       
-        {strategies.fixItResults.length ? (
+    
           <div className="strategy-cards">
             <h2 className="strategies-header__week-range">Week of {uiStore.weekRangeText}</h2>
             <CardGroup columns={2}>
@@ -145,11 +135,6 @@ function FixItStrategies() {
               </div>
             </CardGroup>
           </div>
-        ) : (
-            <p>
-              <em>There are no strategy recommendations for this week</em>
-            </p>
-          )}
       </header>
       <h2 className="strategies-header__title">Fix-It Strategies</h2>
       <div>{strategies.fixItResults.length > 0 && <StrategyCards results={strategies.fixItResults} />}</div>
