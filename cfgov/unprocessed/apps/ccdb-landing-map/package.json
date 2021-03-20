@@ -16,7 +16,7 @@
     "node": ">=12.x"
   },
   "dependencies": {
-    "core-js": "3.3.6",
+    "core-js": "3.9.0",
     "d3": "5.15.1",
     "debounce": "1.2.0",
     "es6-promise": "4.2.8",
