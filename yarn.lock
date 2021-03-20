@@ -929,6 +929,13 @@
   dependencies:
     ftdomdelegate "^3.0.0"
 
+"@cfpb/cfpb-atomic-component@^0.7.9":
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/@cfpb/cfpb-atomic-component/-/cfpb-atomic-component-0.7.9.tgz#7bf4ed6397142bebb57b038b0bb7ec8ea7af1a6f"
+  integrity sha512-a+FIdmx6scLIFdEN4mBc1W2giQLBWMMYoMTBIgA4bRWR8BdPvycDfGvsrNRdqL5BuaPro3IIlV0IX1lL0kQocg==
+  dependencies:
+    ftdomdelegate "^3.0.0"
+
 "@cfpb/cfpb-buttons@0.1.0", "@cfpb/cfpb-buttons@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@cfpb/cfpb-buttons/-/cfpb-buttons-0.1.0.tgz#55c6f886f0b8ce7a166c5a6782b7e7757792e795"
@@ -953,14 +960,22 @@
     normalize-css "^2.0.0"
     normalize-legacy-addon "0.1.0"
 
-"@cfpb/cfpb-expandables@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@cfpb/cfpb-expandables/-/cfpb-expandables-0.1.0.tgz#e6fca2f6874859dfb424eea72224f074a983a025"
-  integrity sha512-2xEVi04Dv3y9SzBMBpQkbRPYOl2w7P5aAs/4JRZfTIJvTjWEZVvNEFQlBlykp4do17IKQ4BFEnlqXfT8XXEZ/Q==
+"@cfpb/cfpb-core@^0.7.7":
+  version "0.7.7"
+  resolved "https://registry.yarnpkg.com/@cfpb/cfpb-core/-/cfpb-core-0.7.7.tgz#48819f32f111c5c30564890246088f665b627484"
+  integrity sha512-58JhhURbUD5yAKQcR2yE0XLUd9ChNPdzfN5MTnhUjFaIVSYfpRIWaWMv7PULPFnv+lDyjOrXCNfUXzIZdggfoQ==
   dependencies:
-    "@cfpb/cfpb-atomic-component" "^0.1.0"
-    "@cfpb/cfpb-core" "^0.1.0"
-    "@cfpb/cfpb-icons" "^0.1.0"
+    normalize-css "^2.0.0"
+    normalize-legacy-addon "0.1.0"
+
+"@cfpb/cfpb-expandables@0.7.9":
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/@cfpb/cfpb-expandables/-/cfpb-expandables-0.7.9.tgz#5bb7ce416b1bb26e7f6fe9617908ab2e6e00ae98"
+  integrity sha512-jHZ0O/mn7hNHkk2LiyIjo2jotV7OhL0ydGfHjrL+MCwmQD6ZSqgTBrKVSgJDSQyAUWg10jm3R3sc1cZ5OepDmg==
+  dependencies:
+    "@cfpb/cfpb-atomic-component" "^0.7.9"
+    "@cfpb/cfpb-core" "^0.7.7"
+    "@cfpb/cfpb-icons" "^0.7.9"
 
 "@cfpb/cfpb-forms@0.1.0":
   version "0.1.0"
@@ -997,6 +1012,11 @@
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/@cfpb/cfpb-icons/-/cfpb-icons-0.0.8.tgz#f4dcf8771e3dc26d61fc5137042df849df96e521"
   integrity sha512-7yIOGeXaMqEE0tw2w05iE1dbV8knMerTsSLvPZs4EB7wqNtyLnuNCr3ybGDcVwKXMe+rxxzKRFz1Wyf12WlaIg==
+
+"@cfpb/cfpb-icons@^0.7.9":
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/@cfpb/cfpb-icons/-/cfpb-icons-0.7.9.tgz#7d3e368336d76f25004cc2d19efc8de7904080c2"
+  integrity sha512-YGQiWIGeUspdDzTUIOtfQSQ4AH4EsGWxc6NazDZ+JZY7PnKv8p/gdMRCQYzZbOtMpXvZDPZWQzIYXbtZMq3GkQ==
 
 "@cfpb/cfpb-layout@0.0.8":
   version "0.0.8"
