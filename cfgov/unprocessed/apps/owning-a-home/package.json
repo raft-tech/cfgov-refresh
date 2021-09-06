@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "amortize": "1.1.0",
-    "axios": "0.19.2",
+    "axios": "0.21.3",
     "date-format": "3.0.0",
     "es6-promise": "4.2.8",
     "fastdom": "1.0.9",
