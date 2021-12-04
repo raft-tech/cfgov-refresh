@@ -1,5 +1,5 @@
 
-django==2.2.16
+django==2.2.24
 gunicorn
 whitenoise==3.3.1
 
