@@ -7,10 +7,10 @@ amortize@1.1.0:
   resolved "https://registry.yarnpkg.com/amortize/-/amortize-1.1.0.tgz#640e10fa960c6a073eacec92ebaee08398fe8249"
   integrity sha512-km08OI2MszLrLHcTXYgr9dx+F4KHeFnrgn1KIsZEHDVXOLExZeB5Gwj/lLtDScyeu7nN7F6UplBCZ8GNDhFVaw==
 
-async@~0.2.10:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
-  integrity sha1-trvgsGdLnXGXCMo43owjfLUmw9E=
+async@^3.2.2:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.2.3.tgz#ac53dafd3f4720ee9e8a160628f18ea91df196c9"
+  integrity sha512-spZRyzKL5l5BZQrr/6m/SqFdBN0q3OCI0f9rjfBzCMBIP4p75P620rR3gTmaksNOhmzgdxcaxdNfMy6anrbM0g==
 
 axios@0.19.2:
   version "0.19.2"
@@ -85,11 +85,12 @@ format-usd@~0.1.0:
   resolved "https://registry.yarnpkg.com/format-usd/-/format-usd-0.1.0.tgz#6ff5475a4ddceb6fc5d3d2f93fedd70e2670ad3e"
   integrity sha1-b/VHWk3c62/F09L5P+3XDiZwrT4=
 
-"handlebars-loader@git+https://github.com/Waavi/handlebars-loader.git":
-  version "1.6.0"
-  resolved "git+https://github.com/Waavi/handlebars-loader.git#c51b8354b0cd42bbe4a86b58f264f820443dca7f"
+handlebars-loader@1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/handlebars-loader/-/handlebars-loader-1.7.2.tgz#1694cc7cb3de1d16bec718af257eed853e4af84d"
+  integrity sha512-rEzru8REzqeJlbotJD+gPQ8AHyxcAjeXbGqGmrz3+sbjecI0ungieONwMR27Htr+AoKI5W36oPLwcwGrPzO8gw==
   dependencies:
-    async "~0.2.10"
+    async "^3.2.2"
     fastparse "^1.0.0"
     loader-utils "1.0.x"
     object-assign "^4.1.0"
