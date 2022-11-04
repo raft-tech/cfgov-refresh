@@ -32,7 +32,7 @@
     "@cfpb/cfpb-tables": "0.1.0",
     "@cfpb/cfpb-typography": "0.1.0",
     "autoprefixer": "9.8.6",
-    "babel-loader": "8.1.0",
+    "babel-loader": "8.2.4",
     "cfpb-chart-builder": "6.4.0",
     "core-js": "3.6.5",
     "del": "5.1.0",
@@ -67,8 +67,8 @@
     "terser-webpack-plugin": "4.1.0",
     "turbolinks": "5.1.1",
     "vinyl-named": "1.1.0",
-    "webpack": "4.44.1",
-    "webpack-stream": "5.0.0",
+    "webpack": "5.0.0",
+    "webpack-stream": "7.0.0",
     "xdr": "0.5.3"
   },
   "devDependencies": {
