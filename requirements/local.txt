@@ -3,3 +3,5 @@ django-debug-toolbar==1.11
 django-sslserver==0.20
 tox-pip-extensions==1.6.0
 tox==3.19.0
+django>=3.2.15 # not directly required, pinned by Snyk to avoid a vulnerability
+sqlparse>=0.4.2 # not directly required, pinned by Snyk to avoid a vulnerability
