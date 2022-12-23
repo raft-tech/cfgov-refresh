@@ -1,1 +1,6 @@
-../../django.txt
+
+django==2.2.16
+gunicorn
+whitenoise==3.3.1
+
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
