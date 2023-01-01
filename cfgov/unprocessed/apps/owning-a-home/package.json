@@ -23,7 +23,7 @@
     "fastdom": "1.0.9",
     "format-usd": "1.0.1",
     "handlebars": "4.7.6",
-    "handlebars-loader": "git+https://github.com/Waavi/handlebars-loader.git",
+    "handlebars-loader": "1.7.3",
     "highcharts": "7.2.1",
     "jquery": "3.5.1",
     "jumbo-mortgage": "3.0.0",
