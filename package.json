@@ -18,7 +18,7 @@
   "browserslist": "> 0.5%, last 2 versions, Firefox ESR, not dead, ie >= 11",
   "dependencies": {
     "@babel/core": "7.11.5",
-    "@babel/preset-env": "7.11.5",
+    "@babel/preset-env": "7.22.0",
     "@cfpb/cfpb-atomic-component": "0.1.0",
     "@cfpb/cfpb-buttons": "0.1.0",
     "@cfpb/cfpb-core": "0.1.0",
@@ -51,7 +51,7 @@
     "gulp-postcss": "8.0.0",
     "gulp-rename": "2.0.0",
     "gulp-replace": "1.0.0",
-    "gulp-sourcemaps": "2.6.5",
+    "gulp-sourcemaps": "3.0.0",
     "gulp-terser": "1.4.0",
     "highcharts": "7.2.1",
     "less": "3.12.2",
@@ -67,8 +67,8 @@
     "terser-webpack-plugin": "4.1.0",
     "turbolinks": "5.1.1",
     "vinyl-named": "1.1.0",
-    "webpack": "4.44.1",
-    "webpack-stream": "5.0.0",
+    "webpack": "5.0.0",
+    "webpack-stream": "7.0.0",
     "xdr": "0.5.3"
   },
   "devDependencies": {
