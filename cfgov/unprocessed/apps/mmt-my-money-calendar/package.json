@@ -18,7 +18,7 @@
     "body-scroll-lock": "2.6.4",
     "clsx": "1.0.4",
     "computed-async-mobx": "4.2.1",
-    "copy-webpack-plugin": "5.1.1",
+    "copy-webpack-plugin": "9.0.1",
     "core-js": "3",
     "css-loader": "3.4.2",
     "dayjs": "1.8.21",
