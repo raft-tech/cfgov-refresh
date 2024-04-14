@@ -2,3 +2,4 @@ beautifulsoup4==4.5.1
 boto3==1.7.80
 github3.py==0.9.6
 requests==2.21.0
+idna>=3.7 # not directly required, pinned by Snyk to avoid a vulnerability
