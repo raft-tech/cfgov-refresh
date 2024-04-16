@@ -3,3 +3,4 @@ django==2.2.16
 gunicorn
 whitenoise==3.3.1
 
+sqlparse>=0.5.0 # not directly required, pinned by Snyk to avoid a vulnerability
