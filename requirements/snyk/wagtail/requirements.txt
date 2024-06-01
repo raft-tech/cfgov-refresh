@@ -1,1 +1,1 @@
-../../wagtail.txt
+wagtail==6.0.5
