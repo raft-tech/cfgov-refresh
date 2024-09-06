@@ -1,1 +1,2 @@
-../../wagtail.txt
+wagtail==2.10.1
+django>=4.2.16 # not directly required, pinned by Snyk to avoid a vulnerability
