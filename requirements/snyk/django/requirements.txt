@@ -1,1 +1,5 @@
-../../django.txt
+
+django==4.2.16
+gunicorn
+whitenoise==3.3.1
+
