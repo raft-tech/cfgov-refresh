@@ -6,10 +6,10 @@
 <<<<<<< HEAD
 [![Build Status](https://github.com/cfpb/consumerfinance.gov/workflows/test/badge.svg?branch=master)](https://github.com/cfpb/consumerfinance.gov/actions)
 =======
-This is a fork of the [main cfgov-refresh](https://github.com/cfpb/cfgov-refresh) for [Raft's](https://goraft.tech/) work on the Digital Money Toolkit project. Some of the Researc, Design, and Technical artifacts can be found [in the Wiki](https://github.com/raft-tech/cfgov-refresh/wiki)
+This is a fork of the [main cfgov-refresh](https://github.com/cfpb/cfgov-refresh) for [Raft's](https://goraft.tech/) work on the Digital Money Toolkit project. Some of the Research, Design, and Technical artifacts can be found [in the Wiki](https://github.com/raft-tech/cfgov-refresh/wiki)
 
 <<<<<<< HEAD
-This is a fork of the [main cfgov-refresh](https://github.com/cfpb/cfgov-refresh) for [Raft's](https://goraft.tech/) work on the Digital Money Toolkit project. Some of the Researc, Design, and Technical artifacts can be found [in the Wiki](https://github.com/raft-tech/cfgov-refresh/wiki)
+This is a fork of the [main cfgov-refresh](https://github.com/cfpb/cfgov-refresh) for [Raft's](https://goraft.tech/) work on the Digital Money Toolkit project. Some of the Research, Design, and Technical artifacts can be found [in the Wiki](https://github.com/raft-tech/cfgov-refresh/wiki)
 
 [![Build Status](https://github.com/cfpb/cfgov-refresh/workflows/test/badge.svg?branch=master)](https://github.com/cfpb/cfgov-refresh/actions)
 >>>>>>> update readme
